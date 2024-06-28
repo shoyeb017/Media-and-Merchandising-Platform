@@ -1,0 +1,18 @@
+.container {
+  background-color: #242428;
+  min-height: 100vh; /* Ensure it takes at least the full height of the viewport */
+  color: #242428;
+  padding-top: 70px; /* Account for the height of the navbar */
+  box-sizing: border-box; /* Include padding in the element's total width and height */
+  padding-bottom: 70px ;
+}
+
+* {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #ffdd95 #333; /* For Firefox */
+}
+
+.content-container {
+  margin-left: 10px;
+  margin-right: 50px;
+}
