@@ -1,6 +1,2 @@
-a short story about a cat
-```
-
-### 2.2.2. `cat` Command
-
-The `cat` command is used to display the contents of a file. It can also be used to concatenate multiple files together and display the output.
+dsnjdkjab
+adssda
