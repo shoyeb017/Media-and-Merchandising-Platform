@@ -5,7 +5,6 @@ const app = express();
 
 async function initialize(){
     let con;
-
     try{
         con = await getConnection();
     
