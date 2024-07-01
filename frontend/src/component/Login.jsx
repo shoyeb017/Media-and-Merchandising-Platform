@@ -10,11 +10,23 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (username === '1' && password === '1') {
-      navigate('/home');
-    } else {
-      alert('Invalid credentials');
-    }
+    fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate('/home');
+        } else {
+          alert('Login failed. Please try again.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   return (
