@@ -4,6 +4,8 @@ import NewsCard from './NewsCard';
 import ProductCard from '../merch/ProductCard';
 import './CompanyDetailsPage.css';
 
+//fetching data from database
+
 
 const companyDetailsPage = ({ companies, products}) => {
     const { companyID } = useParams();

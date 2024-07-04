@@ -412,30 +412,80 @@ const [watchedMovies] = useState ([ {
 
 
 const [companies] = useState([{
-      id: 1,
-      name: 'Example Productions',
-      img:'/img/4.jpg',
-      email:'s@gmail.com',
-      description: 'Example Productions is a leading film and TV production company known for its blockbuster movies and popular TV shows.',
-      mediaId: [1, 2],
-      news: [{ id: 1, title: 'Example Productions Acquires New Script', description: 'Example Productions has acquired the script for a new action-packed movie set to release next summer.'},
-             {id: 2, title: 'New TV Show from Example Productions', description: 'Example Productions announces a new TV show that will premiere this fall, featuring an all-star cast.'}
-            ],
+  id: 1,
+  name: 'Example Productions',
+  img:'https://www.vintagemovieposters.co.uk/wp-content/uploads/2023/03/IMG_1887-scaled.jpeg',
+  email:'s@gmail.com',
+  description: 'Example Productions is a leading film and TV production company known for its blockbuster movies and popular TV shows.',
+  mediaId: [1, 2],
+  news: [{ id: 1, title: 'Example Productions Acquires New Script', description: 'Example Productions has acquired the script for a new action-packed movie set to release next summer.'},
+         {id: 2, title: 'New TV Show from Example Productions', description: 'Example Productions announces a new TV show that will premiere this fall, featuring an all-star cast.'}
+        ],
 
-      productId: [1, 2, 3,4,5,6,7]
-    },
-    {
-      id: 2,
-      name: 'DreamWorks Animation',
-      img:'/img/4.jpg',
-      email:'s@gmail.com',
-      description: 'DreamWorks Animation is an American animation studio that creates animated feature films, television programs, and online virtual games.',
-      mediaId: [3, 4],
-      news: [{id: 1,title: 'DreamWorks Releases New Animated Feature',description: 'DreamWorks Animation has released a new animated feature that is receiving rave reviews from critics and audiences alike.'},
-             {id: 2,title: 'DreamWorks Partners with New Streaming Service',description: 'DreamWorks Animation has announced a new partnership with a leading streaming service to bring its animated movies and TV shows to a wider audience.'}
-            ],
-      productId: [6, 7, 8]
-    }
+  productId: []
+},
+{
+  id: 2,
+  name: 'DreamWorks Animation',
+  img:'https://i.ibb.co/ftSMf7c/beae1ffac73362e365699287770657da.jpg',
+  email:'s@gmail.com',
+  description: 'DreamWorks Animation is an American animation studio that creates animated feature films, television programs, and online virtual games.',
+  mediaId: [3, 4],
+  news: [{id: 1,title: 'DreamWorks Releases New Animated Feature',description: 'DreamWorks Animation has released a new animated feature that is receiving rave reviews from critics and audiences alike.'},
+         {id: 2,title: 'DreamWorks Partners with New Streaming Service',description: 'DreamWorks Animation has announced a new partnership with a leading streaming service to bring its animated movies and TV shows to a wider audience.'}
+        ],
+  productId: [6, 7, 8]
+},
+{
+  id: 1,
+  name: 'Example Productions',
+  img:'https://deadline.com/wp-content/uploads/2021/08/Walt-Disney-Animation-Studios.jpg',
+  email:'s@gmail.com',
+  description: 'Example Productions is a leading film and TV production company known for its blockbuster movies and popular TV shows.',
+  mediaId: [1, 2],
+  news: [{ id: 1, title: 'Example Productions Acquires New Script', description: 'Example Productions has acquired the script for a new action-packed movie set to release next summer.'},
+         {id: 2, title: 'New TV Show from Example Productions', description: 'Example Productions announces a new TV show that will premiere this fall, featuring an all-star cast.'}
+        ],
+
+  productId: [1, 2, 3,4,5,6,7]
+},
+{
+  id: 2,
+  name: 'DreamWorks Animation',
+  img:'/img/4.jpg',
+  email:'s@gmail.com',
+  description: 'DreamWorks Animation is an American animation studio that creates animated feature films, television programs, and online virtual games.',
+  mediaId: [3, 4],
+  news: [{id: 1,title: 'DreamWorks Releases New Animated Feature',description: 'DreamWorks Animation has released a new animated feature that is receiving rave reviews from critics and audiences alike.'},
+         {id: 2,title: 'DreamWorks Partners with New Streaming Service',description: 'DreamWorks Animation has announced a new partnership with a leading streaming service to bring its animated movies and TV shows to a wider audience.'}
+        ],
+  productId: [6, 7, 8]
+},
+{
+  id: 1,
+  name: 'Example Productions',
+  img:'/img/4.jpg',
+  email:'s@gmail.com',
+  description: 'Example Productions is a leading film and TV production company known for its blockbuster movies and popular TV shows.',
+  mediaId: [1, 2],
+  news: [{ id: 1, title: 'Example Productions Acquires New Script', description: 'Example Productions has acquired the script for a new action-packed movie set to release next summer.'},
+         {id: 2, title: 'New TV Show from Example Productions', description: 'Example Productions announces a new TV show that will premiere this fall, featuring an all-star cast.'}
+        ],
+
+  productId: [1, 2, 3,4,5,6,7]
+},
+{
+  id: 2,
+  name: 'DreamWorks Animation',
+  img:'/img/4.jpg',
+  email:'s@gmail.com',
+  description: 'DreamWorks Animation is an American animation studio that creates animated feature films, television programs, and online virtual games.',
+  mediaId: [3, 4],
+  news: [{id: 1,title: 'DreamWorks Releases New Animated Feature',description: 'DreamWorks Animation has released a new animated feature that is receiving rave reviews from critics and audiences alike.'},
+         {id: 2,title: 'DreamWorks Partners with New Streaming Service',description: 'DreamWorks Animation has announced a new partnership with a leading streaming service to bring its animated movies and TV shows to a wider audience.'}
+        ],
+  productId: [6, 7, 8]
+}
   ]);
 
 

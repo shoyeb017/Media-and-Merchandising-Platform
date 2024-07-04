@@ -18,8 +18,14 @@ const CompanyCard = ({ company }) => {
   );
 };
 
+//fetching data from database
+
+
+
 
 const CompanySection = ({ companies }) => {
+  
+
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredCompanies = Array.isArray(companies)
@@ -51,3 +57,4 @@ const CompanySection = ({ companies }) => {
 };
 
 export default CompanySection;
+

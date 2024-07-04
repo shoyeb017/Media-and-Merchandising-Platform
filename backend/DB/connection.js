@@ -18,7 +18,7 @@ async function initializeConnection() {
 
 
 
-async function getConnection() {
+async function getConnection() { 
   if (!connection) {
     await initializeConnection();
   }

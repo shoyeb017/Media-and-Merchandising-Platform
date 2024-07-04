@@ -19,6 +19,7 @@ const Login = () => {
     })
       .then((response) => {
         if (response.ok) {
+          console.log(response);
           navigate('/home');
         } else {
           alert('Login failed. Please try again.');
