@@ -29,7 +29,7 @@ function Navbar() {
         <div className="menu-container">
           <ul className="menu-list">
             <li className="menu-list-item">
-              <Link exact to="/home" >Home</Link>
+              <Link to="/home" >Home</Link>
             </li>
             <li className="menu-list-item">
               <Link to="/search" >Search</Link>

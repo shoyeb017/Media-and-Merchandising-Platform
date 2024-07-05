@@ -59,6 +59,74 @@ oracledb.createPool({
         }
     });
 
+    // company route
+    app.get('/companies', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received company request');
+            const result = await con.execute(
+                `SELECT * FROM COMPANY`
+            );
+            console.log(`Query Result: `,result.rows);
+
+            
+
+            res.send(result.rows);
+            console.log("Company Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    app.get('/products', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received company request');
+            const result = await con.execute(
+                `SELECT * FROM products`
+            );
+            console.log(`Query Result: `,result.rows);
+
+            
+
+            res.send(result.rows);
+            console.log("Company Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    
+
     // Start the server
     app.listen(5000, () => {
         console.log('Server started on http://localhost:5000');

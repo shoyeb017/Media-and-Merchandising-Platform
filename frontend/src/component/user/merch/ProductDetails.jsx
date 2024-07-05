@@ -3,24 +3,13 @@ import { useParams, Link } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
 import './ProductDetails.css';
 
-
-// const ReviewCard = ({ review }) => {
-//   return (
-//     <div className="review-card">
-//       <h4 className="review-name">{review.name}</h4>
-//       <p className="review-desc">{review.description}</p>
-//       <p className="review-rating">Rating: {review.rating}/5</p>
-//     </div>
-//   );
-// };
-
-
-
 const ProductDetails = ({ products, onAddToCart }) => {
   const { productId } = useParams();
-  const product = products.find(p => p.id === parseInt(productId));
+  const product = products.find(p => p.PRO_ID === parseInt(productId));
 
-  const [reviews, setReviews] = useState(product ? product.reviews : []);
+  if (!product) return <div style={{color: 'white'}}>Product not found</div>;
+
+  const [reviews, setReviews] = useState(product.reviews || []);
   const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
 
   const handleAddReview = () => {
@@ -32,17 +21,14 @@ const ProductDetails = ({ products, onAddToCart }) => {
     }
   };
 
-  if (!product) return <div style={{color: 'white'}}>Product not found</div>;
-
   return (
     <div className="product-details">
-
       <Link to="/merch/cart" className="cart-button">View Cart</Link>
-      <img src={product.img} alt={product.name} className="product-details-img" />
+      <img src={product.IMAGE} alt={product.NAME} className="product-details-img" />
       <div className="product-details-info">
-        <h2 className="product-details-name">{product.name}</h2>
-        <p className="product-details-price">${product.price}</p>
-        <p className="product-details-description">{product.description}</p>
+        <h2 className="product-details-name">{product.NAME}</h2>
+        <p className="product-details-price">${product.PRICE}</p>
+        <p className="product-details-description">{product.DESCRIPTION}</p>
         <button onClick={() => onAddToCart(product)}>Add to Cart</button>
       </div>
 

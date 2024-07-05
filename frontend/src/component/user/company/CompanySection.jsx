@@ -5,13 +5,13 @@ import './CompanySection.css';
 
 const CompanyCard = ({ company }) => {
   return (
-    <Link to={`/company/${company.id}`} className="link-product-card">
+    <Link to={`/company/${company.COM_ID}`} className="link-product-card">
 
       <div className="company-card">
-        <img className="company-card-img" src={company.img} alt={company.name} />
+        <img className="company-card-img" src={company.IMG} alt={company.NAME} />
         <div className="company-card-content">
-          <h3 className="company-card-title">{company.name}</h3>
-          <p className="company-card-desc">{company.description}</p>
+          <h3 className="company-card-title">{company.NAME}</h3>
+          <p className="company-card-desc">{company.DESCRIPTION}</p>
         </div>
       </div>
     </Link>
@@ -20,9 +20,6 @@ const CompanyCard = ({ company }) => {
 
 //fetching data from database
 
-
-
-
 const CompanySection = ({ companies }) => {
   
 
@@ -30,7 +27,7 @@ const CompanySection = ({ companies }) => {
 
   const filteredCompanies = Array.isArray(companies)
       ? companies.filter(company =>
-          company.name.toLowerCase().includes(searchQuery.toLowerCase())
+          company.NAME.toLowerCase().includes(searchQuery.toLowerCase())
         )
       : [];
 
@@ -49,7 +46,7 @@ const CompanySection = ({ companies }) => {
 
           <div className="company-list">
               {filteredCompanies.map(company => (
-                  <CompanyCard key={company.id} company={company} />
+                  <CompanyCard key={company.COM_ID} company={company} />
               ))}
           </div>
       </div>

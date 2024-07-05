@@ -7,7 +7,7 @@ const ProductSection = ({ products }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const filteredProducts = products.filter(product =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      product.NAME.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
   return (
@@ -27,7 +27,7 @@ const ProductSection = ({ products }) => {
 
       <div className="product-list">
         {filteredProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.PRO_ID} product={product} />
         ))}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './component/user/common/Navbar';
 import ScrollToTop from './component/user/common/ScrollToTop.jsx';
@@ -25,92 +25,142 @@ import './App.css';
 export default function App() {
 
 
-const [products] = useState
-([
-    {
-      id: 1,
-      name: 'Product 1 Product 1 Product 1 Product 1',
-      price: 29.99,
-      img: '/img/3.jpg',
-      description: 'This is the description for Product 1.This is the description for Product 1.This is the description for Product 1.This is the description for Product 1.This is the description for Product 1. This is the description for Product 1 This is the description for Product 1 This is the description for Product 1 This is the description for Product 1',
-      reviews: [
-        { name: 'Alice', description: 'Great product!', rating: 5 },
-        { name: 'Bob', description: 'Not bad', rating: 3 }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 49.99,
-      img: '/img/4.jpg',
-      description: 'This is the description for Product 2.',
-      reviews: [
-        { name: 'Charlie', description: 'Loved it!', rating: 4 }
-      ]
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+  const [companies, setCompanies] = useState([]);
+  const [products, setProducts] = useState([]);
 
-    {
-      id: 4,
-      name: 'Product 4',
-      price: 19.99,
-      img: '/img/6.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/companies',
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          }
+        );
+        if(!response.ok) {
+          throw new Error('response Error');
+        }
 
-    {
-      id: 5,
-      name: 'Product 5',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+        const data =await response.json();
+        
+        setCompanies(data);
 
-    {
-      id: 6,
-      name: 'Product 6',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+      } catch (error) {
+        console.error('fetching Error:', error);
+      }
+    };
+    fetchCompanies();
+  }, []);
 
-    {
-      id: 8,
-      name: 'Product 6',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
 
-    {
-      id: 9,
-      name: 'Product 6',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/products',
+        {
+          method: 'GET',
+          header: {
+            'Content-Type': 'application/json',
+          }
+        }
+      );
+      if(!response.ok) {
+        throw new Error('response Error');
+      }
 
-    {
-      id: 10,
-      name: 'Product 6',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
+      const data = await response.json();
+      setProducts(data);
+
+    } catch (error) {
+      console.error('fetching Error:', error);
     }
-]);
+  };
+  fetchProducts();
+},[]);
+// const [products] = useState
+// ([
+//     {
+//       id: 1,
+//       name: 'Product 1 Product 1 Product 1 Product 1',
+//       price: 29.99,
+//       img: '/img/3.jpg',
+//       description: 'This is the description for Product 1.This is the description for Product 1.This is the description for Product 1.This is the description for Product 1.This is the description for Product 1. This is the description for Product 1 This is the description for Product 1 This is the description for Product 1 This is the description for Product 1'
+//     },
+//     {
+//       id: 2,
+//       name: 'Product 2',
+//       price: 49.99,
+//       img: '/img/4.jpg',
+//       description: 'This is the description for Product 2.'
+//     },
+//     {
+//       id: 3,
+//       name: 'Product 3',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
+
+//     {
+//       id: 4,
+//       name: 'Product 4',
+//       price: 19.99,
+//       img: '/img/6.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
+
+//     {
+//       id: 5,
+//       name: 'Product 5',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
+
+//     {
+//       id: 6,
+//       name: 'Product 6',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
+
+//     {
+//       id: 8,
+//       name: 'Product 6',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
+
+//     {
+//       id: 9,
+//       name: 'Product 6',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
+
+//     {
+//       id: 10,
+//       name: 'Product 6',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     }
+// ]);
+
+
+
 
 
 const [movies] = useState ([
@@ -411,82 +461,7 @@ const [watchedMovies] = useState ([ {
 
 
 
-const [companies] = useState([{
-  id: 1,
-  name: 'Example Productions',
-  img:'https://www.vintagemovieposters.co.uk/wp-content/uploads/2023/03/IMG_1887-scaled.jpeg',
-  email:'s@gmail.com',
-  description: 'Example Productions is a leading film and TV production company known for its blockbuster movies and popular TV shows.',
-  mediaId: [1, 2],
-  news: [{ id: 1, title: 'Example Productions Acquires New Script', description: 'Example Productions has acquired the script for a new action-packed movie set to release next summer.'},
-         {id: 2, title: 'New TV Show from Example Productions', description: 'Example Productions announces a new TV show that will premiere this fall, featuring an all-star cast.'}
-        ],
 
-  productId: []
-},
-{
-  id: 2,
-  name: 'DreamWorks Animation',
-  img:'https://i.ibb.co/ftSMf7c/beae1ffac73362e365699287770657da.jpg',
-  email:'s@gmail.com',
-  description: 'DreamWorks Animation is an American animation studio that creates animated feature films, television programs, and online virtual games.',
-  mediaId: [3, 4],
-  news: [{id: 1,title: 'DreamWorks Releases New Animated Feature',description: 'DreamWorks Animation has released a new animated feature that is receiving rave reviews from critics and audiences alike.'},
-         {id: 2,title: 'DreamWorks Partners with New Streaming Service',description: 'DreamWorks Animation has announced a new partnership with a leading streaming service to bring its animated movies and TV shows to a wider audience.'}
-        ],
-  productId: [6, 7, 8]
-},
-{
-  id: 1,
-  name: 'Example Productions',
-  img:'https://deadline.com/wp-content/uploads/2021/08/Walt-Disney-Animation-Studios.jpg',
-  email:'s@gmail.com',
-  description: 'Example Productions is a leading film and TV production company known for its blockbuster movies and popular TV shows.',
-  mediaId: [1, 2],
-  news: [{ id: 1, title: 'Example Productions Acquires New Script', description: 'Example Productions has acquired the script for a new action-packed movie set to release next summer.'},
-         {id: 2, title: 'New TV Show from Example Productions', description: 'Example Productions announces a new TV show that will premiere this fall, featuring an all-star cast.'}
-        ],
-
-  productId: [1, 2, 3,4,5,6,7]
-},
-{
-  id: 2,
-  name: 'DreamWorks Animation',
-  img:'/img/4.jpg',
-  email:'s@gmail.com',
-  description: 'DreamWorks Animation is an American animation studio that creates animated feature films, television programs, and online virtual games.',
-  mediaId: [3, 4],
-  news: [{id: 1,title: 'DreamWorks Releases New Animated Feature',description: 'DreamWorks Animation has released a new animated feature that is receiving rave reviews from critics and audiences alike.'},
-         {id: 2,title: 'DreamWorks Partners with New Streaming Service',description: 'DreamWorks Animation has announced a new partnership with a leading streaming service to bring its animated movies and TV shows to a wider audience.'}
-        ],
-  productId: [6, 7, 8]
-},
-{
-  id: 1,
-  name: 'Example Productions',
-  img:'/img/4.jpg',
-  email:'s@gmail.com',
-  description: 'Example Productions is a leading film and TV production company known for its blockbuster movies and popular TV shows.',
-  mediaId: [1, 2],
-  news: [{ id: 1, title: 'Example Productions Acquires New Script', description: 'Example Productions has acquired the script for a new action-packed movie set to release next summer.'},
-         {id: 2, title: 'New TV Show from Example Productions', description: 'Example Productions announces a new TV show that will premiere this fall, featuring an all-star cast.'}
-        ],
-
-  productId: [1, 2, 3,4,5,6,7]
-},
-{
-  id: 2,
-  name: 'DreamWorks Animation',
-  img:'/img/4.jpg',
-  email:'s@gmail.com',
-  description: 'DreamWorks Animation is an American animation studio that creates animated feature films, television programs, and online virtual games.',
-  mediaId: [3, 4],
-  news: [{id: 1,title: 'DreamWorks Releases New Animated Feature',description: 'DreamWorks Animation has released a new animated feature that is receiving rave reviews from critics and audiences alike.'},
-         {id: 2,title: 'DreamWorks Partners with New Streaming Service',description: 'DreamWorks Animation has announced a new partnership with a leading streaming service to bring its animated movies and TV shows to a wider audience.'}
-        ],
-  productId: [6, 7, 8]
-}
-  ]);
 
 
 
@@ -506,6 +481,10 @@ const [companies] = useState([{
     alert('Order confirmed!');
     setCartItems([]);
   };
+
+
+
+
 
 
 
