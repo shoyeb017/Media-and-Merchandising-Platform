@@ -3,30 +3,59 @@ import SearchFilter from './SearchFilter';
 import SearchResults from './SearchResults';
 import './Search.css';
 
-const Search = ({movies}) => {
+const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [results, setResults] = useState([]);
 
-  const handleSearch = () => {
-    // const mockResults = [
-    // { imgSrc: 'img/1.jpeg', title: 'Her', description: '1Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.' , genre: ['Action', 'Comedy'] },
-    // { imgSrc: 'img/2.jpeg', title: 'Inception', description: '2Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.' , genre: ['Drama']},
-    // { imgSrc: 'img/3.jpg', title: 'Interstellar', description: '3Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.' , genre: ['Action', 'Drama'] },
-    // { imgSrc: 'img/4.jpg', title: 'The Dark Knight', description: '4Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.' , genre: ['Comedy'] },
-    // { imgSrc: 'img/5.jpg', title: 'The Shawshank Redemption', description: '5Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.' , genre: ['Horror'] },
-    // { imgSrc: 'img/6.jpg', title: 'The Godfather', description: '6Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.' , genre: ['Comedy']},
-    // { imgSrc: 'img/7.jpg', title: 'The Godfather II', description: '7Lorem ipsum dolor sit amet consectetur adipisicing elit. At hic fugit similique accusantium.' , genre: ['Action', 'Drama']},
-    // ];
-
+  // const handleSearch = () => {
     //change korle ekhane korbo----------
 
-    const filteredResults = movies.filter(movie =>
-      (searchTerm === '' || movie.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      (selectedGenres.length === 0 || selectedGenres.every(genre => movie.genre.includes(genre)))
-    );
+    // const filteredResults = movies.filter(movie =>
+    //   (searchTerm === '' || movie.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
+    //   (selectedGenres.length === 0 || selectedGenres.every(genre => movie.genre.includes(genre)))
+    // );
 
-    setResults(filteredResults);
+    // const filteredResults = movies.filter(movie =>
+
+    // setResults(filteredResults);
+  // };
+
+  const handleSearch = async () => {
+    try {
+      if (searchTerm === '' && selectedGenres.length === 0) {
+        console.log('fetching all movies');
+        const response = await fetch(`http://localhost:5000/media`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+        if (!response.ok) {
+          throw new Error('Failed to fetch movies');
+        }
+        const movies = await response.json();
+        setResults(movies);
+        return;
+      }
+      const response = await fetch(`http://localhost:5000/media/search`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ searchTerm, selectedGenres }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setResults(data);
+      } else {
+        console.error('Failed to search');
+      }
+    }catch (err) {
+      console.error('Failed to search:', err);
+     
+    }
   };
 
   return (

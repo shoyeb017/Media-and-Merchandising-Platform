@@ -125,6 +125,165 @@ oracledb.createPool({
         }
     });
 
+    app.get('/media', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received media request');
+            const result = await con.execute(
+                `SELECT * FROM MEDIA`
+            );
+    
+            const transformData = (data) => {
+                return {
+                    id: data.MEDIA_ID,
+                    img: data.POSTER,
+                    title: data.TITLE,
+                    description: data.DESCRIPTION,
+                    rating: data.RATING , // Assuming the original rating is out of 10 and the new one is out of 5
+                    releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                    type: data.TYPE,
+                    episodes: data.EPISODE || 0,
+                    duration: data.DURATION,
+                    genre: data.GENRE.split(',').map(g => g.trim()),
+                    companyName: 'Example Productions',
+                    role: [],
+                    news: [],
+                    review: []
+                };
+            };
+    
+            const transformedData = result.rows.map(transformData);
+    
+            res.send(transformedData);
+            console.log("Media Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    app.post('/media/search', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received search request:', req.body);
+            const { searchTerm, selectedGenres } = req.body;
+            const genreFilter = selectedGenres.length ? `AND (${selectedGenres.map(g => `GENRE LIKE '%${g}%'`).join(' AND ')})` : '';
+            const result = await con.execute(
+                `SELECT * FROM MEDIA WHERE LOWER(TITLE) LIKE LOWER(:searchTerm) ${genreFilter}`,
+                { searchTerm: `%${searchTerm}%` } // Named bind variables
+            );
+    
+            const transformData = (data) => {
+                return {
+                    id: data.MEDIA_ID,
+                    img: data.POSTER,
+                    title: data.TITLE,
+                    description: data.DESCRIPTION,
+                    rating: data.RATING / 2, // Assuming the original rating is out of 10 and the new one is out of 5
+                    releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                    type: data.TYPE.charAt(0).toUpperCase() + data.TYPE.slice(1).toLowerCase(),
+                    episodes: data.EPISODE || 0,
+                    duration: data.DURATION,
+                    genre: data.GENRE.split(',').map(g => g.trim()),
+                    companyName: 'Example Productions',
+                    role: [],
+                    news: [],
+                    review: []
+                };
+            };
+            const transformedData = result.rows.map(transformData);
+    
+            res.send(transformedData);
+            console.log("Search Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    app.post('/media/page', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received media request:', req.body);
+            const { id } = req.body;
+            console.log('Received media request:', id);
+            const result = await con.execute(
+                `SELECT * FROM MEDIA WHERE MEDIA_ID = :id`,
+                { id } // Named bind variables
+            );
+            console.log(`Query Result: `, result.rows);
+            if (!result.rows.length) {
+                res.status(404).send("Media not found");
+                return;
+            }
+    
+            const transformData = (data) => {
+                return {
+                    id: data.MEDIA_ID,
+                    img: data.POSTER,
+                    title: data.TITLE,
+                    description: data.DESCRIPTION,
+                    rating: data.RATING / 2, // Assuming the original rating is out of 10 and the new one is out of 5
+                    releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                    type: data.TYPE,
+                    episodes: data.EPISODE || 0,
+                    duration: data.DURATION,
+                    genre: data.GENRE ? data.GENRE.split(',').map(g => g.trim()) : [],
+                    companyName: 'Example Productions',
+                    role: [],
+                    news: [],
+                    review: []
+                };
+            };
+            const transformedData = result.rows.map(transformData);
+    
+            res.send(transformedData[0]);
+            console.log("Media Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
     
 
     // Start the server
@@ -134,3 +293,19 @@ oracledb.createPool({
 }).catch(err => {
     console.error('Error starting connection pool', err);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
