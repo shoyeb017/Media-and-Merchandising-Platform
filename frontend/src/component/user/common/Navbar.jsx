@@ -4,6 +4,7 @@ import './Navbar.css';
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +21,14 @@ function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    console.log(storedUsername);
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
   return (
     <div className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
@@ -29,27 +38,26 @@ function Navbar() {
         <div className="menu-container">
           <ul className="menu-list">
             <li className="menu-list-item">
-              <Link to="/home" >Home</Link>
+              <Link to={`/${username}/home`}>Home</Link>
             </li>
             <li className="menu-list-item">
-              <Link to="/search" >Search</Link>
+              <Link to={`/${username}/search`}>Search</Link>
             </li>
             <li className="menu-list-item">
-              <Link to="/mylist" >My List</Link>
+              <Link to={`/${username}/mylist`}>My List</Link>
             </li>
             <li className="menu-list-item">
-              <Link to="/discussion" >Discussion</Link>
+              <Link to={`/${username}/discussion`}>Discussion</Link>
             </li>
             <li className="menu-list-item">
-              <Link to="/company" >Company</Link>
+              <Link to={`/${username}/company`}>Company</Link>
             </li>
             <li className="menu-list-item">
-              <Link to="/merch" >Merchandiser</Link>
+              <Link to={`/${username}/merch`}>Merchandiser</Link>
             </li>
-
           </ul>
         </div>
-        <Link to="/profile" className="profile-text" > Profile </Link>
+        <Link to={`/${username}/profile`} className="profile-text">Profile</Link>
         <Link to="/" className="logout-btn">Logout</Link>
       </div>
     </div>

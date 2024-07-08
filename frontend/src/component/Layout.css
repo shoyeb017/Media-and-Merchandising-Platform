@@ -1,0 +1,16 @@
+/* Ensure the layout takes the full height of the viewport */
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Ensure the content takes up the remaining space between the NavBar and BottomBar */
+  .content {
+    flex: 1;
+  }
+
+  /* BottomBar styles */
+  .bottom-bar {
+    position: relative;
+  }

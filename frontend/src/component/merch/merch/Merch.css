@@ -1,0 +1,20 @@
+.merch {
+
+  }
+
+  .merch-list {
+    margin-left: px;
+  }
+  .cart-button {
+    margin-left: 89%;
+    background-color: #ffdd95;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .cart-button:hover {
+    background-color: #333;
+    color: #ffdd95;
+  }

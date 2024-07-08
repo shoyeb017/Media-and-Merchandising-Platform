@@ -4,7 +4,6 @@
   color: #242428;
   padding-top: 70px; /* Account for the height of the navbar */
   box-sizing: border-box; /* Include padding in the element's total width and height */
-  padding-bottom: 70px ;
 }
 
 * {

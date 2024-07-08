@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductSection.css';
 import ProductCard from './ProductCard';
@@ -7,8 +7,16 @@ const ProductSection = ({ products }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const filteredProducts = products.filter(product =>
-      product.NAME.toLowerCase().includes(searchQuery.toLowerCase())
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    const [username, setUsername] = useState('');
+    useEffect(() => {
+      const storedUsername = localStorage.getItem('username');
+      if (storedUsername) {
+        setUsername(storedUsername);
+      }
+    }, []);
 
   return (
     <div className="product-section">
@@ -21,13 +29,13 @@ const ProductSection = ({ products }) => {
         onChange={(e) => setSearchQuery(e.target.value)}
         className="search-bar"
       />
-      <button className="search-button">Search</button>
-      <Link to="/merch/cart" className="cart-button1">Cart</Link>
+      <button>Search</button>
+      <Link to={`/${username}/merch/cart`} className="cart-button1">Cart</Link>
       </div>
 
       <div className="product-list">
         {filteredProducts.map(product => (
-          <ProductCard key={product.PRO_ID} product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </div>

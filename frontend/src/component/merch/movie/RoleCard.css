@@ -1,0 +1,35 @@
+.role-card {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+
+    padding: 7px;
+
+    max-width: 420px;
+    height: auto;
+  }
+
+  .role-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+
+  .role-info h4 {
+    margin: 0 0 5px;
+
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .role-info p {
+    margin: 0;
+
+    color: #797e8f  ;
+    white-space: nowrap;
+    overflow: hidden;
+  }

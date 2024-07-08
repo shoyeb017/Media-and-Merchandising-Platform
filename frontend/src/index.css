@@ -5,3 +5,25 @@
   body {
     font-family: "Roboto", sans-serif;
   }
+
+  /* Scrollbar.css */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #333;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffdd95;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ddb150;
+}
+

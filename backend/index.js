@@ -283,6 +283,45 @@ oracledb.createPool({
             }
         }
     });
+
+
+    // product page details
+
+    app.get('/products/details', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received product request');
+            const result = await con.execute(
+                `SELECT * FROM PRODUCTS WHERE PRO_ID = :id`,
+                { id: req.params.id }
+            );
+            console.log(`Query Result: `,result.rows);
+
+            if (!result.rows.length) {
+                res.status(404).send("Product not found");
+                return;
+            }
+    
+            res.send(result.rows[0]);
+            console.log("Product Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
     
     
 

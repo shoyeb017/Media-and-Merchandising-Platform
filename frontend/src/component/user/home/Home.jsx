@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../common/Navbar";
-import Sidebar from "../Sidebar";
 import FeaturedContent from "./FeaturedContent";
 import MovieList from "./MovieList";
 

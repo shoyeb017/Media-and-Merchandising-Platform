@@ -1,0 +1,104 @@
+.footer {
+  background: #3a3a3e;
+  color: white;
+  padding: 40px 20px;
+  margin-top: 200px;
+  text-align: center;
+}
+
+.newsletter h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.newsletter p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.newsletter-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newsletter-input input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  width: 300px;
+}
+
+.newsletter-input button {
+  padding: 10px;
+  border: none;
+  background: #ffdd95;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.contact-section {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.contact-info {
+  max-width: 200px;
+}
+
+.contact-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.contact-info h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.contact-info p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.contact-info button {
+  padding: 10px 15px;
+  border: 2px solid #ffdd95;
+  background: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.contact-info button:hover {
+  background: #ffdd95;
+  color: #1e3d59;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  margin: 0 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #ffdd95;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  margin: 5px 0;
+}

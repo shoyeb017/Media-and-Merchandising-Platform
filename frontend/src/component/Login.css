@@ -1,75 +1,103 @@
-src/Login.css
 
-.login-container0{
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    height: 100vh;
-    margin: 0;
-  }
+.login-container0 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(to left, rgba(0,0,0,0), #242428), url('https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg');
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
 
-  .login-container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px 40px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
+.login-container0 {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  margin: 0;
+}
 
-    margin: auto;
-  }
+.login-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 40px;
+  max-width: 350px;
+  width: 100%;
+  text-align: center;
+  margin-left: 850px;
+  margin-top: 10px;
+}
 
-  h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
 
-  .login-form {
-    display: flex;
-    flex-direction: column;
-  }
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
 
-  .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-  }
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
 
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-  }
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
 
-  .form-control0 {
-    position: relative;
-    right: 42px;
-    width: 100%;
-    margin-left: 10px;
-  }
+.form-control0 {
+  position: relative;
+  right: 42px;
+  width: 100%;
+  margin-left: 10px;
+}
 
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-  }
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
 
-  .form-control:focus {
-    border-color: #6e8efb;
-    outline: none;
-  }
+.form-control:focus {
+  border-color: #6e8efb;
+  outline: none;
+}
 
-  .btn-login {
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
+.btn-login {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-  .btn-login:hover {
-    background: linear-gradient(135deg, #a777e3, #6e8efb);
-  }
+.btn-login:hover {
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+}
+
+.btn-registration {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-registration:hover {
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+}
