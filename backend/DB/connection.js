@@ -8,7 +8,7 @@ async function initializeConnection() {
     connection = await oracle.getConnection({
       user: "ADMIN",
       password: "admin",
-      connectString: "Tone:1521/orclpdb",
+      connectString: "localhost:1521/orclpdb",
     });
     console.log("Database connected successfully.");
   } catch (err) {
