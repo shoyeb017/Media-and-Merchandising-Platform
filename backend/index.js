@@ -295,6 +295,8 @@ oracledb.createPool({
                 res.status(500).send("Connection Error");
                 return;
             }
+
+            // dashkj
             console.log('Received product request');
             const result = await con.execute(
                 `SELECT * FROM PRODUCTS WHERE PRO_ID = :id`,
