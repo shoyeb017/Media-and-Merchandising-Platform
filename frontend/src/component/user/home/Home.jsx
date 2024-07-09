@@ -13,7 +13,12 @@ function Home() {
     try {
       const searchterm = '';
       const selectedGenres = [genre];
-      const response = await fetch(`http://localhost:5000/media/search`, {
+      
+      console.log('fetching movies by genre:', genre);
+      console.log('selectedGenres array:', selectedGenres);
+      console.log('Request payload:', JSON.stringify({ searchterm, selectedGenres }));
+      
+      const response = await fetch('http://localhost:5000/media/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,14 +28,17 @@ function Home() {
       
       if (response.ok) {
         const data = await response.json();
-        setMovies(data);
+        console.log('Response data:', data);
+        setMovies(Array.isArray(data) ? data : []);
       } else {
-        console.error('Failed to search');
+        console.error('Failed to search. Status:', response.status);
       }
-    }catch (err) {
+    } catch (err) {
       console.error('Failed to search:', err);
     }
   };
+  
+  
 
   React.useEffect(() => {
     fetchMoviesByGenre('ACTION', setHorrorMovies);

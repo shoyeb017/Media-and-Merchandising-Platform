@@ -39,6 +39,7 @@ const Search = () => {
         setResults(movies);
         return;
       }
+      console.log('searching for movies:', selectedGenres);
       const response = await fetch(`http://localhost:5000/media/search`, {
         method: 'POST',
         headers: {
