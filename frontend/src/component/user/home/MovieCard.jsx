@@ -12,13 +12,13 @@ const MovieCard = ({ movie }) => {
   }, []);
 
   return (
-    <Link to={`/${username}/media/${movie.id}`} className="link-product-card">
+    <Link to={`/${username}/media/${movie.MEDIA_ID}`} className="link-product-card">
 
       <div className="movie-card">
-        <img className="movie-card-img" src={movie.img} alt={movie.title} />
+        <img className="movie-card-img" src={movie.POSTER} alt={movie.TITLE} />
         <div className="movie-card-content">
-          <h3 className="movie-card-title">{movie.title}</h3>
-          <p className="movie-card-desc">{movie.description}</p>
+          <h3 className="movie-card-title">{movie.TITLE}</h3>
+          <p className="movie-card-desc">{movie.DESCRIPTION}</p>
         </div>
       </div>
     </Link>

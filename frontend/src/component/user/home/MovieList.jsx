@@ -26,7 +26,7 @@ const responsive = {
 
 const MovieList = ({ movies, title }) => {
   const movielist = movies.map((movie) => (
-    <MovieCard key={movie.id} movie={movie} /> // Ensure each MovieCard has a unique key and pass the movie item as props
+    <MovieCard key={movie.MEDIA_ID} movie={movie} /> // Ensure each MovieCard has a unique key and pass the movie item as props
   ));
 
   return (

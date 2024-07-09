@@ -57,6 +57,7 @@ const Search = () => {
      
     }
   };
+  
 
   return (
     <div>
