@@ -5,32 +5,38 @@ import MovieList from "./MovieList";
 
 function Home() {
   const [actionMovies, setActionMovies] = React.useState([]);
+  const [horrorMovies, setHorrorMovies] = React.useState([]);
   const [romanceMovies, setRomanceMovies] = React.useState([]);
   const [comedyMovies, setComedyMovies] = React.useState([]);
-  const [horrorMovies, setHorrorMovies] = React.useState([]);
-  const [scifiMovies, setScifiMovies] = React.useState([]);  
+
   const fetchMoviesByGenre = async (genre, setMovies) => {
     try {
-      const response = await fetch(`http://localhost:5000/media/genre?genre=${genre}`, {
-        method: 'GET',
+      const searchterm = '';
+      const selectedGenres = [genre];
+      const response = await fetch(`http://localhost:5000/media/search`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ searchterm, selectedGenres }),
       });
-      if (!response.ok) {
-        throw new Error('Failed to fetch movies');
+      
+      if (response.ok) {
+        const data = await response.json();
+        setMovies(data);
+      } else {
+        console.error('Failed to search');
       }
-      const movies = await response.json();
-      setMovies(movies);
-    } catch (err) {
-      console.error(`Failed to fetch ${genre} movies:`, err);
+    }catch (err) {
+      console.error('Failed to search:', err);
     }
   };
 
   React.useEffect(() => {
-    fetchMoviesByGenre('Horror', setHorrorMovies);
-    fetchMoviesByGenre('Romance', setRomanceMovies);
-    fetchMoviesByGenre('Comedy', setComedyMovies);
+    fetchMoviesByGenre('ACTION', setHorrorMovies);
+    fetchMoviesByGenre('HORROR', setHorrorMovies);
+    fetchMoviesByGenre('ROMANCE', setRomanceMovies);
+    fetchMoviesByGenre('COMEDY', setComedyMovies);
   }, []);
 
   return (
@@ -38,10 +44,10 @@ function Home() {
       <Navbar />
       <FeaturedContent />
       <div className="content-container">
+        {/* <MovieList movies={actionMovies} title="Action" /> */}
         <MovieList movies={horrorMovies} title="Horror" />
-        <MovieList movies={romanceMovies} title="Romance" />
+        {/* <MovieList movies={romanceMovies} title="Romance" /> */}
         <MovieList movies={comedyMovies} title="Comedy" />
-        
       </div>
     </div>
   );

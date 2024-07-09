@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieCard from '../home/MovieCard.jsx';
+import MovieCardcopy from '../home/MovieCardcopy.jsx';
 import './SearchResults.css';
 
 const SearchResults = ({ results }) => {
@@ -8,7 +8,7 @@ const SearchResults = ({ results }) => {
     <h3 className="search-results-title">Filter Results</h3>
     <div className="search-results">
       {results.map((result, index) => (
-        <MovieCard key={index} movie={result}/>
+        <MovieCardcopy key={index} movie={result}/>
       ))}
     </div>
     </>

@@ -515,7 +515,7 @@ const [companies] = useState([{
               <Route path="/:username/media/:mediaID" element={<MovieDetailsPage movies={movies} />} />
 
 
-              <Route path="/:username/company" element={<CompanySection companies={companies} />} />
+              <Route path="/:username/company" element={<CompanySection/>} />
               <Route path="/:username/company/:companyID" element={<CompanyDetailsPage companies={companies} />} />
 
               {/* /:movieId */}

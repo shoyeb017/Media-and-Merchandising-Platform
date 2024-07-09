@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import MovieCard from './MovieCard';
+import MovieCardcopy from './MovieCardcopy';
 import './MovieList.css';
 
 const responsive = {
@@ -25,8 +25,13 @@ const responsive = {
 };
 
 const MovieList = ({ movies, title }) => {
+  if (!Array.isArray(movies)) {
+    console.error('Expected an array of movies:', movies);
+    return null;
+  }
+
   const movielist = movies.map((movie) => (
-    <MovieCard key={movie.MEDIA_ID} movie={movie} /> // Ensure each MovieCard has a unique key and pass the movie item as props
+    <MovieCardcopy key={movie.id} movie={movie} /> // Ensure each MovieCardcopy has a unique key and pass the movie item as props
   ));
 
   return (

@@ -212,6 +212,7 @@ oracledb.createPool({
             const transformedData = result.rows.map(transformData);
     
             res.send(transformedData);
+            console.log(transformData);
             console.log("Search Data sent");
         } catch (err) {
             console.error("Error during database query: ", err);
@@ -315,31 +316,7 @@ oracledb.createPool({
     });
     
     
-
-    app.get('/media/genre', async (req, res) => {
-        try {
-            const { genre } = req.query; // Use req.query to get query parameters
-            console.log('Received genre request', genre);
-            
-            const con = await pool.getConnection();
-            if (!con) {
-                throw new Error("Connection Error");
-            }
-            
-            const result = await con.execute(
-                `SELECT * FROM MEDIA WHERE UPPER(GENRE) = UPPER(:genre)`,
-                { genre }
-            );
-            console.log(`Query Result: `, result.rows);
-            
-            
-            res.send(result.rows);
-            console.log("Media Data sent");
-        } catch (err) {
-            console.error("Error during database query: ", err);
-            res.status(500).send("Internal Server Error");
-        }
-    });
+      
 
     // Start the server
     app.listen(5000, () => {
