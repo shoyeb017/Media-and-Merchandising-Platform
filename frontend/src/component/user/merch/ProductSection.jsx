@@ -7,14 +7,7 @@ const ProductSection = ({  }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState([]);  // Initialize with useState
 
-<<<<<<< HEAD
-    const filteredProducts = products.filter(product =>
-      product.name.toLowerCase())
-  
-
-=======
     
->>>>>>> 04965d56de44ee9ad6f42ab7479dbe06ec5a99d2
     const [username, setUsername] = useState('');
     useEffect(() => {
       const storedUsername = localStorage.getItem('username');
