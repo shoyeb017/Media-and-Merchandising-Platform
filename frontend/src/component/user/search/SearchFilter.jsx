@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchFilter.css';
-const genres = ['Action','Adventure','Comedy', 'Drama','Fantasy','Historical', 'Horror','Magic',
-              'Mystery','Psychological','Romance','Sci-Fi','Supernatural','Sports','Thriller','Tragedy'];
+const genres = ['ACTION','ADVENTURE','COMEDY', 'DRAMA','FANTASY','HISTORICAL', 'HORROR','MAGIC',
+        'MYSTERY','PSYCHOLOGICAL','ROMANCE','SCI-FI','SUPERNATURAL','SPORTS','THRILLER','TRAGEDY'];
 
 const SearchFilter = ({ searchTerm, setSearchTerm, selectedGenres, setSelectedGenres, handleSearch }) => {
   const handleGenreClick = (genre) => {

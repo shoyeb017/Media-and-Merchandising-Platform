@@ -16,7 +16,7 @@ import './ProductDetails.css';
 
 
 
-const ProductDetails = ({ products, onAddToCart }) => {
+const ProductDetails = ({ onAddToCart }) => {
   const [username, setUsername] = useState('');
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');

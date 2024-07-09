@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 import './ProductSection.css';
 import ProductCard from './ProductCard';
 
-const ProductSection = ({ products }) => {
+const ProductSection = ({  }) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [products, setProducts] = useState([]);  // Initialize with useState
 
+<<<<<<< HEAD
     const filteredProducts = products.filter(product =>
       product.name.toLowerCase())
   
 
+=======
+    
+>>>>>>> 04965d56de44ee9ad6f42ab7479dbe06ec5a99d2
     const [username, setUsername] = useState('');
     useEffect(() => {
       const storedUsername = localStorage.getItem('username');
@@ -17,9 +22,38 @@ const ProductSection = ({ products }) => {
         setUsername(storedUsername);
       }
     }, []);
+    
 
-  return (
-    <div className="product-section">
+    useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+                const response = await fetch('http://localhost:5000/products', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (!response.ok) {
+                  throw new Error('Something went wrong!');
+                }
+                
+                const data = await response.json();
+                setProducts(data);  // Set the fetched data to the products state
+              } catch (error) {
+                console.error(error);
+              }
+            };
+            
+            fetchProducts();
+          }, []);
+          
+          // const filteredProducts = products.filter(product =>
+          //   product.name.toLowerCase().includes(searchQuery.toLowerCase())
+          // );
+          
+          return (
+            <div className="product-section">
 
       <div className="product-section-header">
       <input
@@ -34,8 +68,8 @@ const ProductSection = ({ products }) => {
       </div>
 
       <div className="product-list">
-        {filteredProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
+        {products.map(product => (
+          <ProductCard key={product.PRO_ID} product={product} />
         ))}
       </div>
     </div>
