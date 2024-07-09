@@ -18,6 +18,7 @@ import Login from './component/Login.jsx';
 import Registration from './component/Registration.jsx';
 //dsahuihajsdlaks
 import LayoutUser from './component/LayoutUser.jsx';
+
 import LayoutAdmin from './component/LayoutAdmin.jsx';
 import LayoutCompany from './component/LayoutCompany.jsx';
 import LayoutMerch from './component/LayoutMerch.jsx';
