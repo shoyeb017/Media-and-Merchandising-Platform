@@ -7,8 +7,8 @@ const ProductSection = ({ products }) => {
     const [searchQuery, setSearchQuery] = useState('');
 
     const filteredProducts = products.filter(product =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+      product.name.toLowerCase())
+  
 
     const [username, setUsername] = useState('');
     useEffect(() => {
