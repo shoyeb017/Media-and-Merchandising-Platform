@@ -1,37 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductSection.css';
 import ProductCard from './ProductCard';
 
-const ProductSection = ({ products }) => {
+const ProductSection = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [products, setProducts] = useState([]);  // Initialize with useState
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/products', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Something went wrong!');
+                }
+
+                const data = await response.json();
+                setProducts(data);  // Set the fetched data to the products state
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
 
     const filteredProducts = products.filter(product =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-  return (
-    <div className="product-section">
+    return (
+        <div className="product-section">
+            <div className="product-section-header">
+                <input
+                    type="text"
+                    placeholder="Search for products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="search-bar"
+                />
+                <button className="search-button">Search</button>
+                <Link to="/merch/cart" className="cart-button1">Cart</Link>
+            </div>
 
-      <div className="product-section-header">
-      <input
-        type="text"
-        placeholder="Search for products..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className="search-bar"
-      />
-      <button className="search-button">Search</button>
-      <Link to="/merch/cart" className="cart-button1">Cart</Link>
-      </div>
-
-      <div className="product-list">
-        {filteredProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    </div>
-  );
+            <div className="product-list">
+                {filteredProducts.map(product => (
+                    <ProductCard key={product.id} product={product} />
+                ))}
+            </div>
+        </div>
+    );
 };
 
 export default ProductSection;

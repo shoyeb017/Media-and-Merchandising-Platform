@@ -16,7 +16,7 @@ import './ProductDetails.css';
 
 
 
-const ProductDetails = ({ products, onAddToCart }) => {
+const ProductDetails = ({}) => {
   const [username, setUsername] = useState('');
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -26,7 +26,30 @@ const ProductDetails = ({ products, onAddToCart }) => {
   }, []);
 
   const { productId } = useParams();
-  const product = products.find(p => p.id === parseInt(productId));
+  const [product, setProducts] =useState(null);
+
+
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/products/details', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: productId }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch product details');
+            }
+            const product = await response.json();
+            setProducts(product);
+        } catch (err) {
+            console.error('Failed to fetch product details:', err);
+        }
+    };
+    fetchProductDetails();
+}, [productId]);
 
   const [reviews, setReviews] = useState(product ? product.reviews : []);
   const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
@@ -46,11 +69,11 @@ const ProductDetails = ({ products, onAddToCart }) => {
     <div className="product-details">
 
       <Link to={`/${username}/merch/cart`} className="cart-button">View Cart</Link>
-      <img src={product.img} alt={product.name} className="product-details-img" />
+      <img src={product.IMAGE} alt={product.NAME} className="product-details-img" />
       <div className="product-details-info">
-        <h2 className="product-details-name">{product.name}</h2>
-        <p className="product-details-price">${product.price}</p>
-        <p className="product-details-description">{product.description}</p>
+        <h2 className="product-details-name">{product.NAME}</h2>
+        <p className="product-details-price">${product.PRICE}</p>
+        <p className="product-details-description">{product.DESCRIPTION}</p>
         <button onClick={() => onAddToCart(product)}>Add to Cart</button>
       </div>
 

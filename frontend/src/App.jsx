@@ -40,92 +40,94 @@ import './App.css';
 export default function App() {
 
 
-const [products] = useState
-([
-    {
-      id: 1,
-      name: 'Product 1 Product 1 Product 1 Product 1',
-      price: 29.99,
-      img: '/img/3.jpg',
-      description: 'This is the description for Product 1.This is the description for Product 1.This is the description for Product 1.This is the description for Product 1.This is the description for Product 1. This is the description for Product 1 This is the description for Product 1 This is the description for Product 1 This is the description for Product 1',
-      reviews: [
-        { name: 'Alice', description: 'Great product!', rating: 5 },
-        { name: 'Bob', description: 'Not bad', rating: 3 }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 49.99,
-      img: '/img/4.jpg',
-      description: 'This is the description for Product 2.',
-      reviews: [
-        { name: 'Charlie', description: 'Loved it!', rating: 4 }
-      ]
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+// const [products] = useState
+// ([
+//     {
+//       id: 1,
+//       name: 'Product 1 Product 1 Product 1 Product 1',
+//       price: 29.99,
+//       img: '/img/3.jpg',
+//       description: 'This is the description for Product 1.This is the description for Product 1.This is the description for Product 1.This is the description for Product 1.This is the description for Product 1. This is the description for Product 1 This is the description for Product 1 This is the description for Product 1 This is the description for Product 1',
+//       reviews: [
+//         { name: 'Alice', description: 'Great product!', rating: 5 },
+//         { name: 'Bob', description: 'Not bad', rating: 3 }
+//       ]
+//     },
+//     {
+//       id: 2,
+//       name: 'Product 2',
+//       price: 49.99,
+//       img: '/img/4.jpg',
+//       description: 'This is the description for Product 2.',
+//       reviews: [
+//         { name: 'Charlie', description: 'Loved it!', rating: 4 }
+//       ]
+//     },
+//     {
+//       id: 3,
+//       name: 'Product 3',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
 
-    {
-      id: 4,
-      name: 'Product 4',
-      price: 19.99,
-      img: '/img/6.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+//     {
+//       id: 4,
+//       name: 'Product 4',
+//       price: 19.99,
+//       img: '/img/6.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
 
-    {
-      id: 5,
-      name: 'Product 5',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+//     {
+//       id: 5,
+//       name: 'Product 5',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
 
-    {
-      id: 6,
-      name: 'Product 6',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+//     {
+//       id: 6,
+//       name: 'Product 6',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
 
-    {
-      id: 8,
-      name: 'Product 6',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+//     {
+//       id: 8,
+//       name: 'Product 6',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
 
-    {
-      id: 9,
-      name: 'Product 6',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    },
+//     {
+//       id: 9,
+//       name: 'Product 6',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     },
 
-    {
-      id: 10,
-      name: 'Product 6',
-      price: 19.99,
-      img: '/img/5.jpg',
-      description: 'This is the description for Product 3.',
-      reviews: []
-    }
-]);
+//     {
+//       id: 10,
+//       name: 'Product 6',
+//       price: 19.99,
+//       img: '/img/5.jpg',
+//       description: 'This is the description for Product 3.',
+//       reviews: []
+//     }
+// ]);
+
+
 
 
 const [movies] = useState ([
@@ -501,19 +503,19 @@ const [companies] = useState([{
             <Route element={<LayoutUser />}> 
               {/* User-specific routes */}
               <Route path="/:username/home" element={<HomeUser movies={movies}/>} />
-              <Route path="/:username/search" element={<Search movies={movies}/>} />
+              <Route path="/:username/search" element={<Search />} />
               <Route path="/:username/discussion" element={<Discussion />} />
               <Route path="/:username/mylist" element={<Mylist planToWatchMovies={planToWatchMovies} watchedMovies={watchedMovies}/>} />
               {/* <Route path="/:username/merch" element={<Merch products={products} />} /> */}
               <Route path="/:username/profile" element={<ProfileUser />} />
               <Route path="/:username/merch/cart" element={<Cart cartItems={cartItems} onConfirmOrder={handleConfirmOrder} onCancelItem={handleCancelItem} />} />
-              <Route path="/:username/merch" element={<ProductSection products={products} />} />
-              <Route path="/:username/product/:productId" element={<ProductDetails products={products} onAddToCart={handleAddToCart} />} />
+              <Route path="/:username/merch" element={<ProductSection />} />
+              <Route path="/:username/product/:productId" element={<ProductDetails onAddToCart={handleAddToCart} />} />
               <Route path="/:username/media/:mediaID" element={<MovieDetailsPage movies={movies} />} />
 
 
               <Route path="/:username/company" element={<CompanySection companies={companies} />} />
-              <Route path="/:username/company/:companyID" element={<CompanyDetailsPage companies={companies} products={products} />} />
+              <Route path="/:username/company/:companyID" element={<CompanyDetailsPage companies={companies} />} />
 
               {/* /:movieId */}
           </Route>
