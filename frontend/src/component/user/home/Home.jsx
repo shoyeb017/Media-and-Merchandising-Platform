@@ -4,26 +4,26 @@ import FeaturedContent from "./FeaturedContent";
 import MovieList from "./MovieList";
 
 function Home() {
+  let selectedGenres=[];
+  const searchTerm=''
   const [actionMovies, setActionMovies] = React.useState([]);
   const [horrorMovies, setHorrorMovies] = React.useState([]);
   const [romanceMovies, setRomanceMovies] = React.useState([]);
   const [comedyMovies, setComedyMovies] = React.useState([]);
 
-  const fetchMoviesByGenre = async (genre, setMovies) => {
+  const fetchMoviesByGenre = async ( setMovies) => {
     try {
-      const searchterm = '';
-      const selectedGenres = [genre];
       
-      console.log('fetching movies by genre:', genre);
+      console.log('fetching movies by genre:', selectedGenres);
       console.log('selectedGenres array:', selectedGenres);
-      console.log('Request payload:', JSON.stringify({ searchterm, selectedGenres }));
+      console.log('Request payload:', JSON.stringify({ searchTerm, selectedGenres }));
       
       const response = await fetch('http://localhost:5000/media/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ searchterm, selectedGenres }),
+        body: JSON.stringify({ searchTerm, selectedGenres }),
       });
       
       if (response.ok) {
@@ -41,10 +41,14 @@ function Home() {
   
 
   React.useEffect(() => {
-    fetchMoviesByGenre('ACTION', setHorrorMovies);
-    fetchMoviesByGenre('HORROR', setHorrorMovies);
-    fetchMoviesByGenre('ROMANCE', setRomanceMovies);
-    fetchMoviesByGenre('COMEDY', setComedyMovies);
+    selectedGenres=['ACTION'];
+    fetchMoviesByGenre( setActionMovies);
+    selectedGenres=['HORROR'];
+    fetchMoviesByGenre( setHorrorMovies);
+    selectedGenres=['ROMANCE'];
+    fetchMoviesByGenre( setRomanceMovies);
+    selectedGenres=['COMEDY'];
+    fetchMoviesByGenre( setComedyMovies);
   }, []);
 
   return (
@@ -52,9 +56,9 @@ function Home() {
       <Navbar />
       <FeaturedContent />
       <div className="content-container">
-        {/* <MovieList movies={actionMovies} title="Action" /> */}
+        <MovieList movies={actionMovies} title="Action" />
         <MovieList movies={horrorMovies} title="Horror" />
-        {/* <MovieList movies={romanceMovies} title="Romance" /> */}
+        <MovieList movies={romanceMovies} title="Romance" />
         <MovieList movies={comedyMovies} title="Comedy" />
       </div>
     </div>

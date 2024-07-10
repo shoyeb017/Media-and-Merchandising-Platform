@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import SearchFilter from './SearchFilter';
 import SearchResults from './SearchResults';
 import './Search.css';
+const genres = ['ACTION','ADVENTURE','COMEDY', 'DRAMA','FANTASY','HISTORICAL', 'HORROR','MAGIC',
+  'MYSTERY','PSYCHOLOGICAL','ROMANCE','SCI-FI','SUPERNATURAL','SPORTS','THRILLER','TRAGEDY'];
+
+  
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
