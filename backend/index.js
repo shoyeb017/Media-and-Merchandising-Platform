@@ -13,7 +13,7 @@ app.use(express.json()); // Middleware to parse JSON
 oracledb.createPool({
     user: "ADMIN",
     password: "admin",
-    connectString: "Tone:1521/orclpdb",
+    connectString: "localhost:1521/orclpdb",
     poolMin: 5,
     poolMax: 20,
     poolIncrement: 5
@@ -129,12 +129,15 @@ oracledb.createPool({
         let con;
         try {
             con = await pool.getConnection();
+            console.log('Received media request000');
             if (!con) {
                 res.status(500).send("Connection Error");
                 return;
             }
             console.log('Received media request');
+
             const result = await con.execute(
+
                 `SELECT * FROM MEDIA`
             );
     
