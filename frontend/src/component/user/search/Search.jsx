@@ -1,55 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchFilter from './SearchFilter';
 import SearchResults from './SearchResults';
 import './Search.css';
-const genres = ['ACTION','ADVENTURE','COMEDY', 'DRAMA','FANTASY','HISTORICAL', 'HORROR','MAGIC',
-  'MYSTERY','PSYCHOLOGICAL','ROMANCE','SCI-FI','SUPERNATURAL','SPORTS','THRILLER','TRAGEDY'];
 
-  
+const genres = ['ACTION', 'ADVENTURE', 'COMEDY', 'DRAMA', 'FANTASY', 'HISTORICAL', 'HORROR', 'MAGIC',
+  'MYSTERY', 'PSYCHOLOGICAL', 'ROMANCE', 'SCI-FI', 'SUPERNATURAL', 'SPORTS', 'THRILLER', 'TRAGEDY'];
+
+const mediaTypes = ['MOVIE', 'TV_SHOW', 'ANIME'];
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedMediaType, setSelectedMediaType] = useState('');
   const [results, setResults] = useState([]);
-
-  // const handleSearch = () => {
-    //change korle ekhane korbo----------
-
-    // const filteredResults = movies.filter(movie =>
-    //   (searchTerm === '' || movie.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
-    //   (selectedGenres.length === 0 || selectedGenres.every(genre => movie.genre.includes(genre)))
-    // );
-
-    // const filteredResults = movies.filter(movie =>
-
-    // setResults(filteredResults);
-  // };
 
   const handleSearch = async () => {
     try {
-      if (searchTerm === '' && selectedGenres.length === 0) {
-        console.log('fetching all movies');
-        const response = await fetch(`http://localhost:5000/media`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
+
+
+
+      if (searchTerm === '' && selectedGenres.length === 0 && selectedMediaType === "") {
+        console.log('fetching all media');
+        const response = await fetch('http://localhost:5000/media', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         if (!response.ok) {
-          throw new Error('Failed to fetch movies');
+          throw new Error('Failed to fetch media');
         }
-        const movies = await response.json();
-        setResults(movies);
+        const media = await response.json();
+        setResults(media);
         return;
       }
-      console.log('searching for movies:', selectedGenres);
-      const response = await fetch(`http://localhost:5000/media/search`, {
+
+
+
+
+      else if(selectedMediaType === "")
+      {     
+        console.log('searching for media:', selectedGenres);
+        const response = await fetch(`http://localhost:5000/media/search/genre`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ searchTerm, selectedGenres }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setResults(data);
+        }
+        return;
+      }
+
+
+
+
+      console.log('searching for media:', { searchTerm, selectedGenres, selectedMediaType });
+      const response = await fetch('http://localhost:5000/media/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ searchTerm, selectedGenres }),
+        body: JSON.stringify({ searchTerm, selectedGenres, selectedMediaType }),
       });
       if (response.ok) {
         const data = await response.json();
@@ -57,12 +72,14 @@ const Search = () => {
       } else {
         console.error('Failed to search');
       }
-    }catch (err) {
+    } catch (err) {
       console.error('Failed to search:', err);
-     
     }
   };
-  
+
+  useEffect(() => {
+    handleSearch();
+  }, [searchTerm, selectedGenres, selectedMediaType]);
 
   return (
     <div>
@@ -71,7 +88,8 @@ const Search = () => {
         setSearchTerm={setSearchTerm}
         selectedGenres={selectedGenres}
         setSelectedGenres={setSelectedGenres}
-        handleSearch={handleSearch}
+        selectedMediaType={selectedMediaType}
+        setSelectedMediaType={setSelectedMediaType}
       />
       <SearchResults results={results} />
     </div>

@@ -18,7 +18,7 @@ function Home() {
       console.log('selectedGenres array:', selectedGenres);
       console.log('Request payload:', JSON.stringify({ searchTerm, selectedGenres }));
       
-      const response = await fetch('http://localhost:5000/media/search', {
+      const response = await fetch('http://localhost:5000/media/search/genre', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
