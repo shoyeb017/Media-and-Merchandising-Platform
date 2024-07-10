@@ -133,12 +133,15 @@ oracledb.createPool({
         let con;
         try {
             con = await pool.getConnection();
+            console.log('Received media request000');
             if (!con) {
                 res.status(500).send("Connection Error");
                 return;
             }
             console.log('Received media request');
+
             const result = await con.execute(
+
                 `SELECT * FROM MEDIA`
             );
     
