@@ -315,7 +315,50 @@ oracledb.createPool({
         }
     });
 
-    //hsdakjfhkjs
+    // retrieving featured items
+    
+
+    app.get('/media/featured', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received media request');
+    
+            const query = `
+                SELECT TITLE, POSTER AS IMG_SRC, DESCRIPTION
+                FROM MEDIA
+                ORDER BY RATING DESC
+                FETCH FIRST 5 ROWS ONLY
+            `;
+            const result = await con.execute(query);
+    
+            const transformData = (data) => ({
+                title: data.TITLE,
+                imgSrc: data.IMG_SRC, // Ensure the database field is aliased as IMG_SRC
+                description: data.DESCRIPTION
+            });
+    
+            const transformedData = result.rows.map(transformData);
+    
+            res.send(transformedData);
+            console.log("Media Data sent");
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
     
     
       
