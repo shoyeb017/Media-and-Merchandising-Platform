@@ -5,31 +5,30 @@ import './Login.css';
 const Login = ({ setUserType }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [selectedUserType, setSelectedUserType] = useState('user'); // Default to 'user'
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let userType = null;
-    if (username === '1' && password === '1') {
-      userType = 'user';
-    } else if (username === '2' && password === '2') {
-      userType = 'admin';
-    } else if (username === '3' && password === '3') {
-      userType = 'merchandiser';
-    } else if (username === '4' && password === '4') {
-      userType = 'company';
-    } else {
+
+    // Use selectedUserType from the dropdown
+    let userType = selectedUserType;
+
+    // Perform additional checks if needed based on username and password
+    if ((username === '1' && password !== '1') ||
+        (username === '2' && password !== '2') ||
+        (username === '3' && password !== '3') ||
+        (username === '4' && password !== '4')) {
       alert('Invalid credentials');
       return;
     }
 
+    // Set user type and username in localStorage
     setUserType(userType);
     localStorage.setItem('userType', userType);
     localStorage.setItem('username', username);
     navigate(`/${username}/home`);
   };
-
-  
 
   return (
     <div className="login-container0">
@@ -53,6 +52,19 @@ const Login = ({ setUserType }) => {
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"
             />
+          </div>
+          <div className="form-group">
+            <label>User Type:</label>
+            <select
+              value={selectedUserType}
+              onChange={(e) => setSelectedUserType(e.target.value)}
+              className="form-control"
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+              <option value="merchandiser">Merchandiser</option>
+              <option value="company">Company</option>
+            </select>
           </div>
           <button type="submit" className="btn-login">Login</button>
 
