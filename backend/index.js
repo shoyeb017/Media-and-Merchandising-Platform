@@ -19,6 +19,10 @@ oracledb.createPool({
     poolIncrement: 5
 }).then(pool => {
     console.log('Connection pool started');
+    //registration route
+    //
+
+
 
     // Login route
     app.post('/login', async (req, res) => {
@@ -187,6 +191,71 @@ oracledb.createPool({
                 return;
             }
             console.log('Received search request:', req.body);
+            const { searchTerm, selectedGenres, selectedMediaType } = req.body;
+    
+            // Construct the genre filter part of the query
+            const genreFilter = selectedGenres.length ? `AND (${selectedGenres.map(g => `GENRE LIKE '%${g}%'`).join(' AND ')})` : '';
+    
+            // Construct the media type filter part of the query
+            const mediaTypeFilter = selectedMediaType ? `AND LOWER(TYPE) = LOWER(:selectedMediaType)` : '';
+    
+            // Combine the filters into the query
+            const query = `
+                SELECT * FROM MEDIA 
+                WHERE LOWER(TITLE) LIKE LOWER(:searchTerm) 
+                ${genreFilter} 
+                ${mediaTypeFilter}
+            `;
+    
+            // Execute the query with the search term and selected media type
+            const result = await con.execute(query, { searchTerm: `%${searchTerm}%`, selectedMediaType });
+    
+            const transformData = (data) => {
+                return {
+                    id: data.MEDIA_ID,
+                    img: data.POSTER,
+                    title: data.TITLE,
+                    description: data.DESCRIPTION,
+                    rating: data.RATING / 2, // Assuming the original rating is out of 10 and the new one is out of 5
+                    releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                    type: data.TYPE.charAt(0).toUpperCase() + data.TYPE.slice(1).toLowerCase(),
+                    episodes: data.EPISODE || 0,
+                    duration: data.DURATION,
+                    genre: data.GENRE.split(',').map(g => g.trim()),
+                    companyName: 'Example Productions',
+                    role: [],
+                    news: [],
+                    review: []
+                };
+            };
+    
+            const transformedData = result.rows.map(transformData);
+    
+            res.send(transformedData);
+            console.log("Search Data sent:", transformedData);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    app.post('/media/search/genre', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received search request:', req.body);
             const { searchTerm, selectedGenres } = req.body;
             const genreFilter = selectedGenres.length ? `AND (${selectedGenres.map(g => `GENRE LIKE '%${g}%'`).join(' AND ')})` : '';
             const result = await con.execute(
@@ -230,6 +299,7 @@ oracledb.createPool({
             }
         }
     });
+    
 
     app.post('/media/page', async (req, res) => {
         let con;

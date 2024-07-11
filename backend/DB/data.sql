@@ -3387,3 +3387,6 @@ INSERT INTO MEDIA (
     TO_DATE('04/19/2020', 'MM/DD/YYYY'),
     10
 );
+
+
+
