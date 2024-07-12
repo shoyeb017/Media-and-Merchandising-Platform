@@ -59,6 +59,41 @@
   resize: none; /* Optional: Prevent resizing */
 }
 
+.registration-form input[type="file"] {
+  width: 96%;
+  padding: 10px;
+  border: 1px solid  #4d5059;
+  border-radius: 5px;
+  background-color: transparent;
+
+  color: white;
+
+}
+
+.registration-form input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.registration-form input[type="file"]::before {
+  content: 'Choose File';
+  display: inline-block;
+  background: #ffdd95;
+  color: black;
+  padding: 10px 15px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.registration-form input[type="file"]:hover::before {
+  background: #4d5059;
+  color: #ffdd95;
+}
+
 
 .registration-form input[type="text"] {
   background-color: transparent;

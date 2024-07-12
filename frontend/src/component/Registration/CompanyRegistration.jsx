@@ -1,6 +1,9 @@
+// src/component/Registration/CompanyRegistration.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CompanyRegistration.css'; // Import the CSS file
+import { ref, uploadBytes, getDownloadURL, storage } from '../../firebase';
+import { v4 } from "uuid";
 import Footer from '../user/common/Footer.jsx';
 
 const CompanyRegistration = () => {
@@ -10,8 +13,10 @@ const CompanyRegistration = () => {
     name: '',
     email: '',
     description: '',
+    imageUrl: '', 
   });
 
+  const [imageUpload, setImageUpload] = useState(null);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -19,21 +24,32 @@ const CompanyRegistration = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     for (const key in formData) {
-      if (formData[key] === '') {
+      if (formData[key] === '' && key !== 'imageUrl') {
         alert(`Please fill in the ${key} field.`);
         return;
       }
     }
+
+    if (!imageUpload) {
+      alert('Please upload an image.');
+      return;
+    }
+
+    // Upload the image and get the URL
+    const imageRef = ref(storage, `company/profile/${imageUpload.name + v4()}`);
+    await uploadBytes(imageRef, imageUpload);
+    const url = await getDownloadURL(imageRef);
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
     if (!Array.isArray(users)) {
       localStorage.setItem('users', JSON.stringify([]));
     }
 
-    users.push({ ...formData, type: 'company' });
+    const updatedFormData = { ...formData, imageUrl: url };
+    users.push({ ...updatedFormData, type: 'company' });
     localStorage.setItem('users', JSON.stringify(users));
 
     alert('Registration successful!');
@@ -44,9 +60,10 @@ const CompanyRegistration = () => {
       name: '',
       email: '',
       description: '',
+      imageUrl: '', 
     });
+  
 
-    // Navigate to another page after successful registration
     // navigate('/');
   };
 
@@ -55,6 +72,16 @@ const CompanyRegistration = () => {
       <h2 className="title">Company Registration</h2>
       <div className="registration-container-company">
         <form onSubmit={handleSubmit} className="registration-form">
+          <div className="form-group">
+            <label>Upload Image:</label>
+            <input
+              type="file"
+              onChange={(event) => {
+                setImageUpload(event.target.files[0]);
+              }}
+              required
+            />
+          </div>
           <div className="form-group">
             <label>Username:</label>
             <input

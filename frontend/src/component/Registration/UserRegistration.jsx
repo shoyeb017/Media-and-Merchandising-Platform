@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import './UserRegistration.css'; // Import the CSS file
 import Footer from '../user/common/Footer.jsx';
+
 
 const UserRegistration = () => {
   const [formData, setFormData] = useState({
