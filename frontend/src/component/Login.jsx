@@ -12,10 +12,10 @@ const Login = ({ setUserType }) => {
     event.preventDefault();
 
     // Use selectedUserType from the dropdown
-    let userType = selectedUserType;
-
-    try {
-        const response = await fetch('http://localhost:5000/login', {
+    const userType = selectedUserType;
+    
+      try {
+        const response = await fetch(`http://localhost:5000/login/${selectedUserType}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -23,21 +23,22 @@ const Login = ({ setUserType }) => {
           body: JSON.stringify({ username, password }),
         });
         if(response.status === 200) {
-          const data = await response.json();
-          localStorage.setItem('userType', userType);
+          // const data = await response.json();
+          localStorage.setItem('userType', selectedUserType);
           localStorage.setItem('username', username);
+          console.log("USERTYPE-----------"+localStorage.getItem('userType'));
+
+          setUserType(selectedUserType);
+
           navigate(`/${username}/home`);
         } else {
           alert('Invalid credentials');
         }
-    }
-    catch (error) {
-      console.error('Error:', error);
-    }
-
-
-  };
-
+      }
+      catch (error) {
+        console.error('Error:', error);
+      }
+};
 
   return (
     <div className="login-container0">

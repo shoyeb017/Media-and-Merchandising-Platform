@@ -14,9 +14,9 @@ function generateUserId(username) {
     return Math.abs(username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + Date.now()) % 10000;
 }
 
-function generateLoginId(username, password, dob) {
-    //will generate a login id based on the username and password and DOB
-    return Math.abs(username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + password.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + dob.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0));
+function generateLoginId(username, password) {
+    //will generate a login id based on the username and password
+    return Math.abs(username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + password.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0));
 }
 
 
@@ -99,8 +99,55 @@ oracledb.createPool({
 
 
 
+    app.post('/registration/merchandiser', async (req, res) => {
+        const { username, password, name, description, email, city, street, house, phone } = req.body;
+        console.log('Received merchandiser registration request:', { username, password, name, description, email, city, street, house, phone });
+    
+        const user_id = generateUserId(username);
+        console.log('Generated User ID:', user_id);
+        const login_id = generateLoginId(username, password);
+        console.log('Generated Login ID:', login_id);
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            // Insert merchandiser data into the database\
+            const result = await con.execute(
+                `INSERT INTO MERCHANDISER (MER_ID, USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+                VALUES (:user_id, :username, :name, :description, :email, :city, :street, :house, :phone)`,
+                { user_id, username, name, description, email, city, street, house, phone }
+            );
+            console.log(`Merchandiser Insert Result: ${JSON.stringify(result)}`);
+
+            // Insert merchandiser login credentials into the database
+            const loginResult = await con.execute(
+                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) VALUES (:login_id, :password, 'MERCHANDISER', :user_id)`,
+                { login_id, password, user_id }
+            );
+            console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
+
+            // Commit the transaction
+            await con.commit();
+
+            res.status(201).send("Merchandiser registered successfully");
+            console.log("Merchandiser registered successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        }
+    }
+    );
+
+
+
+
     // Login route
-    app.post('/login', async (req, res) => {
+    app.post('/login/user', async (req, res) => {
         const { username, password } = req.body;
         console.log('Received login request:', { username, password }); // Log the received request
         let con;
@@ -113,6 +160,44 @@ oracledb.createPool({
 
             const result = await con.execute(
                 `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN USERS ON LOGIN.ID = USERS.USER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                { username, password } // Named bind variables
+            );
+            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+            if (result.rows.length) {
+                res.status(200).send("Login Successful"); // Respond to client
+                console.log("Login Successful");
+            } else {
+                console.log("Invalid Credentials");
+                res.status(401).send("Invalid Credentials"); // Respond to client
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    app.post('/login/merchandiser', async (req, res) => {
+        const { username, password } = req.body;
+        console.log('Received login request:', { username, password }); // Log the received request
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN MERCHANDISER ON LOGIN.ID = MERCHANDISER.MER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
                 { username, password } // Named bind variables
             );
             console.log(`Query Result: ${JSON.stringify(result.rows)}`);
