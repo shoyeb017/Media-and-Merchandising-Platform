@@ -53,7 +53,7 @@ const Login = ({ setUserType }) => {
               className="form-control"
             />
           </div>
-          <div className="form-group">
+          <div className="form-group-login">
             <label>User Type:</label>
             <select
               value={selectedUserType}

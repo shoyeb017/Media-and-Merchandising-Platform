@@ -40,12 +40,12 @@ h2 {
   flex-direction: column;
 }
 
-.form-group {
+.form-group-login {
   margin-bottom: 15px;
   text-align: left;
 }
 
-.form-group label {
+.form-group-login label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
