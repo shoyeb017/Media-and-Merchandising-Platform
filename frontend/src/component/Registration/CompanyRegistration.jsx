@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CompanyRegistration.css'; // Import the CSS file
-import { ref, uploadBytes, getDownloadURL, storage } from '../../firebase';
-import { v4 } from "uuid";
+// import { ref, uploadBytes, getDownloadURL, storage } from '../../firebase';
+// import { v4 } from "uuid";
 import Footer from '../user/common/Footer.jsx';
 
 const CompanyRegistration = () => {

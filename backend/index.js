@@ -9,6 +9,21 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // Middleware to parse JSON
 
+function generateUserId(username) {
+    //will return a short unique integer of 4 digit based on the username and current time
+    return Math.abs(username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + Date.now()) % 10000;
+}
+
+function generateLoginId(username, password, dob) {
+    //will generate a login id based on the username and password and DOB
+    return Math.abs(username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + password.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + dob.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0));
+}
+
+
+
+
+
+
 // Create a connection pool
 oracledb.createPool({
     user: "ADMIN",
@@ -19,8 +34,68 @@ oracledb.createPool({
     poolIncrement: 5
 }).then(pool => {
     console.log('Connection pool started');
+
+
+
     //registration route
-    //
+    app.post('/registration/user', async (req, res) => {
+    const { username, password, name, dob, email, city, street, house, phone, genres } = req.body;
+    console.log('Received user registration request:', { username, password, name, dob, email, city, street, house, phone, genres });
+
+    const user_id = generateUserId(username);
+    console.log('Generated User ID:', user_id);
+    const login_id = generateLoginId(username, password, dob);
+    console.log('Generated Login ID:', login_id);
+
+    let con;
+    try {
+        con = await pool.getConnection();
+        if (!con) {
+        res.status(500).send("Connection Error");
+        return;
+        }
+
+        // Insert user data into the database
+        const userResult = await con.execute(
+            `INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE) 
+            VALUES (:user_id, :username, :name, TO_DATE(:dob, 'YYYY-MM-DD'), :email, :city, :street, :house, :phone)`,
+            { user_id, username, name, dob, email, city, street, house, phone }
+        );
+        console.log(`User Insert Result: ${JSON.stringify(userResult)}`);
+
+        // Insert user login credentials into the database
+        const loginResult = await con.execute(
+            `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) VALUES (:login_id, :password, 'USER', :user_id)`,
+            { login_id, password, user_id }
+        );
+        console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
+
+        // Insert user genre preferences into the database
+        const genreResult = await con.execute(
+            `INSERT INTO PREFERREDGENRE (USER_ID, GENRES) VALUES (:user_id, :genres)`,
+            { user_id, genres: genres.join(',') }
+        );
+        console.log(`Genre Insert Result: ${JSON.stringify(genreResult)}`);
+
+        // Commit the transaction
+        await con.commit();
+
+        res.status(201).send("User registered successfully");
+        console.log("User registered successfully");
+    } catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        if (con) {
+            try {
+                await con.close();
+            } catch (err) {
+                console.error("Error closing database connection: ", err);
+            }
+        }
+    }
+});
+
 
 
 
@@ -37,13 +112,13 @@ oracledb.createPool({
             }
 
             const result = await con.execute(
-                `SELECT * FROM LOGIN WHERE login_id = :username AND password = :password`,
+                `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN USERS ON LOGIN.ID = USERS.USER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
                 { username, password } // Named bind variables
             );
             console.log(`Query Result: ${JSON.stringify(result.rows)}`);
 
             if (result.rows.length) {
-                res.send(result.rows[0]);
+                res.status(200).send("Login Successful"); // Respond to client
                 console.log("Login Successful");
             } else {
                 console.log("Invalid Credentials");
