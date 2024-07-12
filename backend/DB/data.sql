@@ -349,113 +349,9 @@ ALTER TABLE MERCHANDISER ADD CONSTRAINT FK_PHONE_ID_MERCHANDISER FOREIGN KEY (PH
 
 ALTER TABLE USERS ADD CONSTRAINT FK_PHONE_ID_USERS FOREIGN KEY (PHONE_ID) REFERENCES PHONE (PHONE_ID);
 
-INSERT INTO COMPANY(
-    COM_ID,
-    "NAME",
-    IMG,
-    DESCRIPTION,
-    EMAIL
-) VALUES (
-    1,
-    'Company1',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    'Company1dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
-    'sample@gmail.com'
-);
-
-INSERT INTO COMPANY(
-    COM_ID,
-    "NAME",
-    IMG,
-    DESCRIPTION,
-    EMAIL
-) VALUES (
-    2,
-    'Company2',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    'Company2dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
-    'sample@gmail.com'
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    1,
-    'Product1',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    100,
-    10
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    2,
-    'Product2',
-    'this is a really good product',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    200,
-    20
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    3,
-    'Product3',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    300,
-    30
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    4,
-    'Product4',
-    'this is a really good product',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    400,
-    40
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    5,
-    'Product5',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    500,
-    50
-);
+--------------------------------------------------------------------------------------------------------------------------------
+-- INSERTING DATA INTO MEDIA TABLE
+--------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO MEDIA (
     MEDIA_ID,
@@ -3368,3 +3264,123 @@ INSERT INTO MEDIA (
     TO_DATE('04/19/2020', 'MM/DD/YYYY'),
     10
 );
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- INSERT INTO COMPANY TABLE
+--------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO COMPANY(
+    COM_ID,
+    "NAME",
+    IMG,
+    DESCRIPTION,
+    EMAIL
+) VALUES (
+    1,
+    'Company1',
+    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
+    'Company1dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
+    'sample@gmail.com'
+);
+
+INSERT INTO COMPANY(
+    COM_ID,
+    "NAME",
+    IMG,
+    DESCRIPTION,
+    EMAIL
+) VALUES (
+    2,
+    'Company2',
+    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
+    'Company2dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
+    'sample@gmail.com'
+);
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- INSERT INTO PRODUCT TABLE
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    1,
+    'Product1',
+    'this is a really good product',
+    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
+    100,
+    10
+);
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    2,
+    'Product2',
+    'this is a really good product',
+    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
+    200,
+    20
+);
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    3,
+    'Product3',
+    'this is a really good product',
+    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
+    300,
+    30
+);
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    4,
+    'Product4',
+    'this is a really good product',
+    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
+    400,
+    40
+);
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    5,
+    'Product5',
+    'this is a really good product',
+    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
+    500,
+    50
+);
+
