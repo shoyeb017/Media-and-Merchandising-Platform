@@ -63,6 +63,8 @@ oracledb.createPool({
         }
     });
 
+    
+
     // company route
     app.get('/companies', async (req, res) => {
         let con;
