@@ -36,66 +36,74 @@ oracledb.createPool({
     console.log('Connection pool started');
 
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR USER REGISTRATION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
     //registration route
     app.post('/registration/user', async (req, res) => {
-    const { username, password, name, dob, email, city, street, house, phone, genres } = req.body;
-    console.log('Received user registration request:', { username, password, name, dob, email, city, street, house, phone, genres });
+        const { username, password, name, dob, email, city, street, house, phone, genres } = req.body;
+        console.log('Received user registration request:', { username, password, name, dob, email, city, street, house, phone, genres });
 
-    const user_id = generateUserId(username);
-    console.log('Generated User ID:', user_id);
-    const login_id = generateLoginId(username, password, dob);
-    console.log('Generated Login ID:', login_id);
+        const user_id = generateUserId(username);
+        console.log('Generated User ID:', user_id);
+        const login_id = generateLoginId(username, password, dob);
+        console.log('Generated Login ID:', login_id);
 
-    let con;
-    try {
-        con = await pool.getConnection();
-        if (!con) {
-        res.status(500).send("Connection Error");
-        return;
-        }
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+            res.status(500).send("Connection Error");
+            return;
+            }
 
-        // Insert user data into the database
-        const userResult = await con.execute(
-            `INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE) 
-            VALUES (:user_id, :username, :name, TO_DATE(:dob, 'YYYY-MM-DD'), :email, :city, :street, :house, :phone)`,
-            { user_id, username, name, dob, email, city, street, house, phone }
-        );
-        console.log(`User Insert Result: ${JSON.stringify(userResult)}`);
+            // Insert user data into the database
+            const userResult = await con.execute(
+                `INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE) 
+                VALUES (:user_id, :username, :name, TO_DATE(:dob, 'YYYY-MM-DD'), :email, :city, :street, :house, :phone)`,
+                { user_id, username, name, dob, email, city, street, house, phone }
+            );
+            console.log(`User Insert Result: ${JSON.stringify(userResult)}`);
 
-        // Insert user login credentials into the database
-        const loginResult = await con.execute(
-            `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) VALUES (:login_id, :password, 'USER', :user_id)`,
-            { login_id, password, user_id }
-        );
-        console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
+            // Insert user login credentials into the database
+            const loginResult = await con.execute(
+                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) VALUES (:login_id, :password, 'USER', :user_id)`,
+                { login_id, password, user_id }
+            );
+            console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
 
-        // Insert user genre preferences into the database
-        const genreResult = await con.execute(
-            `INSERT INTO PREFERREDGENRE (USER_ID, GENRES) VALUES (:user_id, :genres)`,
-            { user_id, genres: genres.join(',') }
-        );
-        console.log(`Genre Insert Result: ${JSON.stringify(genreResult)}`);
+            // Insert user genre preferences into the database
+            const genreResult = await con.execute(
+                `INSERT INTO PREFERREDGENRE (USER_ID, GENRES) VALUES (:user_id, :genres)`,
+                { user_id, genres: genres.join(',') }
+            );
+            console.log(`Genre Insert Result: ${JSON.stringify(genreResult)}`);
 
-        // Commit the transaction
-        await con.commit();
+            // Commit the transaction
+            await con.commit();
 
-        res.status(201).send("User registered successfully");
-        console.log("User registered successfully");
-    } catch (err) {
-        console.error("Error during database query: ", err);
-        res.status(500).send("Internal Server Error");
-    } finally {
-        if (con) {
-            try {
-                await con.close();
-            } catch (err) {
-                console.error("Error closing database connection: ", err);
+            res.status(201).send("User registered successfully");
+            console.log("User registered successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
             }
         }
-    }
-});
+    });
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MERCHANIDISER REGISTRATION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -143,10 +151,21 @@ oracledb.createPool({
     }
     );
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR COMPANY REGISTRATION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/registration/company', async (req, res) => {
+
+
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Login route for USER
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
-    // Login route
     app.post('/login/user', async (req, res) => {
         const { username, password } = req.body;
         console.log('Received login request:', { username, password }); // Log the received request
@@ -186,7 +205,9 @@ oracledb.createPool({
             }
         }
     });
-
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Login route for MERCHANDISER 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     app.post('/login/merchandiser', async (req, res) => {
         const { username, password } = req.body;
         console.log('Received login request:', { username, password }); // Log the received request
@@ -224,6 +245,9 @@ oracledb.createPool({
             }
         }
     });
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Login route for COMPANY 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     app.post('/login/company', async (req, res) => {
         const { username, password } = req.body;
@@ -255,7 +279,10 @@ oracledb.createPool({
             res.status(500).send("Internal Server Error");
         }
     });
-    // user data for profile page
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// route for USER PROFILE
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     app.post('/profile/user', async (req, res) => {
         const { user_id } = req.body;
@@ -294,43 +321,59 @@ oracledb.createPool({
         }
     });
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for USER PROFILE UPDATE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
     app.post('/profile/user/update', async (req, res) => {
-        const {user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE } = req.body;
+        const { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE } = req.body;
         console.log('Received user profile update request:', { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE });
+      
+        if (!user_id || !NAME || !DOB || !EMAIL || !CITY || !STREET || !HOUSE || !PHONE) {
+          return res.status(400).json({ message: "All fields are required" });
+        }
+      
         let con;
         try {
-            con = await pool.getConnection();
-            if (!con) {
-                res.status(500).send("Connection Error");
-                return;
-            }
+          con = await pool.getConnection();
+          if (!con) {
+            res.status(500).json({ message: "Connection Error" });
+            return;
+          }
+      
+          const result = await con.execute(
+            `UPDATE USERS SET NAME = :NAME, DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE WHERE USER_ID = :user_id`,
+            { NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+          );
+          console.log(`Query Result: ${JSON.stringify(result)}`);
+      
+          await con.commit();
 
-            const result = await con.execute(
-                `UPDATE USERS SET NAME = :NAME, DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE WHERE USER_ID = :user_id`,
-                { NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
-            );
-            console.log(`Query Result: ${JSON.stringify(result)}`);
-
-            res.status(200).send("Profile updated successfully");
-            console.log("Profile updated successfully");
-
+          const updatedProfile = { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE };
+          res.status(200).json(updatedProfile);
+          console.log("Profile updated successfully");
+      
         } catch (err) {
-            console.error("Error during database query: ", err);
-            res.status(500).send("Internal Server Error");
+          console.error("Error during database query: ", err);
+          res.status(500).json({ message: "Internal Server Error" });
         } finally {
-            if (con) {
-                try {
-                    await con.close();
-                } catch (err) {
-                    console.error("Error closing database connection: ", err);
-                }
+          if (con) {
+            try {
+              await con.close();
+            } catch (err) {
+              console.error("Error closing database connection: ", err);
             }
+          }
         }
-    });
+      });
+      
 
-    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for fetch all COMPANY
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // company route
+
     app.get('/companies', async (req, res) => {
         let con;
         try {
@@ -362,6 +405,10 @@ oracledb.createPool({
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for ALL PRODUCTS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     app.get('/products', async (req, res) => {
@@ -395,6 +442,11 @@ oracledb.createPool({
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for ALL MEDIA
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
     app.get('/media', async (req, res) => {
         let con;
@@ -448,6 +500,11 @@ oracledb.createPool({
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MEADIA SEARCH 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
     app.post('/media/search', async (req, res) => {
         let con;
@@ -514,6 +571,11 @@ oracledb.createPool({
         }
     });
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MEADIA SEARCH BY GENRE 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
     app.post('/media/search/genre', async (req, res) => {
         let con;
         try {
@@ -566,6 +628,11 @@ oracledb.createPool({
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MEIAD PAGE 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     
 
     app.post('/media/page', async (req, res) => {
@@ -626,7 +693,10 @@ oracledb.createPool({
     });
 
 
-    // product page details
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR PRODUCT DETAILS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
     app.post('/products/details', async (req, res) => {
         try {
@@ -655,7 +725,10 @@ oracledb.createPool({
         }
     });
 
-    // retrieving featured items
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR FEATURED MEDIA
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     
 
     app.get('/media/featured', async (req, res) => {

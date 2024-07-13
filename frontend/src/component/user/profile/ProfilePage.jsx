@@ -50,28 +50,33 @@ const ProfilePage = () => {
     // Handle the update logic (e.g., save the updated profile to a server)
     console.log("Updated Profile:", profile);
     setIsEditing(false);
-
+  
     try {
-      const response = await fetch('http://localhost:5000/profile/update', {
+      const updatedProfile = { ...profile, user_id: localStorage.getItem('user_id') };
+  
+      const response = await fetch('http://localhost:5000/profile/user/update', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({user_id: localStorage.getItem('user_id')}, profile),
+        body: JSON.stringify(updatedProfile),
       });
-
+  
+      const data = await response.json();
+  
       if (response.status === 200) {
-        const data = await response.json();
         setProfile(data);
         alert('Profile updated successfully!');
       } else {
-        alert('Failed to update profile');
+        alert(data.message || 'Failed to update profile');
       }
     } catch (error) {
       console.error('Error:', error);
       alert('An error occurred while updating the profile');
     }
   };
+  
+  
 
   return (
     <div className="profile-page">

@@ -3266,33 +3266,214 @@ INSERT INTO MEDIA (
 -- INSERT INTO COMPANY TABLE
 --------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO COMPANY(
-    COM_ID,
-    "NAME",
-    IMG,
-    DESCRIPTION,
-    EMAIL
-) VALUES (
-    1,
-    'Company1',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    'Company1dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
-    'sample@gmail.com'
-);
 
-INSERT INTO COMPANY(
-    COM_ID,
-    "NAME",
-    IMG,
-    DESCRIPTION,
-    EMAIL
-) VALUES (
-    2,
-    'Company2',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    'Company2dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
-    'sample@gmail.com'
-);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (1, 'Walt Disney Studios Motion Pictures', 'company1', 'https://i.ytimg.com/vi/qGpWhGIMGbI/maxresdefault.jpg', 'Walt Disney Studios Motion Pictures is an American film distributor within the Disney Entertainment division of the Walt Disney Company.', 'walt@gmail.com');
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (2, 'Paramount Pictures', 'company2', 'https://static1.srcdn.com/wordpress/wp-content/uploads/2018/02/Paramount-Logo-in-Yelllow.jpg', 'Paramount Pictures Corporation, doing business as Paramount Pictures is an American film and television production and distribution company and the namesake subsidiary of Paramount Global.', 'para@gmail.com');
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (3, 'Warner Bros. Pictures', 'company3', 'https://wbd.com/wp-content/uploads/2024/01/wb-motion-pictures-group-16x9-1.png', 'Warner Bros. Pictures is an American film production and distribution company of the Warner Bros. Motion Picture Group division of Warner Bros. Entertainment. The studio is the flagship producer of live-action feature films within the Warner Bros', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (4, 'Warner Bros.', 'company4', 'https://logomak.com/blog/wp-content/uploads/2023/09/The-Evolution-and-Design-of-the-Warner-Brothers-Logo-min.png', 'Warner Bros. Entertainment Inc. is an American film and entertainment studio headquartered at the Warner Bros. Studios complex in Burbank, California, and a subsidiary of Warner Bros. Discovery.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (5, 'Roadshow Entertainment', 'company5', 'https://i.ytimg.com/vi/WuWiEr6Sokw/hqdefault.jpg', 'Roadshow Entertainment is an Australian home video, production and distribution company that is a division of Village Roadshow that distributes films in Australia and New Zealand. Their first release was Mad Max. Roadshow Entertainment is an independent video distributor in Australia and New Zealand.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (6, 'AA Films', 'company6', 'https://upload.wikimedia.org/wikipedia/en/5/5c/Aafilmslogo.jpg', 'AA Films is an Indian motion picture distribution company, owned by Anil Thadani. It mainly distributes Hindi films and Hindi-dubbed films.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (7, 'Netflix', 'company7', 'https://i.pcmag.com/imagery/reviews/05cItXL96l4LE9n02WfDR0h-5.fit_scale.size_760x427.v1582751026.png', 'Netflix is an American subscription video on-demand Internet streaming service. The service primarily distributes original and acquired films and television shows from various genres, and it is available internationally in multiple languages. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (8, 'Reliance Entertainment', 'company8', 'https://img.youtube.com/vi/pX3lCISMMFo/0.jpg', 'Reliance Entertainment Pvt. Ltd. is an Indian media and entertainment company. It is a division of Reliance Group, handling its media and entertainment business, across content and distribution platforms. The company was founded on 15 February 2005, as two entities, namely Reliance Big Entertainment and BIG Pictures. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (9, 'Orion Pictures', 'company9', 'https://pbs.twimg.com/profile_images/1549773030053650432/nFuqiKxZ_400x400.jpg', 'Orion Releasing, LLC is an American film production and distribution company owned by the Amazon MGM Studios subsidiary of Amazon. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (10, 'Alchemy', 'company10', 'https://www.cryptoninjas.net/wp-content/uploads/alchemy-crypto-ninjas.jpg', 'Alchemy was an American independent global film distributor based in Los Angeles, California. The company acquired and distributed feature films, television series and specialty programming. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (11, '20th Century Studios', 'company11', 'https://cdn-p.smehost.net/sites/2705a69cf9104eb6898f7ee189d0162a/wp-content/uploads/2019/05/FoxHomeEnts-940x528.jpg', '20th Century Studios, Inc. is an American film studio owned by the Walt Disney Studios, a division of Disney Entertainment, in turn a division of The Walt Disney Company. It is headquartered at the Fox Studio Lot in the Century City area of Los Angeles, leased from Fox Corporation.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (12, 'Paramount Home Entertainment', 'company12', 'https://variety.com/wp-content/uploads/2015/08/paramount-home-media-distribution.jpg', 'Paramount Home Entertainment is the home video distribution arm of Paramount Pictures. The division oversees Paramount Global''s home entertainment and transactional digital distribution activities worldwide.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (13, 'Sony Pictures', 'company13', 'https://variety.com/wp-content/uploads/2017/09/sony-pictures.jpg', 'Sony Pictures Entertainment Inc. is an American diversified multinational mass media and entertainment studio conglomerate that produces, acquires, and distributes filmed entertainment through multiple platforms.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (14, 'Lightstorm Entertainment', 'company14', 'https://i.ytimg.com/vi/cgkfH7bS-To/maxresdefault.jpg', 'Lightstorm Entertainment is an American independent production company founded in 1990 by filmmaker James Cameron and producer Lawrence Kasanoff. The majority of its films have been distributed and owned by 20th Century Fox, now known as 20th Century Studios.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (15, 'TSG Entertainment', 'company15', 'https://i.ytimg.com/vi/cDpYQzO_Jm0/maxresdefault.jpg', 'TSG Entertainment Finance LLC, doing business as TSG Entertainment, is an American film financing entity. TSG was established after the U.S. theatrical release of Parental Guidance to replace Dune Entertainment when Dune did not renew their deal with 20th Century Fox.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (16, 'Lionsgate Films', 'company16', 'https://www.closinglogos.com/images/thumb/7/77/TsqMR9stjM8GK71isbEwBw94345.jpeg/285px-TsqMR9stjM8GK71isbEwBw94345.jpeg', 'Lionsgate Films is a Canadian-American film production and distribution studio founded in Canada in 1962. It is now a division of Lionsgate Studios and headquartered in Santa Monica. Lionsgate is the largest and most successful mini-major film studio in North America.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (17, 'Toho Co., Ltd.', 'company17', 'https://pbs.twimg.com/profile_images/1281305042209964032/sCrCxbs-_200x200.jpg', 'Toho Co., Ltd. is a Japanese entertainment company primarily engaged in the production and distribution of films and the production and exhibition of stage plays. Its headquarters is in Chiyoda, Tokyo, and is one of the core companies of the Osaka-based Hankyu Hanshin Toho Group. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (18, 'Metro-Goldwyn-Mayer', 'company18', 'https://i.ytimg.com/vi/5G8mZ7Aw13Q/maxresdefault.jpg', 'Metro-Goldwyn-Mayer Studios Inc., is an American media company specializing in film and television production and distribution based in Beverly Hills, California. It was founded on April 17, 1924 and has been owned by the Amazon MGM Studios subsidiary of Amazon since 2022. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (19, 'United Artists', 'company19', 'https://variety.com/wp-content/uploads/2019/02/ua-logo-.jpg', 'United Artists Corporation was an American production and distribution company founded in 1919 by Charlie Chaplin, D.W. Griffith, Mary Pickford and Douglas Fairbanks as a venture premised on allowing actors to control their own financial and artistic interests rather than being dependent upon commercial studios.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (20, 'FilmFlex', 'company20', 'https://cdn.broadbandtvnews.com/wp-content/uploads/2015/02/14121141/filmflex.jpg', 'FilmFlex, is an on-demand movie rental services provider, claiming to be largest outside the US. The service originally launched as a joint venture between Sony Pictures Television and The Walt Disney Company, but it was sold in 2014 to Vubiquity. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (21, 'Turner Entertainment', 'company21', 'https://logodix.com/logo/1037760.jpg', 'Turner Entertainment Company is an American multimedia company founded by Ted Turner on August 2, 1986. Purchased by Time Warner Entertainment on October 10, 1996, as part of its acquisition of Turner Broadcasting System, the company was largely responsible for overseeing the TBS library for worldwide distribution.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (22, 'A24', 'company22', 'https://static1.moviewebimages.com/wordpress/wp-content/uploads/article/XTNSa7q35FZTYnHI2j2qVeLS7Iogxu.jpg', 'A24 Films LLC, commonly referred to as A24, is an American independent entertainment company that specializes in film and television production, as well as film distribution. The company is based in Manhattan. The company was founded in 2012 by Daniel Katz, David Fenkel, and John Hodges.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (23, 'Pen Studios', 'company23', 'https://upload.wikimedia.org/wikipedia/commons/7/7a/PEN_STUDIO_LOGO.jpg', 'Pen Studios is an Indian film production and distribution company established by Dr. Jayantilal Gada on 31 March 1987. Based in Mumbai, it mainly produces and distributes Hindi, Telugu and Tamil films. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (24, 'Amazon MGM Studios', 'company24', 'https://deadline.com/wp-content/uploads/2023/11/Amazon-MGM-Studios-Logo.jpg', 'Amazon MGM Studios, formerly Amazon Studios, is an American film and television production and distribution studio owned by Amazon launched in 2010. It took its current name in 2023 following its merger with MGM Holdings, which Amazon had acquired the year prior.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (25, 'Neon', 'company25', 'https://theneoncompany.shop/wp-content/uploads/2022/06/gradient-logo.png', 'Neon Rated, LLC, doing business as Neon, is an American independent film production and distribution company founded in 2017 by CEO Tom Quinn and Tim League, who also was the co-founder of the Alamo Drafthouse Cinema chain. As of 2019, League is no longer involved with daily operations for the company.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (26, 'Universal Pictures', 'company26', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Universal_Pictures_logo.svg/1200px-Universal_Pictures_logo.svg.png', 'Universal City Studios LLC, doing business as Universal Pictures is an American film production and distribution company that is a division of Universal Studios, which is owned by NBCUniversal, a division of Comcast.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (27, 'Sony Pictures Entertainment Japan', 'company27', 'https://i.ytimg.com/vi/eFhOLqrA8D0/maxresdefault.jpg', 'Sony Pictures Entertainment Japan Inc., abbreviated SPE or SPEJ, is a Japanese film studio, based in Minato-ku, Tokyo. It is a wholly owned subsidiary of Japanese conglomerate Sony Group Corporation, with the majority of SPEJ''s shares held by Sony Pictures Entertainment.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (28, 'Columbia Pictures', 'company28', 'https://c8.alamy.com/comp/K3M8K5/columbia-pictures-a-colour-rhapsody-in-technicolor-columbia-pictures-K3M8K5.jpg', 'Columbia Pictures Industries, Inc., commonly known as Columbia Pictures or simply Columbia, is an American film production and distribution company that is a member of the Sony Pictures Motion Picture', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (29, 'Miramax', 'company29', 'https://www.indiewire.com/wp-content/uploads/2017/10/miramax.jpg', 'Miramax, LLC, formerly known as Miramax Films, is an American independent film and television production and distribution company founded on December 19, 1979, by Harvey and Bob Weinstein, and based in Los Angeles, California. Today, it is owned by beIN Media Group and Paramount Global. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (30, 'New Line Cinema', 'company30', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/New_Line_Cinema_2024.svg/1200px-New_Line_Cinema_2024.svg.png', 'New Line Productions, Inc., doing business as New Line Cinema, is an American film and television production studio owned by Warner Bros. Discovery. Since 2008, it has been operating as a unit of Warner Bros. Pictures.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (31, 'RKO Pictures', 'company31', 'https://live.staticflickr.com/7423/9539125455_60333f0801_b.jpg', 'RKO Radio Pictures Inc., commonly known as RKO Pictures or simply RKO, was an American film production and distribution company, one of the "Big Five" film studios of Hollywood''s Golden Age.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (32, 'Amazon Prime Video', 'company32', 'https://i.pcmag.com/imagery/reviews/02dIsBiVpmVTMeXkrKxWy0W-13.fit_scale.size_760x427.v1582749138.png', 'Amazon Prime Video, or simply Prime Video, is an American subscription video on-demand over-the-top streaming and rental service of Amazon offered both as a stand-alone service and as part of Amazon''s Prime subscription.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (33, 'HBO', 'company33', 'https://c.dlnws.com/image/upload/c_limit,f_auto,q_auto,w_1800/v1503592425/Blog/HBO_2.jpg', 'Home Box Office is an American pay television network, which is the flagship property of namesake parent-subsidiary Home Box Office, Inc., itself a unit owned by Warner Bros. Discovery. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (34, 'Bighead, Littlehead', 'company34', 'https://i.ytimg.com/vi/cqIQ8lOZAlg/maxresdefault.jpg', 'Netflix / Bighead Littlehead - Taken from a teen music drama film "Metal Lords" (2022)., #logo #identity #label , This video shows content that is not owned by us. All the rights goes to the original.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (35, 'Pierrot', 'company35', 'https://ih1.redbubble.net/image.5221021342.6521/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg', 'Pierrot Co., Ltd. is a Japanese animation studio established in May 1979 by Yuji Nunokawa, previously an animator and director for Tatsunoko Production. Its headquarters are located in Mitaka, Tokyo', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (36, 'The Mighty Mint', 'company36', 'https://images.squarespace-cdn.com/content/v1/5cfeb36e27582b000108967b/e4eebee7-03ab-44b4-905d-83afacf525ea/tv-work-mightymint.jpg', 'The Mighty Mint. Company Details: Address: 8340 Melrose Ave, West Hollywood ... film and tv projects currently in pre-production and active development.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (37, 'Production I.G', 'company37', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Production_I.G_Logo.svg/1200px-Production_I.G_Logo.svg.png', 'Production I.G, Inc. is a Japanese animation studio and production enterprise. Headquartered in Musashino, Tokyo Production I.G was founded on December 15, 1987, by producer Mitsuhisa Ishikawa .', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (38, 'Black Isle Studios', 'company38', 'https://images.fallout.wiki/5/5c/Black_Isle_logo.png', 'Black Isle Studios is a division of the developer and publisher Interplay Entertainment formed in 1996 that develops role-playing video games. It has published several games from other developers. Black Isle is based in Irvine, California.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (39, 'Interplay Entertainment', 'company39', 'https://www.gematsu.com/wp-content/uploads/2022/02/Company-Logo_Interplay-Init.png', 'Interplay Entertainment Corp. is an American video game developer and publisher based in Los Angeles. The company was founded in 1983 as Interplay Productions by developers Brian Fargo, Jay Patel, Troy Worrell, and Rebecca Heineman, as well as investor Chris Wells.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (40, 'Square Enix', 'company40', 'https://w7.pngwing.com/pngs/745/167/png-transparent-square-enix-hd-logo-thumbnail.png', 'Square Enix Holdings Co., Ltd. is a Japanese multinational holding company, video game publisher and entertainment conglomerate. It releases role-playing game franchises, such as Final Fantasy, Dragon Quest, and Kingdom Hearts, among numerous others.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (41, 'STARZ', 'company41', 'https://i.pcmag.com/imagery/reviews/001BnpRT6eF1fQN8if2FwZ2-5..v1569476173.png', 'Starz is an American premium cable and satellite television network owned by Lionsgate, and is the flagship property of parent subsidiary Starz Inc. Programming on Starz consists of theatrically released motion pictures and first-run original television series.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (42, 'FX Productions', 'company42', 'https://pbs.twimg.com/profile_images/707883264762114049/tW3aSUbA_400x400.jpg', 'FX Productions, LLC is an American television and in-house production company owned by FX Networks, a division of the Disney Entertainment unit of The Walt Disney Company. The studio currently produces series for FX, FXX and FX on Hulu.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (43, 'Kinema Citrus', 'company43', 'https://www.animenewsnetwork.com/hotlink/thumbnails/crop600x315gIK/cms/news.2/148486/kinemacitrus.jpg', 'Kinema Citrus Co., Ltd. is a Japanese animation studio, founded on March 3, 2008, by former Production I.G and Bones members and based in Suginami, Tokyo. Its business directors are Muneki Ogasawara, Yuichiro Matsuka and Masaki Tachibana', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (44, 'NBC', 'company44', 'https://thevpn.guru/wp-content/uploads/2017/10/How-to-Watch-NBC-outside-USA-Unblock-in-UK-Canada-e1508134329932.jpg', 'The National Broadcasting Company is an American commercial broadcast television and radio network serving as the flagship property of the NBC Entertainment division of NBCUniversal, a subsidiary of Comcast. The headquarters of NBC is in New York City at the Comcast Building. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (45, 'Apple TV+', 'company45', 'https://i.blogs.es/bf7298/netflix-vs-apple-tv-hbo-max-amazon-hulu-disney-prices-and-shows/450_1000.jpg', 'Apple TV+ is an American subscription OTT streaming service owned and operated by Apple Inc. Launched on November 1, 2019, it offers a selection of original production film and television series called Apple Originals.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (46, 'Media Factory', 'company46', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Media_Factory_logo.svg/1600px-Media_Factory_logo.svg.png', 'Media Factory (??????????, Mediafakutor?), formerly known as Media Factory, Inc. (??????????????, Kabushiki gaisha Mediafakutor?), doing business as Media Factory, is a Japanese publisher and brand company of Kadokawa Future Publishing.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (47, 'Shondaland', 'company47', 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Images.Shondaland.png', 'Shondaland is an American television production company founded by television writer and producer Shonda Rhimes. She founded it to be one of the production companies of her first series, the medical drama Grey''s Anatomy in 2005.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (48, 'USA Network', 'company48', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/USA-Network-Logo.svg/2560px-USA-Network-Logo.svg.png', 'USA Network is an American basic cable television channel owned by the NBCUniversal Media Group division of Comcast''s NBCUniversal. It was originally launched in 1977 as Madison Square Garden Sports Network, one of the first national sports cable television channels. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (49, 'PlayStation', 'company49', 'https://matrixwarehouse.co.za/wp-content/uploads/2020/11/playstation.jpg', 'The PlayStation is a home video game console developed and marketed by Sony Computer Entertainment. It was released in Japan on 3 December 1994, in North America on 9 September 1995, in Europe on 29 September 1995, and in Australia on 15 November 1995', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (50, 'Wonderland Sound and Vision', 'company50', 'https://i.ytimg.com/vi/20-EJZ22KCw/maxresdefault.jpg', 'Wonderland Sound and Vision, or simply known as Wonderland, is an American production company founded by director and producer Joseph McGinty Nichol in 2001. It independently develops, produces and finances its own slate of feature films, television and digital projects. The company is responsible for television series The O.C., Chuck, and Supernatural, alongside films Terminator Salvation, We Are Marshall, The DUFF and The Babysitter.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (51, 'Warner Bros. Television Studios', 'company51', 'https://images.seeklogo.com/logo-png/52/1/warner-bros-studios-2024-logo-png_seeklogo-527162.png', 'Warner Bros. Television Studios is an American television production and distribution studio of the Warner Bros. Television Group division of Warner Bros.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (52, 'Bones', 'company52', 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/4b0c8131939375.56677dba15c38.jpg', 'Bones Inc. (Japanese: ???????, Hepburn: Kabushiki-gaisha Bonzu) is a Japanese animation studio. It has produced numerous series, including RahXephon, No. 6, Wolf''s Rain, Scrapped Princess, Eureka Seven, Angelic Layer, Darker than Black, Soul Eater, Ouran High School Host Club, both the 2003 and 2009 adaptations of Fullmetal Alchemist, Star Driver, Gosick, Mob Psycho 100, Space Dandy, Noragami, Bungo Stray Dogs, and My Hero Academia. Its headquarters are located in Igusa, Suginami, Tokyo.[2]', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (53, 'AMC Studio', 'company53', 'https://i.ytimg.com/vi/UyWkXynxKMM/maxresdefault.jpg', 'AMC is the largest movie exhibition company in the United States and the largest throughout the world with approximately 900 theatres and 10,000 screens across the globe.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (54, 'CBS Studios', 'company54', 'https://w7.pngwing.com/pngs/742/231/png-transparent-kyw-tv-cbs-news-television-show-cbs-news-logo-television-text-trademark.png', 'CBS Studios, Inc. is an American television production company which is a subsidiary of the CBS Entertainment Group unit of Paramount Global. It was formed on January 17, 2006, by CBS Corporation as CBS Paramount Television, as a renaming of the original incarnation of the Paramount Television studio. ', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (55, 'Shueisha', 'company55', 'https://i.ytimg.com/vi/t0CGjYVr4Yw/hqdefault.jpg', 'Shueisha Inc. is a Japanese publishing company headquartered in Chiyoda, Tokyo, Japan. Shueisha is the largest publishing company in Japan. It was established in 1925 as the entertainment-related publishing division of Japanese publisher Shogakukan. The following year, Shueisha became a separate, independent company.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (56, 'MGM+', 'company56', 'https://corp.epix.com/wp-content/uploads/2023/01/Working-At-MGM-section.jpg', 'MGM+, is an American premium cable and satellite television network owned by the MGMPlus Entertainment subsidiary of Metro-Goldwyn-Mayer, which is itself a subsidiary of Amazon MGM Studios.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (57, 'Wit Studio', 'company57', 'https://pbs.twimg.com/profile_images/758103228911382528/ddk_Mekd_400x400.jpg', 'Wit Studio, Inc., stylized as WIT Studio, is a Japanese animation studio founded on June 1, 2012, by producers at Production I.G as a subsidiary of IG Port.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (58, 'MAPPA', 'company58', 'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg', 'MAPPA Co., Ltd. is a Japanese animation studio headquartered in Suginami, Tokyo. Founded in 2011 by Madhouse co-founder and producer Masao Maruyama, it has produced anime works including Terror in .', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (59, 'Nippon TV', 'company59', 'https://static.tvtropes.org/pmwiki/pub/images/nippon_tv_logo_2014.png', 'The Nippon Television Network Corporation, also known as Nippon Television, with the call sign JOAX-DTV, is a Japanese television station serving the Kant? region as the flagship station of the Nippon News Network and the Nippon Television Network System.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (60, 'Japan Studio', 'company60', 'https://static1.srcdn.com/wordpress/wp-content/uploads/2021/07/Japan-Studio-removed-from-PlayStation-Studios-website.jpg', 'Japan Studio was a Japanese video game developer based in Tokyo. A first-party studio for Sony Interactive Entertainment, it was best known for the Ape Escape, LocoRoco, Patapon, Gravity Rush, and Knack series, the Team Ico games, Bloodborne, The Legend of Dragoon, and Astro''s Playroom.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (61, 'Madhouse, Inc.', 'company61', 'https://pbs.twimg.com/profile_images/1522526028912025601/KHMwfsr8_400x400.jpg', 'Madhouse, Inc. is a Japanese animation studio founded in 1972 by ex–Mushi Pro staff, including Masao Maruyama, Osamu Dezaki, and Yoshiaki Kawajiri.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (62, 'Toho Animation', 'company62', 'https://pbs.twimg.com/profile_images/1782960038086393856/aet3ZyAR_400x400.jpg', 'Toho Co., Ltd. (??????, T?h? Kabushiki-gaisha) is a Japanese entertainment company primarily engaged in the production and distribution of films and the production and exhibition of stage plays.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (63, 'Kyoto Animation', 'company63', 'https://ultimatemegax.wordpress.com/wp-content/uploads/2015/03/kyotoanimationlogo.jpg', 'Kyoto Animation Co., Ltd., often abbreviated KyoAni, is a Japanese animation studio and light novel publisher located in Uji, Kyoto Prefecture. It was founded in 1985 by husband and wife Hideaki and Yoko Hatta, who remain its president and vice-president respectively.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (64, 'Mindhouse', 'company64', 'https://pbs.twimg.com/profile_images/1610556562652729344/RKvkyBOb_400x400.jpg', 'Documentary movies are found here.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (65, 'MY Tupelo Entertainment', 'company65', 'https://pbs.twimg.com/media/Et3QLu2VkAQz2US.jpg', 'My Tupelo Entertainment LLC is a startup company that was incorporated in DE. This company profile was created to provide more information about My Tupelo Entertainment LLC, a private company.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (66, 'Taylor Swift Productions', 'company66', 'https://upload.wikimedia.org/wikipedia/en/8/8e/Taylor_Swift_Productions_logo.jpg', 'Taylor Swift Productions, Inc. is the in-house visual media production company of the American singer-songwriter Taylor Swift. It was first credited in the DVD and Bluray version of Speak Now World Tour – Live in 2011 and has produced all of Swift''s visual media works since 2018, including her music videos and films.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (67, 'Fuzzy Door Productions', 'company67', 'https://i1.sndcdn.com/avatars-000274822782-fh91j3-t500x500.jpg', 'Fuzzy Door Productions, Inc. is an American film and television production company founded by Seth MacFarlane in 1998.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (68, 'Impact Partners', 'company68', 'https://www.techbarcelona.com/wp-content/uploads/image-418.jpeg', 'Impact Partners is an American film production and television production company founded in 2007, by Dan Cogan and Geralyn Dreyfous. The company primarily produces documentary films focusing on social issues.', NULL);
+
+INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
+VALUES (69, 'Mainstream media', 'company69', 'https://e7.pngegg.com/pngimages/68/96/png-clipart-mainstream-media-logo-mass-media-news-live-broadcast-thumbnail.png', 'In journalism, mainstream media is a term and abbreviation used to refer collectively to the various large mass news media that influence many people and both reflect and shape prevailing currents of thought. The term is used to contrast with alternative media.', NULL);
 
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -3396,5 +3577,10 @@ INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STRE
 INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
             VALUES (1235, '1234', 'MERCHANDISER', 1234);
 
-            SELECT USER_NAME, PASSWORD FROM MERCHANDISER JOIN LOGIN ON MERCHANDISER.MER_ID = LOGIN.ID
-            ;
+            
+
+
+
+
+
+
