@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
+import styles from './Login.module.css';
 
 const Login = ({ setUserType }) => {
   const [username, setUsername] = useState('');
@@ -35,8 +36,8 @@ const Login = ({ setUserType }) => {
       <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
-            <label>Username:</label>
+          <div className="form-group-login">
+          <label>Username:</label>
             <input
               type="text"
               value={username}
@@ -44,7 +45,7 @@ const Login = ({ setUserType }) => {
               className="form-control0"
             />
           </div>
-          <div className="form-group">
+          <div className="form-group-login">
             <label>Password:</label>
             <input
               type="password"
@@ -58,7 +59,7 @@ const Login = ({ setUserType }) => {
             <select
               value={selectedUserType}
               onChange={(e) => setSelectedUserType(e.target.value)}
-              className="form-control"
+              className="form-user-type"
             >
               <option value="user">User</option>
               <option value="admin">Admin</option>

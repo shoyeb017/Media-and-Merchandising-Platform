@@ -12,6 +12,9 @@
   background-image: linear-gradient(to left, rgba(0,0,0,0), #242428), url('https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg');
   font-family: Arial, sans-serif;
   margin: 0;
+
+  position: absolute;
+  bottom: 0;
 }
 
 .login-container0 {
@@ -28,6 +31,8 @@
   text-align: center;
   margin-left: 850px;
   margin-top: 10px;
+
+  color: black;
 }
 
 h2 {
@@ -45,21 +50,26 @@ h2 {
   text-align: left;
 }
 
-.form-group-login label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #555;
-}
-
-.form-control0 {
-  position: relative;
-  right: 42px;
+.form-group-login input[type="text"] {
+  color: black;
+  margin: 0px;
+  background-color: white;
+  border: 0px;
   width: 100%;
-  margin-left: 10px;
 }
 
-.form-control {
+.form-group-login input[type="password"] {
+  color: black;
+  margin: 0px;
+  background-color: white;
+  border: 0px;
+  width: 98%;
+  height: 38px;
+  border-radius: 2px;
+}
+
+
+.form-user-type {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
@@ -68,7 +78,7 @@ h2 {
   transition: border-color 0.3s;
 }
 
-.form-control:focus {
+.form-user-type:focus {
   border-color: #6e8efb;
   outline: none;
 }
