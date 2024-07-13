@@ -1,15 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+
 import NewsCard from './NewsCard';
 import ProductCard from '../merch/ProductCard';
 import './CompanyDetailsPage.css';
 
-const CompanyDetailsPage = ({ companies, products }) => {
+const CompanyDetailsPage = () => {
   const { companyID } = useParams();
-  const company = companies.find(p => p.COM_ID === parseInt(companyID));
+  const [company, setCompany] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch company data by ID
+    const fetchCompanyData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/companies/page`,
+          { 
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' } 
+          }
+
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setCompany(data);
+        } else {
+          console.error('Failed to fetch company data');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCompanyData();
+  }, [companyID]);
+
+  if (loading) {
+    return <div className="error">Loading...</div>;
+  }
 
   if (!company) {
-    return <div className="error">Loading...</div>; // Or handle the case where company is not found
+    return <div className="error">Company not found.</div>;
   }
 
   const coverImgStyle = {

@@ -414,6 +414,46 @@ oracledb.createPool({
     });
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for COMPANY DETAILS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/companies/page', async (req, res) => {
+        const { companyID } = req.body;
+        console.log('Received company request:', companyID);
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `SELECT * FROM COMPANY WHERE COM_ID = :companyID`,
+                { companyID }
+            );
+            console.log(`Query Result: `, result.rows);
+            if (!result.rows.length) {
+                res.status(404).send("Company not found");
+                return;
+            }
+            res.send(result.rows[0]);
+            console.log("Company Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for ALL PRODUCTS
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -739,7 +739,7 @@ export default function App() {
               <Route path="/:username/company" element={<CompanySection />} />
               <Route
                 path="/:username/company/:companyID"
-                element={<CompanyDetailsPage companies={companies} />}
+                element={<CompanyDetailsPage/>}
               />
 
               {/* /:movieId */}
