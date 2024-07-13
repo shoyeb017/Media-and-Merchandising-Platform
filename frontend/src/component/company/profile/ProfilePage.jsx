@@ -6,10 +6,10 @@ import './ProfilePage.css';
 
 const ProfilePage = () => {
   const initialProfile = {
-    IMG: '/img/3.jpg', // Placeholder image URL
-    NAME: 'Company XYZ',
-    EMAIL: 'contact@companyxyz.com',
-    DESCRIPTION: 'This is a sample description of the company.',
+    IMG: '', // Placeholder image URL
+    NAME: '',
+    EMAIL: '',
+    DESCRIPTION: '',
   };
 
   const [profile, setProfile] = useState(initialProfile);
@@ -18,29 +18,29 @@ const ProfilePage = () => {
   const [imageUpload, setImageUpload] = useState(null);
 
   useEffect(() => {
-    fetchProfileData(); // Fetch profile data when the component mounts
-  }, []);
-
-  const fetchProfileData = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/company/profile',
-        {
-          method: 'GET',
+    const fetchProfileData = async () => {
+      console.log('Fetching profile data...');
+      console.log("USER ID________________________"+localStorage.getItem('user_id'));
+      try {
+        const response = await fetch('http://localhost:5000/profile/company', {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userId: localStorage.getItem('user_Id') }),
+          body: JSON.stringify({ userid: localStorage.getItem('user_id') }),
         });
-      if (response.status === 200) {
-        const data = await response.json();
-        setProfile(data);
+        if (response.status === 200) {
+          const data = await response.json();
+          setProfile(data);
+        }
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
       }
-    }
-    catch (error) {
-      console.error('Error fetching profile data:', error);
-    }
+    };
+    fetchProfileData();
+  }, []);
 
-  };
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;

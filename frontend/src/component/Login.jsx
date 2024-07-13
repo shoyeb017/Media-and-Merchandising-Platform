@@ -29,7 +29,7 @@ const Login = ({ setUserType }) => {
           localStorage.setItem('user_id', data.user_id);
           localStorage.setItem('userType', selectedUserType);
           localStorage.setItem('username', username);
-          console.log("USERTYPE-----------"+localStorage.getItem('userType'));
+          console.log("USER ID>>>>>>>>>>>>>>>>"+localStorage.getItem('user_id'));
           
           setUserType(selectedUserType);
 
