@@ -1,62 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import './FeaturedContent.css';
 
-// const featuredItems = [
-//   {
-//     title: 'The Witcher',
-//     imgSrc: '/img/f-1.jpg',
-//     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
-//   },
-//   {
-//     title: 'The Mandalorian',
-//     imgSrc: '/img/f-2.jpg',
-//     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
-//   },
-//   {
-//     title: 'Witcher',
-//     imgSrc: '/img/3.jpg',
-//     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
-//   },
-//   {
-//     title: 'Mandalorian',
-//     imgSrc: '/img/4.jpg',
-//     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
-//   },
-//   {
-//     title: 'The Witc',
-//     imgSrc: '/img/5.jpg',
-//     description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
-//   }
-// ];
-
-const fetchFeaturedItems = async () => {
-  try {
-    const response = await fetch('http://localhost:5000/media/featured', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error('Failed to fetch featured content');
-    }
-    const data = await response.json();
-    // Optionally map the data if transformation is needed
-    const transformedData = data.map(item => ({
-      title: item.title,
-      imgSrc: item.imgSrc,
-      description: item.description,
-    }));
-    return transformedData;
-  } catch (err) {
-    console.error('Failed to fetch featured content:', err);
-    return [];
+const featuredItems = [
+  {
+    title: 'The Witcher',
+    imgSrc: '/img/f-1.jpg',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
+  },
+  {
+    title: 'The Mandalorian',
+    imgSrc: '/img/f-2.jpg',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
+  },
+  {
+    title: 'Witcher',
+    imgSrc: '/img/3.jpg',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
+  },
+  {
+    title: 'Mandalorian',
+    imgSrc: '/img/4.jpg',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
+  },
+  {
+    title: 'The Witc',
+    imgSrc: '/img/5.jpg',
+    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.'
   }
-};
+];
 
-// Usage example:
-const featuredItems = await fetchFeaturedItems();
-console.log(featuredItems);
+// const fetchFeaturedItems = async () => {
+//   try {
+//     const response = await fetch('http://localhost:5000/media/featured', {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
+//     if (!response.ok) {
+//       throw new Error('Failed to fetch featured content');
+//     }
+//     const data = await response.json();
+//     // Optionally map the data if transformation is needed
+//     const transformedData = data.map(item => ({
+//       title: item.title,
+//       imgSrc: item.imgSrc,
+//       description: item.description,
+//     }));
+//     return transformedData;
+//   } catch (err) {
+//     console.error('Failed to fetch featured content:', err);
+//     return [];
+//   }
+// };
+
+// // Usage example:
+// const featuredItems = await fetchFeaturedItems();
+// console.log(featuredItems);
 
 
 function FeaturedContent() {
@@ -80,7 +80,7 @@ function FeaturedContent() {
       <p className="featured-desc">
         {featuredItems[currentIndex].description}
       </p>
-      <button className="featured-button">WATCH</button>
+      {/* <button className="featured-button">WATCH</button> */}
       <div className="dots-container">
         {featuredItems.map((_, index) => (
           <span
