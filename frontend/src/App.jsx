@@ -736,7 +736,7 @@ export default function App() {
                 element={<MovieDetailsPage movies={movies} />}
               />
 
-              <Route path="/:username/company" element={<CompanySection />} />
+              <Route path="/:username/company" element={<CompanySection/>} />
               <Route
                 path="/:username/company/:companyID"
                 element={<CompanyDetailsPage/>}

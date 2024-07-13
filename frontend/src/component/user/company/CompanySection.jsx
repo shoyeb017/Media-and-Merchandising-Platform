@@ -2,7 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CompanySection.css';
 
-const CompanyCard = ({ company }) => {
+
+
+const CompanyCard = ({company}) => {
+
+  const [username, setUsername] = useState('');
+  useEffect(() => {
+  const storedUsername = localStorage.getItem('username');
+  if (storedUsername) {
+    setUsername(storedUsername);
+  }
+  }, []);
+
   return (
     <Link to={`/${username}/company/${company.COM_ID}`} className="link-product-card">
       <div className="company-card">
