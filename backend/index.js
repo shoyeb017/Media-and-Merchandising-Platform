@@ -334,6 +334,13 @@ oracledb.createPool({
           return res.status(400).json({ message: "All fields are required" });
         }
       
+        // Log the DOB value to verify its format
+        console.log('DOB before formatting:', DOB);
+      
+        // Ensure DOB is in YYYY-MM-DD format
+        const formattedDOB = new Date(DOB).toISOString().split('T')[0];
+        console.log('Formatted DOB:', formattedDOB);
+      
         let con;
         try {
           con = await pool.getConnection();
@@ -344,13 +351,13 @@ oracledb.createPool({
       
           const result = await con.execute(
             `UPDATE USERS SET NAME = :NAME, DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE WHERE USER_ID = :user_id`,
-            { NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+            { NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
           );
           console.log(`Query Result: ${JSON.stringify(result)}`);
       
           await con.commit();
-
-          const updatedProfile = { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE };
+      
+          const updatedProfile = { user_id, NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE };
           res.status(200).json(updatedProfile);
           console.log("Profile updated successfully");
       
