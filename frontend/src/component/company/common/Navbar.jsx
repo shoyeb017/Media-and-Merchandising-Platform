@@ -39,6 +39,9 @@ function Navbar() {
             <li className="menu-list-item">
               <Link to={`/${username}/home`}>Home</Link>
             </li>
+            <li className="menu-list-item">
+              <Link to={`/${username}/mediaform`}>Add Media</Link>
+            </li>
 
           </ul>
         </div>

@@ -41,6 +41,8 @@ import CompanyRegistration from "./component/Registration/CompanyRegistration.js
 import MerchandiserRegistration from "./component/Registration/MerchandiserRegistration.jsx";
 import UserRegistration from "./component/Registration/UserRegistration.jsx";
 
+import MediaForm from "./component/company/mediaform/MediaForm.jsx";
+
 import "./App.css";
 
 export default function App() {
@@ -770,6 +772,7 @@ export default function App() {
                 path="/:username/home"
                 element={<HomeCompany movies={movies} />}
               />
+              <Route path="/:username/mediaform" element={<MediaForm />} />
               <Route path="/:username/profile" element={<ProfileCompany />} />
             </Route>
           )}
