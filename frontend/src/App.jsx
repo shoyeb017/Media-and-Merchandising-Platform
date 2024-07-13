@@ -671,6 +671,7 @@ export default function App() {
   const [username, setUsername] = useState(null);
 
   useEffect(() => {
+    const storedUserId = localStorage.getItem('user_Id');
     const storedUserType = localStorage.getItem('userType');
     const storedUsername = localStorage.getItem('username');
     setUserType(storedUserType);

@@ -23,11 +23,13 @@ const Login = ({ setUserType }) => {
           body: JSON.stringify({ username, password }),
         });
         if(response.status === 200) {
-          // const data = await response.json();
+          const data = await response.json();
+          // set user_id in localStorage
+          localStorage.setItem('user_id', data.user_id);
           localStorage.setItem('userType', selectedUserType);
           localStorage.setItem('username', username);
           console.log("USERTYPE-----------"+localStorage.getItem('userType'));
-
+          
           setUserType(selectedUserType);
 
           navigate(`/${username}/home`);

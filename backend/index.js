@@ -159,14 +159,16 @@ oracledb.createPool({
             }
 
             const result = await con.execute(
-                `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN USERS ON LOGIN.ID = USERS.USER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                `SELECT USER_NAME, PASSWORD, USER_ID as "user_id" 
+                FROM LOGIN JOIN USERS ON LOGIN.ID = USERS.USER_ID
+                WHERE USER_NAME = :username AND PASSWORD = :password`,
                 { username, password } // Named bind variables
             );
             console.log(`Query Result: ${JSON.stringify(result.rows)}`);
 
             if (result.rows.length) {
-                res.status(200).send("Login Successful"); // Respond to client
-                console.log("Login Successful");
+                //send the full user data to the client
+                res.status(200).send(result.rows[0]); // Respond to client
             } else {
                 console.log("Invalid Credentials");
                 res.status(401).send("Invalid Credentials"); // Respond to client
@@ -203,12 +205,115 @@ oracledb.createPool({
             console.log(`Query Result: ${JSON.stringify(result.rows)}`);
 
             if (result.rows.length) {
-                res.status(200).send("Login Successful"); // Respond to client
+                res.status(200).send(result.rows[0]); // Respond to client
                 console.log("Login Successful");
             } else {
                 console.log("Invalid Credentials");
                 res.status(401).send("Invalid Credentials"); // Respond to client
             }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    app.post('/login/company', async (req, res) => {
+        const { username, password } = req.body;
+        console.log('Received login request:', { username, password }); // Log the received request
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN COMPANY ON LOGIN.ID = COMPANY.COM_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                { username, password } // Named bind variables
+            );
+            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+            if (result.rows.length) {
+                res.status(200).send(result.rows[0]); // Respond to client
+                console.log("Login Successful");
+            }
+            else {
+                console.log("Invalid Credentials");
+                res.status(401).send("Invalid Credentials"); // Respond to client
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        }
+    });
+    // user data for profile page
+
+    app.post('/profile/user', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received user profile request:', { user_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT * FROM USERS WHERE USER_ID = :user_id`,
+                { user_id } // Named bind variables
+            );
+            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+            if (result.rows.length) {
+                res.send(result.rows[0]);
+                console.log("User Data sent");
+            } else {
+                res.status(404).send("User not found");
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    app.post('/profile/user/update', async (req, res) => {
+        const {user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE } = req.body;
+        console.log('Received user profile update request:', { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `UPDATE USERS SET NAME = :NAME, DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE WHERE USER_ID = :user_id`,
+                { NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+            );
+            console.log(`Query Result: ${JSON.stringify(result)}`);
+
+            res.status(200).send("Profile updated successfully");
+            console.log("Profile updated successfully");
+
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
