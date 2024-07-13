@@ -16,8 +16,9 @@ const CompanyDetailsPage = () => {
       try {
         const response = await fetch(`http://localhost:5000/companies/page`,
           { 
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' } 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ companyID })
           }
 
         );
@@ -33,7 +34,6 @@ const CompanyDetailsPage = () => {
         setLoading(false);
       }
     };
-
     fetchCompanyData();
   }, [companyID]);
 

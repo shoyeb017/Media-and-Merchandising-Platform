@@ -15,8 +15,8 @@ function generateUserId(username) {
 }
 
 function generateLoginId(username, password) {
-    //will generate a login id based on the username and password
-    return Math.abs(username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + password.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0));
+    //will generate a login id based on the username and password nad time\
+    return Math.abs(username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + password.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + Date.now()) % 10000;    
 }
 
 
@@ -70,7 +70,8 @@ oracledb.createPool({
 
             // Insert user login credentials into the database
             const loginResult = await con.execute(
-                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) VALUES (:login_id, :password, 'USER', :user_id)`,
+                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
+                VALUES (:login_id, :password, 'USER', :user_id)`,
                 { login_id, password, user_id }
             );
             console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
@@ -134,7 +135,8 @@ oracledb.createPool({
 
             // Insert merchandiser login credentials into the database
             const loginResult = await con.execute(
-                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) VALUES (:login_id, :password, 'MERCHANDISER', :user_id)`,
+                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
+                VALUES (:login_id, :password, 'MERCHANDISER', :user_id)`,
                 { login_id, password, user_id }
             );
             console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
@@ -156,7 +158,48 @@ oracledb.createPool({
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     app.post('/registration/company', async (req, res) => {
+        const { username, password, name, email, description, imageUrl } = req.body;
+        console.log('Received company registration request:', { username, password, name, email, description, imageUrl });
+    
+        const user_id = generateUserId(username);
+        console.log('Generated User ID:', user_id);
+        const login_id = generateLoginId(username, password);
+        console.log('Generated Login ID:', login_id);
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
 
+            // Insert company data into the database
+            const result = await con.execute(
+                `INSERT INTO COMPANY (COM_ID, USER_NAME, NAME, IMG, EMAIL, DESCRIPTION)
+                VALUES (:user_id, :username, :name, :imageUrl, :email, :description)`,
+                { user_id, username, name, imageUrl, email, description }
+            );
+            console.log(`Company Insert Result: ${JSON.stringify(result)}`);
+
+            // Insert company login credentials into the database
+            const loginResult = await con.execute(
+                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
+                VALUES (:login_id, :password, 'COMPANY', :user_id)`,
+                { login_id, password, user_id }
+            );
+
+            console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
+
+            // Commit the transaction
+            await con.commit();
+
+            res.status(201).send("Company registered successfully");
+            console.log("Company registered successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        }
 
     });
 
@@ -420,6 +463,7 @@ oracledb.createPool({
     app.post('/companies/page', async (req, res) => {
         const { companyID } = req.body;
         console.log('Received company request:', companyID);
+
         let con;
         try {
             con = await pool.getConnection();
