@@ -32,27 +32,44 @@ const MerchandiserRegistration = () => {
       }
     }
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (!Array.isArray(users)) {
-      localStorage.setItem('users', JSON.stringify([]));
+    try {
+      fetch('http://localhost:5000/registration/merchandiser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => {
+          if (response.status === 201) {
+            alert('Registration successful!');
+            setFormData({
+              username: '',
+              password: '',
+              name: '',
+              description: '',
+              email: '',
+              city: '',
+              street: '',
+              house: '',
+              phone: '',
+            });
+            
+            navigate('/login');
+          } else {
+            alert('Registration failed');
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
-    
-    users.push({ ...formData, type: 'merchandiser' });
-    localStorage.setItem('users', JSON.stringify(users));
+    catch (error) {
+      console.error('Error:', error);
+    }
 
-    alert('Registration successful!');
-    setFormData({
-      username: '',
-      password: '',
-      name: '',
-      description: '',
-      email: '',
-      city: '',
-      street: '',
-      house: '',
-      phone: '',
-    });
-    // navigate('/');
+
+
   };
 
   return (

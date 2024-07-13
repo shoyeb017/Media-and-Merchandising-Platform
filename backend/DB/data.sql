@@ -28,6 +28,8 @@ DROP TABLE USERSTARTDISCUSSION;
 
 DROP TABLE USERWATCHANDFAVORITE;
 
+DROP TABLE PREFERREDGENRE;
+
 DROP TABLE PREFERENCEFORROLE;
 
 DROP TABLE PREFERENCEFORMEDIA;
@@ -52,49 +54,49 @@ DROP TABLE ADMIN;
 
 DROP TABLE USERS;
 
-DROP TABLE PHONE;
-
 CREATE TABLE USERS(
     USER_ID INT NOT NULL,
+    USER_NAME VARCHAR2(255),
     NAME VARCHAR2(255),
     DOB DATE,
     EMAIL VARCHAR2(255),
     CITY VARCHAR2(255),
     STREET VARCHAR2(255),
     HOUSE VARCHAR2(255),
-    PHONE_ID INT NOT NULL,
+    PHONE VARCHAR2(255),
     PRIMARY KEY(USER_ID)
 );
 
 CREATE TABLE ADMIN(
     ADMIN_ID INT NOT NULL,
+    USER_NAME VARCHAR2(255),
     NAME VARCHAR2(255),
     DOB DATE,
-    AGE INT,
+    -- AGE GENERATED ALWAYS AS (EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM DOB)) VIRTUAL,
     EMAIL VARCHAR2(255),
     CITY VARCHAR2(255),
     STREET VARCHAR2(255),
     HOUSE VARCHAR2(255),
-    PHONE_ID INT NOT NULL,
+    PHONE VARCHAR2(255),
     PRIMARY KEY(ADMIN_ID)
 );
 
 CREATE TABLE MERCHANDISER(
     MER_ID INT NOT NULL,
+    USER_NAME VARCHAR2(255),
     NAME VARCHAR2(255),
     DESCRIPTION VARCHAR2(4000),
-    DOB DATE,
-    AGE INT,
     EMAIL VARCHAR2(255),
     CITY VARCHAR2(255),
     STREET VARCHAR2(255),
     HOUSE VARCHAR2(255),
-    PHONE_ID INT NOT NULL,
+    PHONE VARCHAR2(255),
     PRIMARY KEY(MER_ID)
 );
 
 CREATE TABLE COMPANY(
     COM_ID INT NOT NULL,
+    USER_NAME VARCHAR2(255),
     NAME VARCHAR2(255),
     IMG VARCHAR2(255),
     DESCRIPTION VARCHAR2(4000),
@@ -108,7 +110,7 @@ CREATE TABLE MEDIA (
     DESCRIPTION VARCHAR2(4000),
     RATING INT,
     TYPE VARCHAR2(50),
-    GENRE VARCHAR2(255),
+    GENRE VARCHAR2(1000),
     TRAILER VARCHAR2(255),
     POSTER VARCHAR2(255),
     DURATION VARCHAR2(50),
@@ -160,6 +162,11 @@ CREATE TABLE ROLE(
     ROLE_TYPE VARCHAR2(50),
     PRIMARY KEY (ROLE_ID),
     CONSTRAINT ROLE_TYPE_CHECK CHECK (ROLE_TYPE IN ('DIRECTOR', 'PRODUCER', 'WRITER', 'ACTOR', 'ACTRESS'))
+);
+
+CREATE TABLE PREFERREDGENRE(
+    USER_ID INT NOT NULL,
+    GENRES VARCHAR2(1000)
 );
 
 CREATE TABLE PREFERENCEFORMEDIA(
@@ -268,12 +275,6 @@ CREATE TABLE NEWSTOMEDIA (
     NEWS_DATE DATE
 );
 
-CREATE TABLE PHONE(
-    PHONE_ID INT NOT NULL,
-    PHONE_NUMBER INT NOT NULL,
-    PRIMARY KEY(PHONE_ID),
-    CONSTRAINT PHONE_AK_1 UNIQUE(PHONE_NUMBER)
-);
 
 ALTER TABLE PREFERENCEFORMEDIA ADD CONSTRAINT FK_MEDIA_ID_PREFERENCEFORMEDIA FOREIGN KEY (MEDIA_ID) REFERENCES MEDIA (MEDIA_ID);
 
@@ -343,119 +344,10 @@ ALTER TABLE NEWSTOMEDIA ADD CONSTRAINT FK_NEWS_ID_NEWSTOMEDIA FOREIGN KEY (NEWS_
 
 ALTER TABLE NEWSTOMEDIA ADD CONSTRAINT FK_MEDIA_ID_NEWSTOMEDIA FOREIGN KEY (MEDIA_ID) REFERENCES MEDIA (MEDIA_ID);
 
-ALTER TABLE ADMIN ADD CONSTRAINT FK_PHONE_ID_ADMIN FOREIGN KEY (PHONE_ID) REFERENCES PHONE (PHONE_ID);
 
-ALTER TABLE MERCHANDISER ADD CONSTRAINT FK_PHONE_ID_MERCHANDISER FOREIGN KEY (PHONE_ID) REFERENCES PHONE (PHONE_ID);
-
-ALTER TABLE USERS ADD CONSTRAINT FK_PHONE_ID_USERS FOREIGN KEY (PHONE_ID) REFERENCES PHONE (PHONE_ID);
-
-INSERT INTO COMPANY(
-    COM_ID,
-    "NAME",
-    IMG,
-    DESCRIPTION,
-    EMAIL
-) VALUES (
-    1,
-    'Company1',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    'Company1dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
-    'sample@gmail.com'
-);
-
-INSERT INTO COMPANY(
-    COM_ID,
-    "NAME",
-    IMG,
-    DESCRIPTION,
-    EMAIL
-) VALUES (
-    2,
-    'Company2',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    'Company2dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
-    'sample@gmail.com'
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    1,
-    'Product1',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    100,
-    10
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    2,
-    'Product2',
-    'this is a really good product',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    200,
-    20
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    3,
-    'Product3',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    300,
-    30
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    4,
-    'Product4',
-    'this is a really good product',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    400,
-    40
-);
-
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    PRICE,
-    QUANTITY
-) VALUES (
-    5,
-    'Product5',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    500,
-    50
-);
+--------------------------------------------------------------------------------------------------------------------------------
+-- INSERTING DATA INTO MEDIA TABLE
+--------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO MEDIA (
     MEDIA_ID,
@@ -3368,3 +3260,141 @@ INSERT INTO MEDIA (
     TO_DATE('04/19/2020', 'MM/DD/YYYY'),
     10
 );
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- INSERT INTO COMPANY TABLE
+--------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO COMPANY(
+    COM_ID,
+    "NAME",
+    IMG,
+    DESCRIPTION,
+    EMAIL
+) VALUES (
+    1,
+    'Company1',
+    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
+    'Company1dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
+    'sample@gmail.com'
+);
+
+INSERT INTO COMPANY(
+    COM_ID,
+    "NAME",
+    IMG,
+    DESCRIPTION,
+    EMAIL
+) VALUES (
+    2,
+    'Company2',
+    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
+    'Company2dsadadhaskjndkjskdkjdsamdnaklsdjadkjlnsaldknakldnlsandlkndklandkladnskldaklsdhsaldkjlasdhksabclhbclkabdahidbfhcbdhdsbsufhb',
+    'sample@gmail.com'
+);
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+-- INSERT INTO PRODUCT TABLE
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    1,
+    'Product1',
+    'this is a really good product',
+    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
+    100,
+    10
+);
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    2,
+    'Product2',
+    'this is a really good product',
+    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
+    200,
+    20
+);
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    3,
+    'Product3',
+    'this is a really good product',
+    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
+    300,
+    30
+);
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    4,
+    'Product4',
+    'this is a really good product',
+    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
+    400,
+    40
+);
+
+INSERT INTO PRODUCTS(
+    PRO_ID,
+    NAME,
+    DESCRIPTION,
+    IMAGE,
+    PRICE,
+    QUANTITY
+) VALUES (
+    5,
+    'Product5',
+    'this is a really good product',
+    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
+    500,
+    50
+);
+
+
+INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE) 
+            VALUES (1234, 'siifu', 'Sifat Bin Asad', TO_DATE('01/01/1999', 'MM/DD/YYYY'), 'meow@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+
+INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
+            VALUES (1234, '1234', 'USER', 1234);
+
+INSERT INTO PREFERREDGENRE (USER_ID, GENRES)
+            VALUES (1234, 'ACTION,SCI-FI,COMEDY,HORROR');
+
+INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+            VALUES (1234, 'sfmerch', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+
+INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
+            VALUES (1235, '1234', 'MERCHANDISER', 1234);
+
+            SELECT USER_NAME, PASSWORD FROM MERCHANDISER JOIN LOGIN ON MERCHANDISER.MER_ID = LOGIN.ID
+            ;

@@ -6,6 +6,11 @@ function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [username, setUsername] = useState('');
 
+
+  const handleLogout = () => {
+    localStorage.clear();
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -58,7 +63,7 @@ function Navbar() {
           </ul>
         </div>
         <Link to={`/${username}/profile`} className="profile-text">Profile</Link>
-        <Link to="/" className="logout-btn">Logout</Link>
+        <Link to="/" className="logout-btn" onClick={handleLogout}>Logout</Link>
       </div>
     </div>
   );

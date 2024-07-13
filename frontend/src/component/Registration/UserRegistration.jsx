@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import './UserRegistration.css'; // Import the CSS file
 import Footer from '../user/common/Footer.jsx';
-
 
 const UserRegistration = () => {
   const [formData, setFormData] = useState({
@@ -21,8 +19,10 @@ const UserRegistration = () => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const navigate = useNavigate();
 
-  const genres = ['ACTION', 'ADVENTURE', 'COMEDY', 'DRAMA', 'FANTASY', 'HISTORICAL', 'HORROR', 'MAGIC',
-  'MYSTERY', 'PSYCHOLOGICAL', 'ROMANCE', 'SCI-FI', 'SUPERNATURAL', 'SPORTS', 'THRILLER', 'TRAGEDY'];
+  const genres = [
+    'ACTION', 'ADVENTURE', 'COMEDY', 'DRAMA', 'FANTASY', 'HISTORICAL', 'HORROR', 'MAGIC',
+    'MYSTERY', 'PSYCHOLOGICAL', 'ROMANCE', 'SCI-FI', 'SUPERNATURAL', 'SPORTS', 'THRILLER', 'TRAGEDY'
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +35,7 @@ const UserRegistration = () => {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     for (const key in formData) {
       if (formData[key] === '') {
@@ -43,37 +43,41 @@ const UserRegistration = () => {
         return;
       }
     }
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (!Array.isArray(users)) {
-      localStorage.setItem('users', JSON.stringify([]));
+  
+    try {
+      const response = await fetch('http://localhost:5000/registration/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, genres: selectedGenres }),
+      });
+  
+      if (response.status === 201) {
+        alert('Registration successful!');
+        setFormData({
+          username: '',
+          password: '',
+          name: '',
+          dob: '',
+          email: '',
+          city: '',
+          street: '',
+          house: '',
+          phone: '',
+        });
+        setSelectedGenres([]);
+        navigate('/');
+      } else {
+        alert('Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error registering user:', error);
+      alert('An error occurred during registration. Please try again.');
     }
-    
-    users.push({ ...formData, type: 'user' });
-    localStorage.setItem('users', JSON.stringify(users));
-
-    const genresMap = JSON.parse(localStorage.getItem('genres')) || {};
-    genresMap[formData.username] = selectedGenres;
-    localStorage.setItem('genres', JSON.stringify(genresMap));
-
-    alert('Registration successful!');
-
-    setFormData({
-      username: '',
-      password: '',
-      name: '',
-      dob: '',
-      email: '',
-      city: '',
-      street: '',
-      house: '',
-      phone: '',
-    });
-    setSelectedGenres([]);
-    // navigate('/');
   };
-
-  return ( 
+  
+  return (
     <div className="full-section">
       <h2 className="title">User Registration</h2>
       <div className="registration-container">

@@ -9,27 +9,39 @@ const Login = ({ setUserType }) => {
   const [selectedUserType, setSelectedUserType] = useState('user'); // Default to 'user'
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Use selectedUserType from the dropdown
-    let userType = selectedUserType;
+    const userType = selectedUserType;
+    
+      try {
+        const response = await fetch(`http://localhost:5000/login/${selectedUserType}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        });
+        if(response.status === 200) {
+          const data = await response.json();
+          // set user_id in localStorage
+          localStorage.setItem('user_id', data.user_id);
+          localStorage.setItem('userType', selectedUserType);
+          localStorage.setItem('username', username);
+          console.log("USERTYPE-----------"+localStorage.getItem('userType'));
+          
+          setUserType(selectedUserType);
 
-    // Perform additional checks if needed based on username and password
-    if ((username === '1' && password !== '1') ||
-        (username === '2' && password !== '2') ||
-        (username === '3' && password !== '3') ||
-        (username === '4' && password !== '4')) {
-      alert('Invalid credentials');
-      return;
-    }
-
-    // Set user type and username in localStorage
-    setUserType(userType);
-    localStorage.setItem('userType', userType);
-    localStorage.setItem('username', username);
-    navigate(`/${username}/home`);
-  };
+          navigate(`/${username}/home`);
+        } else {
+          alert('Invalid credentials');
+        }
+      }
+      catch (error) {
+        console.error('Error:', error);
+      }
+};
 
   return (
     <div className="login-container0">
