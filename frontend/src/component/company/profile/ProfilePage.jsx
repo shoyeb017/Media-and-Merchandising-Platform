@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 import { storage } from '../../../firebase'; // Make sure to configure and export your Firebase storage instance
@@ -6,16 +6,41 @@ import './ProfilePage.css';
 
 const ProfilePage = () => {
   const initialProfile = {
-    img: '/img/3.jpg', // Placeholder image URL
-    name: 'Company XYZ',
-    email: 'contact@companyxyz.com',
-    description: 'This is a sample description of the company.',
+    IMG: '/img/3.jpg', // Placeholder image URL
+    NAME: 'Company XYZ',
+    EMAIL: 'contact@companyxyz.com',
+    DESCRIPTION: 'This is a sample description of the company.',
   };
 
   const [profile, setProfile] = useState(initialProfile);
   const [isEditing, setIsEditing] = useState(false);
-  const [imagePreview, setImagePreview] = useState(initialProfile.img);
+  const [imagePreview, setImagePreview] = useState(initialProfile.IMG);
   const [imageUpload, setImageUpload] = useState(null);
+
+  useEffect(() => {
+    fetchProfileData(); // Fetch profile data when the component mounts
+  }, []);
+
+  const fetchProfileData = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/company/profile',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId: localStorage.getItem('user_Id') }),
+        });
+      if (response.status === 200) {
+        const data = await response.json();
+        setProfile(data);
+      }
+    }
+    catch (error) {
+      console.error('Error fetching profile data:', error);
+    }
+
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +71,7 @@ const ProfilePage = () => {
       const imageRef = ref(storage, `company/profile/${imageUpload.name + v4()}`);
       await uploadBytes(imageRef, imageUpload);
       const url = await getDownloadURL(imageRef);
-      updatedProfile.img = url;
+      updatedProfile.IMG = url;
       // Clear the image upload state after uploading
       setImageUpload(null);
     }
@@ -67,31 +92,31 @@ const ProfilePage = () => {
             {imagePreview && <img src={imagePreview} alt="Preview" className="profile-img-preview" />}
           </>
         ) : (
-          <img src={profile.img} alt={profile.name} className="profile-img" />
+          <img src={profile.IMG} alt={profile.NAME} className="profile-img" />
         )}
       </div>
       <div className="profile-info">
         <label>Name: </label>
         {isEditing ? (
-          <input type="text" name="name" value={profile.name} onChange={handleChange} />
+          <input type="text" name="name" value={profile.NAME} onChange={handleChange} />
         ) : (
-          <span>{profile.name}</span>
+          <span>{profile.NAME}</span>
         )}
       </div>
       <div className="profile-info">
         <label>Email: </label>
         {isEditing ? (
-          <input type="email" name="email" value={profile.email} onChange={handleChange} />
+          <input type="email" name="email" value={profile.EMAIL} onChange={handleChange} />
         ) : (
-          <span>{profile.email}</span>
+          <span>{profile.EMAIL}</span>
         )}
       </div>
       <div className="profile-info">
         <label>Description: </label>
         {isEditing ? (
-          <textarea name="description" value={profile.description} onChange={handleChange} />
+          <textarea name="description" value={profile.DESCRIPTION} onChange={handleChange} />
         ) : (
-          <span>{profile.description}</span>
+          <span>{profile.DESCRIPTION}</span>
         )}
       </div>
       <div className="profile-buttons">
