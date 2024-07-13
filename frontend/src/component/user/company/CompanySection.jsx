@@ -4,7 +4,7 @@ import './CompanySection.css';
 
 const CompanyCard = ({ company }) => {
   return (
-    <Link to={`/company/${company.COM_ID}`} className="link-product-card">
+    <Link to={`/${username}/company/${company.COM_ID}`} className="link-product-card">
       <div className="company-card">
         <img className="company-card-img" src={company.IMG} alt={company.NAME} />
         <div className="company-card-content">
