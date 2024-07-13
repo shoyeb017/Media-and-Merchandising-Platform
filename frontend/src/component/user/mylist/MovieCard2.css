@@ -4,13 +4,36 @@
     position: relative;
   }
 
+  .delete-button {
+    z-index: 1;
+    position: absolute; 
+
+    width: 281px;
+    height: 28px;
+
+    background-color: #ffdd95;
+    font-size: large;
+    font-weight: bold;
+    border: 0px;
+  }
+
   .movie-card2:hover .movie-card2-img {
     transform: scale(1.1);
     opacity: 0.5;
   }
 
+  .delete-button:hover {
+    background-color: red;
+    color: white;
+  }
+  .movie-card2:hover .movie-card2-img {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+
+
   .movie-card2:hover .movie-card2-title {
-    transform: scale(1.2);
+    transform: scale(1.1);
     margin: 0 30px;
     opacity: 0.5;
   }
@@ -25,17 +48,17 @@
 
   .movie-card2-img {
     transition: all 1s ease-in-out;
-    width: 270px;
+    width: 280px;
     height: 200px;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 5px;
   }
 
   .movie-card2-title {
     transition: all 1s ease-in-out;
     color: white;
     padding: 0 10px;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
     position: relative;
     top: 100%;
@@ -64,17 +87,3 @@
     transition: 1s all ease-in-out;
   }
 
-  .movie-card2-button {
-    padding: 10px;
-    background-color: #4dbf00;
-    color: white;
-    border-radius: 10px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    bottom: 20px;
-    left: 50px;
-    opacity: 0;
-    transition: 1s all ease-in-out;
-  }
