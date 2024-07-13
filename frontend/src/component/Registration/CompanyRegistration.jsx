@@ -1,10 +1,10 @@
-// src/component/Registration/CompanyRegistration.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './CompanyRegistration.css'; // Import the CSS file
-// import { ref, uploadBytes, getDownloadURL, storage } from '../../firebase';
-// import { v4 } from "uuid";
+import './CompanyRegistration.css';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 } from "uuid";
 import Footer from '../user/common/Footer.jsx';
+import { storage } from '../../firebase';
 
 const CompanyRegistration = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const CompanyRegistration = () => {
     name: '',
     email: '',
     description: '',
-    imageUrl: '', 
+    imageUrl: '',
   });
 
   const [imageUpload, setImageUpload] = useState(null);
@@ -38,33 +38,53 @@ const CompanyRegistration = () => {
       return;
     }
 
-    // Upload the image and get the URL
-    const imageRef = ref(storage, `company/profile/${imageUpload.name + v4()}`);
-    await uploadBytes(imageRef, imageUpload);
-    const url = await getDownloadURL(imageRef);
+    try {
+      // Upload the image and get the URL
+      const imageRef = ref(storage, `company/profile/${imageUpload.name + v4()}`);
+      console.log('Uploading image...');
+      await uploadBytes(imageRef, imageUpload);
+      console.log('Image uploaded successfully.');
+      const url = await getDownloadURL(imageRef);
+      console.log('Image URL:', url);
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (!Array.isArray(users)) {
-      localStorage.setItem('users', JSON.stringify([]));
+      const updatedFormData = { ...formData, imageUrl: url };
+
+      // Send the form data to the backend
+      const response = await fetch('http://localhost:5000/registration/company', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedFormData),
+      });
+      if (response.status === 201) {
+        alert('Registration successful!');
+        setFormData({
+          username: '',
+          password: '',
+          name: '',
+          email: '',
+          description: '',
+          imageUrl: '',
+        });
+
+        navigate('/');
+      } else {
+        // Check if the response has content
+        if (response.headers.get('Content-Length') > '0') {
+          const errorData = await response.json();
+          console.error('Error during registration:', errorData);
+          alert('An error occurred during registration. Please try again.');
+        } else {
+          // Handle case where there is no response body
+          console.error('Error during registration: No response body');
+          alert('An error occurred during registration. No details available.');
+        }
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert('An error occurred during registration. Please try again.');
     }
-
-    const updatedFormData = { ...formData, imageUrl: url };
-    users.push({ ...updatedFormData, type: 'company' });
-    localStorage.setItem('users', JSON.stringify(users));
-
-    alert('Registration successful!');
-
-    setFormData({
-      username: '',
-      password: '',
-      name: '',
-      email: '',
-      description: '',
-      imageUrl: '', 
-    });
-  
-
-    // navigate('/');
   };
 
   return (
