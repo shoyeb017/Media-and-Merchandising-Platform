@@ -416,7 +416,52 @@ oracledb.createPool({
             }
           }
         }
-      });
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for COMPANY PROFILE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.post('/profile/company', async (req, res) => {
+        const { userid } = req.body;
+        console.log('Received company profile request:', { userid });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT * FROM COMPANY WHERE COM_ID = :userid`,
+                { userid } // Named bind variables
+            );
+            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+            if (result.rows.length) {
+                res.send(result.rows[0]);
+                console.log("Company Data sent");
+            } else {
+                res.status(404).send("Company not found");
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
+
+
       
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
