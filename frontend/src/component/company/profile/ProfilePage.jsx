@@ -1,60 +1,81 @@
 import React, { useState } from 'react';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 } from 'uuid';
+import { storage } from '../../../firebase'; // Make sure to configure and export your Firebase storage instance
 import './ProfilePage.css';
 
 const ProfilePage = () => {
   const initialProfile = {
-    name: 'John Doe',
-    dob: '1990-01-01',
-    age: 34,
-    email: 'john.doe@example.com',
-    city: 'New York',
-    street: '5th Avenue',
-    house: '123',
+    img: '/img/3.jpg', // Placeholder image URL
+    name: 'Company XYZ',
+    email: 'contact@companyxyz.com',
+    description: 'This is a sample description of the company.',
   };
 
   const [profile, setProfile] = useState(initialProfile);
   const [isEditing, setIsEditing] = useState(false);
+  const [imagePreview, setImagePreview] = useState(initialProfile.img);
+  const [imageUpload, setImageUpload] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageUpload(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const toggleEdit = () => {
     setIsEditing(!isEditing);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
+    let updatedProfile = { ...profile };
+
+    // Only upload the image if a new file has been selected
+    if (imageUpload) {
+      const imageRef = ref(storage, `company/profile/${imageUpload.name + v4()}`);
+      await uploadBytes(imageRef, imageUpload);
+      const url = await getDownloadURL(imageRef);
+      updatedProfile.img = url;
+      // Clear the image upload state after uploading
+      setImageUpload(null);
+    }
+
     // Handle the update logic (e.g., save the updated profile to a server)
-    console.log("Updated Profile:", profile);
+    console.log("Updated Profile:", updatedProfile);
+    setProfile(updatedProfile);
     setIsEditing(false);
   };
 
   return (
-    <div className="profile-page">
-      <h2>Profile</h2>
+    <div className="company-profile-page">
+      <h2>Company Profile</h2>
+      <div className="profile-info-image">
+        {isEditing ? (
+          <>
+            <input type="file" name="img" onChange={handleImageChange} />
+            {imagePreview && <img src={imagePreview} alt="Preview" className="profile-img-preview" />}
+          </>
+        ) : (
+          <img src={profile.img} alt={profile.name} className="profile-img" />
+        )}
+      </div>
       <div className="profile-info">
         <label>Name: </label>
         {isEditing ? (
           <input type="text" name="name" value={profile.name} onChange={handleChange} />
         ) : (
           <span>{profile.name}</span>
-        )}
-      </div>
-      <div className="profile-info">
-        <label>Date of Birth: </label>
-        {isEditing ? (
-          <input type="date" name="dob" value={profile.dob} onChange={handleChange} />
-        ) : (
-          <span>{profile.dob}</span>
-        )}
-      </div>
-      <div className="profile-info">
-        <label>Age: </label>
-        {isEditing ? (
-          <input type="number" name="age" value={profile.age} onChange={handleChange} />
-        ) : (
-          <span>{profile.age}</span>
         )}
       </div>
       <div className="profile-info">
@@ -66,27 +87,11 @@ const ProfilePage = () => {
         )}
       </div>
       <div className="profile-info">
-        <label>City: </label>
+        <label>Description: </label>
         {isEditing ? (
-          <input type="text" name="city" value={profile.city} onChange={handleChange} />
+          <textarea name="description" value={profile.description} onChange={handleChange} />
         ) : (
-          <span>{profile.city}</span>
-        )}
-      </div>
-      <div className="profile-info">
-        <label>Street: </label>
-        {isEditing ? (
-          <input type="text" name="street" value={profile.street} onChange={handleChange} />
-        ) : (
-          <span>{profile.street}</span>
-        )}
-      </div>
-      <div className="profile-info">
-        <label>House: </label>
-        {isEditing ? (
-          <input type="text" name="house" value={profile.house} onChange={handleChange} />
-        ) : (
-          <span>{profile.house}</span>
+          <span>{profile.description}</span>
         )}
       </div>
       <div className="profile-buttons">
