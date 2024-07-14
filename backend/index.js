@@ -153,6 +153,56 @@ oracledb.createPool({
     }
     );
 
+     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR CHECK USERNAME EXIST COMPANY REGISTRATION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/registration/company/check-username', async (req, res) => {
+        const { username } = req.body;
+    
+        console.log('Received username check request:', username);
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            console.log('Checking username availability:', username);
+    
+            const checkUserResult = await con.execute(
+                `SELECT COUNT(*) AS count FROM COMPANY WHERE USER_NAME = :username`,
+                { username }
+            );
+            console.log(`Query Result: ${JSON.stringify(checkUserResult.rows)}`);
+    
+            const userCount = checkUserResult.rows[0].COUNT;
+    
+            console.log(`User Count: ${userCount}`);
+    
+            if (userCount > 0) {
+                res.status(409).send("Username already exists");
+            } else {
+                res.status(200).send("Username available");
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing connection: ", err);
+                }
+            }
+        }
+    });
+    
+    
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR COMPANY REGISTRATION
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -263,8 +313,7 @@ oracledb.createPool({
             }
 
             const result = await con.execute(
-                `SELECT USER_NAME, PASSWORD, MER_ID as "user_id"
-                FROM LOGIN JOIN MERCHANDISER ON LOGIN.ID = MERCHANDISER.MER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN MERCHANDISER ON LOGIN.ID = MERCHANDISER.MER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
                 { username, password } // Named bind variables
             );
             console.log(`Query Result: ${JSON.stringify(result.rows)}`);
@@ -305,8 +354,7 @@ oracledb.createPool({
             }
 
             const result = await con.execute(
-                `SELECT USER_NAME, PASSWORD, COM_ID as "user_id"
-                FROM LOGIN JOIN COMPANY ON LOGIN.ID = COMPANY.COM_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN COMPANY ON LOGIN.ID = COMPANY.COM_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
                 { username, password } // Named bind variables
             );
             console.log(`Query Result: ${JSON.stringify(result.rows)}`);
@@ -911,14 +959,6 @@ oracledb.createPool({
         }
     });
     
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // ROUTE FOR MYLIST
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    
-
-
-
     
       
 
@@ -929,3 +969,19 @@ oracledb.createPool({
 }).catch(err => {
     console.error('Error starting connection pool', err);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
