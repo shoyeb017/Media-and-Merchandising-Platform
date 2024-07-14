@@ -15,12 +15,12 @@ const MovieCard2 = ({ movie, handleDeleteMovie }) => {
   return (
     <div className="movie-card2">
       <button className="delete-button" onClick={handleDeleteMovie}>X</button>
-      <Link to={`/${username}/media/${movie.id}`} className="link-product-card">
+      <Link to={`/${username}/media/${movie.MEDIA_ID}`} className="link-product-card">
         <div className="movie-card2">
-          <img className="movie-card2-img" src={movie.img} alt={movie.title} />
+          <img className="movie-card2-img" src={movie.POSTER} alt={movie.TITLE} />
           <div className="movie-card2-content">
-            <h3 className="movie-card2-title">{movie.title}</h3>
-            <p className="movie-card2-desc">{movie.description}</p>
+            <h3 className="movie-card2-title">{movie.TITLE}</h3>
+            <p className="movie-card2-desc">{movie.DESCRIPTION}</p>
           </div>
         </div>
       </Link>
