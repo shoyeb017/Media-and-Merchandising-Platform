@@ -959,6 +959,71 @@ oracledb.createPool({
         }
     });
     
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR adding in PLAN TO WATCH or WATCHED
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/media/mylist/add', async (req, res) => {
+        let { user_id, media_id, status } = req.body; // Changed to let
+        console.log('Received add to plan to watch request:', { user_id, media_id, status });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            let originalStatus = status;
+            if (status === 'WATCHED') {
+                status = 'PLAN_TO_WATCH';
+            } else {
+                status = 'WATCHED';
+            }
+    
+            const deleteResult = await con.execute(
+                `DELETE FROM USERWATCHANDFAVORITE 
+                 WHERE USER_ID = :user_id
+                 AND MEDIA_ID = :media_id
+                 AND STATUS = :status`,
+                { user_id, media_id, status }, { autoCommit: true }
+            );
+            console.log(`Query Result: `, deleteResult);
+    
+            status = originalStatus; // Reset status to the original value before inserting
+    
+            const result = await con.execute(
+                `INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, STATUS)
+                VALUES (:user_id, :media_id, :status)`,
+                { user_id, media_id, status }, { autoCommit: true }
+            );
+            console.log(`Query Result: `, result);
+            res.send("Added to My List successfully");
+            console.log("Added to My List successfully");
+            
+    
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
+    
+
+
+
+
+
+
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR PLAN TO WATCH
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -982,7 +1047,7 @@ oracledb.createPool({
                 )`,
                 { user_id }
             );
-            console.log(`Query Result: `, result.rows);
+            // console.log(`Query Result: `, result.rows);
             res.send(result.rows);
             console.log("Plan to Watch Data sent");
         } catch (err) {
@@ -1024,7 +1089,7 @@ oracledb.createPool({
                 )`,
                 { user_id }
             );
-            console.log(`Query Result: `, result.rows);
+            // console.log(`Query Result: `, result.rows);
             res.send(result.rows);
             console.log("Plan to Watch Data sent");
         } catch (err) {
@@ -1045,47 +1110,56 @@ oracledb.createPool({
     // ROUTE FOR DELETE FROM PLAN TO WATCH
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    app.delete('/media/planToWatch', async (req, res) => {
+    app.post('/media/planToWatch/delete', async (req, res) => {
         const { user_id, media_id } = req.body;
-        console.log('Received delete request:', { user_id, media_id });
+        console.log('Received delete request for plan to watch:', { user_id, media_id });
+        
         let con;
         try {
-            con = await pool.getConnection();
-            if (!con) {
-                res.status(500).send("Connection Error");
-                return;
-            }
-            const result = await con.execute(
-                `DELETE FROM USERWATCHANDFAVORITE 
-                WHERE USER_ID = :user_id
-                AND MEDIA_ID = :media_id
-                AND STATUS = 'PLAN_TO_WATCH'`,
-                { user_id, media_id }
-            );
-            console.log(`Query Result: `, result.rowsAffected);
+          con = await pool.getConnection();
+          if (!con) {
+            res.status(500).send("Connection Error");
+            return;
+          }
+          
+          const result = await con.execute(
+            `DELETE FROM USERWATCHANDFAVORITE 
+             WHERE USER_ID = :user_id
+             AND MEDIA_ID = :media_id
+             AND STATUS = 'PLAN_TO_WATCH'`,
+            { user_id, media_id },{ autoCommit: true }
+          );
+          
+          console.log(`Query Result: `, result.rowsAffected);
+          if (result.rowsAffected === 0) {
+            res.status(404).send("Record not found or already deleted");
+          } else {
+            await con.commit();
             res.send("Deleted successfully");
             console.log("Deleted successfully");
+          }
         } catch (err) {
-            console.error("Error during database query:", err);
-            res.status(500).send("Internal Server Error");
+          console.error("Error during database query:", err);
+          res.status(500).send("Internal Server Error");
         } finally {
-            if (con) {
-                try {
-                    await con.close();
-                } catch (err) {
-                    console.error("Error closing database connection:", err);
-                }
+          if (con) {
+            try {
+              await con.close();
+            } catch (err) {
+              console.error("Error closing database connection:", err);
             }
+          }
         }
-    });
+      });
+      
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR DELETE FROM WATCHED
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    app.delete('/media/watched', async (req, res) => {
+    app.post('/media/watched/delete', async (req, res) => {
         const { user_id, media_id } = req.body;
-        console.log('Received delete request:', { user_id, media_id });
+        console.log('Received delete request for watched:', { user_id, media_id });
         let con;
         try {
           con = await pool.getConnection();
@@ -1098,7 +1172,7 @@ oracledb.createPool({
              WHERE USER_ID = :user_id
              AND MEDIA_ID = :media_id
              AND STATUS = 'WATCHED'`,
-            { user_id, media_id }
+            { user_id, media_id } ,{ autoCommit: true}
           );
           console.log(`Query Result: `, result);
           if (result.rowsAffected === 0) {

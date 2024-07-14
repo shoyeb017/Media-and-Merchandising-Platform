@@ -44,27 +44,51 @@ const Mylist = () => {
   const handleDeleteMovie = async (id, list) => {
     if(list === 'planToWatch') {
       try {
-        await fetch('http://localhost:5000/media/planToWatch', {
-          method: 'DELETE',
+        console.log('Deleting movie:',id,list);
+        console.log('user_id:',localStorage.getItem('user_id'));
+        await fetch('http://localhost:5000/media/planToWatch/delete', {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ user_id: localStorage.getItem('user_id'), media_id: id }),
         });
         setPlanToWatchMovies(planToWatchMovies.filter(movie => movie.id !== id));
+        // window.location.reload();
+        const planToWatchResponse = await fetch('http://localhost:5000/media/planToWatch', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+        });
+        const planToWatchData = await planToWatchResponse.json();
+        setPlanToWatchMovies(planToWatchData);
+
       } catch (error) {
         console.error('Error deleting movie:', error);
       }
     }else if(list === 'watched') {
       try {
-        await fetch('http://localhost:5000/media/watched', {
-          method: 'DELETE',
+        await fetch('http://localhost:5000/media/watched/delete', {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ user_id: localStorage.getItem('user_id'), media_id: id }),
         });
         setWatchedMovies(watchedMovies.filter(movie => movie.id !== id));
+        // window.location.reload();
+        const watchedResponse = await fetch('http://localhost:5000/media/watched', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+        });
+        const watchedData = await watchedResponse.json();
+        setWatchedMovies(watchedData);
+        
       } catch (error) {
         console.error('Error deleting movie:', error);
       }
@@ -91,17 +115,17 @@ const Mylist = () => {
         {activeList === 'planToWatch' &&
           planToWatchMovies.map((movie) => (
             <MovieCard2
-              key={movie.id || movie.tempId}
+              key={movie.MEDIA_ID}
               movie={movie}
-              handleDeleteMovie={() => handleDeleteMovie(movie.id, 'planToWatch')}
+              handleDeleteMovie={() => handleDeleteMovie(movie.MEDIA_ID, 'planToWatch')}
             />
           ))}
         {activeList === 'watched' &&
           watchedMovies.map((movie) => (
             <MovieCard2
-              key={movie.id || movie.tempId}
+              key={movie.MEDIA_ID}
               movie={movie}
-              handleDeleteMovie={() => handleDeleteMovie(movie.id, 'watched')}
+              handleDeleteMovie={() => handleDeleteMovie(movie.MEDIA_ID, 'watched')}
             />
           ))}
       </div>
