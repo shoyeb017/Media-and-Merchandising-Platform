@@ -959,6 +959,170 @@ oracledb.createPool({
         }
     });
     
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR PLAN TO WATCH
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/media/planToWatch', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received plan to watch request:', { user_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `SELECT * FROM MEDIA 
+                WHERE MEDIA_ID IN (
+                    SELECT MEDIA_ID FROM USERWATCHANDFAVORITE 
+                    WHERE USER_ID = :user_id
+                    AND STATUS = 'PLAN_TO_WATCH'
+                )`,
+                { user_id }
+            );
+            console.log(`Query Result: `, result.rows);
+            res.send(result.rows);
+            console.log("Plan to Watch Data sent");
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
+    
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR WATCHED
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/media/watched', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received plan to watch request:', { user_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `SELECT * FROM MEDIA 
+                WHERE MEDIA_ID IN (
+                    SELECT MEDIA_ID FROM USERWATCHANDFAVORITE 
+                    WHERE USER_ID = :user_id
+                    AND STATUS = 'WATCHED'
+                )`,
+                { user_id }
+            );
+            console.log(`Query Result: `, result.rows);
+            res.send(result.rows);
+            console.log("Plan to Watch Data sent");
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR DELETE FROM PLAN TO WATCH
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.delete('/media/planToWatch', async (req, res) => {
+        const { user_id, media_id } = req.body;
+        console.log('Received delete request:', { user_id, media_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `DELETE FROM USERWATCHANDFAVORITE 
+                WHERE USER_ID = :user_id
+                AND MEDIA_ID = :media_id
+                AND STATUS = 'PLAN_TO_WATCH'`,
+                { user_id, media_id }
+            );
+            console.log(`Query Result: `, result.rowsAffected);
+            res.send("Deleted successfully");
+            console.log("Deleted successfully");
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR DELETE FROM WATCHED
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.delete('/media/watched', async (req, res) => {
+        const { user_id, media_id } = req.body;
+        console.log('Received delete request:', { user_id, media_id });
+        let con;
+        try {
+          con = await pool.getConnection();
+          if (!con) {
+            res.status(500).send("Connection Error");
+            return;
+          }
+          const result = await con.execute(
+            `DELETE FROM USERWATCHANDFAVORITE 
+             WHERE USER_ID = :user_id
+             AND MEDIA_ID = :media_id
+             AND STATUS = 'WATCHED'`,
+            { user_id, media_id }
+          );
+          console.log(`Query Result: `, result);
+          if (result.rowsAffected === 0) {
+            res.status(404).send("Record not found or already deleted");
+          } else {
+            res.send("Deleted successfully");
+            console.log("Deleted successfully");
+            await con.commit();
+          }
+        } catch (err) {
+          console.error("Error during database query:", err);
+          res.status(500).send("Internal Server Error");
+        } finally {
+          if (con) {
+            try {
+              await con.close();
+            } catch (err) {
+              console.error("Error closing database connection:", err);
+            }
+          }
+        }
+    });
+      
+
     
       
 
