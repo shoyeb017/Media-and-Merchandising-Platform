@@ -26,6 +26,7 @@ const Login = ({ setUserType }) => {
         if(response.status === 200) {
           const data = await response.json();
           // set user_id in localStorage
+          console.log("USER ID>>>>>>>>>>>>>>>>"+data.user_id);
           localStorage.setItem('user_id', data.user_id);
           localStorage.setItem('userType', selectedUserType);
           localStorage.setItem('username', username);

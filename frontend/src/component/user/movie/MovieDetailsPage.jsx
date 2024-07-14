@@ -22,6 +22,8 @@ const MovieDetailsPage = () => {
     const [reviews, setReviews] = useState([]);
     const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
 
+    const userId = localStorage.getItem('user_id');
+
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
@@ -48,16 +50,42 @@ const MovieDetailsPage = () => {
         return <div className="error">Loading...</div>; // Or handle the case where movie is not found
     }
 
-    const handleWatched = () => {
+    const handleWatched = async () => {
         alert('Movie added to Watched List');
         setWatchedList([...watchedList, movieDetails]);
         setPlanToWatchList(planToWatchList.filter(item => item.title !== movieDetails.title));
+
+        try {
+            await fetch('http://localhost:5000/media/mylist/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: userId, media_id: movieDetails.id, status : 'WATCHED' }),
+            });
+
+        } catch (error) {
+            console.error('Error updating eatched list:', error);
+        }
     };
 
-    const handlePlanToWatch = () => {
+    const handlePlanToWatch = async () => {
         alert('Movie added to Plan to Watch List');
         setPlanToWatchList([...planToWatchList, movieDetails]);
         setWatchedList(watchedList.filter(item => item.title !== movieDetails.title));
+
+        try {
+            await fetch('http://localhost:5000/media/mylist/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: userId, media_id: movieDetails.id, status : 'PLAN_TO_WATCH' }),
+            });
+
+        } catch (error) {
+            console.error('Error updating plan to watch list:', error);
+        }
     };
 
     const handleAddReview = () => {

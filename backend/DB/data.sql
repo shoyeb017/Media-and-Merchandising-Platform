@@ -3672,7 +3672,7 @@ INSERT INTO PRODUCTS(
 
 
 
-DELETE FROM USERWATCHANDFAVORITE 
-                WHERE USER_ID = '1234'
-                AND MEDIA_ID = '7'
-                AND STATUS = 'WATCHED';
+-- DELETE FROM USERWATCHANDFAVORITE 
+--                 WHERE USER_ID = '1234'
+--                 AND MEDIA_ID = '1'
+--                 AND STATUS = 'PLAN_TO_WATCH';
