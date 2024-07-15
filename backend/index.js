@@ -153,7 +153,7 @@ oracledb.createPool({
     }
     );
 
-     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR CHECK USERNAME EXIST COMPANY REGISTRATION
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -176,11 +176,11 @@ oracledb.createPool({
                 `SELECT COUNT(*) AS count FROM COMPANY WHERE USER_NAME = :username`,
                 { username }
             );
-            console.log(`Query Result: ${JSON.stringify(checkUserResult.rows)}`);
+            console.log('Query Result: ${JSON.stringify(checkUserResult.rows)}');
     
             const userCount = checkUserResult.rows[0].COUNT;
     
-            console.log(`User Count: ${userCount}`);
+            console.log('User Count: ${userCount}');
     
             if (userCount > 0) {
                 res.status(409).send("Username already exists");
@@ -200,8 +200,6 @@ oracledb.createPool({
             }
         }
     });
-    
-    
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR COMPANY REGISTRATION
@@ -313,7 +311,8 @@ oracledb.createPool({
             }
 
             const result = await con.execute(
-                `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN MERCHANDISER ON LOGIN.ID = MERCHANDISER.MER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                `SELECT USER_NAME, PASSWORD, MER_ID as "user_id"
+                FROM LOGIN JOIN MERCHANDISER ON LOGIN.ID = MERCHANDISER.MER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
                 { username, password } // Named bind variables
             );
             console.log(`Query Result: ${JSON.stringify(result.rows)}`);
@@ -354,7 +353,8 @@ oracledb.createPool({
             }
 
             const result = await con.execute(
-                `SELECT USER_NAME, PASSWORD FROM LOGIN JOIN COMPANY ON LOGIN.ID = COMPANY.COM_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                `SELECT USER_NAME, PASSWORD, COM_ID as "user_id"
+                FROM LOGIN JOIN COMPANY ON LOGIN.ID = COMPANY.COM_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
                 { username, password } // Named bind variables
             );
             console.log(`Query Result: ${JSON.stringify(result.rows)}`);
@@ -1001,7 +1001,7 @@ oracledb.createPool({
             console.log(`Query Result: `, result);
             res.send("Added to My List successfully");
             console.log("Added to My List successfully");
-            
+
     
         } catch (err) {
             console.error("Error during database query:", err);
@@ -1207,19 +1207,3 @@ oracledb.createPool({
 }).catch(err => {
     console.error('Error starting connection pool', err);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
