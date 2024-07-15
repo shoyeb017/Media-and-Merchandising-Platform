@@ -24,6 +24,8 @@
     "react-multi-carousel": "^2.8.5",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.24.1",
+    "react-toastify": "^10.0.5",
+    "sweetalert2": "^11.12.2",
     "uuid": "^10.0.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-import styles from './Login.module.css';
+import Swal from 'sweetalert2'
 
 const Login = ({ setUserType }) => {
   const [username, setUsername] = useState('');
@@ -36,7 +36,13 @@ const Login = ({ setUserType }) => {
 
           navigate(`/${username}/home`);
         } else {
-          alert('Invalid credentials');
+          console.log('Invalid credentials');
+          Swal.fire({
+            title: 'Invalid credentials!',
+            text: 'Please enter valid credentials',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          })
         }
       }
       catch (error) {
