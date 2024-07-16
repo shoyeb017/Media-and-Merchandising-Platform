@@ -5,6 +5,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from "uuid";
 import Footer from '../user/common/Footer.jsx';
 import { storage } from '../../firebase';
+import Swal from 'sweetalert2'
 
 const CompanyRegistration = () => {
   const [formData, setFormData] = useState({
@@ -66,7 +67,13 @@ const CompanyRegistration = () => {
     // Check if username already exists
     const usernameExists = await checkUsernameExists(formData.username);
     if (usernameExists) {
-      alert('Username already exists. Please choose a different username.');
+      console.log('Username already exists.');
+      Swal.fire({
+        title: 'Username already exists!',
+        text: 'Please choose a different username.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      })
       return;
     }
 
