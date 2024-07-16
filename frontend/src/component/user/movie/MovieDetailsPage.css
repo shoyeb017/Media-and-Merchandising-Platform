@@ -312,7 +312,7 @@
 
 
 
-  .discussion-section {
+  .discussions-section {
     width: 50%;
     padding-left: 100px;
     margin-top: 150px;
@@ -339,10 +339,10 @@
     border-radius: 10px;
   }
 
-  .discussion-name{
-    width: 97%;
+  .add-discussion input[type="text"] {
+    width: 100%;
     padding: 5px 10px;
-    margin: 10px 0;
+    margin: 10px 0px;
     border-radius: 5px;
     border: 1px solid #ffdd95;
     background-color: #505053;

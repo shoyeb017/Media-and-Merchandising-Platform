@@ -14,6 +14,15 @@ const ReviewCard = ({ review }) => {
     );
 };
 
+const DiscussionCard = ({ discussion }) => {
+    return (
+        <div className="discussion-card">
+            <h4 className="discussion-topic">{discussion.topic}</h4>
+            <p className="discussion-desc">{discussion.description}</p>
+        </div>
+    );
+};
+
 const MovieDetailsPage = () => {
     const { mediaID } = useParams();
     const [movieDetails, setMovieDetails] = useState(null);
@@ -21,6 +30,8 @@ const MovieDetailsPage = () => {
     const [planToWatchList, setPlanToWatchList] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
+    const [discussions, setDiscussions] = useState([]);
+    const [newDiscussion, setNewDiscussion] = useState({ topic: '', description: '' });
 
     const userId = localStorage.getItem('user_id');
 
@@ -94,6 +105,15 @@ const MovieDetailsPage = () => {
             setNewReview({ name: '', description: '', rating: 0 });
         } else {
             alert('Please fill out all fields and provide a rating.');
+        }
+    };
+
+    const handleAddDiscussion = () => {
+        if (newDiscussion.topic && newDiscussion.description) {
+            setDiscussions([...discussions, newDiscussion]);
+            setNewDiscussion({ topic: '', description: '' });
+        } else {
+            alert('Please fill out both topic and description.');
         }
     };
 
@@ -198,6 +218,32 @@ const MovieDetailsPage = () => {
                     <button onClick={handleAddReview}>Submit Review</button>
                 </div>
             </div>
+            {/* Discussions Section */}
+            <div className="discussions-section">
+                <h3 className="discussion-title">Discussions</h3>
+                {discussions.map((discussion, index) => (
+                    <DiscussionCard key={index} discussion={discussion} />
+                ))}
+
+                <div className="add-discussion">
+                    <h4 style={{ color: 'white' }}>Add a Discussion</h4>
+                    <input
+                        type="text"
+                        placeholder="Topic"
+                        value={newDiscussion.topic}
+                        onChange={(e) => setNewDiscussion({ ...newDiscussion, topic: e.target.value })}
+                        className="discussion-name"
+                    />
+                    <textarea
+                        placeholder="Discussion Description"
+                        value={newDiscussion.description}
+                        onChange={(e) => setNewDiscussion({ ...newDiscussion, description: e.target.value })}
+                        className="discussion-des"
+                    />
+                    <button onClick={handleAddDiscussion}>Submit Discussion</button>
+                </div>
+            </div>
+
         </div>
     );
 };
