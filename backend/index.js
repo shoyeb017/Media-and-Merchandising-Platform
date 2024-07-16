@@ -154,6 +154,153 @@ oracledb.createPool({
     );
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR CHECK USERNAME EXIST USER REGISTRATION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/registration/user/check-username', async (req, res) => {
+        const { username } = req.body;
+    
+        console.log('Received username check request:', username);
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            console.log('Checking username availability:', username);
+    
+            const checkUserResult = await con.execute(
+                `SELECT COUNT(*) AS count FROM USERS WHERE USER_NAME = :username`,
+                { username }
+            );
+            console.log('Query Result: ${JSON.stringify(checkUserResult.rows)}');
+    
+            const userCount = checkUserResult.rows[0].COUNT;
+    
+            console.log('User Count:', userCount);
+    
+            if (userCount > 0) {
+                res.status(409).send("Username already exists");
+            } else {
+                res.status(200).send("Username available");
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR CHECK USERNAME EXIST COMPANY REGISTRATION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/registration/merch/check-username', async (req, res) => {
+        const { username } = req.body;
+    
+        console.log('Received username check request:', username);
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            console.log('Checking username availability:', username);
+    
+            const checkUserResult = await con.execute(
+                `SELECT COUNT(*) AS count FROM MERCHANDISER WHERE USER_NAME = :username`,
+                { username }
+            );
+            console.log('Query Result: ${JSON.stringify(checkUserResult.rows)}');
+    
+            const userCount = checkUserResult.rows[0].COUNT;
+    
+            console.log('User Count: ${userCount}');
+    
+            if (userCount > 0) {
+                res.status(409).send("Username already exists");
+            } else {
+                res.status(200).send("Username available");
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing connection: ", err);
+                }
+            }
+        }
+    });
+
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR CHECK USERNAME EXIST COMPANY REGISTRATION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/registration/company/check-username', async (req, res) => {
+        const { username } = req.body;
+    
+        console.log('Received username check request:', username);
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            console.log('Checking username availability:', username);
+    
+            const checkUserResult = await con.execute(
+                `SELECT COUNT(*) AS count FROM COMPANY WHERE USER_NAME = :username`,
+                { username }
+            );
+            console.log('Query Result: ${JSON.stringify(checkUserResult.rows)}');
+    
+            const userCount = checkUserResult.rows[0].COUNT;
+    
+            console.log('User Count: ${userCount}');
+    
+            if (userCount > 0) {
+                res.status(409).send("Username already exists");
+            } else {
+                res.status(200).send("Username available");
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing connection: ", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR COMPANY REGISTRATION
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -953,7 +1100,7 @@ oracledb.createPool({
             console.log(`Query Result: `, result);
             res.send("Added to My List successfully");
             console.log("Added to My List successfully");
-            
+
     
         } catch (err) {
             console.error("Error during database query:", err);

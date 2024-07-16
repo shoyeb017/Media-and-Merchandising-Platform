@@ -64,7 +64,7 @@ const CompanyDetailsPage = () => {
         <div className="allsection">
           <div className="section1">
             <img src={company.IMG} alt={company.NAME} className="company-img" />
-          </div>
+          </div> 
           <div className="section2">
             <h2>{company.NAME}</h2>
             <p>{company.DESCRIPTION}</p>
@@ -81,7 +81,7 @@ const CompanyDetailsPage = () => {
           <h3 className="products-title">Advertisement</h3>
           <div className="product-list">
             {Array.isArray(company.productId) && company.productId.map(productId => {
-              const product = products.find(p => p.COM_ID === productId);
+              const product = product.find(p => p.COM_ID === productId);
               if (product) {
                 return <ProductCard key={product.COM_ID} product={product} />;
               }

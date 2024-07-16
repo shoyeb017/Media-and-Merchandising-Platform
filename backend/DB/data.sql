@@ -158,8 +158,8 @@ CREATE TABLE NEWSANDUPDATES(
 CREATE TABLE ROLE(
     ROLE_ID INT NOT NULL,
     NAME VARCHAR2(255),
-    IMG VARCHAR2(255),
-    ROLE_TYPE VARCHAR2(50),
+    IMG VARCHAR2(4000),
+    ROLE_TYPE VARCHAR2(255),
     PRIMARY KEY (ROLE_ID),
     CONSTRAINT ROLE_TYPE_CHECK CHECK (ROLE_TYPE IN ('DIRECTOR', 'PRODUCER', 'WRITER', 'ACTOR', 'ACTRESS'))
 );
@@ -364,7 +364,7 @@ ALTER TABLE NEWSTOMEDIA ADD CONSTRAINT FK_MEDIA_ID_NEWSTOMEDIA FOREIGN KEY (MEDI
 
 
 INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE) 
-            VALUES (1234, 'siifu', 'Sifat Bin Asad', TO_DATE('01/01/1999', 'MM/DD/YYYY'), 'meow@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+            VALUES (1234, 'Siifu', 'Sifat Bin Asad', TO_DATE('01/01/1999', 'MM/DD/YYYY'), 'meow@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
 
 INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
             VALUES (1234, '1234', 'USER', 1234);
@@ -985,57 +985,57 @@ INSERT INTO MEDIA (
     NULL
 );
 
-INSERT INTO MEDIA (
-    MEDIA_ID,
-    TITLE,
-    DESCRIPTION,
-    RATING,
-    TYPE,
-    GENRE,
-    TRAILER,
-    POSTER,
-    DURATION,
-    RELEASE_DATE,
-    EPISODE
-) VALUES (
-    53,
-    'The Notebook',
-    'With almost religious devotion, Duke, a kind octogenarian inmate of a peaceful nursing home, reads daily a captivating story from the worn-out pages of his leather-bound notebook to a fellow female patient. To keep her company, Duke recounts the fascinating love affair between impecunious but poetic country boy Noah and Allie, an affluent city girl. And little by little, Duke unfolds a Southern, lumber-scented summer romance beneath the tall trees of late 1930s North Carolina. Indeed, it seems as if the silent manuscript possesses the unfathomable power to penetrate the opaque clouds that enclose the silver-haired dame; slowly but surely, the enchanted lady becomes immersed in the strangely alluring fairy tale of the young ardent lovers'' highs and lows. But nobody knows what tomorrow holds. Are all summer loves doomed to fail?',
-    8,
-    'MOVIE',
-    'ROMANCE',
-    'https://www.youtube.com/watch?v=BjJcYdEOI0k',
-    'https://m.media-amazon.com/images/M/MV5BNzk0NGU5ZWYtZTI5Ni00NTcwLWJjMzAtN2JmZTA5YTA1YTVlXkEyXkFqcGdeQXVyMzk3NDU4NTU@._V1_FMjpg_UX1000_.jpg',
-    '2h 3m',
-    TO_DATE('06/25/2004', 'MM/DD/YYYY'),
-    NULL
-);
+-- INSERT INTO MEDIA (
+--     MEDIA_ID,
+--     TITLE,
+--     DESCRIPTION,
+--     RATING,
+--     TYPE,
+--     GENRE,
+--     TRAILER,
+--     POSTER,
+--     DURATION,
+--     RELEASE_DATE,
+--     EPISODE
+-- ) VALUES (
+--     53,
+--     'The Notebook',
+--     'With almost religious devotion, Duke, a kind octogenarian inmate of a peaceful nursing home, reads daily a captivating story from the worn-out pages of his leather-bound notebook to a fellow female patient. To keep her company, Duke recounts the fascinating love affair between impecunious but poetic country boy Noah and Allie, an affluent city girl. And little by little, Duke unfolds a Southern, lumber-scented summer romance beneath the tall trees of late 1930s North Carolina. Indeed, it seems as if the silent manuscript possesses the unfathomable power to penetrate the opaque clouds that enclose the silver-haired dame; slowly but surely, the enchanted lady becomes immersed in the strangely alluring fairy tale of the young ardent lovers'' highs and lows. But nobody knows what tomorrow holds. Are all summer loves doomed to fail?',
+--     8,
+--     'MOVIE',
+--     'ROMANCE',
+--     'https://www.youtube.com/watch?v=BjJcYdEOI0k',
+--     'https://m.media-amazon.com/images/M/MV5BNzk0NGU5ZWYtZTI5Ni00NTcwLWJjMzAtN2JmZTA5YTA1YTVlXkEyXkFqcGdeQXVyMzk3NDU4NTU@._V1_FMjpg_UX1000_.jpg',
+--     '2h 3m',
+--     TO_DATE('06/25/2004', 'MM/DD/YYYY'),
+--     NULL
+-- );
 
-INSERT INTO MEDIA (
-    MEDIA_ID,
-    TITLE,
-    DESCRIPTION,
-    RATING,
-    TYPE,
-    GENRE,
-    TRAILER,
-    POSTER,
-    DURATION,
-    RELEASE_DATE,
-    EPISODE
-) VALUES (
-    54,
-    'Chemical Hearts',
-    '17-year-old Henry Page has never been in love. He fancies himself a romantic, but the kind of once-in-a-lifetime love he''s been hoping for just hasn''t happened yet. When he meets transfer student Grace Town on the first day of senior year, all that might be about to change. When Grace and Henry are chosen to co-edit the school paper, he is immediately drawn to the mysterious newcomer. As he learns the heartbreaking secret that has changed her life, he finds himself falling in love with her--or at least the person he thinks she is.',
-    7,
-    'MOVIE',
-    'ROMANCE',
-    'https://www.youtube.com/watch?v=GuS5BZTUVJs',
-    'https://m.media-amazon.com/images/M/MV5BZGFkMDJkOWMtNGI4MS00ZTQ0LWJkMjktYTM2YTQ1MTA3NTRiXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1000_.jpg',
-    '1h 33m',
-    TO_DATE('07/21/2020', 'MM/DD/YYYY'),
-    NULL
-);
+-- INSERT INTO MEDIA (
+--     MEDIA_ID,
+--     TITLE,
+--     DESCRIPTION,
+--     RATING,
+--     TYPE,
+--     GENRE,
+--     TRAILER,
+--     POSTER,
+--     DURATION,
+--     RELEASE_DATE,
+--     EPISODE
+-- ) VALUES (
+--     54,
+--     'Chemical Hearts',
+--     '17-year-old Henry Page has never been in love. He fancies himself a romantic, but the kind of once-in-a-lifetime love he''s been hoping for just hasn''t happened yet. When he meets transfer student Grace Town on the first day of senior year, all that might be about to change. When Grace and Henry are chosen to co-edit the school paper, he is immediately drawn to the mysterious newcomer. As he learns the heartbreaking secret that has changed her life, he finds himself falling in love with her--or at least the person he thinks she is.',
+--     7,
+--     'MOVIE',
+--     'ROMANCE',
+--     'https://www.youtube.com/watch?v=GuS5BZTUVJs',
+--     'https://m.media-amazon.com/images/M/MV5BZGFkMDJkOWMtNGI4MS00ZTQ0LWJkMjktYTM2YTQ1MTA3NTRiXkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_FMjpg_UX1000_.jpg',
+--     '1h 33m',
+--     TO_DATE('07/21/2020', 'MM/DD/YYYY'),
+--     NULL
+-- );
 
 INSERT INTO MEDIA (
     MEDIA_ID,
@@ -3582,6 +3582,372 @@ VALUES (69, 'Mainstream media', 'company69', 'https://e7.pngegg.com/pngimages/68
 
 
 --------------------------------------------------------------------------------------------------------------------------------
+-- INSERT INTO COMPANYHASMEDIA TABLE
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (3, 1);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (4, 1);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (5, 1);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (6, 2);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (6, 3);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (7, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (8, 1);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (9, 3);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (9, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (9, 5);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (10, 3);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (10, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (41, 6);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (44, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (45, 8);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (46, 9);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (47, 3);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (47, 10);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (49, 11);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (51, 11);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (51, 2);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (51, 12);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (55, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (56, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (57, 13);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (59, 11);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (59, 14);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (59, 15);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (61, 16);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (62, 17);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (64, 11);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (65, 18);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (65, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (65, 3);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (65, 19);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (65, 20);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (65, 21);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (66, 22);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (67, 23);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (69, 24);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (70, 25);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (71, 26);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (71, 2);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (72, 2);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (12, 3);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (12, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (13, 27);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (14, 2);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (15, 1);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (16, 2);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (17, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (17, 28);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (18, 29);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (18, 20);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (19, 30);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (20, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (20, 2);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (20, 31);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (21, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (22, 1);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (23, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (24, 3);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (24, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (24, 20);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (25, 3);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (26, 17);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (27, 17);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (76, 32);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (77, 33);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (77, 34);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (28, 35);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (78, 36);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (29, 37);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (80, 38);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (80, 39);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (30, 40);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (81, 41);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (82, 42);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (31, 43);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (58, 44);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (84, 45);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (32, 46);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (85, 47);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (33, 35);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (86, 48);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (87, 33);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (34, 49);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (88, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (89, 50);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (89, 51);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (35, 37);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (90, 4);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (36, 46);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (91, 32);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (92, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (93, 47);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (37, 52);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (94, 53);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (95, 54);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (38, 55);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (96, 56);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (39, 57);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (39, 58);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (40, 59);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (200, 60);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (200, 61);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (201, 62);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (202, 63);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (203, 59);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (204, 18);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (205, 64);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (206, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (207, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (208, 65);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (209, 7);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (211, 66);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (212, 67);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (213, 68);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (214, 69);
+
+INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
+VALUES (215, 7);
+
+
+--------------------------------------------------------------------------------------------------------------------------------
 -- INSERT INTO PRODUCT TABLE
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -3676,3 +4042,1223 @@ INSERT INTO PRODUCTS(
 --                 WHERE USER_ID = '1234'
 --                 AND MEDIA_ID = '1'
 --                 AND STATUS = 'PLAN_TO_WATCH';
+
+
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (1, 'Robert Downey Jr.', 'https://cdn.britannica.com/99/254199-050-98CF4E04/Robert-Downey-JR-UK-premier-Oppenheimer-movie-July-2023.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (2, 'Scarlett Johansson', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Scarlett_Johansson_by_Gage_Skidmore_2_%28cropped%2C_2%29.jpg/640px-Scarlett_Johansson_by_Gage_Skidmore_2_%28cropped%2C_2%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (3, 'Chris Evans', 'https://m.media-amazon.com/images/M/MV5BMWZlMzRkZmYtZTg0My00MGE2LWFhZWQtOTRmZGQxMWY5OTJhXkEyXkFqcGdeQXVyMTMxODA4Njgx._V1_FMjpg_UX1000_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (4, 'Chris Hemsworth', 'https://pyxis.nymag.com/v1/imgs/987/85f/be21bcfc78ac481b5609ae80fe6243992d-chrishemsworth.1x.rsquare.w1400.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (5, 'Anthony Russo', 'https://m.media-amazon.com/images/M/MV5BMTc2NjM5MTM0Ml5BMl5BanBnXkFtZTgwMTY3ODczNjM@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (6, 'Joe Russo', 'https://m.media-amazon.com/images/M/MV5BMTc2NzY1NTY5OF5BMl5BanBnXkFtZTgwNjY3ODczNjM@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (8, 'Cate Blanchett', 'https://upload.wikimedia.org/wikipedia/commons/3/31/Cate_Blanchett_Berlinale_2023_%28cropped%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (9, 'Tessa Thompson', 'https://cdn.britannica.com/97/240397-050-F3870799/Tessa-Thompson-Actress-Paris-Fashion-Week-2020.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (10, 'Taika Waititi', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Taika_Waititi_by_Gage_Skidmore_2.jpg/1200px-Taika_Waititi_by_Gage_Skidmore_2.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (11, 'Eric Pearson', 'https://m.media-amazon.com/images/M/MV5BMDAwYTkxMTAtNjRkYS00ZTI5LWIyMDEtNjU1MjQ2MmE3MWZiXkEyXkFqcGdeQXVyNDM0NDAwOTQ@._V1_FMjpg_UX1000_.jpg', 'WRITER');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (12, 'Benedict Cumberbatch', 'https://m.media-amazon.com/images/M/MV5BMjE0MDkzMDQwOF5BMl5BanBnXkFtZTgwOTE1Mjg1MzE@._V1_FMjpg_UX1000_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (13, 'Rachel McAdams', 'https://m.media-amazon.com/images/M/MV5BMTY5ODcxMDU4NV5BMl5BanBnXkFtZTcwMjAzNjQyNQ@@._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (14, 'Tilda Swinton', 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Tilda_Swinton_Viennale_2018.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (15, 'Benedict Wong', 'https://image.tmdb.org/t/p/w500/yYfLyrC2CE6vBWSJfkpuVKL2POM.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (16, 'Scott Derrickson', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Scott_Derrickson_by_Gage_Skidmore_2.jpg/1200px-Scott_Derrickson_by_Gage_Skidmore_2.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (17, 'Matthew McConaughey', 'https://resizing.flixster.com/EGHx3pWc7PJu9XL5sA-Vv5D-j9s=/218x280/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/44410_v9_bc.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (18, 'Jessica Chastain', 'https://m.media-amazon.com/images/M/MV5BMTU1MDM5NjczOF5BMl5BanBnXkFtZTcwOTY2MDE4OA@@._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (19, 'Anne Hathaway', 'https://variety.com/wp-content/uploads/2024/03/GettyImages-1830881916.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (20, 'Timothée Chalamet', 'https://resizing.flixster.com/-7xX0CigJSaLOzYrjhgDLjqsY-8=/218x280/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/535891_v9_bc.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (21, 'Christopher Nolan', 'https://cdn.britannica.com/37/255737-050-9BB3FEDA/Christopher-Nolan-Movie-film-director-Oppenheimer-UK-premiere-2023.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (22, 'Leonardo DiCaprio', 'https://cdn.britannica.com/65/227665-050-D74A477E/American-actor-Leonardo-DiCaprio-2016.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (23, 'Cillian Murphy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Cillian_Murphy_at_Berlinale_2024%2C_Ausschnitt.jpg/640px-Cillian_Murphy_at_Berlinale_2024%2C_Ausschnitt.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (24, 'Joseph Gordon-Levitt', 'https://image.tmdb.org/t/p/w500/z2FA8js799xqtfiFjBTicFYdfk.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (25, 'Marion Cotillard', 'https://upload.wikimedia.org/wikipedia/commons/5/59/Marion_Cotillard_at_2019_Cannes.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (27, 'Pete Docter', 'https://m.media-amazon.com/images/M/MV5BYzI3M2Y3Y2UtMTVmOC00Y2U4LThhOWItMjcxODdhNTJiNmI1XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (28, 'Amy Poehler', 'https://hips.hearstapps.com/hmg-prod/images/gettyimages-1142603651_cropped.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (29, 'Mindy Kaling', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Mindy_Kaling_by_Claire_Leahy_%28cropped%29.jpg/1200px-Mindy_Kaling_by_Claire_Leahy_%28cropped%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (30, 'Bill Hader', 'https://m.media-amazon.com/images/M/MV5BNTY3MzgwMjE3N15BMl5BanBnXkFtZTcwNjc2MjE3NA@@._V1_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (31, 'Tom Hardy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Tom_Hardy_Locke_Premiere.jpg/640px-Tom_Hardy_Locke_Premiere.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (32, 'Charlize Theron', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Charlize_Theron_in_2017.jpg/1200px-Charlize_Theron_in_2017.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (33, 'Nicholas Hoult', 'https://goldenglobes.com/wp-content/uploads/2023/10/Nicholas_Hoult042219_0-Magnus-Sundholm.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (34, 'Zoë Kravitz', 'https://media.allure.com/photos/6217a011e844b00b21ca2666/1:1/w_3280,h_3280,c_limit/Zoe%20Kravitz%20at%20The%20Batman%20Screening%20in%20London.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (35, 'George Miller', 'https://media.newyorker.com/photos/6643cd2d50edf15e5a28f500/master/pass/Bilger-Interview-GeorgeMiller.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (36, 'Mads Mikkelsen', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mads_Mikkelsen_by_Gage_Skidmore_2.jpg/800px-Mads_Mikkelsen_by_Gage_Skidmore_2.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (37, 'Eddie Redmayne', 'https://image.tmdb.org/t/p/w500/Ll3cAE9RIsSX4cvTi5K1KNQizI.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (38, 'Jude Law', 'https://m.media-amazon.com/images/M/MV5BMTMwOTg5NTQ3NV5BMl5BanBnXkFtZTcwNzM3MDAzNQ@@._V1_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (39, 'Katherine Waterston', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Katherine_Waterston_%2843001990584%29.jpg/170px-Katherine_Waterston_%2843001990584%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (40, 'David Yates', 'https://m.media-amazon.com/images/M/MV5BMTY2NTU4NjY4M15BMl5BanBnXkFtZTYwNjIxOTI1._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (41, 'Sidharth Malhotra', 'https://cms-article.forbesindia.com/media/images/2016/Nov/img_90001_siddharth_malhotrabg.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (42, 'Sonakshi Sinha', 'https://upload.wikimedia.org/wikipedia/commons/9/90/Sonakshi_Sinha_snapped_at_Krome_Studio_in_Bandra_%285%29.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (43, 'Akshaye Khanna', 'https://static.toiimg.com/thumb/msid-91419152,width-400,resizemode-4/91419152.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (44, 'Mandira Bedi', 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Mandira_Bedi_on_Day_2_of_Lakme_Fashion_Week_2017.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (45, 'Abhay Chopra', 'https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/abhay-chopra-29069-05-10-2017-09-15-31.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (46, 'Nawazuddin Siddiqui', 'https://in.bmscdn.com/iedb/artist/images/website/poster/large/nawazuddin_siddiqui_17110_26-07-2016_05-42-25.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (47, 'Radhika Apte', 'https://upload.wikimedia.org/wikipedia/commons/7/75/Radhika_Apte.png', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (48, 'Shivani Raghuvanshi', 'https://c8.alamy.com/comp/2RF9G7N/mumbai-india-01st-aug-2023-indian-film-actress-shivani-raghuvanshi-is-seen-during-the-trailer-launch-of-her-upcoming-web-series-made-in-heaven-season-2-in-mumbai-the-second-season-of-the-web-series-will-return-on-august-10-2023-on-prime-video-photo-by-ashish-vaishnavsopa-imagessipa-usa-credit-sipa-usaalamy-live-news-2RF9G7N.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (49, 'Smita Singh', 'https://static.toiimg.com/thumb/msid-100381153,width-400,resizemode-4/100381153.jpg', 'WRITER');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (50, 'Honey Trehan', 'https://www.thestatesman.com/wp-content/uploads/2023/07/Honey-Trehan.jpeg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (51, 'Aamir Khan', 'https://images.news18.com/ibnlive/uploads/2021/02/1612346460_aamir_khan_4k-2880x1800.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (52, 'Kareena Kapoor Khan', 'https://upload.wikimedia.org/wikipedia/commons/2/29/Kareena_Kapoor_Khan_in_2023_%281%29_%28cropped%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (53, 'Rani Mukerji', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Rani_Mukerji_2009.jpg/220px-Rani_Mukerji_2009.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (55, 'Reema Kagti', 'https://m.media-amazon.com/images/M/MV5BNmEwODFlOTgtNmRhMC00NTMwLTgxOGEtZDIwZTM4YzQ5OWFkXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (56, 'Anthony Hopkins', 'https://m.media-amazon.com/images/M/MV5BMTg5ODk1NTc5Ml5BMl5BanBnXkFtZTYwMjAwOTI4._V1_FMjpg_UX1000_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (57, 'Jodie Foster', 'https://cdn.britannica.com/92/250492-050-13BD1534/Jodie-Foster-attending-the-Taxi-Driver-40th-Anniversary-Screening-Tribeca-Film-Festival.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (58, 'Jonathan Demme', 'https://m.media-amazon.com/images/M/MV5BMTY1NzY0OTQ0OF5BMl5BanBnXkFtZTcwNDY1Njk5Mg@@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (59, 'Thomas Harris', 'https://static01.nyt.com/images/2019/05/21/books/18Harris1/merlin_154859496_bad9ccb5-a380-4bbd-9a51-0655fa356485-superJumbo.jpg', 'WRITER');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (60, 'Ted Levine', 'https://ntvb.tmsimg.com/assets/assets/76236_v9_bb.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (61, 'Rodrigo Cortés', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Premios_Goya_2019_-_Rodrigo_Cort%C3%A9s_%28cropped%29.jpg/1200px-Premios_Goya_2019_-_Rodrigo_Cort%C3%A9s_%28cropped%29.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (62, 'Cillian Murphy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Cillian_Murphy_at_Berlinale_2024%2C_Ausschnitt.jpg/640px-Cillian_Murphy_at_Berlinale_2024%2C_Ausschnitt.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (63, 'Robert De Niro', 'https://cdn.britannica.com/00/213300-050-ADF31CD9/American-actor-Robert-De-Niro-2019.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (64, 'Sigourney Weaver', 'https://parade.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTgwMzIwNzY0MDQ0NDEz/0609_sigourneyweavercvr-ftr.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (65, 'Elizabeth Olsen', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Elizabeth_Olsen_by_Gage_Skidmore_2.jpg/1200px-Elizabeth_Olsen_by_Gage_Skidmore_2.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (66, 'John Polson', 'https://resizing.flixster.com/Naq25kY2CJF_WMQJ0rVgAtNgDqw=/218x280/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/87261_v9_bb.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (67, 'Robert De Niro', 'https://cdn.britannica.com/00/213300-050-ADF31CD9/American-actor-Robert-De-Niro-2019.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (68, 'Dakota Fanning', 'https://upload.wikimedia.org/wikipedia/commons/7/73/Dakota_Fanning_SAG_AWARDS_2020.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (69, 'Famke Janssen', 'https://images8.alphacoders.com/489/489170.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (70, 'James Cameron', 'https://media.vanityfair.com/photos/656f89c8710cfd971ca79847/master/pass/vf1223-james-cameron.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (71, 'Kate Winslet', 'https://cdn.britannica.com/38/130638-050-DBCE19EE/Kate-Winslet.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (73, 'Billy Zane', 'https://image.tmdb.org/t/p/original/7CBwxqE00aZAAEBaRkapylgdi15.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (74, 'Vanessa Caswill', 'https://pbs.twimg.com/profile_images/1692568181364146176/qbw7Lh9U_400x400.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (75, 'Haley Lu Richardson', 'https://m.media-amazon.com/images/M/MV5BNDNhMTgwNzAtYzNiZC00MTRiLTg1M2ItYjA1OTNmZjRiYWU3XkEyXkFqcGdeQXVyMjQwMDg0Ng@@._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (76, 'Ben Hardy', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Ben_Hardy_by_Gage_Skidmore.jpg/800px-Ben_Hardy_by_Gage_Skidmore.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (77, 'Jameela Jamil', 'https://upload.wikimedia.org/wikipedia/commons/2/22/Jameela_Jamil_at_the_2018_Comic-Con_International_%2842913091955%29_%28cropped%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (78, 'Ben Young', 'https://images.squarespace-cdn.com/content/v1/56d5fb4b59827ed3dba79aaa/1597866849161-D0N4KCKDUVTGQ81LFQFY/ben.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (79, 'Michael Peña', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Michael_Pe%C3%B1a_TIFF_2015.jpg/800px-Michael_Pe%C3%B1a_TIFF_2015.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (80, 'Lizzy Caplan', 'https://m.media-amazon.com/images/M/MV5BMjA1MDgxNDU0Nl5BMl5BanBnXkFtZTgwNjk4NTgwMTE@._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (81, 'Israel Broussard', 'https://people.com/thmb/-04Hy6fqgcLoWjcflgvQWZVPwg0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(693x0:695x2)/israel-broussard-ac0eea0aed694a209522acfd106a83e6.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (82, 'Jon Watts', 'https://m.media-amazon.com/images/M/MV5BNzg2NjA5ODAyMV5BMl5BanBnXkFtZTgwODAzMjkxNDE@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (83, 'Tom Holland', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tom_Holland_by_Gage_Skidmore.jpg/640px-Tom_Holland_by_Gage_Skidmore.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (84, 'Zendaya', 'https://www.hollywoodreporter.com/wp-content/uploads/2024/04/Zendaya-Challengers-LA-Premiere-GettyImages-2147868269-H-2024.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (85, 'Michael Keaton', 'https://cdn.britannica.com/45/188645-050-97905C5A/Michael-Keaton-2015.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (86, 'James Cameron', 'https://media.vanityfair.com/photos/656f89c8710cfd971ca79847/master/pass/vf1223-james-cameron.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (87, 'Zoe Saldana', 'https://cdn.britannica.com/17/215017-050-0E006005/American-actress-Zoe-Saldana-2018.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (88, 'Sam Worthington', 'https://image.tmdb.org/t/p/w500/mflBcox36s9ZPbsZPVOuhf6axaJ.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (89, 'Sigourney Weaver', 'https://parade.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTgwMzIwNzY0MDQ0NDEz/0609_sigourneyweavercvr-ftr.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (90, 'Takashi Shimizu', 'https://static.tvtropes.org/pmwiki/pub/images/takashi_shimizu_5ab68fee_f5b0_44fe_aae8_141a49e8372_resize_750.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (91, 'Yuya Ozeki', 'https://images.mubicdn.net/images/cast_member/123660/cache-599138-1603000197/image-w856.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (92, 'Takako Fuji', 'https://m.media-amazon.com/images/M/MV5BMzMxNzEwOTg4NV5BMl5BanBnXkFtZTcwNDAxMTQyOA@@._V1_FMjpg_UX1000_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (93, 'Hideo Nakata', 'https://m.media-amazon.com/images/M/MV5BM2UxYTY4ZTItYjAzMi00ZmU4LWJlMDAtOWFlYmZmMzhlYjBiXkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_QL75_UY207_CR87,0,140,207_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (94, 'Nanako Matsushima', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Nanako_Matsushima_in_2010_10.jpg/220px-Nanako_Matsushima_in_2010_10.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (95, 'Hiroyuki Sanada', 'https://media.vanityfair.com/photos/5b021ca9c3c368138beb8c0e/1:1/w_960,h_960,c_limit/westworld-musashi-hiroyuki.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (96, 'Rie Ino''o', 'https://image.tmdb.org/t/p/w500/xh494gyErPfHDwGJPQUiyba9kIY.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (97, 'Banjong Pisanthanakun', 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Banjong_Pisanthanakun_at_MTV_Onair_Live.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (98, 'Parkpoom Wongpoom', 'https://alchetron.com/cdn/parkpoom-wongpoom-fd6e0d7f-7096-42e3-b8aa-b86bb4de78d-resize-750.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (99, 'Ananda Everingham', 'https://i.mydramalist.com/wvzoA_5f.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (100, 'Natthaweeranuch Thongmee', 'https://i.mydramalist.com/rN04Ep_5c.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (101, 'Tobe Hooper', 'https://m.media-amazon.com/images/M/MV5BMTM0NzgyOTczMV5BMl5BanBnXkFtZTYwOTU2Nzcz._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (102, 'Heather O''Rourke', 'https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/Heather_O%27Rourke.jpeg/220px-Heather_O%27Rourke.jpeg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (103, 'JoBeth Williams', 'https://c8.alamy.com/comp/E64WXK/beverly-hills-california-usa-14th-aug-2014-jobeth-williams-arrives-E64WXK.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (104, 'Dominique Dunne', 'https://i.pinimg.com/736x/55/75/42/5575427fc220ee1bf70b276af29cdd62.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (105, 'Sean Durkin', 'https://upload.wikimedia.org/wikipedia/commons/4/40/Sean_Durkin_%28portrait%29.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (106, 'Zac Efron', 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Zac_Efron_at_the_Baywatch_Red_Carpet_Premiere_Sydney_Australia.jpg/800px-Zac_Efron_at_the_Baywatch_Red_Carpet_Premiere_Sydney_Australia.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (107, 'Lily James', 'https://goldenglobes.com/wp-content/uploads/2023/10/Lily-James-GettyImages-1422627664.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (108, 'Jeremy Allen White', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Jeremy_Allen_White%2C_AT%26T_Center%2C_2013.jpg/640px-Jeremy_Allen_White%2C_AT%26T_Center%2C_2013.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (109, 'Kabir Khan', 'https://upload.wikimedia.org/wikipedia/commons/5/51/Kabir_Khan_at_IFFI_2022.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (110, 'Kartik Aaryan', 'https://upload.wikimedia.org/wikipedia/commons/5/52/Kartik_Aaryan_in_2022.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (111, 'Palak Lalwani', 'https://www.gethucinema.com/wp-content/uploads/2023/10/PalakLalwani-25-768x957.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (112, 'Bhuvan Arora', 'https://m.media-amazon.com/images/M/MV5BNmQ2MWQyYzctZWUxOC00ODY4LWE4MGEtNmVlZmZjM2IwNWViXkEyXkFqcGdeQXVyMTE1MTYxNDAw._V1_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (113, 'George Clooney', 'https://ca-times.brightspotcdn.com/dims4/default/4bd7049/2147483647/strip/true/crop/3526x2343+0+0/resize/1200x797!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fe7%2F9a%2Fc6cf99e04db2842d833975a9c398%2Fla-premiere-of-the-boys-in-the-boat-92153.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (114, 'Callum Turner', 'https://m.media-amazon.com/images/M/MV5BZWJmNGRlMGMtZDlkMC00NjYxLWE2OGEtMzE1MDllN2IwYzFhXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (115, 'Hadley Robinson', 'https://www.hollywoodreporter.com/wp-content/uploads/2022/04/GettyImages-1377220527-H-2022.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (116, 'Michael Mann', 'https://pyxis.nymag.com/v1/imgs/1fc/227/ceedb206db8b98938b0c6d1e70fd2c7c9e-MICHAEL-MANN-AMANDA-DEMME-NY-MAG-24638-F.rvertical.w570.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (117, 'Adam Driver', 'https://media.gq-magazine.co.uk/photos/5d138d39b6fee96334c9d921/4:3/w_1704,h_1278,c_limit/adamDriverstarwars.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (118, 'Penélope Cruz', 'https://i.abcnewsfe.com/a/2e0c575c-cc96-480d-86a9-77f29924ac05/penelope-cruz-rt-gmh-240118_1705590269793_hpMain.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (119, 'Shailene Woodley', 'https://upload.wikimedia.org/wikipedia/commons/3/30/Shailene_Woodley_2018_%28cropped%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (120, 'Gabriel Leone', 'https://m.media-amazon.com/images/M/MV5BYjhhNGU0NTYtNGY0YS00OGQxLThlZDAtZWE1ZmZkNDVhOWVmXkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_QL75_UX500_CR0,0,500,281_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (121, 'Alfred Hitchcock', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Hitchcock%2C_Alfred_02.jpg/640px-Hitchcock%2C_Alfred_02.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (122, 'Anthony Perkins', 'https://m.media-amazon.com/images/M/MV5BMTIzMTUyMTYxM15BMl5BanBnXkFtZTYwNzE5OTI2._V1_FMjpg_UX1000_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (123, 'Janet Leigh', 'https://media.vanityfair.com/photos/651aeb5b40ecae898abc5128/9:16/w_756,h_1344,c_limit/Janet%20Leigh-Tony%20Curtis.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (124, 'Roman Polanski', 'https://upload.wikimedia.org/wikipedia/commons/0/06/Roman_Polanski_2011_2.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (125, 'Faye Dunaway', 'https://m.media-amazon.com/images/M/MV5BMTk4OTU5MDY0OV5BMl5BanBnXkFtZTYwNTc0MTM1._V1_FMjpg_UX1000_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (126, 'Diane Ladd', 'https://image.tmdb.org/t/p/w235_and_h235_face/l09hDywACsXFkmSy7d8V2YJiRNW.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (127, 'Perry Lopez', 'https://i.ebayimg.com/images/g/aRIAAOSwPetkAoG8/s-l1200.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (128, 'Greta Gerwig', 'https://cdn.britannica.com/89/213489-050-13BB1CF2/American-actress-director-screenwriter-Greta-Gerwig-2019.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (129, 'Margot Robbie', 'https://people.com/thmb/HjGBbtW9gVBaSs9ywDRL4yzff5A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(717x306:719x308)/Margot-Robbie-attends-the-2024-Breakthrough-Prize-Ceremony-041624-1-600b6c4710f14e569060b23c6dd4004f.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (130, 'Ryan Gosling', 'https://upload.wikimedia.org/wikipedia/commons/6/62/GoslingBFI081223_%2822_of_30%29_%2853388157347%29_%28cropped%29.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (131, 'Adil El Arbi', 'https://m.media-amazon.com/images/M/MV5BNTk4ODJmM2QtMjA3YS00MjU4LThhNmQtNjZhMDkzMzU1MzI2L2ltYWdlXkEyXkFqcGdeQXVyNTAyNDQ2NjI@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (132, 'Bilall Fallah', 'https://upload.wikimedia.org/wikipedia/commons/7/75/Bilall_Fallah_%282018%29.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (133, 'Will Smith', 'https://goldenglobes.com/wp-content/uploads/2023/10/will-smith-c-hfpa-2016.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (134, 'Jacob Scipio', 'https://guyanachronicle.com/wp-content/uploads/elementor/thumbs/jacob-qpz32593bj7cr4odamyy4kjd0xpwc9in9o4b7dk0dq.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (135, 'Martin Lawrence', 'https://cdn.britannica.com/01/219501-050-42074723/Martin-Lawrence-2020.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (136, 'Mark Waters', 'https://image.tmdb.org/t/p/w500/afouy66zeJ1hn7fcjLp8QkcTeQJ.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (137, 'Lindsay Lohan', 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Lindsay_Lohan_in_2023_%28cropped%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (139, 'Tina Fey', 'https://m.media-amazon.com/images/M/MV5BNTJiOWYxMzQtNWZmYS00ZmNmLWE1ODktMGM3ZTkyYmE1YTBkXkEyXkFqcGdeQXVyMTAwOTg0NzU5._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (140, 'Tim Miller', 'https://www.hollywoodreporter.com/wp-content/uploads/2019/11/us_film_director_tim_miller_-_getty_-_h_2019_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (141, 'Ryan Reynolds', 'https://m.media-amazon.com/images/M/MV5BODFmN2VmZmEtYTRjZi00ZjY1LTgxYjQtODMyNDI3ZDk4ZTJiXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (142, 'Morena Baccarin', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Morena_Baccarin_by_Gage_Skidmore_2.jpg/1200px-Morena_Baccarin_by_Gage_Skidmore_2.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (143, 'Gina Carano', 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Gina_Carano_Photo_Op_GalaxyCon_Richmond_2024.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (144, 'Ed Skrein', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Ed_Skrein_by_Gage_Skidmore.jpg/1200px-Ed_Skrein_by_Gage_Skidmore.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (145, 'Robert Zemeckis', 'https://image.tmdb.org/t/p/w500/lPYDQ5LYNJ12rJZENtyASmVZ1Ql.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (146, 'Tom Hanks', 'https://m.media-amazon.com/images/M/MV5BMTQ2MjMwNDA3Nl5BMl5BanBnXkFtZTcwMTA2NDY3NQ@@._V1_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (147, 'Robin Wright', 'https://www.emmys.com/sites/default/files/Robin-Wright-bio-450x600.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (148, 'Frank Darabont', 'https://m.media-amazon.com/images/M/MV5BNjk0MTkxNzQwOF5BMl5BanBnXkFtZTcwODM5OTMwNA@@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (149, 'Morgan Freeman', 'https://cdn.britannica.com/40/144440-050-DA828627/Morgan-Freeman.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (150, 'Tim Robbins', 'https://m.media-amazon.com/images/M/MV5BMTI1OTYxNzAxOF5BMl5BanBnXkFtZTYwNTE5ODI4._V1_FMjpg_UX1000_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (151, 'Clancy Brown', 'https://ew.com/thmb/52UVjfSWuqpSm872ms472fyErko=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1175128929-5eb1df7303dc4cb6adc2e99763b265cd.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (152, 'Quentin Tarantino', 'https://cdn.britannica.com/81/220481-050-55413025/Quentin-Tarantino-2020.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (153, 'John Travolta', 'https://upload.wikimedia.org/wikipedia/commons/d/d1/John_T_color_01.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (154, 'Samuel L. Jackson', 'https://ca-times.brightspotcdn.com/dims4/default/63248d7/2147483647/strip/true/crop/3803x4754+0+0/resize/2000x2500!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fbc%2F99%2Fade2b1354ed1962e527ea82eaebf%2F964075-env-samuel-l-jackson-cove-002-copy.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (155, 'Uma Thurman', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Uma_Thurman_2014_%28cropped%29.jpg/800px-Uma_Thurman_2014_%28cropped%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (156, 'Peter Jackson', 'https://ca-times.brightspotcdn.com/dims4/default/d53170d/2147483647/strip/true/crop/4441x5555+0+0/resize/1200x1501!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F81%2Fe8%2Ff9eafacb4341816dc8f891d46941%2Fgettyimages-1147233383.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (157, 'Elijah Wood', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Elijah_Wood_%2847955397556%29_%28cropped%29.jpg/640px-Elijah_Wood_%2847955397556%29_%28cropped%29.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (158, 'Ian McKellen', 'https://image.tmdb.org/t/p/w500/5cnnnpnJG6TiYUSS7qgJheUZgnv.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (160, 'Orson Welles', 'https://media.vanityfair.com/photos/54caa718494254fc0996667e/master/w_2560%2Cc_limit/image.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (161, 'Joseph Cotten', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Joseph_Cotten_-_1952.jpg/240px-Joseph_Cotten_-_1952.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (162, 'Dorothy Comingore', 'https://m.media-amazon.com/images/M/MV5BMTU4NjcwNTU5Ml5BMl5BanBnXkFtZTcwMDI5NDYwOA@@._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (163, 'Juan Carlos Fresnadillo', 'https://m.media-amazon.com/images/M/MV5BMTUyOTcyNjk4N15BMl5BanBnXkFtZTgwOTU5OTA5OTE@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (164, 'Millie Bobby Brown', 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Millie_Bobby_Brown_-_MBB_-_Portrait_1_-_SFM5_-_July_10%2C_2022_at_Stranger_Fan_Meet_5_People_Convention_%28cropped%29.jpg/800px-Millie_Bobby_Brown_-_MBB_-_Portrait_1_-_SFM5_-_July_10%2C_2022_at_Stranger_Fan_Meet_5_People_Convention_%28cropped%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (165, 'Nick Robinson', 'https://upload.wikimedia.org/wikipedia/commons/3/34/Nick_Robinson_interview_2018_left.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (166, 'Shohreh Aghdashloo', 'https://m.media-amazon.com/images/M/MV5BZDI0M2Q1NzYtYzIxNy00MWE4LTg4NDgtOWRhZDdkYTAxZTBhXkEyXkFqcGdeQXVyNTY3MzA5MzA@._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (167, 'Bill Condon', 'https://pearlanddean.com/wp-content/uploads/2021/07/uuid3ff381e2-04a6-456d-864b-2f5147929c82groupId10139t1625746046549.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (168, 'Emma Watson', 'https://m.media-amazon.com/images/M/MV5BMTQ3ODE2NTMxMV5BMl5BanBnXkFtZTgwOTIzOTQzMjE@._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (169, 'Dan Stevens', 'https://m.media-amazon.com/images/M/MV5BMTY0NTY5OTI2MF5BMl5BanBnXkFtZTgwNDkzMzIxMzE@._V1_QL75_UY207_CR5,0,140,207_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (170, 'Luke Evans', 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Luke_Evans_in_2018_%28cropped_4%29.jpg/800px-Luke_Evans_in_2018_%28cropped_4%29.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (171, 'Paul Feig', 'https://m.media-amazon.com/images/M/MV5BNjUyODUyODQzM15BMl5BanBnXkFtZTcwNzM3MjE3NA@@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (172, 'Sophia Anne Caruso', 'https://m.media-amazon.com/images/M/MV5BNmY5MjM1YzMtZWVjYS00OTY0LWE1YzgtZjRmODBiNDYzNDU5XkEyXkFqcGdeQXVyMjQyMjMwODM@._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (173, 'Sofia Wylie', 'https://cdns-images.dzcdn.net/images/artist/36779fe4262e4a5c575ec0b454643334/1900x1900-000000-80-0-0.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (174, 'Jamie Flatters', 'https://ntvb.tmsimg.com/assets/assets/1095336_v9_aa.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (175, 'Chris Columbus', 'https://m.media-amazon.com/images/M/MV5BMTY2MTYzNzUyNl5BMl5BanBnXkFtZTYwMDI0NzA0._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (176, 'Daniel Radcliffe', 'https://image.tmdb.org/t/p/w500/iPg0J9UzAlPj1fLEJNllpW9IhGe.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (178, 'Rupert Grint', 'https://m.media-amazon.com/images/M/MV5BMTM3Zjk0YzgtZjk3Mi00NGZiLThmYzUtZWRkN2E4NWQ3M2E1XkEyXkFqcGdeQXVyMzQ3Nzk5MTU@._V1_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (179, 'Andrés Muschietti', 'https://image.tmdb.org/t/p/w235_and_h235_face/mzOMGWzqFFLqIqa2WkDv5I1IxHE.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (180, 'Ezra Miller', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Ezra_Miller_by_Gage_Skidmore_2.jpg/1200px-Ezra_Miller_by_Gage_Skidmore_2.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (181, 'Michael Keaton', 'https://m.media-amazon.com/images/M/MV5BZmNiZmMzN2MtOTNkMy00YjA1LTg4NzktMWI4Njg1NzI3ODAyXkEyXkFqcGdeQXVyNzg5MzIyOA@@._V1_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (182, 'Sasha Calle', 'https://m.media-amazon.com/images/M/MV5BYjQ2NGRkZjItMWQ4YS00ZGUwLWIwNzEtNmE3NjQ3MDQ2NjFmXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (183, 'Ben Affleck', 'https://m.media-amazon.com/images/M/MV5BMzczNzNiMDAtMmUzZS00MTkwLWIwOTYtNmYyNjg3MTVkNThhXkEyXkFqcGdeQXVyMjA4MjI5MTA@._V1_FMjpg_UX1000_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (184, 'Makoto Shinkai', 'https://m.media-amazon.com/images/M/MV5BN2IxMTg5YmEtMWQ5NC00NDQyLTliOWQtMjkxYTU5NDFmMmQyXkEyXkFqcGdeQXVyMTExNDQ2MTI@._V1_.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (185, 'Ryuunosuke Kamiki', 'https://asianwiki.com/images/c/c6/Ryunosuke_Kamiki-p1.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (186, 'Masami Nagasawa', 'https://i.mydramalist.com/Bd7goq_5c.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (187, 'Alison Brie', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Alison_Brie_by_Gage_Skidmore.jpg/800px-Alison_Brie_by_Gage_Skidmore.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (188, 'Lee Pace', 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Lee_Pace_Paris_Fashion_Week_Spring_Summer_2020.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (189, 'Kotaro Daigo', 'https://image.tmdb.org/t/p/w500/qtkmRQthVbReDZruVN1YlBlQA8W.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (190, 'Catriona McKenzie', 'https://pbs.twimg.com/profile_images/1669114877112365056/5HYMsuKR_400x400.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (191, 'Antony Starr', 'https://upload.wikimedia.org/wikipedia/commons/2/21/Antony_Starr_Photo_Op_GalaxyCon_Oklahoma_City_2024.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (192, 'Karl Urban', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Karl_Urban_SXSW_2022_%28cropped%29.jpg/640px-Karl_Urban_SXSW_2022_%28cropped%29.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (193, 'Jack Quaid', 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Jack_Quaid_by_Gage_Skidmore.jpg/1200px-Jack_Quaid_by_Gage_Skidmore.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (194, 'Alan Taylor', 'https://upload.wikimedia.org/wikipedia/commons/5/54/Alan_Taylor_2013_crop.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (195, 'Emilia Clarke', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Emilia_Clarke_Dior_Rose_des_Vents.jpg/640px-Emilia_Clarke_Dior_Rose_des_Vents.jpg', 'ACTRESS');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (196, 'Kit Harington', 'https://upload.wikimedia.org/wikipedia/commons/3/32/Kit_harrington_by_sachyn_mital_%28cropped_2%29.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (197, 'Peter Dinklage', 'https://hips.hearstapps.com/hmg-prod/images/peter-dinklage-20787107-1-402.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (198, 'Hayato Date', 'https://cdn.myanimelist.net/images/voiceactors/2/10555.jpg', 'DIRECTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (199, 'Junko Takeuchi', 'https://m.media-amazon.com/images/M/MV5BNzIzNmM5OGEtMGZiYS00ZTg4LThhYmMtNjYwZDhlNzMwZGIwXkEyXkFqcGdeQXVyNDQxNjcxNQ@@._V1_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE) 
+VALUES (200, 'Chie Nakamura', 'https://image.tmdb.org/t/p/w500/evB6vKUbm0CKgBcgikPeFXdwd29.jpg', 'ACTRESS');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (3, 1);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (3, 2);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (3, 3);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (3, 4);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (3, 5);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (3, 6);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (4, 4);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (4, 8);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (4, 9);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (4, 10);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (4, 11);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (5, 12);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (5, 13);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (5, 14);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (5, 15);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (5, 16);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (6, 17);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (6, 18);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (6, 19);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (6, 20);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (6, 21);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (7, 22);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (7, 23);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (7, 24);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (7, 25);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (7, 21);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (8, 27);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (8, 28);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (8, 29);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (8, 30);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (9, 31);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (9, 32);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (9, 33);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (9, 34);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (9, 35);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (10, 36);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (10, 37);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (10, 38);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (10, 39);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (10, 40);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (41, 41);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (41, 42);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (41, 43);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (41, 44);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (41, 45);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (44, 46);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (44, 47);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (44, 48);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (44, 49);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (44, 50);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (45, 51);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (45, 52);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (45, 53);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (45, 46);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (45, 55);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (46, 56);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (46, 57);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (46, 58);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (46, 59);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (46, 60);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (47, 61);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (47, 62);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (47, 63);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (47, 64);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (47, 65);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (49, 66);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (49, 67);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (49, 68);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (49, 69);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (51, 70);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (51, 71);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (51, 22);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (51, 73);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (55, 74);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (55, 75);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (55, 76);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (55, 77);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (56, 78);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (56, 79);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (56, 80);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (56, 81);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (57, 82);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (57, 83);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (57, 84);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (57, 85);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (59, 86);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (59, 87);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (59, 88);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (59, 89);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (61, 90);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (61, 91);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (61, 92);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (62, 93);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (62, 94);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (62, 95);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (62, 96);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (64, 97);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (64, 98);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (64, 99);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (64, 100);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (65, 101);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (65, 102);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (65, 103);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (65, 104);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (66, 105);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (66, 106);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (66, 107);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (66, 108);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (67, 109);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (67, 110);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (67, 111);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (67, 112);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (69, 113);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (69, 114);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (69, 115);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (70, 116);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (70, 117);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (70, 118);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (70, 119);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (70, 120);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (71, 121);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (71, 122);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (71, 123);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (72, 124);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (72, 125);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (72, 126);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (72, 127);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (12, 128);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (12, 129);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (12, 130);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (13, 131);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (13, 132);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (13, 133);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (13, 134);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (13, 135);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (14, 136);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (14, 137);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (14, 13);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (14, 139);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (15, 140);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (15, 141);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (15, 142);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (15, 143);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (15, 144);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (16, 145);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (16, 146);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (16, 147);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (17, 148);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (17, 149);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (17, 150);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (17, 151);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (18, 152);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (18, 153);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (18, 154);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (18, 155);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (19, 156);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (19, 157);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (19, 158);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (19, 8);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (20, 160);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (20, 161);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (20, 162);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (21, 163);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (21, 164);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (21, 165);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (21, 166);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (22, 167);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (22, 168);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (22, 169);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (22, 170);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (23, 171);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (23, 172);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (23, 173);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (23, 174);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (24, 175);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (24, 176);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (24, 168);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (24, 178);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (25, 179);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (25, 180);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (25, 181);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (25, 182);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (25, 183);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (26, 184);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (26, 185);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (26, 186);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (27, 184);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (27, 187);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (27, 188);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (27, 189);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (76, 190);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (76, 191);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (76, 192);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (76, 193);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (77, 194);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (77, 195);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (77, 196);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (77, 197);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (28, 198);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (28, 199);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (28, 200);
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM ROLE, MEDIAHASROLE where ROLE.ROLE_ID = MEDIAHASROLE.ROLE_ID 
+and MEDIA_ID=3;
+
+
+
+
+
+
+
+
+
+
+

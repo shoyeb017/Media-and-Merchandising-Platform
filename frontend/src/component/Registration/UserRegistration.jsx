@@ -35,6 +35,31 @@ const UserRegistration = () => {
     );
   };
 
+
+  const checkUsernameExists = async (username) => {
+    try {
+      console.log('Checking username:', username);
+
+      const response = await fetch('http://localhost:5000/registration/user/check-username', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username }), // Send username as an object
+      });
+      if (response.status === 409) {
+        console.log('Username already exists.');
+        return true;
+      }
+      console.log('Username is available.');
+      return false;
+    } catch (error) {
+      console.error('Error checking username:', error);
+      return false;
+    }
+  }; 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     for (const key in formData) {
@@ -42,6 +67,13 @@ const UserRegistration = () => {
         alert(`Please fill in the ${key} field.`);
         return;
       }
+    }
+
+
+    const usernameExists = await checkUsernameExists(formData.username);
+    if (usernameExists) {
+      alert('Username already exists. Please choose a different username.');
+      return;
     }
   
     try {
