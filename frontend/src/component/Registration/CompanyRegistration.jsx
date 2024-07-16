@@ -54,7 +54,7 @@ const CompanyRegistration = () => {
     e.preventDefault();
     for (const key in formData) {
       if (formData[key] === '' && key !== 'imageUrl') {
-        alert(`Please fill in the ${key} field.`);
+        alert('Please fill in the ${key} field.');
         return;
       }
     }
@@ -79,7 +79,7 @@ const CompanyRegistration = () => {
 
     try {
       // Upload the image and get the URL
-      const imageRef = ref(storage, `company/profile/${imageUpload.name + v4()}`);
+      const imageRef = ref(storage, 'company/profile/${imageUpload.name + v4()}');
       console.log('Uploading image...');
       await uploadBytes(imageRef, imageUpload);
       console.log('Image uploaded successfully.');
