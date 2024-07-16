@@ -567,6 +567,97 @@ oracledb.createPool({
         }
     });
 
+
+        
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for MERCHANDISER PROFILE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/profile/merch', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received MERCHANDISER profile request:', { user_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT * FROM MERCHANDISER WHERE MER_ID = :user_id`,
+                { user_id } // Named bind variables
+            );
+            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+            if (result.rows.length) {
+                res.send(result.rows[0]);
+                console.log("User Data sent");
+            } else {
+                res.status(404).send("User not found");
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for MERCHANDISER PROFILE UPDATE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.post('/profile/merch/update', async (req, res) => {
+        const { user_id, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE } = req.body;
+        console.log('Received Merchandiser profile update request:', { user_id, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE });
+    
+        if (!user_id || !NAME || !DESCRIPTION || !EMAIL || !CITY || !STREET || !HOUSE || !PHONE) {
+        return res.status(400).json({ message: "All fields are required" });
+        }
+    
+        let con;
+        try {
+        con = await pool.getConnection();
+        if (!con) {
+            res.status(500).json({ message: "Connection Error" });
+            return;
+        }
+    
+        const result = await con.execute(
+            `UPDATE MERCHANDISER SET NAME = :NAME, DESCRIPTION = :DESCRIPTION, EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE 
+            WHERE MER_ID = :user_id`,
+            { NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+        );
+        console.log(`Query Result: ${JSON.stringify(result)}`);
+    
+        await con.commit();
+    
+        const updatedProfile = { user_id, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE };
+        res.status(200).json(updatedProfile);
+        console.log("Profile updated successfully");
+    
+        } catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).json({ message: "Internal Server Error" });
+        } finally {
+        if (con) {
+            try {
+            await con.close();
+            } catch (err) {
+            console.error("Error closing database connection: ", err);
+            }
+        }
+        }
+    });
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for COMPANY PROFILE
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

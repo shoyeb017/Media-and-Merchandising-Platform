@@ -4,7 +4,7 @@ import './ProfilePage.css';
 const ProfilePage = () => {
   const [profile, setProfile] = useState({
     NAME: '',
-    DOB: '',
+    DESCRIPTION: '',
     EMAIL: '',
     CITY: '',
     STREET: '',
@@ -16,12 +16,12 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch('http://localhost:5000/profile/user', {
+        const response = await fetch('http://localhost:5000/profile/merch', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ username: localStorage.getItem('username') }),
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
         });
         console.log({response});
         if (response.status === 200) {
@@ -53,12 +53,13 @@ const ProfilePage = () => {
     setIsEditing(false);
 
     try {
-      const response = await fetch('http://localhost:5000/profile/update', {
+      const updatedProfile = { ...profile, user_id: localStorage.getItem('user_id') };
+      const response = await fetch('http://localhost:5000/profile/merch/update', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(profile),
+        body: JSON.stringify(updatedProfile),
       });
 
       if (response.status === 200) {
@@ -86,11 +87,11 @@ const ProfilePage = () => {
         )}
       </div>
       <div className="profile-info">
-        <label>Date of Birth: </label>
+        <label>Description: </label>
         {isEditing ? (
-          <input type="date" name="DOB" value={profile.DOB.split('T')[0]} onChange={handleChange} />
+          <input type="text" name="DESCRIPTION" value={profile.DESCRIPTION} onChange={handleChange} />
         ) : (
-          <span>{profile.DOB.split('T')[0]}</span>
+          <span>{profile.DESCRIPTION}</span>
         )}
       </div>
       <div className="profile-info">
