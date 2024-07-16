@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// import { ref, uploadBytes, getDownloadURL, storage } from '../../../firebase';
-// import { v4 } from "uuid";
+import { ref, uploadBytes, getDownloadURL, storage } from '../../../firebase';
+import { v4 } from "uuid";
 import './MediaForm.css';
 
 // Dummy role data for demonstration
@@ -13,6 +13,8 @@ const dummyRoleData = [
 
 const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Historical', 'Horror', 'Magic',
   'Mystery', 'Psychological', 'Romance', 'Sci-Fi', 'Supernatural', 'Sports', 'Thriller', 'Tragedy'];
+
+const mediaTypes = ['MOVIE', 'TV_SHOW', 'DOCUMENTARY', 'ANIME'];
 
 const MediaForm = () => {
   const [mediaData, setMediaData] = useState({
@@ -51,6 +53,13 @@ const MediaForm = () => {
         return { ...prevData, selectedGenres: [...selectedGenres, genre] };
       }
     });
+  };
+
+  const handleTypeClick = (type) => {
+    setMediaData(prevData => ({
+      ...prevData,
+      type: prevData.type === type ? '' : type
+    }));
   };
 
   const handleImageChange = (e) => {
@@ -127,9 +136,9 @@ const MediaForm = () => {
     }
 
     if (!mediaData.image) {
-        alert('Please upload an image.');
-        return;
-      }
+      alert('Please upload an image.');
+      return;
+    }
 
     const imageRef = ref(storage, `media/${mediaData.image.name + v4()}`);
     await uploadBytes(imageRef, mediaData.image);
@@ -174,9 +183,20 @@ const MediaForm = () => {
             <textarea name="description" value={mediaData.description} onChange={handleChange} rows="4" />
           </div>
 
-          <div className="form-group">
+          <div className="form-group-genre">
             <label>Type:</label>
-            <input type="text" name="type" value={mediaData.type} onChange={handleChange} />
+            <div className="genre-buttons">
+              {mediaTypes.map((type) => (
+                <button
+                  key={type}
+                  type="button"
+                  className={`genre-button ${mediaData.type === type ? 'selected' : ''}`}
+                  onClick={() => handleTypeClick(type)}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="form-group-genre">
