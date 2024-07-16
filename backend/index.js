@@ -915,7 +915,7 @@ oracledb.createPool({
     });
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // ROUTE FOR MEIAD PAGE 
+    // ROUTE FOR MEDIA PAGE 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     
@@ -933,13 +933,23 @@ oracledb.createPool({
             console.log('Received media request:', id);
             const result = await con.execute(
                 `SELECT * FROM MEDIA WHERE MEDIA_ID = :id`,
-                { id } // Named bind variables
+                { id }
             );
             console.log(`Query Result: `, result.rows);
             if (!result.rows.length) {
                 res.status(404).send("Media not found");
                 return;
             }
+
+            const roleResult = await con.execute(
+                `SELECT ROLE_ID, NAME, IMG, ROLE_TYPE 
+                FROM ROLE NATURAL JOIN MEDIAHASROLE 
+                where MEDIA_ID = :id 
+                ORDER by ROLE_TYPE ASC`,
+                { id }
+            );
+            console.log(`Role Query Result: `, roleResult.rows);
+            
     
             const transformData = (data) => {
                 return {
@@ -954,7 +964,7 @@ oracledb.createPool({
                     duration: data.DURATION,
                     genre: data.GENRE ? data.GENRE.split(',').map(g => g.trim()) : [],
                     companyName: 'Example Productions',
-                    role: [],
+                    role: roleResult.rows,
                     news: [],
                     review: []
                 };
