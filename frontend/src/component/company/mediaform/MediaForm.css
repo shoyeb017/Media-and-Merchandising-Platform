@@ -227,9 +227,14 @@
 
 .selected-roles{
   margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
   
 }
 .selected-roles .selected-role{
+  display: inline-flex; 
+  align-items: center;
   color: #ffdd95;
   border: 1px solid #ffdd95;
   padding-left: 5px;

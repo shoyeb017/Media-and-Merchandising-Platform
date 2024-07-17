@@ -4,7 +4,7 @@ import './NewsCard.css';
 const NewsCard = ({ news }) => {
   return (
     <div className="news-card">
-      <h4>{news.title}</h4>
+      <h4>{news.topic}</h4>
       <p>{news.description}</p>
     </div>
   );

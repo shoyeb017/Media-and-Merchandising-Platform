@@ -9,6 +9,24 @@
     margin: auto;
   }
 
+  .trailer-player {
+    width: 100%;
+    height: 500px;
+    margin: 30px auto;
+    border: 2px solid #ffdd95;
+    border-radius: 5px;
+  }
+
+  .trailer-player2 {
+    width: 300px;
+    height: 225px;
+    /* Ensure the player is responsive */
+    max-width: 100%;
+    margin-top: 10px;
+    border: 2px solid #ffdd95;
+    border-radius: 5px;
+  }
+
   /* .movie-details {
     background: url(img/6.jpg);
     background-attachment: fixed;
@@ -310,46 +328,24 @@
     white-space: warp;
   }
 
-
-
-  .discussion-section {
-    width: 50%;
-    padding-left: 100px;
-    margin-top: 150px;
-    margin-left: 540px;
-    margin-right: auto;
-
-
-    color: white;
-  }
-
-  .discussion-title {
-    color: #ffdd95;
-    font-size: 30px;
-    padding: 10px;
-    margin-bottom: 40px;
-    border-right: 5px solid white;
-    text-align: right;
-  }
-
-  .add-discussion {
+  .add-news {
     margin-top: 80px;
     background-color: #505053;
     padding: 15px;
     border-radius: 10px;
   }
 
-  .discussion-name{
-    width: 97%;
+  .add-news input[type="text"] {
+    width: 100%;
     padding: 5px 10px;
-    margin: 10px 0;
+    margin: 10px 0px;
     border-radius: 5px;
     border: 1px solid #ffdd95;
     background-color: #505053;
     color: white;
   }
 
-  .discussion-des {
+  .news-des {
     width: 97%;
     padding: 10px 10px;
     min-height: 80px;
@@ -360,7 +356,7 @@
     color: white;
   }
 
-  .add-discussion button {
+  .add-news button {
     padding: 8px 10px;
     background-color: #ffdd95;
     color: #505053;
@@ -372,7 +368,7 @@
     margin-left: auto; /* Align the button to the right */
   }
 
-  .add-discussion button:hover {
+  .add-news button:hover {
     background-color: #505053;
     color: #ffdd95;
   }

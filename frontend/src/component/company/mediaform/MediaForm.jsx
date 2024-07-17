@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { ref, uploadBytes, getDownloadURL, storage } from '../../../firebase';
 import { v4 } from "uuid";
 import './MediaForm.css';
@@ -11,8 +11,8 @@ const dummyRoleData = [
   { id: 4, name: 'Producer', imageUrl: 'https://example.com/producer.jpg' },
 ];
 
-const genres = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Historical', 'Horror', 'Magic',
-  'Mystery', 'Psychological', 'Romance', 'Sci-Fi', 'Supernatural', 'Sports', 'Thriller', 'Tragedy'];
+const genres = ['ACTION', 'ADVENTURE', 'COMEDY', 'DRAMA', 'FANTASY', 'HISTORICAL', 'HORROR', 'MAGIC',
+  'MYSTERY', 'PSYCHOLOGICAL', 'ROMANCE', 'SCI-FI', 'SUPERNATURAL', 'SPORTS', 'THRILLER', 'TRAGEDY'];
 
 const mediaTypes = ['MOVIE', 'TV_SHOW', 'DOCUMENTARY', 'ANIME'];
 
@@ -27,14 +27,57 @@ const MediaForm = () => {
     releaseDate: '',
     episode: '',
     roles: [],
-    image: null,
-    imageUrl: ''
+    imageUrl: '',
+    com_id: ''
   });
 
   const [roleFields, setRoleFields] = useState([]);
+  const [roles, setRoles] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState([]);
+
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/roles',
+          { 
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' } 
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setRoles(data);
+        } else {
+          alert('Failed to fetch role');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
+  const filteredRoles = roles.filter(role =>
+    role.NAME.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSearchChange = (e) => {
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+    if (searchTerm) {
+      const filteredRoles = dummyRoleData.filter(role =>
+        role.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(filteredRoles);
+    } else {
+      setSearchResults([]);
+    }
+  };
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -81,42 +124,34 @@ const MediaForm = () => {
     }
   };
 
-  const handleSearchChange = (e) => {
-    const searchTerm = e.target.value;
-    setSearchTerm(searchTerm);
-    if (searchTerm) {
-      const filteredRoles = dummyRoleData.filter(role =>
-        role.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSearchResults(filteredRoles);
-    } else {
-      setSearchResults([]);
-    }
-  };
-
   const handleRoleSelection = (role) => {
+    console.log('Role selected:', role);
     const newRole = {
-      picture: role.imageUrl,
-      pictureUrl: '',
-      name: role.name,
-      type: ''
+      role_id: role.ROLE_ID,
+      name: role.NAME
     };
-    if (!selectedRoles.includes(role.name)) {
-      setSelectedRoles(prevRoles => [...prevRoles, role.name]);
-      addRoleField(newRole);
-    }
+  
+    setSelectedRoles(prevRoles => {
+     
+      if (prevRoles.some(r => r.role_id === role.ROLE_ID)) {
+        return prevRoles; // If yes, return the current state without changes
+      }
+      const updatedRoles = [...prevRoles, newRole];
+      addRoleField(newRole); // Add role to roleFields as well
+      return updatedRoles;
+    });
+    // Note: This console log won't show the updated state immediately due to async nature of setState
+    //console.log('Selected roles:', selectedRoles);
   };
-
-  const removeSelectedRole = (roleName) => {
-    const updatedRoles = selectedRoles.filter(role => role !== roleName);
-    setSelectedRoles(updatedRoles);
-    const newRoleFields = roleFields.filter(role => role.name !== roleName);
-    setRoleFields(newRoleFields);
-  };
-
+  
   const addRoleField = (role) => {
-    const newRoleFields = [...roleFields, role];
-    setRoleFields(newRoleFields);
+    setRoleFields(prevFields => [...prevFields, role]); // Add new role to roleFields
+  };
+  
+
+  const removeSelectedRole = (roleId) => {
+    setSelectedRoles(prevRoles => prevRoles.filter(role => role.role_id !== roleId));
+    setRoleFields(prevFields => prevFields.filter(role => role.role_id !== roleId));
   };
 
   const validateForm = () => {
@@ -140,31 +175,75 @@ const MediaForm = () => {
       return;
     }
 
-    const imageRef = ref(storage, `media/${mediaData.image.name + v4()}`);
-    await uploadBytes(imageRef, mediaData.image);
-    const url = await getDownloadURL(imageRef);
-    console.log("url link----->" + url);
+    try {
+      // Upload the image and get the URL
+      const imageRef = ref(storage, `media/${mediaData.image.name + v4()}`);
+      await uploadBytes(imageRef, mediaData.image);
+      const url = await getDownloadURL(imageRef);
+      console.log("url link----->" + url);
 
-    setMediaData({
-      title: '',
-      description: '',
-      type: '',
-      selectedGenres: [],
-      trailer: '',
-      duration: '',
-      releaseDate: '',
-      episode: '',
-      roles: [],
-      image: null,
-      imageUrl: ''
-    });
-    setRoleFields([]);
-    setSearchTerm('');
-    setSearchResults([]);
-    setSelectedRoles([]);
+      console.log('Selected roles:', selectedRoles);
 
-    alert('Media uploaded successfully!');
-    window.location.reload();
+      const rolesArray = selectedRoles.map(role => ({ role_id: role.role_id }));
+      const updatedFormData = {
+        ...mediaData,
+        roles: rolesArray , // Use role_id from the selectedRoles array
+        imageUrl: url, // Include the uploaded image URL
+        com_id: localStorage.getItem('user_id')
+      };
+
+      console.log('Form data:', updatedFormData);
+      console.log('Roles:', rolesArray);
+    
+
+      // Send the form data to the backend
+      const response = await fetch('http://localhost:5000/addmedia', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedFormData),
+      });
+      if (response.status === 201) {
+        
+        setMediaData({
+          title: '',
+          description: '',
+          type: '',
+          selectedGenres: [],
+          trailer: '',
+          duration: '',
+          releaseDate: '',
+          episode: '',
+          roles: [],
+          image: null,
+          imageUrl: '',
+          com_id: ''
+        });
+        setRoleFields([]);
+        setSearchTerm('');
+        setSearchResults([]);
+        setSelectedRoles([]);
+
+        alert('Media Added successful!');
+        // window.location.reload();
+
+      } else {
+        // Check if the response has content
+        if (response.headers.get('Content-Length') > '0') {
+          const errorData = await response.json();
+          console.error('Error during adding:', errorData);
+          alert('An error occurred during adding. Please try again.');
+        } else {
+          // Handle case where there is no response body
+          console.error('Error during adding: No response body');
+          alert('An error occurred during adding. No details available.');
+        }
+      }
+    } catch (error) {
+      console.error('Error during adding:', error);
+      alert('An error occurred during adding. Please try again.');
+    }
   };
 
   return (
@@ -244,31 +323,26 @@ const MediaForm = () => {
           <div className="roles-section-company">
             <h3 className="role-title">Roles</h3>
             <div className="selected-roles">
-              {selectedRoles.map((roleName) => (
-                <span key={roleName} className="selected-role">
-                  {roleName}
-                  <button
-                    type="button"
-                    className="remove-role"
-                    onClick={() => removeSelectedRole(roleName)}
-                  >
-                    X
-                  </button>
-                </span>
-              ))}
+            {selectedRoles.map(role => (
+              <div key={role.role_id} className="selected-role">
+                {role.name}
+                <button className="remove-role" type="button" onClick={() => removeSelectedRole(role.role_id)}>X</button>
+              </div>
+            ))}
             </div>
             <div className="role-search">
               <input
                 type="text"
                 placeholder="Search roles..."
                 value={searchTerm}
-                onChange={handleSearchChange}
+                // onChange={handleSearchChange}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <div className="search-results">
-                {searchResults.length > 0 && searchResults.map((role) => (
-                  <div key={role.id} className="role-result" onClick={() => handleRoleSelection(role)}>
-                    <img src={role.imageUrl} alt={role.name} className="role-thumbnail" />
-                    <div className="role-name">{role.name}</div>
+                { searchTerm.length > 0 && filteredRoles.length > 0 && filteredRoles.map((role) => (
+                  <div key={role.ROLE_ID} className="role-result" onClick={() => handleRoleSelection(role)}>
+                    <img src={role.IMG} alt={role.NAME} className="role-thumbnail" />
+                    <div className="role-name">{role.NAME}</div>
                   </div>
                 ))}
               </div>

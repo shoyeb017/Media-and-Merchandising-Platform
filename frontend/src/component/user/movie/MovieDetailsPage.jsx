@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import RoleCard from './RoleCard';
 import NewsCard from './NewsCard';
 import './MovieDetailsPage.css';
+import ReactPlayer from 'react-player';
 
 const ReviewCard = ({ review }) => {
     return (
@@ -50,6 +51,7 @@ const MovieDetailsPage = () => {
                 }
                 const movieDetails = await response.json();
                 setMovieDetails(movieDetails);
+                console.log(movieDetails);
             } catch (err) {
                 console.error('Failed to fetch movie details:', err);
             }
@@ -161,6 +163,7 @@ const MovieDetailsPage = () => {
                 </div>
             </div>
 
+            <ReactPlayer url={movieDetails.trailer} className="trailer-player"/>
             {/* Roles & News Section */}
             <div className="movie-details-middle">
                 <div className="roles-section">

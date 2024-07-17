@@ -19,6 +19,11 @@ function generateLoginId(username, password) {
     return Math.abs(username.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + password.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + Date.now()) % 10000;    
 }
 
+function generateMediaId(title) {
+    //will generate a media id based on the title and time
+    return Math.abs(title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + Date.now()) % 10000;
+}
+
 
 
 
@@ -650,6 +655,283 @@ oracledb.createPool({
         }
     });
 
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for fetch all Role
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.get('/roles', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received Role request');
+            const result = await con.execute(
+                `SELECT * FROM ROLE`
+            );
+            console.log(`Query Result: `,result.rows);
+
+            
+
+            res.send(result.rows);
+            console.log("ROLE Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR ADD MEDIA
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/addmedia', async (req, res) => {
+        const {
+            title,
+            description,
+            type,
+            selectedGenres,
+            trailer,
+            duration,
+            releaseDate,
+            episode,
+            roles,
+            imageUrl,
+            com_id
+        } = req.body;
+    
+        console.log('Received add media request:', { title, description, type, selectedGenres, trailer, imageUrl, duration, releaseDate, episode, roles });
+        
+        const media_id = generateMediaId(title); // Assuming you have a function to generate media IDs
+        const rating = 0; // Default rating
+        console.log('Generated Media ID:', media_id);
+
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            // Insert media data into the database
+            const result = await con.execute(
+                `INSERT INTO MEDIA (MEDIA_ID, TITLE, DESCRIPTION, RATING, TYPE, GENRE, TRAILER, POSTER, DURATION, RELEASE_DATE, EPISODE)
+                VALUES (:media_id, :title, :description, :rating, :type, :genres, :trailer, :poster, :duration, TO_DATE(:releaseDate, 'YYYY-MM-DD'), :episode)`,
+                {
+                    media_id,
+                    title,
+                    description,
+                    rating,
+                    type,
+                    genres: selectedGenres.join(', '), // Assuming genres are stored as comma-separated values
+                    trailer,
+                    poster: imageUrl,
+                    duration,
+                    releaseDate,
+                    episode
+                }
+            );
+            
+            console.log(`Media Insert Result: ${JSON.stringify(result)}`);
+    
+            // Insert roles associated with the media into MEDIAHASROLE
+            for (const role of roles) {
+                try {
+                    const roleResult = await con.execute(
+                        `INSERT INTO MEDIAHASROLE (ROLE_ID, MEDIA_ID)
+                        VALUES (:role_id, :media_id)`,
+                        {
+                            role_id: role.role_id,
+                            media_id
+                        }
+                    );
+                    console.log(`Role Insert Result for Role ID ${role.role_id}: ${JSON.stringify(roleResult)}`);
+                } catch (roleErr) {
+                    console.error(`Error inserting role ID ${role.role_id}: `, roleErr);
+                    throw roleErr;
+                }
+            }
+
+             // Insert media and company association into COMPANYHASMEDIA
+            const companyMediaResult = await con.execute(
+            `INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID)
+            VALUES (:media_id, :com_id)`,
+            {
+                media_id,
+                com_id
+            }
+        );
+        console.log(`Company-Media Insert Result: ${JSON.stringify(companyMediaResult)}`);
+    
+            // Commit the transaction
+            await con.commit();
+    
+            res.status(201).send("Media added successfully");
+            console.log("Media added successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for COMPANY MY MEDIA
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/mymedia', async (req, res) => {
+        const { com_id } = req.body;
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            // Get all media IDs for the given company ID
+            const mediaIdsResult = await con.execute(
+                `SELECT MEDIA_ID FROM COMPANYHASMEDIA WHERE COM_ID = :com_id`,
+                { com_id }
+            );
+    
+            const mediaIds = mediaIdsResult.rows.map(row => row.MEDIA_ID);
+    
+            if (mediaIds.length === 0) {
+                res.status(404).send("No media found for the given company");
+                return;
+            }
+    
+            // Get all media details for the retrieved media IDs
+            const mediaQuery = `
+                SELECT MEDIA.*, COMPANY.NAME AS COMPANY_NAME 
+                FROM MEDIA
+                LEFT JOIN COMPANYHASMEDIA ON MEDIA.MEDIA_ID = COMPANYHASMEDIA.MEDIA_ID
+                LEFT JOIN COMPANY ON COMPANYHASMEDIA.COM_ID = COMPANY.COM_ID
+                WHERE MEDIA.MEDIA_ID IN (${mediaIds.join(', ')})
+            `;
+    
+            const result = await con.execute(mediaQuery);
+    
+            const mediaList = result.rows.map(data => ({
+                id: data.MEDIA_ID,
+                img: data.POSTER,
+                title: data.TITLE,
+                description: data.DESCRIPTION,
+                companyName: data.COMPANY_NAME
+            }));
+    
+            res.send(mediaList);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// route for COMPANY ADD MEDIA
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+
+app.post('/addNews', async (req, res) => {
+    const { mediaID, com_id, topic, description } = req.body;
+    
+    if (!mediaID || !com_id || !topic || !description) {
+        res.status(400).send("Missing required fields");
+        return;
+    }
+
+    let con;
+    try {
+        con = await pool.getConnection();
+        if (!con) {
+            res.status(500).send("Connection Error");
+            return;
+        }
+
+        const news_id = generateUserId(topic);
+        const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
+        // Insert news into NEWSANDUPDATES table
+        await con.execute(
+            `INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+            VALUES (:news_id, :description, :headline)`,
+            {
+                news_id,
+                description,
+                headline: topic
+            }
+        );
+
+        // Insert into COMPANYGIVENEWS table
+        await con.execute(
+            `INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+            VALUES (:news_id, :com_id, TO_DATE(:news_date, 'YYYY-MM-DD'))`,
+            {
+                news_id,
+                com_id,
+                news_date: currentDate
+            }
+        );
+
+        // Insert into NEWSTOMEDIA table
+        await con.execute(
+            `INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+            VALUES (:media_id, :news_id, TO_DATE(:news_date, 'YYYY-MM-DD'))`,
+            {
+                media_id: mediaID,
+                news_id,
+                news_date: currentDate
+            }
+        );
+
+        await con.commit();
+        res.status(201).send("News added successfully");
+        console.log("News added successfully");
+    } catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        if (con) {
+            try {
+                await con.close();
+            } catch (closeErr) {
+                console.error("Error closing database connection: ", closeErr);
+            }
+        }
+    }
+});
+    
+    
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for COMPANY DETAILS
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -932,10 +1214,15 @@ oracledb.createPool({
             const { id } = req.body;
             console.log('Received media request:', id);
             const result = await con.execute(
-                `SELECT * FROM MEDIA WHERE MEDIA_ID = :id`,
+                `   SELECT MEDIA.*, COMPANY.NAME AS COMPANY_NAME 
+                    FROM MEDIA
+                    LEFT JOIN COMPANYHASMEDIA ON MEDIA.MEDIA_ID = COMPANYHASMEDIA.MEDIA_ID
+                    LEFT JOIN COMPANY ON COMPANYHASMEDIA.COM_ID = COMPANY.COM_ID
+                    WHERE MEDIA.MEDIA_ID = :id`,
                 { id }
             );
             console.log(`Query Result: `, result.rows);
+
             if (!result.rows.length) {
                 res.status(404).send("Media not found");
                 return;
@@ -950,6 +1237,16 @@ oracledb.createPool({
             );
             console.log(`Role Query Result: `, roleResult.rows);
             
+            const newsQuery = `
+            SELECT NEWSANDUPDATES.NEWS_ID, HEADLINE AS TOPIC, DESCRIPTION, COMPANYGIVENEWS.NEWS_DATE 
+            FROM NEWSANDUPDATES
+            JOIN NEWSTOMEDIA ON NEWSANDUPDATES.NEWS_ID = NEWSTOMEDIA.NEWS_ID
+            JOIN COMPANYGIVENEWS ON NEWSANDUPDATES.NEWS_ID = COMPANYGIVENEWS.NEWS_ID
+            WHERE NEWSTOMEDIA.MEDIA_ID = :id
+            ORDER BY COMPANYGIVENEWS.NEWS_DATE DESC
+             `;
+
+            const newsResult = await con.execute(newsQuery, { id });
     
             const transformData = (data) => {
                 return {
@@ -963,9 +1260,14 @@ oracledb.createPool({
                     episodes: data.EPISODE || 0,
                     duration: data.DURATION,
                     genre: data.GENRE ? data.GENRE.split(',').map(g => g.trim()) : [],
-                    companyName: 'Example Productions',
+                    trailer: data.TRAILER,
+                    companyName: data.COMPANY_NAME,
                     role: roleResult.rows,
-                    news: [],
+                    news: newsResult.rows.map(row => ({
+                        topic: row.TOPIC,
+                        description: row.DESCRIPTION,
+                        date: row.NEWS_DATE
+                    })),
                     review: []
                 };
             };
