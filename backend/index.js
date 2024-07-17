@@ -1396,10 +1396,129 @@ oracledb.createPool({
           }
         }
     });
+
+
+    app.get('/discussions', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received discussion request');
+            const result = await con.execute(
+                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
+                    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
+                JOIN MEDIA 
+                    ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID`
+            );
+            console.log(`Query Result: `,result.rows);
+            
+            res.send(result.rows);
+            console.log("Discussion Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
       
 
-    
-      
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR DISCUSSION REPLIES
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    app.post('/discussions/replies', async (req, res) => {
+        const { discussion_id } = req.body;
+        console.log('Received discussion request:', { discussion_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `SELECT DISCUSSION.DIS_ID, USERS.NAME, DISCUSSION.DESCRIPTION, DISCUSSION.REPLY_COUNT
+                FROM DISCUSSION JOIN USERSTARTDISCUSSION 
+                    ON DISCUSSION.DIS_ID = USERSTARTDISCUSSION.DIS_ID 
+                JOIN USERS 
+                    ON USERSTARTDISCUSSION.USER_ID = USERS.USER_ID 
+                WHERE PARENT_TOPIC = :discussion_id
+                ORDER BY DISCUSSION.REPLY_COUNT ASC`,
+                { discussion_id }
+            );
+            console.log(`Query Result: `, result.rows);
+            res.send(result.rows);
+            console.log("Discussion Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR DISCUSSION FOR MOVIE PAGE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    app.post('/discussions/media', async (req, res) => {
+        const { id } = req.body;
+        console.log('Received discussion request:', { id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
+                    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
+                JOIN MEDIA ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
+                WHERE MEDIA.MEDIA_ID= :id`,
+                { id }
+            );
+            console.log(`Query Result: `, result.rows);
+            res.send(result.rows);
+            console.log("Discussion Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
 
     // Start the server
     app.listen(5000, () => {

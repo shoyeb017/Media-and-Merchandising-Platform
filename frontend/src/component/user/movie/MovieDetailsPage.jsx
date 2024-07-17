@@ -17,8 +17,8 @@ const ReviewCard = ({ review }) => {
 const DiscussionCard = ({ discussion }) => {
     return (
         <div className="discussion-card">
-            <h4 className="discussion-topic">{discussion.topic}</h4>
-            <p className="discussion-desc">{discussion.description}</p>
+            <h4 className="discussion-topic">{discussion.TOPIC}</h4>
+            <p className="discussion-desc">{discussion.DESCRIPTION}</p>
         </div>
     );
 };
@@ -30,8 +30,8 @@ const MovieDetailsPage = () => {
     const [planToWatchList, setPlanToWatchList] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
-    const [discussions, setDiscussions] = useState([]);
     const [newDiscussion, setNewDiscussion] = useState({ topic: '', description: '' });
+    const [discussions, setDiscussions] = useState([]);
 
     const userId = localStorage.getItem('user_id');
 
@@ -46,16 +46,43 @@ const MovieDetailsPage = () => {
                     body: JSON.stringify({ id: mediaID }),
                 });
                 if (!response.ok) {
-                    throw new Error('Failed to fetch movie details');
+                    throw new Error('Failed to fetch movie DISCUSSION');
                 }
                 const movieDetails = await response.json();
                 setMovieDetails(movieDetails);
             } catch (err) {
-                console.error('Failed to fetch movie details:', err);
+                console.error('Failed to fetch movie Discussion:', err);
             }
         };
         fetchMovieDetails();
+        console.log
     }, [mediaID]);
+
+    /// discussion-------------------------------------------------------------------------------------
+
+    useEffect(() => {
+        const fetchMovieDis = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/discussions/media', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: mediaID }),
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movie details');
+                }
+                const movieDetails = await response.json();
+                setDiscussions(movieDetails);
+            } catch (err) {
+                console.error('Failed to fetch movie details:', err);
+            }
+        };
+        fetchMovieDis();
+    }, [mediaID]);
+
+    
 
     if (!movieDetails) {
         return <div className="error">Loading...</div>; // Or handle the case where movie is not found
@@ -108,7 +135,7 @@ const MovieDetailsPage = () => {
         }
     };
 
-    const handleAddDiscussion = () => {
+    const handleAddDiscussion = async () => {
         if (newDiscussion.topic && newDiscussion.description) {
             setDiscussions([...discussions, newDiscussion]);
             setNewDiscussion({ topic: '', description: '' });
@@ -130,6 +157,8 @@ const MovieDetailsPage = () => {
         alignItems: 'center'
     };
 
+
+    
     return (
         <div className="movie-details-page">
             <div className="movie-details" style={coverImgStyle}>

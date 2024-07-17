@@ -4,7 +4,7 @@ import './SearchFilter.css';
 const genres = ['ACTION', 'ADVENTURE', 'COMEDY', 'DRAMA', 'FANTASY', 'HISTORICAL', 'HORROR', 'MAGIC',
   'MYSTERY', 'PSYCHOLOGICAL', 'ROMANCE', 'SCI-FI', 'SUPERNATURAL', 'SPORTS', 'THRILLER', 'TRAGEDY'];
 
-const mediaTypes = ['MOVIE', 'TV_SHOW', 'ANIME'];
+const mediaTypes = ['MOVIE', 'TV_SHOW', 'ANIME', 'DOCUMENTARY'];
 
 const SearchFilter = ({ searchTerm, setSearchTerm, selectedGenres, setSelectedGenres, selectedMediaType, setSelectedMediaType }) => {
   const handleGenreClick = (genre) => {
