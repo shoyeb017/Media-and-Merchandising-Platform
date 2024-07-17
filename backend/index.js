@@ -572,6 +572,97 @@ oracledb.createPool({
         }
     });
 
+
+        
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for MERCHANDISER PROFILE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/profile/merch', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received MERCHANDISER profile request:', { user_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT * FROM MERCHANDISER WHERE MER_ID = :user_id`,
+                { user_id } // Named bind variables
+            );
+            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+            if (result.rows.length) {
+                res.send(result.rows[0]);
+                console.log("User Data sent");
+            } else {
+                res.status(404).send("User not found");
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for MERCHANDISER PROFILE UPDATE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.post('/profile/merch/update', async (req, res) => {
+        const { user_id, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE } = req.body;
+        console.log('Received Merchandiser profile update request:', { user_id, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE });
+    
+        if (!user_id || !NAME || !DESCRIPTION || !EMAIL || !CITY || !STREET || !HOUSE || !PHONE) {
+        return res.status(400).json({ message: "All fields are required" });
+        }
+    
+        let con;
+        try {
+        con = await pool.getConnection();
+        if (!con) {
+            res.status(500).json({ message: "Connection Error" });
+            return;
+        }
+    
+        const result = await con.execute(
+            `UPDATE MERCHANDISER SET NAME = :NAME, DESCRIPTION = :DESCRIPTION, EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE 
+            WHERE MER_ID = :user_id`,
+            { NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+        );
+        console.log(`Query Result: ${JSON.stringify(result)}`);
+    
+        await con.commit();
+    
+        const updatedProfile = { user_id, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE };
+        res.status(200).json(updatedProfile);
+        console.log("Profile updated successfully");
+    
+        } catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).json({ message: "Internal Server Error" });
+        } finally {
+        if (con) {
+            try {
+            await con.close();
+            } catch (err) {
+            console.error("Error closing database connection: ", err);
+            }
+        }
+        }
+    });
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for COMPANY PROFILE
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1607,10 +1698,129 @@ app.post('/addNews', async (req, res) => {
           }
         }
     });
+
+
+    app.get('/discussions', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received discussion request');
+            const result = await con.execute(
+                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
+                    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
+                JOIN MEDIA 
+                    ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID`
+            );
+            console.log(`Query Result: `,result.rows);
+            
+            res.send(result.rows);
+            console.log("Discussion Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
       
 
-    
-      
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR DISCUSSION REPLIES
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    app.post('/discussions/replies', async (req, res) => {
+        const { discussion_id } = req.body;
+        console.log('Received discussion request:', { discussion_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `SELECT DISCUSSION.DIS_ID, USERS.NAME, DISCUSSION.DESCRIPTION, DISCUSSION.REPLY_COUNT
+                FROM DISCUSSION JOIN USERSTARTDISCUSSION 
+                    ON DISCUSSION.DIS_ID = USERSTARTDISCUSSION.DIS_ID 
+                JOIN USERS 
+                    ON USERSTARTDISCUSSION.USER_ID = USERS.USER_ID 
+                WHERE PARENT_TOPIC = :discussion_id
+                ORDER BY DISCUSSION.REPLY_COUNT ASC`,
+                { discussion_id }
+            );
+            console.log(`Query Result: `, result.rows);
+            res.send(result.rows);
+            console.log("Discussion Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR DISCUSSION FOR MOVIE PAGE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    app.post('/discussions/media', async (req, res) => {
+        const { id } = req.body;
+        console.log('Received discussion request:', { id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
+                    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
+                JOIN MEDIA ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
+                WHERE MEDIA.MEDIA_ID= :id`,
+                { id }
+            );
+            console.log(`Query Result: `, result.rows);
+            res.send(result.rows);
+            console.log("Discussion Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
 
     // Start the server
     app.listen(5000, () => {

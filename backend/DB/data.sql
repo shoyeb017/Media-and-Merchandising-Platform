@@ -5247,16 +5247,598 @@ VALUES (28, 200);
 
 
 
+INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    1,
+    'This is a discussion about the best way to learn SQL.',
+    'SQL',
+    4,
+    NULL
+  );
+
+INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    2,
+    'This is a discussion about the best way to learn Python.',
+    'Python',
+    4,
+    NULL
+  );
+
+INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    3,
+    'This is a discussion about the best way to learn Java.',
+    'Java',
+    4,
+    NULL
+  );
+
+INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    4,
+    'This is a discussion about the best way to learn JavaScript.',
+    'JavaScript',
+    4,
+    NULL
+  );
+
+  -- child topics
+----------------------------------------------------------------------------------
+INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    5,
+    'This is a discussion about the best way to learn SQL.',
+    NULL,
+    1,
+    1
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    8,
+    'This is a discussion about the best way to learn SQL.',
+    NULL,
+    2,
+    1
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    6,
+    'This is a discussion about the best way to learn SQL.',
+    NULL,
+    3,
+    1
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    7,
+    'This is a discussion about the best way to learn SQL.',
+    NULL,
+    4,
+    1
+  );
 
 
-SELECT ROLE_ID, NAME, IMG, ROLE_TYPE FROM ROLE natural JOIN MEDIAHASROLE where MEDIA_ID=3 ORDER by ROLE_TYPE asc;
+-------------------------------------------------------------------------------
+    INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    21,
+    'This is a discussion about the best way to learn Python.',
+    'Python',
+    1,
+    2
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    22,
+    'This is a discussion about the best way to learn Python.',
+    'Python',
+    2,
+    2
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    23,
+    'This is a discussion about the best way to learn Python.',
+    'Python',
+    3,
+    2
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    24,
+    'This is a discussion about the best way to learn Python.',
+    'Python',
+    4,
+    2
+  );
+-------------------------------------------------------------------------------------
+
+INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    31,
+    'This is a discussion about the best way to learn Java.',
+    'Java',
+    1,
+   3
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    32,
+    'This is a discussion about the best way to learn Java.',
+    'Java',
+    2,
+    3
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    33,
+    'This is a discussion about the best way to learn Java.',
+    'Java',
+    3,
+    3
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    34,
+    'This is a discussion about the best way to learn Java.',
+    'Java',
+    4,
+    3
+  );
+  -----------------------------------------------------------------------------------------
+
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    41,
+    'This is a discussion about the best way to learn JavaScript.',
+    'JavaScript',
+    1,
+    4
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    42,
+    'This is a discussion about the best way to learn JavaScript.',
+    'JavaScript',
+    2,
+    4
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    43,
+    'This is a discussion about the best way to learn JavaScript.',
+    'JavaScript',
+    3,
+    4
+  );
+  INSERT INTO DISCUSSION(
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+  )
+VALUES
+  (
+    44,
+    'This is a discussion about the best way to learn JavaScript.',
+    'JavaScript',
+    4,
+    4
+  );
 
 
 
 
 
+SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID JOIN MEDIA ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID;
+
+-- replies of a parent discussion
+
+SELECT DISCUSSION.DIS_ID, USERS.NAME, DISCUSSION.DESCRIPTION, DISCUSSION.REPLY_COUNT
+FROM DISCUSSION JOIN USERSTARTDISCUSSION 
+    ON DISCUSSION.DIS_ID = USERSTARTDISCUSSION.DIS_ID 
+JOIN USERS 
+    ON USERSTARTDISCUSSION.USER_ID = USERS.USER_ID 
+WHERE PARENT_TOPIC = 1;
 
 
+
+SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
+    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
+JOIN MEDIA ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
+WHERE MEDIA.MEDIA_ID=3;
+ 
+
+
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    1
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    2
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    3
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    4
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    5
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    6
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    7
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    8
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    21
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    22
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    23
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    24
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    31
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    32
+  );  
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    33
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    34
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    41
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    42
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    43
+  );
+
+INSERT INTO USERSTARTDISCUSSION(
+    USER_ID,
+    DIS_ID
+  )
+VALUES
+  (
+    1234,
+    44
+  );
+
+
+
+
+
+INSERT INTO DISCUSSIONABOUTMEDIA(
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+  )
+VALUES
+  (
+    1,
+    3,
+    TO_DATE('2022-03-01', 'YYYY-MM-DD')
+  );
+
+INSERT INTO DISCUSSIONABOUTMEDIA(
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+  )
+VALUES
+  (
+    2,
+    4,
+    TO_DATE('2022-03-02', 'YYYY-MM-DD')
+  );
+
+INSERT INTO DISCUSSIONABOUTMEDIA(
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+  )
+VALUES
+  (
+    3,
+    5,
+    TO_DATE('2022-03-03', 'YYYY-MM-DD')
+  );
+
+INSERT INTO DISCUSSIONABOUTMEDIA(
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+  )
+VALUES
+  (
+    4,
+    6,
+    TO_DATE('2022-03-04', 'YYYY-MM-DD')
+  );
 
 
 

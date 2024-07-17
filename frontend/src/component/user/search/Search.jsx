@@ -3,10 +3,6 @@ import SearchFilter from './SearchFilter';
 import SearchResults from './SearchResults';
 import './Search.css';
 
-const genres = ['ACTION', 'ADVENTURE', 'COMEDY', 'DRAMA', 'FANTASY', 'HISTORICAL', 'HORROR', 'MAGIC',
-  'MYSTERY', 'PSYCHOLOGICAL', 'ROMANCE', 'SCI-FI', 'SUPERNATURAL', 'SPORTS', 'THRILLER', 'TRAGEDY'];
-
-const mediaTypes = ['MOVIE', 'TV_SHOW', 'ANIME'];
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
