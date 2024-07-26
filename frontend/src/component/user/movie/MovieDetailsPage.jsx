@@ -144,6 +144,42 @@ const MovieDetailsPage = () => {
         } else {
             alert('Please fill out both topic and description.');
         }
+
+        try {
+            await fetch('http://localhost:5000/discussions/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: userId, media_id: movieDetails.id, topic: newDiscussion.topic, description: newDiscussion.description }),
+            });
+        }
+        catch (error) {
+            console.error('Error adding discussion:', error
+            );
+        }
+        const fetchMovieDis = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/discussions/media', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: mediaID }),
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movie details');
+                }
+                const movieDetails = await response.json();
+                setDiscussions(movieDetails);
+            } catch (err) {
+                console.error('Failed to fetch movie details:', err);
+            }
+        };
+        fetchMovieDis();
+        
+
+        
     };
 
     const coverImgStyle = {

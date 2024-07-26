@@ -60,14 +60,53 @@ const Discussion = () => {
   const handleAddReply = () => {
     if (!selectedDiscussion || !replyText) return;
 
+    try {
+      fetch('http://localhost:5000/discussions/add/reply', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_id: localStorage.getItem('user_id'),
+          discussion_id: selectedDiscussion.DIS_ID,
+          description: replyText,
+          replyCount: selectedDiscussion.REPLY_COUNT + 1,
+        }),
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+      const fetchReplies = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/discussions/replies`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ discussion_id: selectedDiscussion.DIS_ID }),
+          });
+          if (response.status === 200) {
+            const data = await response.json();
+            setReplies(data);
+          } else {
+            alert('Failed to fetch replies');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+      fetchReplies();
+
+
     const newReply = {
       DIS_ID: new Date().getTime(),
-      NAME: localStorage.getItem('username'), // Replace with actual user data
+      NAME: localStorage.getItem("username"), // Replace with actual user data
       DESCRIPTION: replyText,
     };
 
     setReplies([...replies, newReply]);
-    setReplyText('');
+    // setReplyText('');?
   };
 
   return (
