@@ -19,30 +19,35 @@ import ProductDetails from "./component/user/merch/ProductDetails.jsx";
 import MovieDetailsPage from "./component/user/movie/MovieDetailsPage.jsx";
 import CompanySection from "./component/user/company/CompanySection.jsx";
 import CompanyDetailsPage from "./component/user/company/CompanyDetailsPage.jsx";
-import Login from "./component/Login.jsx";
-import Registration from "./component/Registration/Registration.jsx";
-//dsahuihajsdlaks
-import LayoutUser from "./component/Layout/LayoutUser.jsx";
 
+import LayoutUser from "./component/Layout/LayoutUser.jsx";
 import LayoutAdmin from "./component/Layout/LayoutAdmin.jsx";
 import LayoutCompany from "./component/Layout/LayoutCompany.jsx";
 import LayoutMerch from "./component/Layout/LayoutMerch.jsx";
 
 import HomeAdmin from "./component/admin/home/Home.jsx";
+import UserList from "./component/admin/user/UserList.jsx";
+import CompanyList from "./component/admin/company/CompanyList.jsx";
+import MerchandiserList from "./component/admin/merch/MerchandiserList.jsx";
 import ProfileAdmin from "./component/admin/profile/ProfilePage.jsx";
 
 import HomeCompany from "./component/company/home/Home.jsx";
+import MediaForm from "./component/company/mediaform/MediaForm.jsx";
+import CompanyMovieDetailsPage from "./component/company/movie/MovieDetailsPage.jsx";
 import ProfileCompany from "./component/company/profile/ProfilePage.jsx";
 
 import HomeMerch from "./component/merch/home/Home.jsx";
 import ProfileMerch from "./component/merch/profile/ProfilePage.jsx";
 
+import Login from "./component/Login.jsx";
+import Registration from "./component/Registration/Registration.jsx";
 import CompanyRegistration from "./component/Registration/CompanyRegistration.jsx";
 import MerchandiserRegistration from "./component/Registration/MerchandiserRegistration.jsx";
 import UserRegistration from "./component/Registration/UserRegistration.jsx";
 
-import MediaForm from "./component/company/mediaform/MediaForm.jsx";
-import CompanyMovieDetailsPage from "./component/company/movie/MovieDetailsPage.jsx";
+
+
+
 
 import "./App.css";
 
@@ -126,6 +131,9 @@ export default function App() {
           {userType === "admin" && (
             <Route element={<LayoutAdmin />}>
               <Route path="/:username/home" element={<HomeAdmin />} />
+              <Route path="/:username/userlist" element={<UserList />} />
+              <Route path="/:username/companylist" element={<CompanyList />} />
+              <Route path="/:username/merchandiserlist" element={<MerchandiserList />} />
               <Route path="/:username/profile" element={<ProfileAdmin />} />
             </Route>
           )}

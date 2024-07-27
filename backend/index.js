@@ -213,7 +213,7 @@ oracledb.createPool({
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // ROUTE FOR CHECK USERNAME EXIST COMPANY REGISTRATION
+    // ROUTE FOR CHECK USERNAME EXIST MERCHANDISER REGISTRATION
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     app.post('/registration/merch/check-username', async (req, res) => {
@@ -358,6 +358,52 @@ oracledb.createPool({
             res.status(500).send("Internal Server Error");
         }
 
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Login route for ADMIN
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    app.post('/login/admin', async (req, res) => {
+        const { username, password } = req.body;
+        console.log('Received login request:', { username, password }); // Log the received request
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT USER_NAME, PASSWORD, ADMIN_ID as "user_id" 
+                FROM LOGIN JOIN ADMIN ON LOGIN.ID = ADMIN.ADMIN_ID
+                WHERE USER_NAME = :username AND PASSWORD = :password`,
+                { username, password } // Named bind variables
+            );
+            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+            if (result.rows.length) {
+                //send the full user data to the client
+                res.status(200).send(result.rows[0]); // Respond to client
+            } else {
+                console.log("Invalid Credentials");
+                res.status(401).send("Invalid Credentials"); // Respond to client
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
     });
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -39,6 +39,15 @@ function Navbar() {
             <li className="menu-list-item">
               <Link to={`/${username}/home`}>Home</Link>
             </li>
+            <li className="menu-list-item">
+              <Link to={`/${username}/userlist`}>User</Link>
+            </li>
+            <li className="menu-list-item">
+              <Link to={`/${username}/companylist`}>Company</Link>
+            </li>
+            <li className="menu-list-item">
+              <Link to={`/${username}/merchandiserlist`}>Merchandiser</Link>
+            </li>
           </ul>
         </div>
         <Link to={`/${username}/profile`} className="profile-text">Profile</Link>
