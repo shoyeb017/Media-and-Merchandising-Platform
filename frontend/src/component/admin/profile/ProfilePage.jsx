@@ -1,19 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProfilePage.css';
 
 const ProfilePage = () => {
-  const initialProfile = {
-    name: 'John Doe',
-    dob: '1990-01-01',
-    age: 34,
-    email: 'john.doe@example.com',
-    city: 'New York',
-    street: '5th Avenue',
-    house: '123',
-  };
-
-  const [profile, setProfile] = useState(initialProfile);
+  const [profile, setProfile] = useState({
+    NAME: '',
+    DOB: '',
+    EMAIL: '',
+    CITY: '',
+    STREET: '',
+    HOUSE: '',
+    PHONE: '',
+  });
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/profile/admin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+        });
+        if (response.status === 200) {
+          const data = await response.json();
+          setProfile(data);
+        } else {
+          alert('Failed to fetch profile');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,11 +46,37 @@ const ProfilePage = () => {
     setIsEditing(!isEditing);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     // Handle the update logic (e.g., save the updated profile to a server)
     console.log("Updated Profile:", profile);
     setIsEditing(false);
+  
+    try {
+      const updatedProfile = { ...profile, user_id: localStorage.getItem('user_id') };
+  
+      const response = await fetch('http://localhost:5000/profile/admin/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedProfile),
+      });
+  
+      const data = await response.json();
+  
+      if (response.status === 200) {
+        setProfile(data);
+        alert('Profile updated successfully!');
+      } else {
+        alert(data.message || 'Failed to update profile');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while updating the profile');
+    }
   };
+  
+  
 
   return (
     <div className="profile-page">
@@ -36,57 +84,49 @@ const ProfilePage = () => {
       <div className="profile-info">
         <label>Name: </label>
         {isEditing ? (
-          <input type="text" name="name" value={profile.name} onChange={handleChange} />
+          <input type="text" name="NAME" value={profile.NAME} onChange={handleChange} />
         ) : (
-          <span>{profile.name}</span>
+          <span>{profile.NAME}</span>
         )}
       </div>
       <div className="profile-info">
         <label>Date of Birth: </label>
         {isEditing ? (
-          <input type="date" name="dob" value={profile.dob} onChange={handleChange} />
+          <input type="date" name="DOB" value={profile.DOB.split('T')[0]} onChange={handleChange} />
         ) : (
-          <span>{profile.dob}</span>
-        )}
-      </div>
-      <div className="profile-info">
-        <label>Age: </label>
-        {isEditing ? (
-          <input type="number" name="age" value={profile.age} onChange={handleChange} />
-        ) : (
-          <span>{profile.age}</span>
+          <span>{profile.DOB.split('T')[0]}</span>
         )}
       </div>
       <div className="profile-info">
         <label>Email: </label>
         {isEditing ? (
-          <input type="email" name="email" value={profile.email} onChange={handleChange} />
+          <input type="email" name="EMAIL" value={profile.EMAIL} onChange={handleChange} />
         ) : (
-          <span>{profile.email}</span>
+          <span>{profile.EMAIL}</span>
         )}
       </div>
       <div className="profile-info">
         <label>City: </label>
         {isEditing ? (
-          <input type="text" name="city" value={profile.city} onChange={handleChange} />
+          <input type="text" name="CITY" value={profile.CITY} onChange={handleChange} />
         ) : (
-          <span>{profile.city}</span>
+          <span>{profile.CITY}</span>
         )}
       </div>
       <div className="profile-info">
         <label>Street: </label>
         {isEditing ? (
-          <input type="text" name="street" value={profile.street} onChange={handleChange} />
+          <input type="text" name="STREET" value={profile.STREET} onChange={handleChange} />
         ) : (
-          <span>{profile.street}</span>
+          <span>{profile.STREET}</span>
         )}
       </div>
       <div className="profile-info">
         <label>House: </label>
         {isEditing ? (
-          <input type="text" name="house" value={profile.house} onChange={handleChange} />
+          <input type="text" name="HOUSE" value={profile.HOUSE} onChange={handleChange} />
         ) : (
-          <span>{profile.house}</span>
+          <span>{profile.HOUSE}</span>
         )}
       </div>
       <div className="profile-buttons">

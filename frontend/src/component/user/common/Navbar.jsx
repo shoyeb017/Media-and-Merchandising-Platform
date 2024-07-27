@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import Notification from '../notification/Notification';
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -62,6 +63,7 @@ function Navbar() {
             </li>
           </ul>
         </div>
+        <Notification />
         <Link to={`/${username}/profile`} className="profile-text">Profile</Link>
         <Link to="/" className="logout-btn" onClick={handleLogout}>Logout</Link>
       </div>

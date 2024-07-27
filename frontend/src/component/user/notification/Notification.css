@@ -1,0 +1,64 @@
+/* Notification.css */
+.notification-container {
+    position: relative;
+    display: inline-block;
+}
+
+.notification-button {
+    background-color: #ffdd95;
+    color: black;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.notification-bar {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #242428;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #333;
+    border-radius: 5px;
+    z-index: 1000;
+    margin-top: 10px;
+
+    color: white;
+}
+
+.notification-bar h3{
+    padding-bottom: 4px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #ffdd95;
+}
+
+.notification-media-name {
+    color:red;
+    font-size: 9px;
+}
+
+.notification-date {
+    color:red;
+    font-size: 9px;
+}
+.notification-desc {
+    color:white;
+    font-size: 14px;
+}
+
+.notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}

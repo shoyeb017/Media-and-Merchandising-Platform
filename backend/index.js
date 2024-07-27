@@ -208,7 +208,7 @@ oracledb.createPool({
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // ROUTE FOR CHECK USERNAME EXIST COMPANY REGISTRATION
+    // ROUTE FOR CHECK USERNAME EXIST MERCHANDISER REGISTRATION
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     app.post('/registration/merch/check-username', async (req, res) => {
@@ -355,6 +355,52 @@ oracledb.createPool({
 
     });
 
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // Login route for ADMIN
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    app.post('/login/admin', async (req, res) => {
+        const { username, password } = req.body;
+        console.log('Received login request:', { username, password }); // Log the received request
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT USER_NAME, PASSWORD, ADMIN_ID as "user_id" 
+                FROM LOGIN JOIN ADMIN ON LOGIN.ID = ADMIN.ADMIN_ID
+                WHERE USER_NAME = :username AND PASSWORD = :password`,
+                { username, password } // Named bind variables
+            );
+            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+            if (result.rows.length) {
+                //send the full user data to the client
+                res.status(200).send(result.rows[0]); // Respond to client
+            } else {
+                console.log("Invalid Credentials");
+                res.status(401).send("Invalid Credentials"); // Respond to client
+            }
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Login route for USER
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -474,6 +520,101 @@ oracledb.createPool({
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
+        }
+    });
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// route for ADMIN PROFILE
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.post('/profile/admin', async (req, res) => {
+    const { user_id } = req.body;
+    console.log('Received user profile request:', { user_id });
+    let con;
+    try {
+        con = await pool.getConnection();
+        if (!con) {
+            res.status(500).send("Connection Error");
+            return;
+        }
+
+        const result = await con.execute(
+            `SELECT * FROM ADMIN WHERE ADMIN_ID = :user_id`,
+            { user_id } // Named bind variables
+        );
+        console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+        if (result.rows.length) {
+            res.send(result.rows[0]);
+            console.log("User Data sent");
+        } else {
+            res.status(404).send("User not found");
+        }
+    } catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        if (con) {
+            try {
+                await con.close();
+            } catch (err) {
+                console.error("Error closing database connection: ", err);
+            }
+        }
+    }
+});
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for ADMIN PROFILE UPDATE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.post('/profile/admin/update', async (req, res) => {
+        const { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE } = req.body;
+        console.log('Received admin profile update request:', { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE });
+      
+        if (!user_id || !NAME || !DOB || !EMAIL || !CITY || !STREET || !HOUSE || !PHONE) {
+          return res.status(400).json({ message: "All fields are required" });
+        }
+      
+        // Log the DOB value to verify its format
+        console.log('DOB before formatting:', DOB);
+      
+        // Ensure DOB is in YYYY-MM-DD format
+        const formattedDOB = new Date(DOB).toISOString().split('T')[0];
+        console.log('Formatted DOB:', formattedDOB);
+      
+        let con;
+        try {
+          con = await pool.getConnection();
+          if (!con) {
+            res.status(500).json({ message: "Connection Error" });
+            return;
+          }
+      
+          const result = await con.execute(
+            `UPDATE ADMIN SET NAME = :NAME, DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE WHERE ADMIN_ID = :user_id`,
+            { NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+          );
+          console.log(`Query Result: ${JSON.stringify(result)}`);
+      
+          await con.commit();
+      
+          const updatedProfile = { user_id, NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE };
+          res.status(200).json(updatedProfile);
+          console.log("Profile updated successfully");
+      
+        } catch (err) {
+          console.error("Error during database query: ", err);
+          res.status(500).json({ message: "Internal Server Error" });
+        } finally {
+          if (con) {
+            try {
+              await con.close();
+            } catch (err) {
+              console.error("Error closing database connection: ", err);
+            }
+          }
         }
     });
 
@@ -705,33 +846,45 @@ oracledb.createPool({
         }
     });
     
-
-
-      
-
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // route for fetch all COMPANY
+    // ROUTE FOR ADMIN'S USERLIST 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    app.get('/companies', async (req, res) => {
+    app.get('/userlist', async (req, res) => {
         let con;
         try {
             con = await pool.getConnection();
+            console.log('Received userlist request');
             if (!con) {
                 res.status(500).send("Connection Error");
                 return;
             }
-            console.log('Received company request');
+            console.log('Received userlist request');
+
             const result = await con.execute(
-                `SELECT * FROM COMPANY`
+
+                `SELECT * FROM USERS`
             );
-            console.log(`Query Result: `,result.rows);
 
-            
-
-            res.send(result.rows);
-            console.log("Company Data sent");
+            const transformData = (data) => {
+                return {
+                    USER_ID: data.USER_ID,
+                    USER_NAME: data.USER_NAME,
+                    NAME: data.NAME,
+                    DOB: data.DOB,
+                    EMAIL: data.EMAIL,
+                    CITY: data.CITY,
+                    STREET: data.STREET,
+                    HOUSE: data.HOUSE,
+                    PHONE: data.PHONE
+                };
+            };
+    
+            const transformedData = result.rows.map(transformData);
+    
+            res.send(transformedData);
+            console.log("Search Data sent:", transformedData);
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
@@ -745,6 +898,111 @@ oracledb.createPool({
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR ADMIN'S COMPANYLIST 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.get('/companylist', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            console.log('Received companylist request');
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received companylist request');
+
+            const result = await con.execute(
+
+                `SELECT * FROM COMPANY`
+            );
+
+            const transformData = (data) => {
+                return {
+                    COM_ID: data.COM_ID,
+                    USER_NAME: data.USER_NAME,
+                    NAME: data.NAME,
+                    IMG: data.IMG,
+                    DESCRIPTION: data.DESCRIPTION,
+                    EMAIL: data.EMAIL
+                };
+            };
+    
+            const transformedData = result.rows.map(transformData);
+    
+            res.send(transformedData);
+            console.log("Search Data sent:", transformedData);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR ADMIN'S MERCHANDISERLIST 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.get('/merchlist', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            console.log('Received merchlist request');
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received merchlist request');
+
+            const result = await con.execute(
+
+                `SELECT * FROM MERCHANDISER`
+            );
+
+            const transformData = (data) => {
+                return {
+                    MER_ID: data.MER_ID,
+                    USER_NAME: data.USER_NAME,
+                    NAME: data.NAME,
+                    DESCRIPTION: data.DESCRIPTION,
+                    EMAIL: data.EMAIL,
+                    CITY: data.CITY,
+                    STREET: data.STREET,
+                    HOUSE: data.HOUSE,
+                    PHONE: data.PHONE
+                };
+            };
+    
+            const transformedData = result.rows.map(transformData);
+    
+            res.send(transformedData);
+            console.log("Search Data sent:", transformedData);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1023,6 +1281,44 @@ app.post('/addNews', async (req, res) => {
 });
     
     
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for fetch all COMPANY
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.get('/companies', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received company request');
+            const result = await con.execute(
+                `SELECT * FROM COMPANY`
+            );
+            console.log(`Query Result: `,result.rows);
+
+            
+
+            res.send(result.rows);
+            console.log("Company Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for COMPANY DETAILS
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1821,6 +2117,292 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR NOTIFICATION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/notifications', async (req, res) => {
+        const { user_id } = req.body;
+    
+        if (!user_id) {
+            res.status(400).send("Missing required fields");
+            return;
+        }
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            const query = `
+                SELECT
+                    NEWSANDUPDATES.NEWS_ID,
+                    NEWSANDUPDATES.HEADLINE,
+                    NEWSANDUPDATES.DESCRIPTION,
+                    NEWSTOMEDIA.NEWS_DATE,
+                    MEDIA.TITLE AS MEDIA_TITLE
+                FROM
+                    NEWSANDUPDATES
+                JOIN
+                    NEWSTOMEDIA ON NEWSANDUPDATES.NEWS_ID = NEWSTOMEDIA.NEWS_ID
+                JOIN
+                    MEDIA ON NEWSTOMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
+                WHERE
+                    NEWSTOMEDIA.MEDIA_ID IN (
+                        SELECT MEDIA_ID
+                        FROM USERWATCHANDFAVORITE
+                        WHERE USER_ID = :user_id
+                    )
+                ORDER BY
+                    NEWSTOMEDIA.NEWS_DATE DESC
+            `;
+    
+            const result = await con.execute(query, { user_id });
+    
+            if (result.rows.length === 0) {
+                res.status(404).send("No notifications found");
+                return;
+            }
+    
+            const notifications = result.rows.map(row => ({
+                news_id: row.NEWS_ID,
+                headline: row.HEADLINE,
+                description: row.DESCRIPTION,
+                news_date: row.NEWS_DATE,
+                media_title: row.MEDIA_TITLE
+            }));
+    
+            res.status(200).json(notifications);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    // Assuming you're using Express and a database like Oracle
+    app.post('/user-stats', async (req, res) => {
+        console.log('Received user stats request');
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            const userStatsQuery = `
+                SELECT 'User' AS name, COUNT(*) AS count FROM USERS
+                UNION ALL
+                SELECT 'Company' AS name, COUNT(*) AS count FROM COMPANY
+                UNION ALL
+                SELECT 'Merchandiser' AS name, COUNT(*) AS count FROM MERCHANDISER
+            `;
+    
+            const userPieStatsQuery = `
+                SELECT 'Total Users' AS name, 
+                       (SELECT COUNT(*) FROM USERS) + 
+                       (SELECT COUNT(*) FROM COMPANY) + 
+                       (SELECT COUNT(*) FROM MERCHANDISER) AS value
+                FROM DUAL
+                UNION ALL
+                SELECT 'Users' AS name, COUNT(*) AS value FROM USERS
+                UNION ALL
+                SELECT 'Companies' AS name, COUNT(*) AS value FROM COMPANY
+                UNION ALL
+                SELECT 'Merchandisers' AS name, COUNT(*) AS value FROM MERCHANDISER
+            `;
+    
+            const userStats = await con.execute(userStatsQuery);
+            const userPieStats = await con.execute(userPieStatsQuery);
+    
+            res.json({ bar: userStats.rows, pie: userPieStats.rows });
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
+
+    app.post('/media-stats', async (req, res) => {
+        console.log('Received media stats request');
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            const mediaStats = await con.execute(`
+                SELECT 'Media' AS name, COUNT(*) AS count FROM MEDIA
+                UNION ALL
+                SELECT 'Products' AS name, COUNT(*) AS count FROM PRODUCTS
+                UNION ALL
+                SELECT 'Roles' AS name, COUNT(*) AS count FROM ROLE
+            `);
+    
+            res.json(mediaStats.rows);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    app.post('/genre-stats', async (req, res) => {
+        console.log('Received genre stats request');
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            // Execute the query and get the result
+            const result = await con.execute(`
+                SELECT GENRE
+                FROM MEDIA
+            `);
+    
+            // Log the entire result to understand its structure
+            console.log('Fetched media result:', result);
+    
+            // Check if result.rows is an array and contains data
+            if (!result || !Array.isArray(result.rows)) {
+                throw new Error('Invalid result format or empty result');
+            }
+    
+            // Process the rows to count genres
+            const genreCounts = {};
+            result.rows.forEach(row => {
+                if (row.GENRE) {
+                    const genres = row.GENRE.split(',').map(genre => genre.trim());
+                    genres.forEach(genre => {
+                        if (genre) {
+                            genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+                        }
+                    });
+                }
+            });
+    
+            // Convert counts to an array format
+            const genreStats = Object.entries(genreCounts).map(([genre, count]) => ({
+                genre,
+                count
+            }));
+    
+            // console.log('Processed genre stats:', genreStats); 
+    
+            res.json(genreStats);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
+
+    
+    app.post('/type-stats', async (req, res) => {
+        console.log('Received type stats request');
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            const typeStats = await con.execute(`
+                SELECT TYPE AS type, COUNT(*) AS count
+                FROM MEDIA
+                GROUP BY TYPE
+            `);
+            console.log(typeStats.rows);
+            res.json(typeStats.rows);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    app.post('/role-stats', async (req, res) => {
+    console.log('Received role stats request');
+    let con;
+    try {
+        con = await pool.getConnection();
+        if (!con) {
+            res.status(500).send("Connection Error");
+            return;
+        }
+
+        const roleStats = await con.execute(`
+            SELECT ROLE_TYPE AS role, COUNT(*) AS count
+            FROM ROLE
+            GROUP BY ROLE_TYPE
+        `);
+        console.log(roleStats.rows);
+        res.json(roleStats.rows);
+    } catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        if (con) {
+            try {
+                await con.close();
+            } catch (err) {
+                console.error("Error closing database connection: ", err);
+            }
+        }
+    }
+});
+
+    
+
 
     // Start the server
     app.listen(5000, () => {
