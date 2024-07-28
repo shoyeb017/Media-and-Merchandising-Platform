@@ -57,7 +57,7 @@ const Discussion = () => {
     fetchReplies();
   }, [selectedDiscussion]);
 
-  const handleAddReply = () => {
+  const handleAddReply = async () => {
     if (!selectedDiscussion || !replyText) return;
 
     try {
@@ -98,12 +98,25 @@ const Discussion = () => {
       };
       fetchReplies();
 
-
-    const newReply = {
-      DIS_ID: new Date().getTime(),
-      NAME: localStorage.getItem("username"), // Replace with actual user data
-      DESCRIPTION: replyText,
-    };
+      try {
+        const response = await fetch(`http://localhost:5000/discussions/replies`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ discussion_id: selectedDiscussion.DIS_ID }),
+        });
+        if (response.status === 200) {
+          const data = await response.json();
+          setReplies(data);
+        } else {
+          alert('Failed to fetch replies');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    
+    
 
     setReplies([...replies, newReply]);
     // setReplyText('');?

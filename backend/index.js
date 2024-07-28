@@ -25,6 +25,11 @@ function generateMediaId(title) {
 }
 
 
+function generateDiscussionId(topic) {
+    //will generate a discussion id based on the topic
+    return Math.abs(topic.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)) % 10000;
+}
+
 
 
 
@@ -2117,6 +2122,115 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR ADD DISCUSSION
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/discussions/add', async (req, res) => { 
+        const { user_id, media_id, topic, description } = req.body;
+        console.log('Received add discussion request:', { user_id, media_id, topic, description });
+        const dis_id = generateDiscussionId(topic);
+        console.log('Generated Discussion ID:', dis_id);
+        const dis_date = new Date().toISOString().split('T')[0]; 
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `INSERT INTO DISCUSSION (DIS_ID, DESCRIPTION, TOPIC, REPLY_COUNT, PARENT_TOPIC)
+                VALUES (:dis_id, :description, :topic, 0, NULL)`,
+                { dis_id, description, topic }
+            );
+            console.log(`Discussion Insert Result: ${JSON.stringify(result)}`);
+            const userDiscussionResult = await con.execute(
+                `INSERT INTO USERSTARTDISCUSSION (DIS_ID, USER_ID)
+                VALUES (:dis_id, :user_id)`,
+                { user_id, dis_id }
+            );
+            console.log(`User-Discussion Insert Result: ${JSON.stringify(userDiscussionResult)}`);
+            const mediaDiscussionResult = await con.execute(
+                `INSERT INTO DISCUSSIONABOUTMEDIA (DIS_ID, MEDIA_ID,DIS_DATE)
+                VALUES (:dis_id, :media_id, TO_DATE(:dis_date, 'YYYY-MM-DD'))`,
+                { dis_id, media_id, dis_date }
+            );
+            console.log(`Media-Discussion Insert Result: ${JSON.stringify(mediaDiscussionResult)}`);
+            await con.commit();
+            res.status(201).send("Discussion added successfully");
+            console.log("Discussion added successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR ADD DISCUSSION REPLY
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/discussions/add/reply', async (req, res) => {
+        const { user_id, discussion_id, description, replyCount} = req.body;
+        console.log('Received add discussion reply request:', { user_id, discussion_id, description, replyCount });
+        const dis_id = generateDiscussionId(description);
+        console.log('Generated Discussion ID:', dis_id);
+        const dis_date = new Date().toISOString().split('T')[0];
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `INSERT INTO DISCUSSION (DIS_ID, DESCRIPTION, REPLY_COUNT, PARENT_TOPIC)
+                VALUES (:dis_id, :description, :replyCount, :discussion_id)`,
+                { dis_id, description, replyCount, discussion_id }
+            );
+            console.log(`Discussion Insert Result: ${JSON.stringify(result)}`);
+            const userDiscussionResult = await con.execute(
+                `INSERT INTO USERSTARTDISCUSSION (DIS_ID, USER_ID)
+                VALUES (:dis_id, :user_id)`,
+                { dis_id, user_id }
+            );
+            console.log(`User-Discussion Insert Result: ${JSON.stringify(userDiscussionResult)}`);
+            await con.execute(
+                `UPDATE DISCUSSION SET REPLY_COUNT= :replyCount
+                WHERE DIS_ID = :discussion_id`,
+                { replyCount, discussion_id }
+            );
+            console.log(`Reply Count Updated`);
+            await con.commit();
+            res.status(201).send("Discussion reply added successfully");
+            console.log("Discussion reply added successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR NOTIFICATION
