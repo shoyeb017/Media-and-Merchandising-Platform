@@ -6,11 +6,11 @@
   }
 
   .news-card h4 {
-    color: white;
+    color: #ffdd95;
     margin: 0 0 5px;
   }
 
   .news-card p {
     color: #797e8f;
-    margin: 5px 0;
+    margin: 3px 0;
   }

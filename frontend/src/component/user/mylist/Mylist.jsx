@@ -6,6 +6,8 @@ const Mylist = () => {
   const [activeList, setActiveList] = useState('planToWatch');
   const [planToWatchMovies, setPlanToWatchMovies] = useState([]);
   const [watchedMovies, setWatchedMovies] = useState([]);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,9 +31,20 @@ const Mylist = () => {
         });
         const watchedData = await watchedResponse.json();
         setWatchedMovies(watchedData);
+
+        const favoriteResponse = await fetch('http://localhost:5000/media/favorite/mylist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+        });
+        const favoriteData = await favoriteResponse.json();
+        setFavoriteMovies(favoriteData);
       } catch (error) {
         console.error('Error fetching movie data:', error);
       }
+
     };
 
     fetchData();
@@ -92,6 +105,30 @@ const Mylist = () => {
       } catch (error) {
         console.error('Error deleting movie:', error);
       }
+    } else if(list === 'favorite') {
+      try {
+        await fetch('http://localhost:5000/media/favorite/delete', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id'), media_id: id }),
+        });
+        setFavoriteMovies(favoriteMovies.filter(movie => movie.id !== id));
+        // window.location.reload();
+        const favoriteResponse = await fetch('http://localhost:5000/media/favorite/mylist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+        });
+        const favoriteData = await favoriteResponse.json();
+        setFavoriteMovies(favoriteData);
+
+      } catch (error) {
+        console.error('Error deleting movie:', error);
+      }
     }
   };
 
@@ -110,6 +147,13 @@ const Mylist = () => {
         >
           Watched
         </button>
+        <button
+          className={`list-button ${activeList === 'favorite' ? 'active' : ''}`}
+          onClick={() => handleButtonClick('favorite')}
+        >
+          Favorite
+        </button>
+
       </div>
       <div className="movie-list">
         {activeList === 'planToWatch' &&
@@ -126,6 +170,14 @@ const Mylist = () => {
               key={movie.MEDIA_ID}
               movie={movie}
               handleDeleteMovie={() => handleDeleteMovie(movie.MEDIA_ID, 'watched')}
+            />
+          ))}
+        {activeList === 'favorite' &&
+          favoriteMovies.map((movie) => (
+            <MovieCard2
+              key={movie.MEDIA_ID}
+              movie={movie}
+              handleDeleteMovie={() => handleDeleteMovie(movie.MEDIA_ID, 'favorite')}
             />
           ))}
       </div>

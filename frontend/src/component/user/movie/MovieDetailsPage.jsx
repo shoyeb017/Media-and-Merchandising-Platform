@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faS, faStar } from '@fortawesome/free-solid-svg-icons';
 import RoleCard from './RoleCard';
 import NewsCard from './NewsCard';
 import './MovieDetailsPage.css';
@@ -33,9 +35,37 @@ const MovieDetailsPage = () => {
     const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
     const [newDiscussion, setNewDiscussion] = useState({ topic: '', description: '' });
     const [discussions, setDiscussions] = useState([]);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     const userId = localStorage.getItem('user_id');
 
+    // isfavorite------------------------------------------------------------------------------------------
+
+    useEffect(() => {
+        const fetchFavorite = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/media/favorite/status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user_id: userId, media_id: mediaID }),
+                });
+                if (response.status === 200) {
+                    setIsFavorite(true);
+                } else {
+                    setIsFavorite(false);
+                }
+                console.log(isFavorite);
+
+            } catch (error) {
+                console.error('Error fetching favorite status:', error);
+            }
+        };
+        fetchFavorite();
+    }, [userId, mediaID]);
+
+    //movie details--------------------------------------------------------------------------
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
@@ -57,7 +87,6 @@ const MovieDetailsPage = () => {
             }
         };
         fetchMovieDetails();
-        console.log
     }, [mediaID]);
 
     /// discussion-------------------------------------------------------------------------------------
@@ -182,6 +211,25 @@ const MovieDetailsPage = () => {
         
     };
 
+    const handleFavorite = async () => {
+        setIsFavorite(!isFavorite);
+        try {
+            await fetch('http://localhost:5000/media/favorite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    user_id: userId, 
+                    media_id: movieDetails.id, 
+                    is_favorite: !isFavorite
+                }),
+            });
+        } catch (error) {
+            console.error('Error updating favorite status:', error);
+        }
+    };
+
     const coverImgStyle = {
         backgroundImage: `url(${movieDetails.img})`,
         backgroundAttachment: 'fixed',
@@ -197,6 +245,8 @@ const MovieDetailsPage = () => {
 
 
     
+
+    
     return (
         <div className="movie-details-page">
             <div className="movie-details" style={coverImgStyle}>
@@ -205,7 +255,16 @@ const MovieDetailsPage = () => {
                         <img src={movieDetails.img} alt={movieDetails.title} className="movie-img" />
                     </div>
                     <div className="section2">
-                        <h2>{movieDetails.title}</h2>
+                    <h2>
+                        {movieDetails.title}
+                        <FontAwesomeIcon
+                            icon={faStar}
+                            className={`fav-icon ${isFavorite ? 'favorite' : ''}`}
+                            onClick={handleFavorite}
+                        />
+                    </h2>
+
+                        
                         <div>
                             <button className="button1" onClick={handleWatched}>Watched</button>
                             <button className="button2" onClick={handlePlanToWatch}>Plan to Watch</button>
