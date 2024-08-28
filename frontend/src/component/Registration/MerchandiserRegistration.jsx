@@ -87,7 +87,7 @@ const MerchandiserRegistration = () => {
               phone: '',
             });
             
-            navigate('/login');
+            navigate('/');
           } else {
             alert('Registration failed');
           }

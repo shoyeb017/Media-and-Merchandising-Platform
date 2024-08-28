@@ -1,0 +1,291 @@
+.addproduct-container {
+  width: 100%;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0), #242428), url('https://static.vecteezy.com/system/resources/previews/031/319/909/large_2x/row-of-fashionable-polo-t-shirts-for-man-on-wooden-hanger-or-rack-in-a-clothing-boutique-retail-shop-concept-by-ai-generated-free-photo.jpg');
+  filter: blur(1px);
+  position: absolute;
+}
+
+.product-form {
+  max-width: 600px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #3a3a3e;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1; /* Ensure this is above the background container */
+}
+
+.title-addproduct {
+  font-size: 45px;
+  margin-bottom: 20px;
+  color: #ffdd95;
+  filter: drop-shadow(2px 2px 2px black);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+  text-align: center;
+
+  border-bottom: 1px solid #ffdd95;
+  padding-bottom: 30px;
+
+  position: relative;
+  z-index: 1; /* Ensure this is above the background container */
+
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: white;
+}
+
+.form-group input[type="text"]{
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #4d5059;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  background-color: transparent;
+  color: #ffdd95;
+  margin: 0px;
+}
+
+.form-group input[type="text"]:focus {
+  border: 1px solid #ffdd95;
+  border-color: #ffdd95;
+  box-shadow: 0 0 6px #ffdd95;
+}
+
+.form-group input[type="number"]{
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #4d5059;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  background-color: transparent;
+  color: #ffdd95;
+  margin: 0px;
+}
+
+.form-group input[type="number"]:focus {
+  border: 1px solid #ffdd95;
+  border-color: #ffdd95;
+  box-shadow: 0 0 6px #ffdd95;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.upload-image-label {
+  color: white;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+.image-upload {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 15px;
+}
+
+.image-upload input[type="file"] {
+  width: 96%;
+  padding: 10px;
+  border: 1px solid  #4d5059;
+  border-radius: 5px;
+  background-color: transparent;
+
+  color: white;
+
+}
+
+.image-upload input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.image-upload input[type="file"]::before {
+  content: 'Choose File';
+  display: inline-block;
+  background: #ffdd95;
+  color: black;
+  padding: 10px 15px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.image-upload input[type="file"]:hover::before {
+  background: #4d5059;
+  color: #ffdd95;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 10px;
+  margin-left: 20px;
+
+  border-radius: 5px;
+  border: 1px solid #ffdd95;
+}
+
+
+.media-section {
+  margin-top: 20px;
+}
+
+.media-section h3{
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.selected-media{
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  
+}
+
+.selected-media .selected-media-item p{
+
+  align-items: center;
+  color: #ffdd95;
+  border: 1px solid #ffdd95;
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+
+  margin-right: 10px;
+}
+
+.selected-media .selected-media-item{
+  display: inline-flex; 
+  align-items: center;
+  color: #ffdd95;
+  border: 1px solid #ffdd95;
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+
+  margin-right: 10px;
+}
+.selected-media .remove-media{
+  color: white;
+  
+  background-color: transparent;
+  border: 0px;
+}
+.selected-media .remove-media:hover{
+  color: #ffdd95;
+}
+
+
+.media-search {
+  margin-top: 10px;
+}
+
+.media-search input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #4d5059;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  margin: 0px;
+}
+
+.media-search input[type="text"]:focus {
+  border: 1px solid #ffdd95;
+  border-color: #ffdd95;
+  box-shadow: 0 0 6px #ffdd95;
+}
+
+.media-search .search-results {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  background-color: #4d5059;
+  gap: 0px;
+  border-radius: 5px;
+
+}
+
+.media-result {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  width: 97%;
+}
+
+.media-result:hover {
+  background-color: #ffdd95;
+  color: black;
+  .role-name{
+    color: black;
+  }
+  border-radius: 5px;
+}
+
+.media-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.media-title{
+  color: white;
+}
+
+
+.submit-button {
+
+  font-size: 18px;
+  font-weight: bold;
+
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ffdd95;
+  color: black;
+  transition: background-color 0.3s;
+
+  width: 100%;
+
+  margin-top: 60px;
+}
+
+.submit-button:hover {
+  background-color: black;
+  color: #ffdd95;
+}

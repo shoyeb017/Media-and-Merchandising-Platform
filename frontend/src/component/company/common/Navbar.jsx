@@ -42,7 +42,9 @@ function Navbar() {
             <li className="menu-list-item">
               <Link to={`/${username}/mediaform`}>Add Media</Link>
             </li>
-
+            <li className="menu-list-item">
+              <Link to={`/${username}/company/collaborate`}>Collaborate</Link>
+            </li>
           </ul>
         </div>
         <Link to={`/${username}/profile`} className="profile-text">Profile</Link>

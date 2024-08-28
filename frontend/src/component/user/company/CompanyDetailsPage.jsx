@@ -7,12 +7,41 @@ import './CompanyDetailsPage.css';
 
 const CompanyDetailsPage = () => {
   const { companyID } = useParams();
+  // const { com_id} = useParams();
   const [company, setCompany] = useState(null);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Fetch company data by ID
+  const fetchAdvertisement = async () => {
+    const com_id = companyID;
+      console.log(com_id);
+    try {
+      const response = await fetch(`http://localhost:5000/companydetailspage/advertisement`,
+        { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ com_id })
+        }
+
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setProducts(data);
+      } else {
+        console.error('Failed to fetch company data');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     // Fetch company data by ID
     const fetchCompanyData = async () => {
+
       try {
         const response = await fetch(`http://localhost:5000/companies/page`,
           { 
@@ -35,6 +64,7 @@ const CompanyDetailsPage = () => {
       }
     };
     fetchCompanyData();
+    fetchAdvertisement();
   }, [companyID]);
 
   if (loading) {
@@ -80,13 +110,9 @@ const CompanyDetailsPage = () => {
         <div className="products-section">
           <h3 className="products-title">Advertisement</h3>
           <div className="product-list">
-            {Array.isArray(company.productId) && company.productId.map(productId => {
-              const product = product.find(p => p.COM_ID === productId);
-              if (product) {
-                return <ProductCard key={product.COM_ID} product={product} />;
-              }
-              return null; // Handle case where product is not found
-            })}
+          {products.map(product => (
+          <ProductCard key={product.PRO_ID} product={product} />
+        ))}
           </div>
         </div>
 

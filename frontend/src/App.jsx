@@ -29,15 +29,22 @@ import HomeAdmin from "./component/admin/home/Home.jsx";
 import UserList from "./component/admin/user/UserList.jsx";
 import CompanyList from "./component/admin/company/CompanyList.jsx";
 import MerchandiserList from "./component/admin/merch/MerchandiserList.jsx";
+import AddRole from "./component/admin/role/AddRole.jsx";
 import ProfileAdmin from "./component/admin/profile/ProfilePage.jsx";
 
 import HomeCompany from "./component/company/home/Home.jsx";
 import MediaForm from "./component/company/mediaform/MediaForm.jsx";
 import CompanyMovieDetailsPage from "./component/company/movie/MovieDetailsPage.jsx";
+import CompanyCollaborate from "./component/company/collaborate/CompanyCollaborate.jsx";
+import CollabDetailsCompany from "./component/company/collaborate/CollabDetails.jsx";
 import ProfileCompany from "./component/company/profile/ProfilePage.jsx";
 
 import HomeMerch from "./component/merch/home/Home.jsx";
 import ProfileMerch from "./component/merch/profile/ProfilePage.jsx";
+import ProductForm from "./component/merch/addproductform/ProductForm.jsx";
+import MerchandiserCollaborate from "./component/merch/collaborate/MerchandiserCollaborate.jsx";
+import CollabDetailsMerch from "./component/merch/collaborate/CollabDetails.jsx"
+import MerchProductDetailsPage from "./component/merch/product/ProductDetails.jsx";
 
 import Login from "./component/Login.jsx";
 import Registration from "./component/Registration/Registration.jsx";
@@ -134,6 +141,7 @@ export default function App() {
               <Route path="/:username/userlist" element={<UserList />} />
               <Route path="/:username/companylist" element={<CompanyList />} />
               <Route path="/:username/merchandiserlist" element={<MerchandiserList />} />
+              <Route path="/:username/addrole" element={<AddRole />} />
               <Route path="/:username/profile" element={<ProfileAdmin />} />
             </Route>
           )}
@@ -142,6 +150,10 @@ export default function App() {
             <Route element={<LayoutMerch />}>
               <Route path="/:username/home" element={<HomeMerch/>}/>
               <Route path="/:username/profile" element={<ProfileMerch />} />
+              <Route path="/:username/productform" element={<ProductForm />} />
+              <Route path="/merchandiser/:username/product/:productID" element={<MerchProductDetailsPage />}/>
+              <Route path="/:username/merchandiser/collaborate" element={<MerchandiserCollaborate />}/>
+              <Route path="/:username/merchandiser/collaborate/details/:com_id" element={<CollabDetailsMerch />}/>
             </Route>
           )}
 
@@ -151,6 +163,8 @@ export default function App() {
               <Route path="/:username/mediaform" element={<MediaForm />} />
               <Route path="/:username/profile" element={<ProfileCompany />} />
               <Route path="/company/:username/media/:mediaID" element={<CompanyMovieDetailsPage />}/>
+              <Route path="/:username/company/collaborate" element={<CompanyCollaborate />}/>
+              <Route path="/:username/company/collaborate/details/:mer_id" element={<CollabDetailsCompany />}/>
             </Route>
           )}
           {/* Fallback route if userType is not set */}

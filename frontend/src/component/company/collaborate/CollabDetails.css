@@ -1,0 +1,126 @@
+/* CollabDetails.css */
+
+.collab-details-page {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.collab-details-merchandiser{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #3a3a3e;
+    border-radius: 5px;
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 30px 10px;
+
+    width: 700px
+}
+
+.collab-details-merchandiser h2{
+    color: white;
+    font-size: 30px;
+
+    padding: 0px 10px;
+    border-left: 3px solid #ffdd95;
+    border-right: 3px solid #ffdd95;
+}
+
+.collab-details-merchandiser-name{
+    color: #ffdd95;
+    font-size: 25px;
+}
+
+.collab-details-merchandiser-desc{
+    color: white;
+    font-size: 15px;
+}
+  
+
+.collab-details-products{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #3a3a3e;
+    border-radius: 5px;
+    padding: 30px 10px;
+
+    width: 700px;
+}
+
+.collab-details-products h2{
+    color: white;
+    font-size: 30px;
+
+    padding: 0px 10px;
+    border-left: 3px solid #ffdd95;
+    border-right: 3px solid #ffdd95;
+}
+
+.collab-details-products-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+
+    width: 100%;
+  }
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+
+    height: 200px;
+    width: 150px;
+  }
+
+.link-product-card {
+    text-decoration: none;
+  }
+
+
+.product-card:hover {
+    border-color: #ffdd95;
+  }
+
+.product-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+.product-info {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+.product-name {
+    font-size: 12px;
+    margin: 2px 0;
+    color: white;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+  }
+
+.product-price {
+    font-size: 14px;
+    color: #ffdd95;
+    font-weight: bold;
+    margin-top: 12px;
+  }

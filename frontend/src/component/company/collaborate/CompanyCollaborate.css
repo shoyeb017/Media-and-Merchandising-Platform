@@ -1,0 +1,218 @@
+.collab-container {
+    width: 100%;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0), #242428), url('https://www.theladders.com/wp-content/uploads/handshake_190617.jpg');
+    filter: blur(1px);
+    position: absolute;
+  }
+
+
+.title-collab {
+    font-size: 45px;
+    margin-bottom: 20px;
+    color: #ffdd95;
+    filter: drop-shadow(2px 2px 2px black);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
+    text-align: center;
+  
+    border-bottom: 1px solid #ffdd95;
+    padding-bottom: 30px;
+  
+    position: relative;
+    z-index: 1; /* Ensure this is above the background container */
+  
+  }
+
+.collaborate-requests {
+    max-width: 1000px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #3a3a3e;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1; /* Ensure this is above the background container */
+}
+
+.collaborate-requests h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #ffdd95;
+}
+
+
+.collab-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.collab-item {
+    padding: 15px;
+    margin-bottom: 10px;
+
+    background-color: #3a3a3e;
+    color: white;
+    border: 2px solid #4d5059;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.collab-item:hover {
+    border: 1px solid #ffdd95;
+}
+
+/* .collab-item.waiting {
+    background-color: #ffe599;
+}
+
+.collab-item.accepted {
+    background-color: #b6d7a8;
+}
+
+.collab-item.rejected {
+    background-color: #f4cccc;
+} */
+
+.collab-details1 {
+    margin-bottom: 10px;
+    width: 10%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-right: 2px solid #4d5059;
+    padding-right: 10px;
+}
+
+.collab-details1-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.collab-details1-status i{
+    font-size: 50px;
+    color: #ffdd95;
+}
+
+.collab-details2 {
+    margin-bottom: 10px;
+    width: 40%;
+}
+
+.collab-details2-label {
+    color: rgb(109, 109, 109);
+}
+
+.collab-details3 {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.collab-details3-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+
+    background-color: #3a3a3e;
+    border: 1px solid #4d5059;
+    border-radius: 5px;
+    padding:10px;
+
+    font-size: 15px;
+}
+
+.collab-details3-button p{
+    color: white;
+}
+
+.collab-details3-button i {
+    font-size: 20px;
+    color: #ffdd95;
+}
+
+.collab-details3-button:hover {
+    background-color: #4d5059;
+}
+
+.collab-details4 {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.collab-details4-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+
+    width: 100px;
+
+    background-color: #3a3a3e;
+    border: 1px solid #4d5059;
+    border-radius: 5px;
+    padding:10px;
+
+    font-size: 15px;
+}
+
+.collab-details4-button p{
+    color: white;
+}
+
+.collab-details4-button i {
+    font-size: 20px;
+    color: #ffdd95;
+}
+
+.collab-details4-button:hover {
+    background-color: #4d5059;
+}
+
+.collab-actions button {
+    color: black;
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.collab-actions button:first-child {
+    background-color: #28a745;
+    color: white;
+}
+
+.collab-actions button:first-child:hover {
+    background-color: #218838;
+}
+
+.collab-actions button:last-child {
+    background-color: #dc3545;
+    color: white;
+}
+
+.collab-actions button:last-child:hover {
+    background-color: #c82333;
+}

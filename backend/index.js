@@ -24,6 +24,11 @@ function generateMediaId(title) {
     return Math.abs(title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + Date.now()) % 10000;
 }
 
+function generateProductId(title) {
+    //will generate a media id based on the title and time
+    return Math.abs(title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + Date.now()) % 10000;
+}
+
 
 
 
@@ -2404,9 +2409,839 @@ app.post('/addNews', async (req, res) => {
     }
 });
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for add role
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.post('/admin/addrole', async (req, res) => {
+        const {
+            name,
+            roleType,
+            img,
+            imgUrl
+        } = req.body;
+    
+        console.log('Received add role request:', { name,roleType, img , imgUrl});
+    
+        const role_id = generateProductId(name);
+        console.log('Generated Role ID:', role_id);
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            
+            // Insert role data into the ROLE table
+            const productResult = await con.execute(
+                `INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE)
+                 VALUES (:role_id, :name, :imgUrl, :roleType)`,
+                {
+                    role_id,
+                    name,
+                    imgUrl,
+                    roleType
+                }
+            );
+            console.log(`Role Insert Result: ${JSON.stringify(productResult)}`);
+    
+            // Commit the transaction
+            await con.commit();
+    
+            res.status(201).send("Role added successfully");
+            console.log("Role added successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
     
 
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for fetch medias
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.get('/medias', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received Media request');
+            const result = await con.execute(
+                `SELECT * FROM MEDIA`
+            );
+            console.log(`Query Result: `,result.rows);
+
+            
+
+            res.send(result.rows);
+            console.log("MEDIA Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR ADD PRODUCT
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/addproduct', async (req, res) => {
+        const {
+            name,
+            description,
+            price,
+            quantity,
+            image,
+            imageUrl,
+            media,
+            merchId
+        } = req.body;
+    
+        console.log('Received add product request:', { name, description, price, quantity, imageUrl, media, merchId });
+    
+        const pro_id = generateProductId(name);
+        console.log('Generated Product ID:', pro_id);
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            
+            // Insert product data into the PRODUCTS table
+            const productResult = await con.execute(
+                `INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY)
+                 VALUES (:pro_id, :name, :description, :image, :price, :quantity)`,
+                {
+                    pro_id,
+                    name,
+                    description,
+                    image: imageUrl,
+                    price,
+                    quantity
+                }
+            );
+            console.log(`Product Insert Result: ${JSON.stringify(productResult)}`);
+    
+
+        // Insert product and media association into PRODUCTBASEDONMEDIA
+        for (const mediaItem of media) {
+            try {
+                const mediaResult = await con.execute(
+                    `INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID)
+                     VALUES (:pro_id, :media_id)`,
+                    {
+                        pro_id,
+                        media_id: mediaItem
+                    }
+                );
+                console.log(`Media Insert Result for Media ID ${mediaItem.media_id}: ${JSON.stringify(mediaResult)}`);
+            } catch (mediaErr) {
+                console.error(`Error inserting media ID ${mediaItem.media_id}: `, mediaErr);
+                throw mediaErr;
+            }
+        }
+    
+            // Insert product and merch association into MERCHPRODUCEPROD
+            const merchProductResult = await con.execute(
+                `INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID)
+                 VALUES (:pro_id, :merchId)`,
+                {
+                    pro_id,
+                    merchId
+                }
+            );
+            console.log(`Merch-Product Insert Result: ${JSON.stringify(merchProductResult)}`);
+    
+            // Commit the transaction
+            await con.commit();
+    
+            res.status(201).send("Product added successfully");
+            console.log("Product added successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
+    
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // route for MERCHANDISER HOME MY PRODUCT
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/home/myproduct', async (req, res) => {
+        const { mer_id } = req.body;
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            // Get all product details 
+
+            const result = await con.execute(
+                `SELECT PRODUCTS.* 
+                FROM MERCHANDISER, MERCHPRODUCEPROD ,PRODUCTS 
+                WHERE MERCHANDISER.MER_ID = MERCHPRODUCEPROD.MER_ID
+                AND PRODUCTS.PRO_ID = MERCHPRODUCEPROD.PRO_ID
+                AND MERCHANDISER.MER_ID = :mer_id`,
+                { mer_id }
+            );
+            console.log(`Query Result: `, result.rows);
+
+            const List = result.rows.map(data => ({
+                PRO_ID: data.PRO_ID,
+                NAME: data.NAME,
+                DESCRIPTION: data.DESCRIPTION,
+                IMAGE: data.IMAGE,
+                PRICE: data.PRICE,
+                QUANTITY: data.QUANTITY
+            }));
+    
+            res.send(List);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MERCHANDISER COLLABORATE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/merchandiser/collaborate', async (req, res) => {
+        const {
+            com_id,
+            mer_id,
+            description,
+            status
+        } = req.body;
+    
+        console.log('Received merchandiser collaborate request:', { com_id, mer_id, description, status });
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            // Check if there are any existing entries with the same com_id
+            const existingEntriesQuery = await con.execute(
+                `SELECT COUNT(*) AS COUNT FROM COLLABORATE WHERE COM_ID = :com_id AND MER_ID = :mer_id`,
+                { com_id, mer_id }
+            );
+    
+
+            const count = existingEntriesQuery.rows[0].COUNT;
+            console.log(`Existing entries with COM_ID ${com_id} and MER_ID ${mer_id}: ${count}`);
+    
+            // If there are existing entries, delete them
+            if (count > 0) {
+                await con.execute(
+                    `DELETE FROM COLLABORATE WHERE COM_ID = :com_id AND MER_ID = :mer_id`,
+                    { com_id, mer_id }
+                );
+                console.log(`Deleted existing entries with COM_ID ${com_id} and MER_ID ${mer_id}`);
+            }
+    
+            // Fetch all products associated with the merchandiser
+            const productQuery = await con.execute(
+                `SELECT PRO_ID FROM MERCHPRODUCEPROD WHERE MER_ID = :mer_id`,
+                { mer_id }
+            );
+            console.log(`Query Result: `, productQuery.rows);
+    
+            // Insert product associated with the merchandiser into collaborate
+            for (const prod of productQuery.rows) { // Use productQuery.rows to iterate
+                try {
+                    const result = await con.execute(
+                        `INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+                        VALUES (:pro_id, :com_id, :mer_id, :description, :status)`,
+                        {
+                            pro_id: prod.PRO_ID, // Use the correct column name in uppercase
+                            com_id,
+                            mer_id,
+                            description,
+                            status
+                        }
+                    );
+                    console.log(`Product Insert Result for product ID ${prod.PRO_ID}: ${JSON.stringify(result)}`);
+                } catch (prodErr) {
+                    console.error(`Error inserting product ID ${prod.PRO_ID}: `, prodErr);
+                    throw prodErr; // Correct the error thrown
+                }
+            }
+    
+            // Commit the transaction
+            await con.commit();
+    
+            res.status(201).send("Collaborate requested successfully");
+            console.log("Collaborate requested successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MERCHANDISER SHOW ALL COLLABORATE STATUS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/merchandiser/collaborate/status', async (req, res) => {
+        const { mer_id } = req.body;
+        console.log('Received merchandiser collaborate status request:', { mer_id });
+        if (!mer_id) {
+            return res.status(400).send("Merchandiser ID is required");
+        }
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+            // Get all collaborate details
+            const result = await con.execute(
+                `SELECT C.NAME,
+                        COL.MER_ID,
+                        COL.COM_ID,
+                        COL.DESCRIPTION,
+                        COL.C_STATUS,
+                        (SELECT COUNT(P.PRO_ID)
+                         FROM PRODUCTS P
+                         JOIN PRODUCTBASEDONMEDIA PB ON P.PRO_ID = PB.PRO_ID
+                         JOIN COMPANYHASMEDIA CHM ON PB.MEDIA_ID = CHM.MEDIA_ID
+                         WHERE CHM.COM_ID = COL.COM_ID
+                         AND P.PRO_ID IN (
+                             SELECT PRO_ID
+                             FROM MERCHPRODUCEPROD
+                             WHERE MER_ID = COL.MER_ID
+                         )
+                        ) AS PRODUCT_COUNT
+                 FROM COLLABORATE COL
+                 JOIN MERCHANDISER C ON COL.MER_ID = C.MER_ID
+                 WHERE COL.MER_ID = :mer_id
+                 GROUP BY C.NAME, COL.MER_ID, COL.COM_ID, COL.DESCRIPTION, COL.C_STATUS, COL.COM_ID`,
+                { mer_id }
+            );
+            
+    
+            console.log(`Query Result: `, result.rows);
+    
+            const List = result.rows.map(data => ({
+                MER_ID: data.MER_ID,
+                COM_ID: data.COM_ID,
+                MER_NAME: data.NAME,
+                DESCRIPTION: data.DESCRIPTION,
+                C_STATUS: data.C_STATUS,
+                PRODUCT_COUNT: data.PRODUCT_COUNT,
+            }));
+    
+            res.send(List);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MERCHANDISER/COMPANY DELETE COLLABORATE STATUS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/collaborate/delete', async (req, res) => {
+        const {
+            com_id,
+            mer_id
+        } = req.body;
+    
+        console.log('Received delete collaborate request:', { com_id, mer_id });
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            // Check if there are any existing entries with the same com_id
+            const existingEntriesQuery = await con.execute(
+                `SELECT COUNT(*) AS COUNT FROM COLLABORATE WHERE COM_ID = :com_id AND MER_ID = :mer_id`,
+                { com_id, mer_id }
+            );
+    
+
+            const count = existingEntriesQuery.rows[0].COUNT;
+            console.log(`Existing entries with COM_ID ${com_id} and MER_ID ${mer_id}: ${count}`);
+    
+            // If there are existing entries, delete them
+            if (count > 0) {
+                await con.execute(
+                    `DELETE FROM COLLABORATE WHERE COM_ID = :com_id AND MER_ID = :mer_id`,
+                    { com_id, mer_id }
+                );
+                console.log(`Deleted existing entries with COM_ID ${com_id} and MER_ID ${mer_id}`);
+            }
+    
+            // Commit the transaction
+            await con.commit();
+    
+            res.status(201).send("Collaborate Deleted successfully");
+            console.log("Collaborate Deleted successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR COMPANY SHOW COLLABORATE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/company/collaborate/show', async (req, res) => {
+        const { com_id } = req.body;
+    
+        if (!com_id) {
+            return res.status(400).send("Company ID is required");
+        }
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+            // Get all collaborate details
+            const result = await con.execute(
+                `SELECT C.NAME,
+                        COL.MER_ID,
+                        COL.DESCRIPTION,
+                        COL.C_STATUS,
+                        (SELECT COUNT(P.PRO_ID)
+                         FROM PRODUCTS P
+                         JOIN PRODUCTBASEDONMEDIA PB ON P.PRO_ID = PB.PRO_ID
+                         JOIN COMPANYHASMEDIA CHM ON PB.MEDIA_ID = CHM.MEDIA_ID
+                         WHERE CHM.COM_ID = COL.COM_ID
+                         AND P.PRO_ID IN (
+                             SELECT PRO_ID
+                             FROM MERCHPRODUCEPROD
+                             WHERE MER_ID = COL.MER_ID
+                         )
+                        ) AS PRODUCT_COUNT
+                 FROM COLLABORATE COL
+                 JOIN MERCHANDISER C ON COL.MER_ID = C.MER_ID
+                 WHERE COL.COM_ID = :com_id
+                 AND COL.C_STATUS = 'WAITING'
+                 GROUP BY C.NAME, COL.MER_ID, COL.DESCRIPTION, COL.C_STATUS, COL.COM_ID`,
+                { com_id }
+            );
+            
+    
+            console.log(`Query Result: `, result.rows);
+    
+            const List = result.rows.map(data => ({
+                MER_ID: data.MER_ID,
+                MER_NAME: data.NAME,
+                DESCRIPTION: data.DESCRIPTION,
+                C_STATUS: data.C_STATUS,
+                PRODUCT_COUNT: data.PRODUCT_COUNT,
+            }));
+    
+            res.send(List);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR COMPANY SHOW COLLABORATE STATUS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/company/collaborate/status', async (req, res) => {
+        const { com_id } = req.body;
+    
+        if (!com_id) {
+            return res.status(400).send("Company ID is required");
+        }
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+            // Get all collaborate details
+            const result = await con.execute(
+                `SELECT C.NAME,
+                        COL.MER_ID,
+                        COL.COM_ID,
+                        COL.DESCRIPTION,
+                        COL.C_STATUS,
+                        (SELECT COUNT(P.PRO_ID)
+                         FROM PRODUCTS P
+                         JOIN PRODUCTBASEDONMEDIA PB ON P.PRO_ID = PB.PRO_ID
+                         JOIN COMPANYHASMEDIA CHM ON PB.MEDIA_ID = CHM.MEDIA_ID
+                         WHERE CHM.COM_ID = COL.COM_ID
+                         AND P.PRO_ID IN (
+                             SELECT PRO_ID
+                             FROM MERCHPRODUCEPROD
+                             WHERE MER_ID = COL.MER_ID
+                         )
+                        ) AS PRODUCT_COUNT
+                 FROM COLLABORATE COL
+                 JOIN MERCHANDISER C ON COL.MER_ID = C.MER_ID
+                 WHERE COL.COM_ID = :com_id
+                 AND COL.C_STATUS = 'ACCEPTED'
+                 OR COL.C_STATUS = 'REJECTED'
+                 GROUP BY C.NAME, COL.MER_ID, COL.COM_ID, COL.DESCRIPTION, COL.C_STATUS, COL.COM_ID`,
+                { com_id }
+            );
+            
+    
+            console.log(`Query Result: `, result.rows);
+    
+            const List = result.rows.map(data => ({
+                MER_ID: data.MER_ID,
+                COM_ID: data.COM_ID,
+                MER_NAME: data.NAME,
+                DESCRIPTION: data.DESCRIPTION,
+                C_STATUS: data.C_STATUS,
+                PRODUCT_COUNT: data.PRODUCT_COUNT,
+            }));
+    
+            res.send(List);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR COMPANY SHOW COLLABORATE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/company/collaborate/show', async (req, res) => {
+        const { com_id } = req.body;
+    
+        if (!com_id) {
+            return res.status(400).send("Company ID is required");
+        }
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+            // Get all collaborate details
+            const result = await con.execute(
+                `SELECT C.NAME,
+                        COL.MER_ID,
+                        COL.DESCRIPTION,
+                        COL.C_STATUS,
+                        (SELECT COUNT(P.PRO_ID)
+                         FROM PRODUCTS P
+                         JOIN PRODUCTBASEDONMEDIA PB ON P.PRO_ID = PB.PRO_ID
+                         JOIN COMPANYHASMEDIA CHM ON PB.MEDIA_ID = CHM.MEDIA_ID
+                         WHERE CHM.COM_ID = COL.COM_ID
+                         AND P.PRO_ID IN (
+                             SELECT PRO_ID
+                             FROM MERCHPRODUCEPROD
+                             WHERE MER_ID = COL.MER_ID
+                         )
+                        ) AS PRODUCT_COUNT
+                 FROM COLLABORATE COL
+                 JOIN MERCHANDISER C ON COL.MER_ID = C.MER_ID
+                 WHERE COL.COM_ID = :com_id
+                 GROUP BY C.NAME, COL.MER_ID, COL.DESCRIPTION, COL.C_STATUS, COL.COM_ID`,
+                { com_id }
+            );
+            
+    
+            console.log(`Query Result: `, result.rows);
+    
+            const List = result.rows.map(data => ({
+                MER_ID: data.MER_ID,
+                MER_NAME: data.NAME,
+                DESCRIPTION: data.DESCRIPTION,
+                C_STATUS: data.C_STATUS,
+                PRODUCT_COUNT: data.PRODUCT_COUNT,
+            }));
+    
+            res.send(List);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR COMPANY COLLABORATE UPDATE
+    //----------------------------------------------------------------
+    
+    app.post('/company/collaborate/update', async (req, res) => {
+        const { com_id, mer_id, status } = req.body;
+      
+        console.log('Updating collaboration status:', { com_id, mer_id, status });
+      
+        let con;
+        try {
+          con = await pool.getConnection();
+          if (!con) {
+            res.status(500).send("Connection Error");
+            return;
+          }
+      
+          // Update the status for all products related to the given merchandiser and company
+          const result = await con.execute(
+            `UPDATE COLLABORATE
+             SET C_STATUS = :status
+             WHERE COM_ID = :com_id AND MER_ID = :mer_id`,
+            { status, com_id, mer_id }
+          );
+      
+          if (result.rowsAffected === 0) {
+            res.status(404).send("No collaboration request found to update");
+            return;
+          }
+      
+          // Commit the transaction
+          await con.commit();
+      
+          res.status(200).send("Collaboration status updated successfully");
+          console.log("Collaboration status updated successfully");
+        } catch (err) {
+          console.error("Error during database query: ", err);
+          res.status(500).send("Internal Server Error");
+        } finally {
+          if (con) {
+            try {
+              await con.close();
+            } catch (closeErr) {
+              console.error("Error closing database connection: ", closeErr);
+            }
+          }
+        }
+      });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR COMPANY COLLABORATE DETAILS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+    app.post('/company/collaborate/details', async (req, res) => {
+        const { com_id, mer_id } = req.body;
+        console.log('Received collaboration details request:', { com_id, mer_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+            // Get collaboration details for the specified merchandiser, ensuring no duplicates
+            const result = await con.execute(
+                `SELECT  P.PRO_ID, P.NAME AS PRODUCT_NAME, P.DESCRIPTION AS PRODUCT_DESCRIPTION, P.IMAGE AS PRODUCT_IMAGE, P.PRICE AS PRODUCT_PRICE,
+                         M.NAME, M.DESCRIPTION, M.MER_ID
+                         FROM PRODUCTS P
+                         JOIN PRODUCTBASEDONMEDIA PB ON P.PRO_ID = PB.PRO_ID
+                         JOIN COMPANYHASMEDIA CHM ON PB.MEDIA_ID = CHM.MEDIA_ID
+                         JOIN MERCHPRODUCEPROD MP ON P.PRO_ID = MP.PRO_ID
+                         JOIN MERCHANDISER M ON MP.MER_ID = M.MER_ID
+                         WHERE CHM.COM_ID = :com_id
+                         AND MP.MER_ID = :mer_id`,
+                { mer_id, com_id }
+            );
+    
+            console.log(`Query Result: `, result.rows);
+    
+            if (result.rows.length === 0) {
+                return res.status(404).send("No details found for the specified merchandiser");
+            }
+    
+            // Format the response
+            const formattedDetails = {
+                MER_ID: mer_id,
+                MER_NAME: result.rows[0].NAME,
+                DESCRIPTION: result.rows[0].DESCRIPTION,
+                PRODUCTS: result.rows.filter(row => row.PRO_ID).map(row => ({
+                    PRODUCT_ID: row.PRO_ID,
+                    NAME: row.PRODUCT_NAME,
+                    IMAGE: row.PRODUCT_IMAGE,
+                    PRICE: row.PRODUCT_PRICE
+                })),
+            };
+    
+            res.send(formattedDetails);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR COMPANY DETAILS PAGE ADVERTISEMENT PRODUCT
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+    app.post('/companydetailspage/advertisement', async (req, res) => {
+        const { com_id } = req.body;
+        console.log('Received company details page advertisement request:', { com_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+
+            const result = await con.execute(
+                `
+                SELECT P.PRO_ID, P.NAME, P.DESCRIPTION, P.IMAGE, P.PRICE, P.QUANTITY
+                FROM PRODUCTS P
+                JOIN PRODUCTBASEDONMEDIA PB ON P.PRO_ID = PB.PRO_ID
+                JOIN COMPANYHASMEDIA CHM ON PB.MEDIA_ID = CHM.MEDIA_ID
+                JOIN COLLABORATE COL ON P.PRO_ID = COL.PRO_ID AND CHM.COM_ID = COL.COM_ID
+                WHERE COL.COM_ID = :com_id
+                AND COL.C_STATUS = 'ACCEPTED'`,
+                { com_id }
+            );
+    
+            console.log(`Query Result: `, result.rows);
+    
+            if (result.rows.length === 0) {
+                return res.status(404).send("No details found for the specified merchandiser");
+            }
+    
+            res.send(result.rows);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
+    
+
+    
     // Start the server
     app.listen(5000, () => {
         console.log('Server started on http://localhost:5000');

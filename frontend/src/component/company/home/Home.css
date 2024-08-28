@@ -4,7 +4,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0), #242428), url('https://i.pinimg.com/originals/40/ff/45/40ff45a5ae70a855cf1292e8f2a8100c.gif');
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0), #242428), url('zen.gif');
     filter: blur(1px);
     position: absolute;
   }

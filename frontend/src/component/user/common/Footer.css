@@ -31,11 +31,23 @@
 }
 
 .newsletter-input button {
-  padding: 10px;
+  padding: 10px 0px;
   border: none;
   background: #ffdd95;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
+  margin-left: 5px;
+  width: 100px;
+}
+
+.newsletter-input button:hover {
+  padding: 10px 0px;
+  border: none;
+  background: #ffdd95;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  margin-left: 5px;
+  width: 100px;
 }
 
 .contact-section {

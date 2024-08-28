@@ -71,7 +71,7 @@ const CompanySection = () => {
         <button className="search-button">Search</button>
       </div>
 
-      <div className="company-list">
+      <div className="company-list11">
         {filteredCompanies.map(company => (
           <CompanyCard key={company.COM_ID} company={company} />
         ))}
