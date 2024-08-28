@@ -7,9 +7,11 @@
   .delete-button {
     z-index: 1;
     position: absolute; 
-
-    width: 281px;
+    right: -10px;
+    width: 28px;
     height: 28px;
+    border-radius: 10%;
+
 
     background-color: #ffdd95;
     font-size: large;
@@ -23,17 +25,19 @@
   }
 
   .delete-button:hover {
+    /* set the transformation ease */
+    transition: all 0.5s ease;
     background-color: red;
     color: white;
   }
   .movie-card2:hover .movie-card2-img {
-    transform: scale(1.1);
+    transform: scale(1.05);
     opacity: 0.5;
   }
 
 
   .movie-card2:hover .movie-card2-title {
-    transform: scale(1.1);
+    transform: scale(1.05);
     margin: 0 30px;
     opacity: 0.5;
   }
