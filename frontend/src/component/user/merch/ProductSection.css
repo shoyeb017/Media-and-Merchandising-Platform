@@ -44,14 +44,22 @@
   background-color: #ffdd95;
   color: black;
   border: none;
-  padding: 8px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   border-radius: 4px;
-  font-weight: bold;
+  font-weight: 500;
+
   margin-right: 10px;
   margin-bottom: 10px;
+
   text-decoration: none;
+
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 
 .cart-button1:hover {

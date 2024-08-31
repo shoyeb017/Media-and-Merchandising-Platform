@@ -30,6 +30,8 @@
   }
 
   .product-details-info {
+
+    min-width: 400px;
     text-align: center;
     margin : 20px 150px;
 

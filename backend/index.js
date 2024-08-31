@@ -3753,9 +3753,474 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR USER CONFIRMATION ORDER
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+    app.post('/user/order', async (req, res) => {
+        const { user_id, items, order_date, order_time } = req.body; // 'order_date' and 'order_time' are sent separately
+        console.log('Received order request:', { user_id, items, order_date, order_time });
     
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            for (const item of items) {
+                const result = await con.execute(
+                    `INSERT INTO USERORDERSPRODUCT (USER_ID, PRO_ID, DELIVERY_STATUS, ORDER_DATE, ORDER_TIME, ORDER_QUANTITY)
+                     VALUES (:user_id, :pro_id, 'PENDING', TO_DATE(:order_date, 'DD-MM-YYYY'), :order_time, :quantity)`,
+                    { user_id, pro_id: item.PRO_ID, order_date, order_time, quantity: item.quantity }
+                );
+                console.log(`Order Insert Result for Product ${item.PRO_ID}: ${JSON.stringify(result)}`);
+            }
+    
+            // Commit the transaction
+            await con.commit();
+    
+            res.status(201).send("Order placed successfully");
+            console.log("Order placed successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                con.close();
+            }
+        }
+    });
     
 
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR USER ORDER LIST
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+    app.post('/user/orderlist', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received order list request:', { user_id });
+        
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+            const query = `
+                SELECT 
+                    TO_CHAR(ORDER_GROUP.ORDER_DATE, 'DD-MM-YYYY') AS ORDER_DATE,
+                    ORDER_GROUP.ORDER_TIME,  
+                    ORDER_GROUP.USER_ID, 
+                    ORDER_GROUP.ORDER_DETAILS, 
+                    ORDER_GROUP.DELIVERY_STATUS
+                FROM (
+                    SELECT 
+                        ORDER_DATE, 
+                        ORDER_TIME,
+                        USER_ID, 
+                        LISTAGG(PRO_ID || ' (x' || ORDER_QUANTITY || ')', ', ') WITHIN GROUP (ORDER BY PRO_ID) AS ORDER_DETAILS, 
+                        DELIVERY_STATUS
+                    FROM USERORDERSPRODUCT
+                    WHERE USER_ID = :user_id   
+                    GROUP BY ORDER_DATE, ORDER_TIME, USER_ID, DELIVERY_STATUS
+                    ORDER BY ORDER_DATE DESC, ORDER_TIME DESC
+                ) ORDER_GROUP
+            `;
+    
+            const result = await con.execute(query, { user_id });
+            console.log(`Query Result: `, result.rows);
+    
+            if (result.rows.length === 0) {
+                return res.status(404).send("No order list found");
+            }
+    
+            res.send(result.rows);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR USER ORDER LIST PRODUCT
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+    app.post('/merchandiser/orderlist/products', async (req, res) => {
+        const { productIds } = req.body;
+        console.log('Received product details request:', { productIds });
+        let con;
+        try {
+          con = await pool.getConnection();
+          if (!con) {
+            return res.status(500).send("Connection Error");
+          }
+      
+          // Convert productIds array to a comma-separated string for SQL query
+          const idsString = productIds.map(id => `'${id}'`).join(', ');
+      
+          const query = `
+            SELECT 
+              PRO_ID, 
+              NAME, 
+              PRICE, 
+              IMAGE
+            FROM PRODUCTS
+            WHERE PRO_ID IN (${idsString})
+          `;
+      
+          const result = await con.execute(query);
+      
+          console.log(`Query Result: `, result.rows);
+      
+          if (result.rows.length === 0) {
+            return res.status(404).send("No products found");
+          }
+      
+          res.send(result.rows);
+        } catch (err) {
+          console.error("Error during database query: ", err);
+          res.status(500).send("Internal Server Error");
+        } finally {
+          if (con) {
+            try {
+              await con.close();
+            } catch (err) {
+              console.error("Error closing database connection: ", err);
+            }
+          }
+        }
+      });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR USER ORDER USER DETAILS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/merchandiser/order/user/details', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received user_id details request:', { user_id });
+        let con;
+        try {
+          con = await pool.getConnection();
+          if (!con) {
+            return res.status(500).send("Connection Error");
+          }
+
+          const query = 
+          `  SELECT NAME, EMAIL, PHONE, CITY, STREET, HOUSE 
+             FROM USERS 
+             WHERE USER_ID = :user_id `;
+      
+          const result = await con.execute(query, { user_id });
+      
+          console.log(`Query Result: `, result.rows[0]);
+      
+          if (result.rows[0].length === 0) {
+            return res.status(404).send("No user found");
+          }
+      
+          res.send(result.rows[0]);
+        } catch (err) {
+          console.error("Error during database query: ", err);
+          res.status(500).send("Internal Server Error");
+        } finally {
+          if (con) {
+            try {
+              await con.close();
+            } catch (err) {
+              console.error("Error closing database connection: ", err);
+            }
+          }
+        }
+      });
+      
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MERCHANDISER ORDER LIST
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+    app.post('/merchandiser/orderlist', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received order list request:', { user_id });
+        
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+            const query = `
+                SELECT 
+                    TO_CHAR(ORDER_GROUP.ORDER_DATE, 'DD-MM-YYYY') AS ORDER_DATE,
+                    ORDER_GROUP.ORDER_TIME,  
+                    ORDER_GROUP.USER_ID, 
+                    ORDER_GROUP.ORDER_DETAILS, 
+                    ORDER_GROUP.DELIVERY_STATUS
+                FROM (
+                    SELECT 
+                        ORDER_DATE, 
+                        ORDER_TIME,
+                        USER_ID, 
+                        LISTAGG(PRO_ID || ' (x' || ORDER_QUANTITY || ')', ', ') WITHIN GROUP (ORDER BY PRO_ID) AS ORDER_DETAILS, 
+                        DELIVERY_STATUS
+                    FROM USERORDERSPRODUCT
+                    WHERE PRO_ID IN (
+                        SELECT PRO_ID
+                        FROM MERCHPRODUCEPROD
+                        WHERE MER_ID = :user_id)   
+                    GROUP BY ORDER_DATE, ORDER_TIME, USER_ID, DELIVERY_STATUS
+                    ORDER BY ORDER_DATE DESC, ORDER_TIME DESC
+                ) ORDER_GROUP
+            `;
+    
+            const result = await con.execute(query, { user_id });
+            console.log(`Query Result: `, result.rows);
+    
+            if (result.rows.length === 0) {
+                return res.status(404).send("No order list found");
+            }
+    
+            res.send(result.rows);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+    
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MERCHANDISER ORDER LIST PRODUCT
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+    app.post('/merchandiser/orderlist/products', async (req, res) => {
+        const { productIds } = req.body;
+        console.log('Received product details request:', { productIds });
+        let con;
+        try {
+          con = await pool.getConnection();
+          if (!con) {
+            return res.status(500).send("Connection Error");
+          }
+      
+          // Convert productIds array to a comma-separated string for SQL query
+          const idsString = productIds.map(id => `'${id}'`).join(', ');
+      
+          const query = `
+            SELECT 
+              PRO_ID, 
+              NAME, 
+              PRICE, 
+              IMAGE
+            FROM PRODUCTS
+            WHERE PRO_ID IN (${idsString})
+          `;
+      
+          const result = await con.execute(query);
+      
+          console.log(`Query Result: `, result.rows);
+      
+          if (result.rows.length === 0) {
+            return res.status(404).send("No products found");
+          }
+      
+          res.send(result.rows);
+        } catch (err) {
+          console.error("Error during database query: ", err);
+          res.status(500).send("Internal Server Error");
+        } finally {
+          if (con) {
+            try {
+              await con.close();
+            } catch (err) {
+              console.error("Error closing database connection: ", err);
+            }
+          }
+        }
+      });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MERCHANDISER ORDER USER DETAILS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/merchandiser/order/user/details', async (req, res) => {
+        const { user_id } = req.body;
+        console.log('Received user_id details request:', { user_id });
+        let con;
+        try {
+          con = await pool.getConnection();
+          if (!con) {
+            return res.status(500).send("Connection Error");
+          }
+
+          const query = 
+          `  SELECT NAME, EMAIL, PHONE, CITY, STREET, HOUSE 
+             FROM USERS 
+             WHERE USER_ID = :user_id `;
+      
+          const result = await con.execute(query, { user_id });
+      
+          console.log(`Query Result: `, result.rows[0]);
+      
+          if (result.rows[0].length === 0) {
+            return res.status(404).send("No user found");
+          }
+      
+          res.send(result.rows[0]);
+        } catch (err) {
+          console.error("Error during database query: ", err);
+          res.status(500).send("Internal Server Error");
+        } finally {
+          if (con) {
+            try {
+              await con.close();
+            } catch (err) {
+              console.error("Error closing database connection: ", err);
+            }
+          }
+        }
+      });
+      
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MERCHANDISER ORDER UPDATE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/merchandiser/order/update', async (req, res) => {
+        const { order_date, order_time, user_id, status } = req.body;
+        
+        if (!order_date || !order_time || !user_id || !status) {
+            return res.status(400).send("Order date, order time, user ID, and status are required");
+        }
+        
+        const validStatuses = ['PENDING', 'TO SHIP', 'DELIVERED', 'CANCELLED'];
+        if (!validStatuses.includes(status)) {
+            return res.status(400).send("Invalid status");
+        }
+        
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+    
+            // Execute the SQL query
+            const result = await con.execute(
+                `UPDATE USERORDERSPRODUCT 
+                 SET DELIVERY_STATUS = :status 
+                 WHERE USER_ID = :user_id
+                 AND ORDER_DATE = TO_DATE(:order_date, 'DD-MM-YYYY')
+                 AND ORDER_TIME = :order_time`,
+                { status, user_id, order_date, order_time }
+            );
+            
+            if (result.rowsAffected === 0) {
+                return res.status(404).send("No Order request found to update");
+            }
+      
+            // Commit the transaction
+            await con.commit();
+      
+            res.status(200).send("Order status updated successfully");
+            console.log("Order status updated successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
+    
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR USER/MERCHANDISER ORDER DELETE
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/order/delete', async (req, res) => {
+        const { order_date,order_time , user_id } = req.body;
+    
+        console.log('Received order cancel request:', { order_date,order_time, user_id });
+    
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+    
+            // Check if there are any existing entries with the same order_date and user_id
+            const existingEntriesQuery = await con.execute(
+                `SELECT COUNT(*) AS COUNT 
+                FROM USERORDERSPRODUCT 
+                WHERE USER_ID = :user_id
+                 AND ORDER_DATE = TO_DATE(:order_date, 'DD-MM-YYYY')
+                 AND ORDER_TIME = :order_time`,
+                { user_id, order_date, order_time }
+            );
+    
+            const count = existingEntriesQuery.rows[0].COUNT;
+            console.log(`Existing entries with USER_ID ${user_id} and ORDER_DATE ${order_date}: ${count}`);
+    
+            // If there are existing entries, delete them
+            if (count > 0) {
+                await con.execute(
+                    `DELETE 
+                    FROM USERORDERSPRODUCT
+                    WHERE USER_ID = :user_id
+                    AND ORDER_DATE = TO_DATE(:order_date, 'DD-MM-YYYY')
+                    AND ORDER_TIME = :order_time`,
+                    {user_id, order_date, order_time }
+                );
+                console.log(`Deleted existing entries with USER_ID ${user_id} and ORDER_DATE ${order_date}`);
+            }
+    
+            // Commit the transaction
+            await con.commit();
+    
+            res.status(201).send("Order Canceled successfully");
+            console.log("Order Canceled successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
+    
     
     // Start the server
     app.listen(5000, () => {

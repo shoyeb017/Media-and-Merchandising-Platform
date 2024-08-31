@@ -14,11 +14,13 @@ import Mylist from "./component/user/mylist/Mylist.jsx";
 import Merch from "./component/user/merch/Merch.jsx";
 import ProfileUser from "./component/user/profile/ProfilePage.jsx";
 import Cart from "./component/user/merch/Cart.jsx";
+import UserOrder from "./component/user/merch/UserOrder.jsx";
 import ProductSection from "./component/user/merch/ProductSection.jsx";
 import ProductDetails from "./component/user/merch/ProductDetails.jsx";
 import MovieDetailsPage from "./component/user/movie/MovieDetailsPage.jsx";
 import CompanySection from "./component/user/company/CompanySection.jsx";
 import CompanyDetailsPage from "./component/user/company/CompanyDetailsPage.jsx";
+
 
 import LayoutUser from "./component/Layout/LayoutUser.jsx";
 import LayoutAdmin from "./component/Layout/LayoutAdmin.jsx";
@@ -45,6 +47,7 @@ import ProductForm from "./component/merch/addproductform/ProductForm.jsx";
 import MerchandiserCollaborate from "./component/merch/collaborate/MerchandiserCollaborate.jsx";
 import CollabDetailsMerch from "./component/merch/collaborate/CollabDetails.jsx"
 import MerchProductDetailsPage from "./component/merch/product/ProductDetails.jsx";
+import MerchOrder from "./component/merch/order/MerchOrder.jsx";
 
 import Login from "./component/Login.jsx";
 import Registration from "./component/Registration/Registration.jsx";
@@ -112,21 +115,10 @@ export default function App() {
               <Route path="/:username/mylist" element={<Mylist/>}/>
               {/* <Route path="/:username/merch" element={<Merch products={products} />} /> */}
               <Route path="/:username/profile" element={<ProfileUser />} />
-              <Route
-                path="/:username/merch/cart"
-                element={
-                  <Cart
-                    cartItems={cartItems}
-                    onConfirmOrder={handleConfirmOrder}
-                    onCancelItem={handleCancelItem}
-                  />
-                }
-              />
+              <Route path="/:username/merch/cart" element={ <Cart/>}/>
+              <Route path="/:username/merch/order" element={<UserOrder />} />
               <Route path="/:username/merch" element={<ProductSection />} />
-              <Route
-                path="/:username/product/:productId"
-                element={<ProductDetails onAddToCart={handleAddToCart} />}
-              />
+              <Route path="/:username/product/:productId" element={<ProductDetails/>}/>
               <Route path="/:username/media/:mediaID" element={<MovieDetailsPage />}/>
               <Route path="/:username/company" element={<CompanySection/>} />
               <Route path="/:username/company/:companyID" element={<CompanyDetailsPage/>}/>
@@ -154,6 +146,7 @@ export default function App() {
               <Route path="/merchandiser/:username/product/:productID" element={<MerchProductDetailsPage />}/>
               <Route path="/:username/merchandiser/collaborate" element={<MerchandiserCollaborate />}/>
               <Route path="/:username/merchandiser/collaborate/details/:com_id" element={<CollabDetailsMerch />}/>
+              <Route path="/:username/merchandiser/orders" element={<MerchOrder />}/>
             </Route>
           )}
 

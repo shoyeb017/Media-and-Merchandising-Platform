@@ -1,0 +1,242 @@
+.order-container {
+    width: 100%;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0), #242428), url('https://www.theladders.com/wp-content/uploads/handshake_190617.jpg');
+    filter: blur(1px);
+    position: absolute;
+}
+
+.title-order {
+    font-size: 45px;
+    margin-bottom: 20px;
+    color: #ffdd95;
+    filter: drop-shadow(2px 2px 2px black);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
+    text-align: center;
+  
+    border-bottom: 1px solid #ffdd95;
+    padding-bottom: 30px;
+  
+    position: relative;
+    z-index: 1; /* Ensure this is above the background container */
+}
+
+.order-requests {
+    max-width: 1000px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(58, 58, 62, 0.7);
+    border-radius: 8px;
+    position: relative;
+    z-index: 1; /* Ensure this is above the background container */
+}
+
+.order-requests h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #ffdd95;
+}
+
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.order-item {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #3a3a3e;
+    color: white;
+    border: 2px solid #4d5059;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-item:hover {
+    border: 1px solid #ffdd95;
+}
+
+.order-details1 {
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #4d5059;
+    padding-bottom: 10px;
+}
+
+.order-details1-lower {
+    position: absolute;
+    right: 35px;
+    color: tomato;
+    text-align: right;
+}
+
+.order-details1-lower-price {
+    font-size: 25px;
+    color: #ffdd95;
+    font-weight: 500;
+}
+
+
+.order-details1-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.order-details1-status i {
+    font-size: 50px;
+    color: #ffdd95;
+}
+
+.order-details2 {
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.order-details2-upper {
+    width: 50%;
+}
+
+.order-details2-upper-title {
+    font-size: 18px;
+    color: #ffdd95;
+    margin-bottom: 10px;
+    font-weight: 500;
+
+}
+
+.order-details2-upper p{
+    margin: 0;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.order-details2-lower {
+    width: 50%;
+    border-left: 2px solid #4d5059 ;
+    padding-left: 20px;
+}
+
+.order-details2-label {
+    color: rgb(109, 109, 109);
+}
+
+.product-details-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #4d5059;
+    border-radius: 5px;
+    color: white;
+}
+
+.product-detail-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.product-detail-info {
+    flex: 1;
+}
+
+.product-detail-info p {
+    margin: 0;
+}
+
+.order-details3 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.order-details3-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+    background-color: #3a3a3e;
+    border: 1px solid #4d5059;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.order-details3-button p {
+    color: white;
+}
+
+.order-details3-button i {
+    font-size: 20px;
+    color: #ffdd95;
+}
+
+.order-details3-button:hover {
+    background-color: #4d5059;
+}
+
+.order-details4 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.order-details4-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+    width: 120px;
+    background-color: #3a3a3e;
+    border: 1px solid #4d5059;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.order-details4-button p {
+    color: white;
+}
+
+.order-details4-button i {
+    font-size: 20px;
+    color: #ffdd95;
+}
+
+.order-details4-button:hover {
+    background-color: #4d5059;
+}

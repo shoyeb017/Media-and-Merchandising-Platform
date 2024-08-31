@@ -40,20 +40,27 @@ const Notification = () => {
     return (
         <div className="notification-container">
             <button className="notification-button" onClick={toggleNotifications}>
-                {/* <i className="fas fa-bell"></i> */}
                 <FontAwesomeIcon icon={faBell} />
             </button>
 
             {showNotifications && (
                 <div className="notification-bar">
-                    {notifications.map((notification, index) => (
-                        <div key={index} className="notification-item">
-                            <h3>{notification.headline}</h3>
-                            <p className="notification-media-name"><em>{notification.media_title}</em></p>
-                            <span className="notification-date">{new Date(notification.news_date).toLocaleDateString()}</span>
-                            <p className="notification-desc">{notification.description}</p>
-                        </div>
-                    ))}
+                    {notifications.length > 0 ? (
+                        notifications.map((notification, index) => (
+                            <div key={index} className="notification-item">
+                                <h3>{notification.headline}</h3>
+                                <p className="notification-media-name">
+                                    <em>{notification.media_title}</em>
+                                </p>
+                                <span className="notification-date">
+                                    {new Date(notification.news_date).toLocaleDateString()}
+                                </span>
+                                <p className="notification-desc">{notification.description}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="no-notifications-msg">No notifications available.</p>
+                    )}
                 </div>
             )}
         </div>
