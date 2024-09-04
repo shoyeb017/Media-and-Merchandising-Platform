@@ -37,6 +37,12 @@ function generateDiscussionId(topic) {
 }
 
 
+function generateReviewId(title) {
+    //will generate a review id based on the title and time
+    return Math.abs(title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) + Date.now()) % 10000;
+}
+
+
 
 
 
@@ -1442,7 +1448,8 @@ app.post('/addNews', async (req, res) => {
 
             const result = await con.execute(
 
-                `SELECT * FROM MEDIA`
+                `SELECT * FROM MEDIA
+                ORDER BY RATING DESC`
             );
     
             const transformData = (data) => {
@@ -1510,6 +1517,7 @@ app.post('/addNews', async (req, res) => {
                 WHERE LOWER(TITLE) LIKE LOWER(:searchTerm) 
                 ${genreFilter} 
                 ${mediaTypeFilter}
+                ORDER BY RATING DESC
             `;
     
             // Execute the query with the search term and selected media type
@@ -1569,7 +1577,7 @@ app.post('/addNews', async (req, res) => {
             const { searchTerm, selectedGenres } = req.body;
             const genreFilter = selectedGenres.length ? `AND (${selectedGenres.map(g => `GENRE LIKE '%${g}%'`).join(' AND ')})` : '';
             const result = await con.execute(
-                `SELECT * FROM MEDIA WHERE LOWER(TITLE) LIKE LOWER(:searchTerm) ${genreFilter}`,
+                `SELECT * FROM MEDIA WHERE LOWER(TITLE) LIKE LOWER(:searchTerm) ${genreFilter} ORDER BY RATING DESC`,
                 { searchTerm: `%${searchTerm}%` } // Named bind variables
             );
     
@@ -1661,14 +1669,25 @@ app.post('/addNews', async (req, res) => {
              `;
 
             const newsResult = await con.execute(newsQuery, { id });
-    
+
+            const reviewQuery = `
+            SELECT REVIEWRATING.R_ID, REVIEWRATING.DESCRIPTION, REVIEWRATING.RATING, USERS.NAME
+            FROM REVIEWRATING
+            JOIN USERGIVEREVIEW ON REVIEWRATING.R_ID = USERGIVEREVIEW.R_ID
+            JOIN REVIEWABOUTMEDIA ON REVIEWRATING.R_ID = REVIEWABOUTMEDIA.R_ID
+            JOIN USERS ON USERGIVEREVIEW.USER_ID = USERS.USER_ID
+            WHERE REVIEWABOUTMEDIA.MEDIA_ID = :id
+            `;
+            const reviewResult = await con.execute(reviewQuery, { id });
+
+            
             const transformData = (data) => {
                 return {
                     id: data.MEDIA_ID,
                     img: data.POSTER,
                     title: data.TITLE,
                     description: data.DESCRIPTION,
-                    rating: data.RATING / 2, // Assuming the original rating is out of 10 and the new one is out of 5
+                    rating: data.RATING, // Assuming the original rating is out of 10 and the new one is out of 5
                     releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
                     type: data.TYPE,
                     episodes: data.EPISODE || 0,
@@ -1682,7 +1701,13 @@ app.post('/addNews', async (req, res) => {
                         description: row.DESCRIPTION,
                         date: row.NEWS_DATE
                     })),
-                    review: []
+                    review: reviewResult.rows.map(row => ({
+                        name: row.NAME,
+                        id: row.R_ID,
+                        description: row.DESCRIPTION,
+                        rating: row.RATING
+                    }))
+
                 };
             };
             const transformedData = result.rows.map(transformData);
@@ -1702,6 +1727,74 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MEDIA REVIEW
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MEDIA add review
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/media/review/add', async (req, res) => {
+        const { user_id, media_id, rating, description } = req.body;
+        console.log('Received add review request:', { user_id, media_id, description, rating });
+
+        if (!media_id || !user_id || !rating || !description) {
+            res.status(400).send("Missing required fields");
+            return;
+        }
+
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const review_id = generateReviewId(description);
+            const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
+            // Insert review into REVIEWRATING table
+            await con.execute(
+                `INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR)
+                VALUES (:review_id, :description, :rating, 'MEDIA')`,
+                { review_id, description, rating }
+            );
+            
+            // Insert into USERGIVEREVIEW table
+            await con.execute(
+                `INSERT INTO USERGIVEREVIEW (R_ID, USER_ID)
+                VALUES (:review_id, :user_id)`,
+                { review_id, user_id }
+            );
+
+            // Insert into REVIEWABOUTMEDIA table
+            await con.execute(
+                `INSERT INTO REVIEWABOUTMEDIA (MEDIA_ID, R_ID)
+                VALUES (:media_id, :review_id)`,
+                { media_id, review_id }
+            );
+
+            await con.commit();
+            res.status(201).send("Review added successfully");
+            console.log("Review added successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
+
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

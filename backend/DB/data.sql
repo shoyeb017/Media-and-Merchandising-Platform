@@ -1,58 +1,59 @@
-DROP TABLE NEWSTOMEDIA;
+DROP TABLE NEWSTOMEDIA;-----------------------
 
-DROP TABLE DISCUSSIONABOUTMEDIA;
+DROP TABLE DISCUSSIONABOUTMEDIA;-----------------------
 
-DROP TABLE REVIEWABOUTPRODUCT;
+DROP TABLE REVIEWABOUTPRODUCT;-----------------------
 
-DROP TABLE REVIEWABOUTMEDIA;
+DROP TABLE REVIEWABOUTMEDIA;-----------------------
 
-DROP TABLE USERGIVEREVIEW;
+DROP TABLE USERGIVEREVIEW;-----------------------
 
-DROP TABLE REVIEWRATING;
+DROP TABLE REVIEWRATING;-----------------------
 
-DROP TABLE PRODUCTBASEDONMEDIA;
+DROP TABLE PRODUCTBASEDONMEDIA;-----------------------
 
-DROP TABLE USERORDERSPRODUCT;
+DROP TABLE USERORDERSPRODUCT;-----------------------
 
-DROP TABLE MERCHPRODUCEPROD;
+DROP TABLE MERCHPRODUCEPROD;-----------------------
 
-DROP TABLE COLLABORATE;
+DROP TABLE COLLABoRATE;-----------------------
 
-DROP TABLE COMPANYGIVENEWS;
+DROP TABLE COMPANYGIVENEWS;-----------------------
 
-DROP TABLE COMPANYHASMEDIA;
+DROP TABLE COMPANYHASMEDIA;-----------------------
 
-DROP TABLE MEDIAHASROLE;
+DROP TABLE MEDIAHASROLE;-----------------------
 
-DROP TABLE USERSTARTDISCUSSION;
+DROP TABLE USERSTARTDISCUSSION;-----------------------
 
-DROP TABLE USERWATCHANDFAVORITE;
+DROP TABLE USERWATCHANDFAVORITE;-----------------------
 
-DROP TABLE PREFERREDGENRE;
+DROP TABLE PREFERREDGENRE;-----------------------
 
-DROP TABLE PREFERENCEFORROLE;
+DROP TABLE PREFERENCEFORROLE;-----------------------
 
-DROP TABLE PREFERENCEFORMEDIA;
+DROP TABLE PREFERENCEFORMEDIA;-----------------------
 
-DROP TABLE ROLE;
+DROP TABLE ROLE;-----------------------
 
-DROP TABLE NEWSANDUPDATES;
+DROP TABLE NEWSANDUPDATES;-----------------------
 
-DROP TABLE PRODUCTS;
+DROP TABLE PRODUCTS;-----------------------
 
-DROP TABLE LOGIN;
+DROP TABLE LOGIN;-----------------------
 
-DROP TABLE DISCUSSION;
+DROP TABLE DISCUSSION;-----------------------
 
-DROP TABLE COMPANY;
+DROP TABLE COMPANY;-----------------------
 
-DROP TABLE MERCHANDISER;
+DROP TABLE MERCHANDISER;-----------------------
 
-DROP TABLE MEDIA;
+DROP TABLE MEDIA;-----------------------
 
-DROP TABLE ADMIN;
+DROP TABLE ADMIN; -----------------------
 
-DROP TABLE USERS;
+DROP TABLE USERS;-----------------------
+
 
 CREATE TABLE USERS(
     USER_ID INT NOT NULL,
@@ -247,7 +248,7 @@ CREATE TABLE REVIEWRATING (
     RATING INT,
     REVIEW_FOR VARCHAR2(50),
     PRIMARY KEY (R_ID),
-    CONSTRAINT REVIEW_FOR_CHECK CHECK (REVIEW_FOR IN ('PRODUCT', 'SERVICE', 'MOVIE', 'BOOK', 'OTHER'))
+    CONSTRAINT REVIEW_FOR_CHECK CHECK (REVIEW_FOR IN ('PRODUCT', 'MEDIA'))
 );
 
 CREATE TABLE USERGIVEREVIEW(
@@ -372,22 +373,57 @@ INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
 INSERT INTO PREFERREDGENRE (USER_ID, GENRES)
             VALUES (1234, 'ACTION,SCI-FI,COMEDY,HORROR');
 
-INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
-            VALUES (1234, 'sfmerch', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
-
-INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
-            VALUES (1235, '1234', 'MERCHANDISER', 1234);
 
 
 INSERT INTO ADMIN (ADMIN_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE) 
             VALUES (1248, 'admin', 'Sifat Bin Asad', TO_DATE('01/01/1999', 'MM/DD/YYYY'), 'meow@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
 
 INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
-            VALUES (1238, '1234', 'ADMIN', 1248);
+            VALUES (1258, '1234', 'ADMIN', 1248);
             
 
+
 INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
-            VALUES (1236, '1234', 'COMPANY', 1);
+            VALUES (1226, '1234', 'COMPANY', 1);
+
+
+--MERCHANDISERs--------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+            VALUES (1235, 'mer2', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+
+INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
+            VALUES (1235, '1234', 'MERCHANDISER', 1235);
+
+INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+            VALUES (1236, 'mer3', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+
+INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
+            VALUES (1236, '1234', 'MERCHANDISER', 1236);
+
+INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+            VALUES (1237, 'mer4', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+
+INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
+            VALUES (1237, '1234', 'MERCHANDISER', 1237);
+
+INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+            VALUES (1238, 'mer5', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+
+INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
+            VALUES (1238, '1234', 'MERCHANDISER', 1238);
+
+INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+            VALUES (1239, 'mer6', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+
+INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
+            VALUES (1239, '1234', 'MERCHANDISER', 1239);
+
+INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+            VALUES (1240, 'mer6', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
+
+INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
+            VALUES (1240, '1234', 'MERCHANDISER', 1239);
 
 
 
@@ -1459,31 +1495,6 @@ INSERT INTO MEDIA (
     NULL
 );
 
-INSERT INTO MEDIA (
-    MEDIA_ID,
-    TITLE,
-    DESCRIPTION,
-    RATING,
-    TYPE,
-    GENRE,
-    TRAILER,
-    POSTER,
-    DURATION,
-    RELEASE_DATE,
-    EPISODE
-) VALUES (
-    71,
-    'Psycho',
-    'Phoenix office worker Marion Crane is fed up with the way life has treated her. She has to meet her lover Sam in lunch breaks, and they cannot get married because Sam has to give most of his money away in alimony. One Friday, Marion is trusted to bank forty thousand dollars by her employer. Seeing the opportunity to take the money and start a new life, Marion leaves town and heads towards Sam''s California store. Tired after the long drive and caught in a storm, she gets off the main highway and pulls into the Bates Motel. The motel is managed by a quiet young man called Norman who seems to be dominated by his mother.',
-    9,
-    'MOVIE',
-    'THRILLER',
-    'https://www.youtube.com/watch?v=NG3-GlvKPcg',
-    'https://i.ebayimg.com/images/g/HtsAAOSwY11jVxZ1/s-l400.jpg',
-    '1h 49m',
-    TO_DATE('09/08/1960', 'MM/DD/YYYY'),
-    NULL
-);
 
 INSERT INTO MEDIA (
     MEDIA_ID,
@@ -3191,7 +3202,7 @@ INSERT INTO MEDIA (
     210,
     'Planet Earth II',
     'David Attenborough returns with a new wildlife documentary that shows life in a variety of habitats.',
-    10,
+    6,
     'DOCUMENTARY',
     'DRAMA',
     'https://youtu.be/c8aFcHFu8QM?si=tcqWYimdA5-r2VUi',
@@ -3714,12 +3725,6 @@ VALUES (69, 24);
 
 INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
 VALUES (70, 25);
-
-INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
-VALUES (71, 26);
-
-INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
-VALUES (71, 2);
 
 INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID) 
 VALUES (72, 2);
@@ -5002,15 +5007,6 @@ VALUES (70, 119);
 
 INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
 VALUES (70, 120);
-
-INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
-VALUES (71, 121);
-
-INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
-VALUES (71, 122);
-
-INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
-VALUES (71, 123);
 
 INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
 VALUES (72, 124);

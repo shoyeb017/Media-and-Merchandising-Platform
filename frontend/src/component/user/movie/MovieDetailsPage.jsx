@@ -12,7 +12,7 @@ const ReviewCard = ({ review }) => {
         <div className="review-card">
             <h4 className="review-name">{review.name}</h4>
             <p className="review-desc">{review.description}</p>
-            <p className="review-rating">Rating: {review.rating}/5</p>
+            <p className="review-rating">Rating: {review.rating}/10</p>
         </div>
     );
 };
@@ -158,12 +158,51 @@ const MovieDetailsPage = () => {
     };
 
     const handleAddReview = () => {
-        if (newReview.name && newReview.description && newReview.rating > 0) {
+        if (newReview.description && newReview.rating > 0) {
             setReviews([...reviews, newReview]);
             setNewReview({ name: '', description: '', rating: 0 });
         } else {
             alert('Please fill out all fields and provide a rating.');
         }
+
+        try {
+            fetch('http://localhost:5000/media/review/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    user_id: userId, 
+                    media_id: movieDetails.id, 
+                    description: newReview.description, 
+                    rating: newReview.rating 
+                }),
+            });
+        }
+        catch (error) {
+            console.error('Error adding review:', error);
+        }
+
+        const fetchMovieRev = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/media/page', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: mediaID }),
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movie details');
+                }
+                const movieDetails = await response.json();
+                setReviews(movieDetails.review);
+            } catch (err) {
+                console.error('Failed to fetch movie details:', err);
+            }
+        };
+        fetchMovieRev();
+
     };
 
     const handleAddDiscussion = async () => {
@@ -342,12 +381,6 @@ const MovieDetailsPage = () => {
                             
                         </select>
                     </div>
-                    <input
-                        type="text"
-                        placeholder="Your Name"
-                        value={newReview.name}
-                        onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
-                    />
                     <button onClick={handleAddReview}>Submit Review</button>
                 </div>
             </div>

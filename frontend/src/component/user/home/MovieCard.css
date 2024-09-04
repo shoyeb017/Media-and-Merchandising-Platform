@@ -95,13 +95,13 @@
   margin: auto 1rem;
   text-align: center;
   font-family: arial;
-
+  
   position: relative;
 }
 
 .movie-card:hover .movie-card-img,
 .movie-card:hover .movie-card-title {
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
 }
 
 .movie-card:hover .movie-card-desc {
