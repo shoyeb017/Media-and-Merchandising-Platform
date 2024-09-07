@@ -113,10 +113,32 @@ const MovieDetailsPage = () => {
         fetchMovieDis();
     }, [mediaID]);
 
+
+    useEffect(() => {
+        const fetchReview = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/media/review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: mediaID }),
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movie reviews');
+                }   
+                const movieReviews = await response.json();
+                setReviews(movieReviews); 
+            } catch (err) {
+                console.error('Failed to fetch movie reviews:', err);
+            }
+        };
+        fetchReview();
+    }, [mediaID]);
     
 
     if (!movieDetails) {
-        return <div className="error">Loading...</div>; // Or handle the case where movie is not found
+        return <div className="error">Loading...</div>;
     }
 
     const handleWatched = async () => {
@@ -157,16 +179,37 @@ const MovieDetailsPage = () => {
         }
     };
 
-    const handleAddReview = () => {
-        if (newReview.description && newReview.rating > 0) {
-            setReviews([...reviews, newReview]);
-            setNewReview({ name: '', description: '', rating: 0 });
-        } else {
-            alert('Please fill out all fields and provide a rating.');
-        }
+    
 
+
+    const updateReview = async () => {
         try {
-            fetch('http://localhost:5000/media/review/add', {
+            const response = await fetch('http://localhost:5000/media/review', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: mediaID }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch movie reviews');
+            }
+            const movieReviews = await response.json();
+            setReviews(movieReviews); 
+        } catch (err) {
+            console.error('Failed to fetch movie reviews:', err);
+        }
+    };
+    
+    const handleAddReview = async () => {
+        if (!newReview.description || newReview.rating <= 0) {
+            alert('Please fill out all fields and provide a rating.');
+            return; 
+        }
+    
+        try {
+            
+            const addResponse = await fetch('http://localhost:5000/media/review/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -178,32 +221,20 @@ const MovieDetailsPage = () => {
                     rating: newReview.rating 
                 }),
             });
-        }
-        catch (error) {
+    
+            if (!addResponse.ok) {
+                throw new Error('Failed to add review');
+            }
+    
+            setNewReview({ name: '', description: '', rating: 0 });
+
+            await updateReview();
+        } catch (error) {
             console.error('Error adding review:', error);
         }
-
-        const fetchMovieRev = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/media/page', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ id: mediaID }),
-                });
-                if (!response.ok) {
-                    throw new Error('Failed to fetch movie details');
-                }
-                const movieDetails = await response.json();
-                setReviews(movieDetails.review);
-            } catch (err) {
-                console.error('Failed to fetch movie details:', err);
-            }
-        };
-        fetchMovieRev();
-
     };
+``    
+    
 
     const handleAddDiscussion = async () => {
         if (newDiscussion.topic && newDiscussion.description) {
@@ -219,12 +250,16 @@ const MovieDetailsPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ user_id: userId, media_id: movieDetails.id, topic: newDiscussion.topic, description: newDiscussion.description }),
+                body: JSON.stringify({ 
+                    user_id: userId, 
+                    media_id: movieDetails.id, 
+                    topic: newDiscussion.topic, 
+                    description: newDiscussion.description 
+                }),
             });
         }
         catch (error) {
-            console.error('Error adding discussion:', error
-            );
+            console.error('Error adding discussion:', error);
         }
         const fetchMovieDis = async () => {
             try {
@@ -351,7 +386,7 @@ const MovieDetailsPage = () => {
             {/* Reviews Section */}
             <div className="reviews-section">
                 <h3 className="review-rating-title">Reviews & Rating</h3>
-                {movieDetails.review.map((review, index) => (
+                {reviews.map((review, index) => (
                     <ReviewCard key={index} review={review} />
                 ))}
 

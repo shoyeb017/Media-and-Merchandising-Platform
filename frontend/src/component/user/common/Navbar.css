@@ -92,3 +92,20 @@
     background-color: #333;
     color: white;
   }
+
+  .order-button{
+    background-color: #ffdd95;
+    color: black;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .orders-btn {
+    background-color: #242428;
+    border: none;
+  }

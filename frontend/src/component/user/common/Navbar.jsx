@@ -64,6 +64,13 @@ function Navbar() {
           </ul>
         </div>
         <Notification />
+        <button className="orders-btn">
+          <Link to={`/${username}/merch/order`} className="order-button">
+            <i className="fa fa-shopping-cart"></i> {/* Replace with the desired FontAwesome icon */}
+          </Link>
+        </button>
+
+
         <Link to={`/${username}/profile`} className="profile-text">Profile</Link>
         <Link to="/" className="logout-btn" onClick={handleLogout}>Logout</Link>
       </div>

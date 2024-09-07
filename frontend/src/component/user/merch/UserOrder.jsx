@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserOrder.css';
 
@@ -123,6 +123,54 @@ const Order = () => {
       }, 0);
     };
 
+    const handleAddReview = async () => {
+
+      if (!newReview.description || newReview.rating === 0) {
+        alert('Please provide a review and rating');
+        return;
+      }
+      // Implement your logic to handle the review submission, e.g., send the review to the backend
+      console.log("Review submitted");
+
+      console.log('description:', newReview.description);
+      console.log('rating:', newReview.rating);
+      console.log('user_id:', localStorage.getItem('user_id'));
+      console.log('product_id:', isReviewVisible);
+
+      try {
+        const response = await fetch('http://localhost:5000/products/review/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: localStorage.getItem('user_id'),
+            product_id: isReviewVisible,
+            description: newReview.description,
+            rating: newReview.rating,
+          }),
+        });
+
+        if (response.ok) {
+          // Refresh the reviews list
+          console.log('Review added successfully');
+          alert('Review added successfully');
+        } else {
+          console.error('Failed to add review:', await response.text());
+        }
+      } catch (error) {
+        console.error('Error adding review:', error);
+      }
+
+      isReviewVisible && setIsReviewVisible(null);
+
+    };
+    
+    const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
+    const [isReviewVisible, setIsReviewVisible] = useState(null);
+
+    
+
   return (
     <div>
       {/* <div className="order-container"></div> */}
@@ -159,38 +207,65 @@ const Order = () => {
                   <p><strong>Address:</strong> {`${userDetails.HOUSE}, ${userDetails.STREET}, ${userDetails.CITY}`}</p>
                   </div>
                   <div className="order-details2-lower">
-                  <h2 className="order-details2-upper-title">Products</h2>
-                  <ul className="product-details-list">
-                    {order.ORDER_DETAILS.split(', ').map((detail) => {
-                      const [productId, quantity] = detail.split(' (x');
-                      const cleanQuantity = quantity.replace(')', '');
-                      const product = productDetails[productId];
-                      return (
-                        <li key={productId} className="product-detail-item">
-                          <img src={product?.IMAGE} alt={product?.NAME} className="product-detail-image" />
-                          <div className="product-detail-info">
-                            <p><strong>Product Name:</strong> {product?.NAME}</p>
-                            <p><strong>Quantity:</strong> {cleanQuantity}</p>
-                            <p><strong>Price:</strong> ${product?.PRICE}</p>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                    <h2 className="order-details2-upper-title">Products</h2>
+                    <ul className="product-details-list">
+                      {order.ORDER_DETAILS.split(', ').map((detail) => {
+                        const [productId, quantity] = detail.split(' (x');
+                        const cleanQuantity = quantity.replace(')', '');
+                        const product = productDetails[productId];
+
+                        return (
+                          <li key={productId} className="product-detail-item">
+                            <img src={product?.IMAGE} alt={product?.NAME} className="product-detail-image" />
+                            <div className="product-detail-info">
+                              <p><strong>Product Name:</strong> {product?.NAME}</p>
+                              <p><strong>Quantity:</strong> {cleanQuantity}</p>
+                              <p><strong>Price:</strong> ${product?.PRICE}</p>
+                            </div>
+                            
+                            {/* Review Button */}
+                            <button 
+                              onClick={() => setIsReviewVisible(isReviewVisible === productId ? null : productId)} 
+                              className="review-button"
+                            >
+                              Review
+                            </button>
+
+                            {/* Add Review Section */}
+                            <div className={`add-review-floating ${isReviewVisible === productId ? 'show' : ''}`}>
+                              <h4 style={{ color: 'white' }}>Add a Review</h4>
+                              <div className="rating-review-box">
+                                <textarea
+                                  placeholder="Your Review"
+                                  value={newReview.description}
+                                  onChange={(e) => setNewReview({ ...newReview, description: e.target.value })}
+                                />
+                                <select
+                                  value={newReview.rating}
+                                  onChange={(e) => setNewReview({ ...newReview, rating: parseInt(e.target.value) })}
+                                >
+                                  {[...Array(11).keys()].map((num) => (
+                                    <option key={num} value={num}>{num}</option>
+                                  ))}
+                                </select>
+                              </div>
+                              <button onClick={handleAddReview}>Submit Review</button>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
                 </div>
-                {/* <div className="order-details3">
-                  <button className="order-details3-button" onClick={() => navigate(`/product/${order.PRO_ID}`)}>
-                    <i className="fa fa-info-circle"></i>
-                    <p>View Product</p>
-                  </button>
-                </div> */}
                 <div className="order-details4">
-                <button className="order-details4-button" onClick={() => handleCancel(order.ORDER_DATE,order.ORDER_TIME,order.USER_ID)}>
-                      <i className="fa fa-times"></i>
-                      <p>Cancel</p>
-                </button>
+                  <button className="order-details4-button" onClick={() => handleCancel(order.ORDER_DATE, order.ORDER_TIME, order.USER_ID)}>
+                    <i className="fa fa-times"></i>
+                    <p>Delete</p>
+                  </button>
+
+                  
                 </div>
+
               </li>
             ))}
           </ul>

@@ -240,3 +240,44 @@
 .order-details4-button:hover {
     background-color: #4d5059;
 }
+
+.product-detail-item {
+  position: relative; /* Allows the floating section to be positioned relative to this element */
+}
+
+/* Hidden by default, and will fade in */
+.add-review-floating {
+  position: absolute; /* Makes the review section float */
+  top: 50%; /* Adjust as needed */
+  left: 50%; /* Adjust as needed */
+  transform: translate(-50%, -50%); /* Centers the floating box */
+  background-color: #333; /* Background color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensure it's above other elements */
+  opacity: 0; /* Starts hidden */
+  visibility: hidden; /* Ensures it's not visible when hidden */
+  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+}
+
+/* When the review is visible, make it opaque */
+.add-review-floating.show {
+  opacity: 1; /* Fully visible */
+  visibility: visible; /* Visible */
+}
+
+.review-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.review-button:hover {
+  background-color: #0056b3;
+}

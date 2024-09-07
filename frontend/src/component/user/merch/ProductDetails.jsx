@@ -49,17 +49,31 @@ const ProductDetails = () => {
     fetchProductDetails();
   }, [productId]);
 
-  const [reviews, setReviews] = useState(product ? product.reviews : []);
-  const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/products/review', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: productId }),
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+        const reviews = await response.json();
+        setReviews(reviews);
+      } catch (err) {
+        console.error('Failed to fetch reviews:', err);
+      }
+    };
+    fetchReviews();
+  }, [productId]);
 
-  const handleAddReview = () => {
-    if (newReview.description && newReview.rating > 0) {
-      setReviews([...reviews, newReview]);
-      setNewReview({ name: '', description: '', rating: 0 });
-    } else {
-      alert('Please fill out all fields and provide a rating.');
-    }
-  };
+
+  const [reviews, setReviews] = useState(product ? product.reviews : []);
+
 
   const onAddToCart = (product, quantity) => {
     if (quantity <= 0) {
@@ -105,28 +119,7 @@ const ProductDetails = () => {
           <ReviewCard key={index} review={review} />
         ))}
 
-        <div className="add-review">
-          <h4 style={{ color: 'white' }}>Add a Review</h4>
-          <div className="rating-review-box">
-            <textarea
-              placeholder="Your Review"
-              value={newReview.description}
-              onChange={(e) => setNewReview({ ...newReview, description: e.target.value })}
-            />
-            <select
-              value={newReview.rating}
-              onChange={(e) => setNewReview({ ...newReview, rating: parseInt(e.target.value) })}
-            >
-              <option value={0}>0</option>
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-            </select>
-          </div>
-          <button onClick={handleAddReview}>Submit Review</button>
-        </div>
+        
       </div>
     </div>
   );

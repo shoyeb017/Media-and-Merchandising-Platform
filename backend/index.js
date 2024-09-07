@@ -1677,6 +1677,7 @@ app.post('/addNews', async (req, res) => {
             JOIN REVIEWABOUTMEDIA ON REVIEWRATING.R_ID = REVIEWABOUTMEDIA.R_ID
             JOIN USERS ON USERGIVEREVIEW.USER_ID = USERS.USER_ID
             WHERE REVIEWABOUTMEDIA.MEDIA_ID = :id
+            ORDER BY REVIEWRATING.REVIEW_DATE DESC
             `;
             const reviewResult = await con.execute(reviewQuery, { id });
 
@@ -1701,12 +1702,13 @@ app.post('/addNews', async (req, res) => {
                         description: row.DESCRIPTION,
                         date: row.NEWS_DATE
                     })),
-                    review: reviewResult.rows.map(row => ({
-                        name: row.NAME,
-                        id: row.R_ID,
-                        description: row.DESCRIPTION,
-                        rating: row.RATING
-                    }))
+                    review: []
+                    // reviewResult.rows.map(row => ({
+                    //     name: row.NAME,
+                    //     id: row.R_ID,
+                    //     description: row.DESCRIPTION,
+                    //     rating: row.RATING
+                    // }))
 
                 };
             };
@@ -1728,9 +1730,6 @@ app.post('/addNews', async (req, res) => {
         }
     });
 
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    // ROUTE FOR MEDIA REVIEW
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1759,25 +1758,41 @@ app.post('/addNews', async (req, res) => {
 
             // Insert review into REVIEWRATING table
             await con.execute(
-                `INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR)
-                VALUES (:review_id, :description, :rating, 'MEDIA')`,
-                { review_id, description, rating }
+                `INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+                VALUES (:review_id, :description, :rating, 'MEDIA', TO_DATE(:review_date, 'YYYY-MM-DD'))`,
+                { review_id, description, rating, review_date: currentDate }, { autoCommit: true }
             );
-            
+            console.log(`Review Insert time: ${currentDate}`);
             // Insert into USERGIVEREVIEW table
             await con.execute(
                 `INSERT INTO USERGIVEREVIEW (R_ID, USER_ID)
                 VALUES (:review_id, :user_id)`,
-                { review_id, user_id }
+                { review_id, user_id }, { autoCommit: true }
             );
 
             // Insert into REVIEWABOUTMEDIA table
             await con.execute(
                 `INSERT INTO REVIEWABOUTMEDIA (MEDIA_ID, R_ID)
                 VALUES (:media_id, :review_id)`,
-                { media_id, review_id }
+                { media_id, review_id }, { autoCommit: true }
             );
 
+            //get previous rating_count and rating
+            const previousRating = await con.execute(
+                `SELECT RATING, RATING_COUNT FROM MEDIA WHERE MEDIA_ID = :media_id`,
+                { media_id }
+            );
+            const previousRatingCount = previousRating.rows[0].RATING_COUNT;
+            const previousRatingValue = previousRating.rows[0].RATING;
+            //calculate new rating
+            const newRating = ((previousRatingValue * previousRatingCount) + rating) / (previousRatingCount + 1);
+            //update rating and rating_count
+            await con.execute(
+                `UPDATE MEDIA SET RATING = :newRating, RATING_COUNT = RATING_COUNT + 1 WHERE MEDIA_ID = :media_id`,
+                { newRating, media_id } , { autoCommit: true }
+            );
+
+            // Commit the transaction
             await con.commit();
             res.status(201).send("Review added successfully");
             console.log("Review added successfully");
@@ -1794,6 +1809,207 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+
+
+    
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR MEDIA REVIEW
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.post('/media/review', async (req, res) => {
+        const { id } = req.body;
+        console.log('Received media review request:', id);
+
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT REVIEWRATING.R_ID, REVIEWRATING.DESCRIPTION, REVIEWRATING.RATING, USERS.NAME
+                FROM REVIEWRATING
+                JOIN USERGIVEREVIEW ON REVIEWRATING.R_ID = USERGIVEREVIEW.R_ID
+                JOIN REVIEWABOUTMEDIA ON REVIEWRATING.R_ID = REVIEWABOUTMEDIA.R_ID
+                JOIN USERS ON USERGIVEREVIEW.USER_ID = USERS.USER_ID
+                WHERE REVIEWABOUTMEDIA.MEDIA_ID = :id
+                ORDER BY REVIEWRATING.REVIEW_DATE DESC`,
+                { id }, { autoCommit: true }
+            );
+            console.log(`Query Result: `, result.rows);
+
+            if (!result.rows.length) {
+                res.status(404).send("No reviews found for the given media");
+                return;
+            }
+
+            const transformData = (data) => ({
+                id: data.R_ID,
+                name: data.NAME,
+                description: data.DESCRIPTION,
+                rating: data.RATING
+            });
+
+            const transformedData = result.rows.map(transformData);
+
+            res.send(transformedData);
+            console.log("Review Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR product review fetch
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/products/review', async (req, res) => {
+        const { id } = req.body;
+        console.log('Received product review request:', id);
+
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT REVIEWRATING.R_ID, REVIEWRATING.DESCRIPTION, REVIEWRATING.RATING, USERS.NAME
+                FROM REVIEWRATING
+                JOIN USERGIVEREVIEW ON REVIEWRATING.R_ID = USERGIVEREVIEW.R_ID
+                JOIN REVIEWABOUTPRODUCT ON REVIEWRATING.R_ID = REVIEWABOUTPRODUCT.R_ID
+                JOIN USERS ON USERGIVEREVIEW.USER_ID = USERS.USER_ID
+                WHERE REVIEWABOUTPRODUCT.PRO_ID = :id
+                ORDER BY REVIEWRATING.REVIEW_DATE DESC`,
+                { id }, { autoCommit: true }
+            );
+            console.log(`Query Result: `, result.rows);
+
+            if (!result.rows.length) {
+                res.status(404).send("No reviews found for the given product");
+                return;
+            }
+
+            const transformData = (data) => ({
+                id: data.R_ID,
+                name: data.NAME,
+                description: data.DESCRIPTION,
+                rating: data.RATING
+            });
+
+            const transformedData = result.rows.map(transformData);
+            
+            res.send(transformedData);
+            console.log("Review Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+
+            }
+        }
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR PRODUCT ADD REVIEW
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/products/review/add', async (req, res) => {
+        const { user_id, product_id, rating, description } = req.body;
+        console.log('Received add review request:', { user_id, product_id, description, rating });
+
+        if (!product_id || !user_id || !rating || !description) {
+            res.status(400).send("Missing required fields");
+            return;
+        }
+
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const review_id = generateReviewId(description);
+            const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
+            // Insert review into REVIEWRATING table
+            await con.execute(
+                `INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+                VALUES (:review_id, :description, :rating, 'PRODUCT', TO_DATE(:review_date, 'YYYY-MM-DD'))`,
+                { review_id, description, rating, review_date: currentDate }, { autoCommit: true }
+            );
+            console.log(`Review Insert time: ${currentDate}`);
+            // Insert into USERGIVEREVIEW table
+            await con.execute(
+                `INSERT INTO USERGIVEREVIEW (R_ID, USER_ID)
+                VALUES (:review_id, :user_id)`,
+                { review_id, user_id }, { autoCommit: true }
+            );
+
+            // Insert into REVIEWABOUTPRODUCT table
+            await con.execute(
+                `INSERT INTO REVIEWABOUTPRODUCT (PRO_ID, R_ID)
+                VALUES (:product_id, :review_id)`,
+                { product_id, review_id }, { autoCommit: true }
+            );
+
+            //get previous rating_count and rating
+            const previousRating = await con.execute(
+                `SELECT RATING, RATING_COUNT FROM PRODUCTS WHERE PRO_ID = :product_id`,
+                { product_id }
+            );
+            const previousRatingCount = previousRating.rows[0].RATING_COUNT;
+            const previousRatingValue = previousRating.rows[0].RATING;
+            //calculate new rating
+            const newRating = ((previousRatingValue * previousRatingCount) + rating) / (previousRatingCount + 1);
+            //update rating and rating_count
+            await con.execute(
+                `UPDATE PRODUCTS SET RATING = :newRating, RATING_COUNT = RATING_COUNT + 1 WHERE PRO_ID = :product_id`,
+                { newRating, product_id } , { autoCommit: true }
+            );
+
+            // Commit the transaction
+            await con.commit();
+            res.status(201).send("Review added successfully");
+            console.log("Review added successfully");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (closeErr) {
+                    console.error("Error closing database connection: ", closeErr);
+                }
+            }
+        }
+    });
+    
+
 
 
 

@@ -25,7 +25,7 @@
     overflow-y: auto;
     background-color: #242428;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #333;
+    
     border-radius: 5px;
     z-index: 1000;
     margin-top: 10px;
