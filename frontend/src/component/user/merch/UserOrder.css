@@ -270,7 +270,7 @@
 .review-button {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #007bff;
+  background-color: #ffdd95;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -279,5 +279,5 @@
 }
 
 .review-button:hover {
-  background-color: #0056b3;
+  background-color: #ffdd95;
 }

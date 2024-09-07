@@ -4180,115 +4180,311 @@ INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID)
 VALUES (215, 7);
 
 
---------------------------------------------------------------------------------------------------------------------------------
--- INSERT INTO PRODUCT TABLE
---------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------, 0, 0
+-- INSERT INTO PRODUCTS TABLE
+-------------------------------------------------------------------------------------------------------------------------------, 0, 0-
 
 
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    RATING_COUNT,
-    RATING,
-    PRICE,
-    QUANTITY
-) VALUES (
-    1,
-    'Product1',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    0,
-    0,
-    100,
-    10
-);
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (100, 'Interstellar Essential T-Shirt', 'Everyday tee, crew neck, slim fit', 'https://ih1.redbubble.net/image.5087401540.6885/ssrco,slim_fit_t_shirt,mens,101010:01c5ca27c6,front,square_product,600x600.u5.jpg', 21.73, 5, 0, 0);
 
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    RATING_COUNT,
-    RATING,
-    PRICE,
-    QUANTITY
-) VALUES (
-    2,
-    'Product2',
-    'this is a really good product',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    0,
-    0,
-    200,
-    20
-);
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (101, 'hamilton interstellar watch', 'Hamilton Khaki Navy Automatic Green Dial Sprite Bezel Men''s Watch H82375161', 'https://www.watchvault.com.au/cdn/shop/files/HamiltonKhakiAviationPilotDayDateAuto_Interstellar_H64615135-2020WatchVault03_2048x.jpg', 631.4, 2, 0, 0);
 
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    RATING_COUNT,
-    RATING,
-    PRICE,
-    QUANTITY
-) VALUES (
-    3,
-    'Product3',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    0,
-    0,
-    300,
-    30
-);
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (102, 'Inception Top Totem Spinning Metal', 'Made from high grade Zinc Alloy and each top should spin for at least 3 minutes', 'https://m.media-amazon.com/images/I/51eLkYY0r6L._AC_SL1292_.jpg', 20.0, 2, 0, 0);
 
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    RATING_COUNT,
-    RATING,
-    PRICE,
-    QUANTITY
-) VALUES (
-    4,
-    'Product4',
-    'this is a really good product',
-    'https://miro.medium.com/v2/resize:fit:1400/1*zZbzs4vBEH3kTie-NGglXQ.jpeg',
-    0,
-    0,
-    400,
-    40
-);
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (103, '"Inception" inspired poster', 'INCEPTION film poster, minimalist art print, mid-century modern, beige, grey, Swiss, Helvetica, Christopher Nolan, Leonardo DiCaprio', 'https://i.etsystatic.com/42043278/r/il/d5b8d6/6247326852/il_1588xN.6247326852_ov48.jpg', 11.56, 4, 0, 0);
 
-INSERT INTO PRODUCTS(
-    PRO_ID,
-    NAME,
-    DESCRIPTION,
-    IMAGE,
-    RATING_COUNT,
-    RATING,
-    PRICE,
-    QUANTITY
-) VALUES (
-    5,
-    'Product5',
-    'this is a really good product',
-    'https://www.anime-planet.com/images/studios/banners/ufotable-29.jpg',
-    0,
-    0,
-    500,
-    50
-);
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (104, 'The Silence of the Lambs movie Canvas ', 'The Silence of the Lambs FILMS movie Canvas Art Poster unframe multiple choice-12x18''''24x36''', 'https://i.etsystatic.com/26687163/r/il/c55157/6078033999/il_1588xN.6078033999_b210.jpg', 12.75, 5, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (105, 'The Silence Of The Lambs Movie Barcode', 'Celebrate your favourite movies with our unique movie barcode prints. I use video imaging software to watch the The Silence Of The Lambs movie and extrapolate the average color of each scene in the movie. This print then features these colors displayed as a barcode. The perfect gift for any movie fan that loves a unique data representation', 'https://i.etsystatic.com/31803080/r/il/953835/5423830786/il_1588xN.5423830786_se8e.jpg', 14.4, 3, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (106, 'Chandu Champion design T-Shirt', 'Here is my design of Kartik aryan from chandu champion.. Hope you like it Pickup your favourite one merchandise.', 'https://ih1.redbubble.net/image.5568573715.8823/ssrco,slim_fit_t_shirt,flatlay,4f4942:33c5b16199,front,wide_portrait,750x1000-bg,f8f8f8.jpg', 23.0, 5, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (107, 'Psycho Scream Print-Classic Horror Movie Poster', 'Museum-quality print made on thick and long-lasting matte (uncoated) paper with high quality inks producing striking images for wall decor, gifts, projects, collections, and more!', 'https://i.etsystatic.com/37337950/r/il/f02c64/5099389131/il_1588xN.5099389131_kmj5.jpg', 16.2, 6, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (108, 'Retro Psycho 1960 Shirt -Alfred Hitchcock Shirt', 'Our products are unisex and true to size. If you prefer an oversized fit, we recommend ordering 1 or 2 sizes larger than your usual size.', 'https://i.etsystatic.com/53028486/r/il/ddacce/6277595761/il_1588xN.6277595761_ptre.jpg', 20.0, 10, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (109, 'Forrest Gump (1994) Movie Poster Print', 'Canvas Fabric, smooth, not easily deformed, particularly the printing is more realistic, waterproof, durable and Long Lasting. It is ideal for gifts and personal collections.', 'https://i.etsystatic.com/45320799/r/il/7d8db7/5354241887/il_1588xN.5354241887_oj1r.jpg', 8.57, 4, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (110, 'Forrest Gump Point', 'Forrest Gump Point'', this image has been on my bucket list for decades, and I finally got it a couple weeks ago. To get great shots like this one, you simply must be there, at the right time, in the right light, with the right preparation. It is my extreme pleasure to bring you one of my most cherished shots from anywhere. I am making it available in various materials, sizes and price points, so that anyone on any budget who appreciates the moment captured in this image can take it home.', 'https://i.etsystatic.com/36721239/r/il/630bff/5925739127/il_1588xN.5925739127_skif.jpg', 49.0, 5, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (111, 'Shawshank Redemption Unisex Sweatshirt', 'A sturdy and warm sweatshirt bound to keep you warm in the colder months. A pre-shrunk, classic fit sweater that''s made with air-jet spun yarn for a soft feel and reduced pilling', 'https://i.etsystatic.com/16104183/r/il/02cd11/2344895056/il_1588xN.2344895056_cyky.jpg', 35.0, 10, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (112, 'SHAWSHANK REDEMPTION Vintage Tshirt', '100% cotton (fiber content may vary for different colors)
+Medium fabric (5.3 oz/yd² (180 g/m²))
+Classic fit
+Tear-away label
+Runs true to size', 'https://i.etsystatic.com/43160006/r/il/43d969/5677612058/il_1588xN.5677612058_bpkk.jpg', 30.95, 5, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (113, 'Metal Pulp Fiction Wall Art', 'Metal Pulp Fiction Wall Art is an inspirational wall art for living room, bedroom, dining room, kitchen and for your entire home. Metal Pulp Fiction Wall Art will make you wanna dance all night just like Mia Wallace and Vincent Vega. Your guests will most likely adore this unique piece of art.
+', 'https://i.etsystatic.com/33176996/r/il/f7a2cf/3983083566/il_1588xN.3983083566_cfmu.jpg', 120.0, 2, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (114, 'Pulp Fiction (1993) Screenplay', 'This is a full screenplay / movie script in English that comes with preprinted autographs from the cast! If you have been searching for the perfect gift for a movie fan, this is it! This full movie script / screenplay with preprinted autographs is sure to please. It makes for a great gift because it’s unique, authentic, and rare.', 'https://i.etsystatic.com/44907333/r/il/e2aedf/5084300572/il_1588xN.5084300572_j148.jpg', 33.48, 1, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (115, 'Elves Elf Boat Castle The Lord Of The Rings light box', 'Are you a believer in the mystical world of ""Lord of the Rings""? Let Elves help you turn your living space into a magical world with unique box lights inspired by this classic!', 'https://i.etsystatic.com/31580870/r/il/ed1512/6297848841/il_1588xN.6297848841_at00.jpg', 185.0, 8, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (116, '6 in 1 bundle The Fellowship of the Ring Crochet Pattern', 'The Fellowship of the Ring Crochet Pattern, English pattern quick and easy pattern', 'https://i.etsystatic.com/53018604/r/il/b5c853/6119293698/il_1588xN.6119293698_lmdh.jpg', 19.23, 10, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (117, 'The Boys Movie Poster ', 'Poster is printed on Waterproof canvas, it is thick, strong, waterproof, it has the vivid color and will not fade, not easy to be damaged and shows vibrant graphics on it. It becomes more and more popular with the cool crowd.
+', 'https://i.etsystatic.com/51464994/r/il/a3f5eb/6179145815/il_1588xN.6179145815_ru1i.jpg', 15.45, 3, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (118, 'Fire Dragon and Ice Dragon Resin Lamp', 'This resin night light features a magical sight with three little dragons flying across the sky. Its beauty lies not only in the exquisite details but also in the dreamy ambiance it creates. The dragons, crafted from epoxy resin, delicately reflect light, producing a shimmering effect akin to bright stars in the night sky. This light is not just a decorative piece but also an artwork, bringing warmth and style to your living space.
+', 'https://i.etsystatic.com/42604617/r/il/a8da1d/5853600023/il_1588xN.5853600023_70pq.jpg', 114.0, 3, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (119, 'Game of Thrones Coaster Set', 'Depicting the sigils of all four Great Houses of Westeros, these coasters are a unique way to celebrate your love of A Song of Ice and Fire. Made from hand selected cherry boards, each piece is one of a kind. Individually milled, engraved, and hand finished, they work perfectly for hot and cold drinks all year round. Included with these unique coasters is a hand built display box which will keep all four like a perfect wooden throne.
+', 'https://i.etsystatic.com/20160004/r/il/365476/1870250368/il_1588xN.1870250368_nd2b.jpg', 45.0, 4, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (120, 'The Last of Us Ellie''s Journal Cosplay Props Replica', 'The journal is A5 size, which is 5.8 inches x 8 inches, contains content from The Last of Us Part II', 'https://i.etsystatic.com/19424222/r/il/1eea81/5123734983/il_1588xN.5123734983_gb0q.jpg', 68.5, 25, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (121, 'JOEL MUG (THE LAST OF US II) FANMADE', 'THE MUG IS PROFESSIONALLY MADE, INSPIRED BY THE ORIGINAL LOOK OF JOEL''S MUG IN THE LAST OF US PART II. INCLUDES A BOX TO DISPLAY IT WITH YOUR TLOU COLLECTION.', 'https://i.etsystatic.com/24433473/r/il/ba026f/3584208411/il_1588xN.3584208411_jt9l.jpg', 57.8, 5, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (122, ' House of Dragon Adjustable Ring', '14k Matt gold plating, oxidized silver, black oxidized silver, white silver, ring 14 mm height', 'https://i.etsystatic.com/10988505/r/il/c05308/4345385551/il_1588xN.4345385551_8e60.jpg', 69.0, 4, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (123, 'Rhaenyra and Aegon Crowns, House of the Dragon', 'This is a replica of Crown of Jaehaerys I based on series and is not an official item. King of The Seven Kingdoms Crown', 'https://i.etsystatic.com/39161474/r/il/c61d9e/6032700511/il_1588xN.6032700511_614c.jpg', 84.56, 2, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (124, 'Japanese Anime Music Box', 'Unleash the epic world of Attack on Titan with our thrilling music box. For fans of action and adventure, this handcrafted masterpiece is an absolute must-have. It pays homage to the relentless battle against the Titans, showcasing the courage and determination that define the series. Gift it to fellow fans or proudly display it as a symbol of your dedication to the Scout Regiment. 
+', 'https://i.etsystatic.com/41975262/r/il/75ddcb/4799778382/il_1588xN.4799778382_orl5.jpg', 21.83, 5, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (125, 'Erwin Smith Speech Hoodie', 'Erwin Smith Speech Hoodie: A Tribute to Attack on Titan. Immerse yourself in the valor and determination of the Scouts Regiment with our Erwin Smith Speech Hoodie. Inspired by the iconic and motivational speeches of Commander Erwin Smith from "Attack on Titan" (Shingeki no Kyojin), this hoodie is a must-have for fans who admire his leadership and the thrilling saga of humanity''s fight for survival. Designed for both warmth and style, this hoodie is your shield against the cold and a banner of your fandom.', 'https://i.etsystatic.com/52597500/r/il/230191/6216527248/il_1588xN.6216527248_e2lm.jpg', 55.22, 7, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (126, 'Fallout T-shirt', 'This T-shirt is inspired by the classic post-apocalyptic RPG series Fallout. Screen-printed on Earth Positive 100% combed organic cotton T-shirts.
+', 'https://i.etsystatic.com/17927977/r/il/debbb5/5857675522/il_1588xN.5857675522_fp0a.jpg', 34.75, 7, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (127, 'Explosion Resin diorama', 'This resin lamp conveys the message that we should cherish our lives because we don''t know what will happen. The light is powered by 5VDC via the USB type C charging port. A USB Type C charging cable is included.
+', 'https://i.etsystatic.com/40890130/r/il/b5131b/6112626262/il_1588xN.6112626262_flnz.jpg', 108.0, 3, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (128, 'Outlander 10th Anniversary 2014-2024 Signatures Shirt', 'If you love youthful personality style, you will definitely be conquered by these hoodies/sweatshirts/t-shirts. Simple and uncompromising when combined with any item. It makes a thoughtful Birthday gift, Christmas gift, Mother''s Day gift, Holiday gift, etc.', 'https://i.etsystatic.com/39484573/r/il/9590f2/5763359631/il_1588xN.5763359631_azsa.jpg', 30.06, 6, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (129, 'Outlander ring sterling silver', 'Silver outlander ring 925 sterling silver ring for celtic wedding, Scottish wedding ring in brutalist style.Rustic wedding band for her or him.', 'https://i.etsystatic.com/35531844/r/il/ee6920/5234248329/il_1588xN.5234248329_jnm3.jpg', 45.18, 7, 0, 0);
+
+INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
+VALUES (130, 'The Bear TV Show Shirt', 'Graphic t-shirt of The Beef logo signage outside of the restaurant in Chicago.
+', 'https://i.etsystatic.com/45843620/r/il/788fa9/5585868454/il_1588xN.5585868454_6q5i.jpg', 24.0, 10, 0, 0);
 
 
 
 
 
+--------------------------------------------------------------------------------------------------------------------------------, 0, 0
+-- MERCHPRODUCEPROD
+-------------------------------------------------------------------------------------------------------------------------------, 0, 0-
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (100, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (101, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (102, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (103, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (104, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (105, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (106, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (107, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (108, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (109, 1235);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (110, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (111, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (112, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (113, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (114, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (115, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (116, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (117, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (118, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (119, 1236);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (120, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (121, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (122, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (123, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (124, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (125, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (126, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (127, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (128, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (129, 1237);
+
+INSERT INTO MERCHPRODUCEPROD (PRO_ID, MER_ID) 
+VALUES (130, 1235);
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------, 0, 0
+--PRODUCTBASEDONMEDIA
+
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (100, 6);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (101, 6);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (102, 7);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (103, 7);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (104, 46);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (105, 46);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (106, 67);
+
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (109, 16);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (110, 16);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (111, 17);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (112, 17);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (113, 18);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (114, 18);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (115, 19);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (116, 19);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (117, 76);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (118, 77);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (119, 77);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (120, 78);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (121, 78);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (122, 79);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (123, 79);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (124, 29);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (125, 29);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (126, 80);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (127, 80);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (128, 81);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (129, 81);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (130, 82);
 
 
 -- DELETE FROM USERWATCHANDFAVORITE 

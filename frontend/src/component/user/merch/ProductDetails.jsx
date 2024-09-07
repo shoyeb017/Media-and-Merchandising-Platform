@@ -25,7 +25,7 @@ const ProductDetails = () => {
 
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(0); // State for product quantity
+  const [quantity, setQuantity] = useState(1); // State for product quantity
 
   useEffect(() => {
     const fetchProductDetails = async () => {
