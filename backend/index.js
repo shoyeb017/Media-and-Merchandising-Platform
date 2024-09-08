@@ -2062,7 +2062,7 @@ app.post('/addNews', async (req, res) => {
             console.log('Received media request');
     
             const query = `
-                SELECT TITLE, POSTER AS IMG_SRC, DESCRIPTION
+                SELECT MEDIA_ID, TITLE, POSTER AS IMG_SRC, DESCRIPTION
                 FROM MEDIA
                 ORDER BY RATING DESC
                 FETCH FIRST 5 ROWS ONLY
@@ -2070,6 +2070,7 @@ app.post('/addNews', async (req, res) => {
             const result = await con.execute(query);
     
             const transformData = (data) => ({
+                id: data.MEDIA_ID,
                 title: data.TITLE,
                 imgSrc: data.IMG_SRC, // Ensure the database field is aliased as IMG_SRC
                 description: data.DESCRIPTION

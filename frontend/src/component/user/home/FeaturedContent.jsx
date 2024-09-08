@@ -30,13 +30,15 @@ function FeaturedContent() {
 
       const data = await response.json();
       const transformedData = data.map((item) => ({
+        id: item.id, // Make sure to include the id here
         title: item.title,
         imgSrc: item.imgSrc,
         description: item.description,
       }));
 
       setFeaturedItems(transformedData);
-      console.log('featuredItems:', featuredItems);
+      console.log('^^^^^^^^^^^^Featured items:', transformedData);
+
     } catch (err) {
       console.error('Failed to fetch featured content:', err);
       setFeaturedItems([]); // Handle the error by setting to an empty array
@@ -64,7 +66,6 @@ function FeaturedContent() {
   };
 
   const username = localStorage.getItem('username') || '';
-  
 
   return (
     <div
@@ -74,14 +75,13 @@ function FeaturedContent() {
           featuredItems.length
             ? `linear-gradient(to bottom, rgba(0,0,0,0), #242428), url(${featuredItems[currentIndex].imgSrc})`
             : 'none',
-            
       }}
     >
       {featuredItems.length > 0 ? (
         <>
           <div className="allsection2">
             <div className="section12">
-                <img src={featuredItems[currentIndex].imgSrc} alt={featuredItems[currentIndex].title} className="movie-img" />
+              <img src={featuredItems[currentIndex].imgSrc} alt={featuredItems[currentIndex].title} className="movie-img" />
             </div>
             <div className="section22">
               <h1 className="featured-title">{featuredItems[currentIndex].title}</h1>
@@ -89,7 +89,7 @@ function FeaturedContent() {
                 {truncateText(featuredItems[currentIndex].description, 250)}
               </p>
               <button className="featured-button">
-                <Link to={`/${username}/media/${featuredItems}`} className="featured-link">
+                <Link to={`/${username}/media/${featuredItems[currentIndex].id}`} className="featured-link">
                   View Details
                 </Link>
               </button>
