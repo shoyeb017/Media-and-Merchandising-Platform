@@ -1,0 +1,60 @@
+.role2-card {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 10px;
+  color: white;
+
+  padding: 7px;
+  width: 600px;
+  max-width: 1000px;
+  height: auto;
+}
+
+.role2-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.role2-info h4 {
+  margin: 0 0 5px;
+
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.role2-info p {
+  margin: 0;
+
+  color: #797e8f  ;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.role2-action{
+  margin-left: auto;
+  margin-right: 35px;
+  background-color: transparent;
+  border: none;
+}
+
+.remove-icon {
+font-size: 25px;
+color: #797e8f ; 
+transition: color 0.3s ease; 
+}
+
+.remove-icon:hover {
+  /* color: #ffdd95; */
+  color: #ff3333;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.remove-icon:active {
+  color: #ffdd95;
+}
+

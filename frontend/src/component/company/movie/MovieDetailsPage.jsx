@@ -46,6 +46,28 @@ const MovieDetailsPage = () => {
         };
         fetchMovieDetails();
     }, [mediaID]);
+    
+    useEffect(() => {
+        const fetchReview = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/media/review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: mediaID }),
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movie reviews');
+                }   
+                const movieReviews = await response.json();
+                setReviews(movieReviews); 
+            } catch (err) {
+                console.error('Failed to fetch movie reviews:', err);
+            }
+        };
+        fetchReview();
+    }, [mediaID]);
 
     if (!movieDetails) {
         return <div className="error">Loading...</div>; // Or handle the case where movie is not found
@@ -172,7 +194,7 @@ const MovieDetailsPage = () => {
             {/* Reviews Section */}
             <div className="reviews-section">
                 <h3 className="review-rating-title">Reviews & Rating</h3>
-                {movieDetails.review.map((review, index) => (
+                {reviews.map((review, index) => (
                     <ReviewCard key={index} review={review} />
                 ))}
             </div>

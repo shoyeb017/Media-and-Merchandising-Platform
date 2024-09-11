@@ -3138,7 +3138,7 @@ INSERT INTO MEDIA (
     'ANIME',
     'ACTION, COMEDY',
     'https://youtu.be/Poo5lqoWSGw?si=jNzyI6zDEKGf4rqq',
-    'https://www.impericon.com/media/catalog/product/a/b/abydco503_lg.jpg',
+    'https://m.media-amazon.com/images/M/MV5BZjJlNzE5YzEtYzQwYS00NTBjLTk5YzAtYzUwOWQyM2E3OGI2XkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_.jpg',
     '24m',
     TO_DATE('10/05/2015', 'MM/DD/YYYY'),
     25
@@ -6314,3 +6314,28 @@ WHERE COM_ID = 1;
 
 SELECT * FROM MEDIA
                 ORDER BY RATING DESC;
+
+
+SELECT * FROM MEDIA
+                WHERE MEDIA_ID IN (
+                    SELECT MEDIA_ID FROM USERWATCHANDFAVORITE
+                    WHERE USER_ID = 1234
+                    AND FAVORITE = 'Y'
+                );
+
+SELECT ROLE.NAME, ROLE.IMG, ROLE.ROLE_TYPE FROM 
+                ROLE JOIN PREFERENCEFORROLE
+                ON ROLE.ROLE_ID = PREFERENCEFORROLE.ROLE_ID
+                where PREFERENCEFORROLE.USER_ID = 1234
+                ORDER BY ROLE.ROLE_TYPE DESC;
+
+
+                SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
+                    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
+                JOIN MEDIA 
+                    ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
+                JOIN USERSTARTDISCUSSION 
+                    ON DISCUSSION.DIS_ID = USERSTARTDISCUSSION.DIS_ID
+                WHERE USERSTARTDISCUSSION.USER_ID = 1234
+                ORDER BY DISCUSSIONABOUTMEDIA.DIS_DATE DESC, DISCUSSION.REPLY_COUNT DESC

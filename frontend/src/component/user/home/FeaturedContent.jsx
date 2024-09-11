@@ -6,6 +6,8 @@ function FeaturedContent() {
   const [featuredItems, setFeaturedItems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  
+
   // Helper function to truncate text
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {

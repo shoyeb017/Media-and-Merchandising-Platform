@@ -88,14 +88,18 @@
   transition: 1s all ease-in-out;
 } */
 
+.link-product-card {
+  /* background-color: white; */
+
+}
+
 .movie-card {
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
-  max-width: 320px;
+  /* box-shadow: 0 4px 8px 0 rgba(1,1,1,1); */
+  max-width: 200px;
   height: 290px;
   margin: auto 1rem;
   text-align: center;
   font-family: arial;
-  
   position: relative;
 }
 

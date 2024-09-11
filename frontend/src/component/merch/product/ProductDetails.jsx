@@ -44,8 +44,33 @@ const ProductDetails = ({}) => {
     fetchProductDetails();
 }, [productID]);
 
+
+
   const [reviews, setReviews] = useState(product ? product.reviews : []);
   const [newReview, setNewReview] = useState({ name: '', description: '', rating: 0 });
+
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/products/review', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: productID }),
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+        const reviews = await response.json();
+        setReviews(reviews);
+      } catch (err) {
+        console.error('Failed to fetch reviews:', err);
+      }
+    };
+    fetchReviews();
+  }, [productID]);
 
 
   if (!product) return <div style={{color: 'white'}}>Product not found</div>;

@@ -39,7 +39,7 @@ function Navbar() {
     <div className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <div className="logo-container">
-          <h1 className="logo">MMP</h1>
+          {/* <p>MMP</p> */}
         </div>
         <div className="menu-container">
           <ul className="menu-list">

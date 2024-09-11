@@ -37,3 +37,8 @@
     gap: 20px;
     justify-content: center;
   }
+
+.favrole-con h2 {
+  margin: 30px 0;
+  color: #ffdd95;
+}

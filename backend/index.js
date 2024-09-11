@@ -2562,6 +2562,102 @@ app.post('/addNews', async (req, res) => {
         }
     });
 
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR LIST OF ROLES
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/media/favorite/roles', async (req, res) => {
+        const { user_id } = req.body;
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            console.log('Received roles request');
+            const result = await con.execute(
+                `SELECT ROLE.ROLE_ID, ROLE.NAME, ROLE.IMG, ROLE.ROLE_TYPE FROM 
+                ROLE JOIN PREFERENCEFORROLE
+                ON ROLE.ROLE_ID = PREFERENCEFORROLE.ROLE_ID
+                where PREFERENCEFORROLE.USER_ID = :user_id
+                ORDER BY ROLE.NAME ASC`,
+                { user_id }
+            );
+            // console.log(`Query Result: `, result.rows);
+            res.send(result.rows);
+            console.log("----------Roles Data sent");
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR ROLE delete
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.post('/media/favorite/roles/delete', async (req, res) => {
+        const { user_id, role_id } = req.body;
+        console.log('Received delete request for role:', { user_id, role_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const checkResult = await con.execute(
+                `SELECT * FROM PREFERENCEFORROLE
+                WHERE USER_ID = :user_id
+                AND ROLE_ID = :role_id`,
+                { user_id, role_id }
+            );
+
+            console.log(`Query Result: `, checkResult.rows);
+
+            if(checkResult.rows.length === 0){
+                res.status(404).send("Record not found or already deleted");
+            }
+            else {
+                const result = await con.execute(
+                    `DELETE FROM PREFERENCEFORROLE
+                    WHERE USER_ID = :user_id
+                    AND ROLE_ID = :role_id`,
+                    { user_id, role_id }, { autoCommit: true }
+                );
+                console.log(`Query Result: `, result);
+                res.send("Deleted successfully");
+                console.log("Deleted successfully");
+            }
+
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                await con.close();
+                } catch (err) {
+                console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
+
+
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR favorite toggle
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2705,8 +2801,8 @@ app.post('/addNews', async (req, res) => {
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR my DISCUSSION
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    app.get('/discussions/my', async (req, res) => {
-        const user_id = req.query.user_id;
+    app.post('/discussions/my', async (req, res) => {
+        const { user_id } = req.body;
         console.log('Fetching discussions for user:', user_id);
         let con;
         try {
@@ -2715,22 +2811,21 @@ app.post('/addNews', async (req, res) => {
                 res.status(500).send("Connection Error");
                 return;
             }
+            console.log(user_id);
             const result = await con.execute(
-                `
-                SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, DISCUSSION.REPLY_COUNT
-                FROM DISCUSSION
-                JOIN DISCUSSIONABOUTMEDIA 
-                    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID
+                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
+                    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
                 JOIN MEDIA 
                     ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
                 JOIN USERSTARTDISCUSSION 
                     ON DISCUSSION.DIS_ID = USERSTARTDISCUSSION.DIS_ID
                 WHERE USERSTARTDISCUSSION.USER_ID = :user_id
-                ORDER BY DISCUSSIONABOUTMEDIA.DIS_DATE DESC`,
+                ORDER BY DISCUSSIONABOUTMEDIA.DIS_DATE DESC, DISCUSSION.REPLY_COUNT DESC`,
                 { user_id }
             );
             console.log(`Query Result: `, result.rows);
-            res.send(result.rows);
+            res.status(200).send(result.rows);
             console.log("User Discussions Data sent");
         } catch (err) {
             console.error("Error during database query: ", err);
@@ -4538,4 +4633,45 @@ app.post('/addNews', async (req, res) => {
     });
 }).catch(err => {
     console.error('Error starting connection pool', err);
+});
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// RECOMMENDATION Part
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.post('/media/foryou', async (req, res) => {
+    const { user_id } = req.body;
+    console.log('Received recommendation request:', { user_id });
+    let con;
+    try {
+        con = await pool.getConnection();
+        if (!con) {
+            return res.status(500).send("Connection Error");
+        }
+
+        const query = `
+            
+        `;
+
+        const result = await con.execute(query, { user_id });
+        console.log(`Query Result: `, result.rows);
+
+        if (result.rows.length === 0) {
+            return res.status(404).send("No products found");
+        }
+
+        res.send(result.rows);
+    } catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        if (con) {
+            try {
+                await con.close();
+            } catch (err) {
+                console.error("Error closing database connection: ", err);
+            }
+        }
+    }
 });

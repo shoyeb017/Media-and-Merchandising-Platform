@@ -110,10 +110,28 @@ const Discussion = () => {
     }
   };
 
-  const handleViewChange = (view) => {
+  const handleViewChange = async (view) => {
     setView(view);
     if (view === 'my') {
-      fetchDiscussions(`http://localhost:5000/discussions/my?user_id=${localStorage.getItem('user_id')}`);
+      try {
+        const response = await fetch('http://localhost:5000/discussions/my', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+        });
+        console.log(localStorage.getItem('user_id'));
+        if (response.status === 200) {
+          const data = await response.json();
+          setDiscussions(data);
+        } else {
+          alert('Failed to fetch discussions');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+
     } else {
       fetchDiscussions('http://localhost:5000/discussions');
     }

@@ -6,6 +6,9 @@ import MovieList from "./MovieList";
 function Home() {
   let selectedGenres=[];
   const searchTerm=''
+  
+  const [foryouMovies, setForYouMovies] = React.useState([]);
+
   const [actionMovies, setActionMovies] = React.useState([]);
   const [horrorMovies, setHorrorMovies] = React.useState([]);
   const [romanceMovies, setRomanceMovies] = React.useState([]);
@@ -37,6 +40,25 @@ function Home() {
       console.error('Failed to search:', err);
     }
   };
+
+  const fetchforyouMovies = async () => {
+    try {
+      console.log('fetching movies for you');
+      const response = await fetch('http://localhost:5000/media/foryou', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch media');
+      }
+      const media = await response.json();
+      setForYouMovies(media);
+    } catch (err) {
+      console.error('Failed to search:', err);
+    }
+  };
   
   
 
@@ -56,6 +78,7 @@ function Home() {
       <Navbar />
       <FeaturedContent />
       <div className="content-container">
+        <MovieList movies={foryouMovies} title="Top Picks for You" />
         <MovieList movies={actionMovies} title="Action" />
         <MovieList movies={horrorMovies} title="Horror" />
         <MovieList movies={romanceMovies} title="Romance" />
