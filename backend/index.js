@@ -2093,6 +2093,57 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR FEATURED PRODUCTS
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    app.post('/media/products', async (req, res) => {
+        let { media_id } = req.body;
+        console.log('Received media product request:', media_id);
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            const result = await con.execute(
+                `SELECT * FROM PRODUCTS
+                WHERE PRO_ID IN (
+                    SELECT PRO_ID FROM PRODUCTBASEDONMEDIA
+                    WHERE MEDIA_ID = :media_id
+                )`,
+                { media_id }
+            );
+            // console.log(`Query Result: `, result.rows);
+            res.send(result.rows);
+            console.log("Product Data sent");
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
+
+
+            
+
+
+
+
+
+
     
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2424,13 +2475,24 @@ app.post('/addNews', async (req, res) => {
                 res.status(404).send("Record not found or already deleted");
             }
             else {
-                const result = await con.execute(
-                    `UPDATE USERWATCHANDFAVORITE
-                    SET FAVORITE = 'N'
-                    WHERE USER_ID = :user_id
-                    AND MEDIA_ID = :media_id`,
-                    { user_id, media_id }, { autoCommit: true }
-                );
+                if(checkResult.rows[0].STATUS === 'WATCHED' || checkResult.rows[0].STATUS === 'PLAN_TO_WATCH'){
+                    const result = await con.execute(
+                        `UPDATE USERWATCHANDFAVORITE
+                        SET FAVORITE = NULL
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                } else{
+                    //delete the row
+                    const result = await con.execute(
+                        `DELETE FROM USERWATCHANDFAVORITE
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                }
+
                 console.log(`Query Result: `, result);
                 res.send("Deleted successfully");
                 console.log("Deleted successfully");
@@ -2480,16 +2542,30 @@ app.post('/addNews', async (req, res) => {
             if(checkResult.rows.length === 0){
                 res.status(404).send("Record not found or already deleted");
             } else {
-                const result = await con.execute(
-                    `UPDATE USERWATCHANDFAVORITE
-                    SET STATUS = NULL
-                    WHERE USER_ID = :user_id
-                    AND MEDIA_ID = :media_id`,
-                    { user_id, media_id }, { autoCommit: true }
-                );
+
+
+                if(checkResult.rows[0].FAVORITE === 'Y'){
+                    
+                    const result = await con.execute(
+                        `UPDATE USERWATCHANDFAVORITE
+                        SET STATUS = NULL
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                } else{
+                    //delete teh row
+                    const result = await con.execute(
+                        `DELETE FROM USERWATCHANDFAVORITE
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                }
                 console.log(`Query Result: `, result);
                 res.send("Deleted successfully");
                 console.log("Deleted successfully");
+
             }
                 
         } catch (err) {
@@ -2535,13 +2611,25 @@ app.post('/addNews', async (req, res) => {
                 res.status(404).send("Record not found or already deleted");
             }
             else {
-                const result = await con.execute(
-                    `UPDATE USERWATCHANDFAVORITE
-                    SET STATUS = NULL
-                    WHERE USER_ID = :user_id
-                    AND MEDIA_ID = :media_id`,
-                    { user_id, media_id }, { autoCommit: true }
-                );
+                if(checkResult.rows[0].FAVORITE === 'Y'){
+                    
+                    const result = await con.execute(
+                        `UPDATE USERWATCHANDFAVORITE
+                        SET STATUS = NULL
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                } else{
+                    //delete the row
+                    const result = await con.execute(
+                        `DELETE FROM USERWATCHANDFAVORITE
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                }
+
                 console.log(`Query Result: `, result);
                 res.send("Deleted successfully");
                 console.log("Deleted successfully");
@@ -4160,6 +4248,74 @@ app.post('/addNews', async (req, res) => {
     });
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE FOR COMPANY DETAILS PAGE MEDIA
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    app.post('/companydetailspage/medias', async (req, res) => {
+        const { com_id } = req.body;
+        console.log('Received company details page media request:', { com_id });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+
+            const result = await con.execute(
+                `SELECT *
+                FROM MEDIA
+                JOIN COMPANYHASMEDIA ON MEDIA.MEDIA_ID = COMPANYHASMEDIA.MEDIA_ID
+                WHERE COMPANYHASMEDIA.COM_ID = :com_id
+                ORDER BY MEDIA.RELEASE_DATE DESC`,
+                { com_id }
+            );
+
+            console.log(`Query Result: `, result.rows);
+
+            if (result.rows.length === 0) {
+                return res.status(404).send("No media found for the specified company");
+            }
+
+            const transformData = (data) => {
+                return {
+                    id: data.MEDIA_ID,
+                    img: data.POSTER,
+                    title: data.TITLE,
+                    description: data.DESCRIPTION,
+                    rating: data.RATING / 2, // Assuming the original rating is out of 10 and the new one is out of 5
+                    releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                    type: data.TYPE.charAt(0).toUpperCase() + data.TYPE.slice(1).toLowerCase(),
+                    episodes: data.EPISODE || 0,
+                    duration: data.DURATION,
+                    genre: data.GENRE.split(',').map(g => g.trim()),
+                    companyName: 'Example Productions',
+                    role: [],
+                    news: [],
+                    review: []
+                };
+            };
+            const mediaList = result.rows.map(transformData);
+            res.send(mediaList);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        }
+    });
+
+
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR USER CONFIRMATION ORDER
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       
@@ -4627,13 +4783,6 @@ app.post('/addNews', async (req, res) => {
     });
     
     
-    // Start the server
-    app.listen(5000, () => {
-        console.log('Server started on http://localhost:5000');
-    });
-}).catch(err => {
-    console.error('Error starting connection pool', err);
-});
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -4651,17 +4800,66 @@ app.post('/media/foryou', async (req, res) => {
         }
 
         const query = `
-            
+            SELECT 
+                M.MEDIA_ID, 
+                M.TITLE, 
+                M.DESCRIPTION, 
+                M.RATING, 
+                M.RATING_COUNT, 
+                M.TYPE, 
+                M.GENRE, 
+                M.TRAILER, 
+                M.POSTER, 
+                M.DURATION, 
+                M.RELEASE_DATE, 
+                M.EPISODE
+            FROM 
+                MEDIA M
+            JOIN 
+                PREFERREDGENRE P ON INSTR(P.GENRES, M.GENRE) > 0
+            WHERE 
+                P.USER_ID = :USER_ID
+                AND NOT EXISTS (
+                    SELECT 1 
+                    FROM USERWATCHANDFAVORITE UWF 
+                    WHERE UWF.USER_ID = P.USER_ID 
+                    AND UWF.MEDIA_ID = M.MEDIA_ID
+                )
+            ORDER BY 
+                M.RATING DESC
+
         `;
 
         const result = await con.execute(query, { user_id });
         console.log(`Query Result: `, result.rows);
 
+        const transformData = (data) => {
+            return {
+                id: data.MEDIA_ID,
+                img: data.POSTER,
+                title: data.TITLE,
+                description: data.DESCRIPTION,
+                rating: data.RATING , // Assuming the original rating is out of 10 and the new one is out of 5
+                releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                type: data.TYPE,
+                episodes: data.EPISODE || 0,
+                duration: data.DURATION,
+                genre: data.GENRE.split(',').map(g => g.trim()),
+                companyName: 'Example Productions',
+                role: [],
+                news: [],
+                review: []
+            };
+        };
+
+        const List = result.rows.map(transformData);
+
+
         if (result.rows.length === 0) {
-            return res.status(404).send("No products found");
+            return res.status(404).send("No recommendation found");
         }
 
-        res.send(result.rows);
+        res.send(List);
     } catch (err) {
         console.error("Error during database query: ", err);
         res.status(500).send("Internal Server Error");
@@ -4674,4 +4872,14 @@ app.post('/media/foryou', async (req, res) => {
             }
         }
     }
+});
+
+
+
+    // Start the server
+    app.listen(5000, () => {
+        console.log('Server started on http://localhost:5000');
+    });
+}).catch(err => {
+    console.error('Error starting connection pool', err);
 });

@@ -49,6 +49,7 @@ function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
       });
       if (!response.ok) {
         throw new Error('Failed to fetch media');
@@ -63,6 +64,8 @@ function Home() {
   
 
   React.useEffect(() => {
+    fetchforyouMovies( );
+    
     selectedGenres=['ACTION'];
     fetchMoviesByGenre( setActionMovies);
     selectedGenres=['HORROR'];
@@ -79,6 +82,7 @@ function Home() {
       <FeaturedContent />
       <div className="content-container">
         <MovieList movies={foryouMovies} title="Top Picks for You" />
+        <MovieList movies={foryouMovies} title="From Your Favorite Actors" />
         <MovieList movies={actionMovies} title="Action" />
         <MovieList movies={horrorMovies} title="Horror" />
         <MovieList movies={romanceMovies} title="Romance" />
@@ -86,6 +90,7 @@ function Home() {
       </div>
     </div>
   );
+  
 }
 
 export default Home;

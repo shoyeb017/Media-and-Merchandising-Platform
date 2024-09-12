@@ -6,6 +6,7 @@ import RoleCard from './RoleCard';
 import NewsCard from './NewsCard';
 import './MovieDetailsPage.css';
 import ReactPlayer from 'react-player';
+import ProductCard from '../merch/ProductCard';
 
 const ReviewCard = ({ review }) => {
     return (
@@ -36,6 +37,7 @@ const MovieDetailsPage = () => {
     const [newDiscussion, setNewDiscussion] = useState({ topic: '', description: '' });
     const [discussions, setDiscussions] = useState([]);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [products, setProducts] = useState([]);
 
     const userId = localStorage.getItem('user_id');
 
@@ -136,6 +138,31 @@ const MovieDetailsPage = () => {
         fetchReview();
     }, [mediaID]);
     
+
+    useEffect(() => {
+        const fetchproducts = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/media/products', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ media_id: mediaID }),
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setProducts(data);
+                } else {
+                    console.error('Failed to fetch company data');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+        fetchproducts();
+    }, [mediaID]);
+
+
 
     if (!movieDetails) {
         return <div className="error">Loading...</div>;
@@ -442,6 +469,17 @@ const MovieDetailsPage = () => {
                         className="discussion-des"
                     />
                     <button onClick={handleAddDiscussion}>Submit Discussion</button>
+                </div>
+            </div>
+
+            <div className="company-details-middle">
+                <div className="products-section">
+                    <h3 className="products-title">Advertisement</h3>
+                    <div className="product-list">
+                        {products.map(product => (
+                            <ProductCard key={product.PRO_ID} product={product} />
+                        ))}
+                    </div>
                 </div>
             </div>
 

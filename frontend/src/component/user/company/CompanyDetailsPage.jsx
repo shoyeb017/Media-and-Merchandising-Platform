@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import NewsCard from './NewsCard';
 import ProductCard from '../merch/ProductCard';
 import './CompanyDetailsPage.css';
+import MovieList from '../home/MovieList';
 
 const CompanyDetailsPage = () => {
   const { companyID } = useParams();
@@ -11,6 +12,7 @@ const CompanyDetailsPage = () => {
   const [company, setCompany] = useState(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [companyMovies, setCompanyMovies] = useState([]);
 
   // Fetch company data by ID
   const fetchAdvertisement = async () => {
@@ -31,6 +33,22 @@ const CompanyDetailsPage = () => {
       } else {
         console.error('Failed to fetch company data');
       }
+      const response2 = await fetch(`http://localhost:5000/companydetailspage/medias`,
+        { 
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ com_id })
+        }
+
+      );
+      if (response2.ok) {
+        const data = await response2.json();
+        setCompanyMovies(data);
+      } else {
+        console.error('Failed to fetch company data');
+      }
+      
+
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -104,7 +122,7 @@ const CompanyDetailsPage = () => {
           </div>
         </div>
       </div>
-
+      <MovieList movies={companyMovies} title="Medias" />
       {/* Product & news section */}
       <div className="company-details-middle">
         <div className="products-section">
