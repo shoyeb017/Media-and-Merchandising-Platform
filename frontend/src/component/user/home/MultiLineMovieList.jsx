@@ -28,8 +28,7 @@ const responsive = {
 
   const MultiLineMovieList = ({ data }) => {
 
-  const [roleMedia, setRoleMedia] = useState([]);
-
+    const [roleMedia, setRoleMedia] = useState([]);
 
   useEffect(() => {
     const fetchRoleMedia = async () => {
@@ -43,27 +42,22 @@ const responsive = {
             },
             body: JSON.stringify({ role_id: data[i].ROLE_ID }),
           });
-  
+
           if (!response.ok) {
             throw new Error('Failed to fetch media');
           }
-  
+
           const roleData = await response.json();
-          if (roleData && roleData.movies) {
-            allRoleMedia.push(roleData);
-          } else {
-            console.warn('Invalid data structure received:', roleData);
-          }
+          allRoleMedia.push(roleData);
         }
         setRoleMedia(allRoleMedia);
       } catch (error) {
         console.error('Error fetching role media:', error);
       }
     };
-  
+
     fetchRoleMedia();
-  }, [data]);
-  
+  }, [data]); 
 
 
     if (!Array.isArray(roleMedia)) {
@@ -74,25 +68,24 @@ const responsive = {
     
   
     const roleMediaList = roleMedia.map((lineData, index) => (
-      lineData && lineData.media ? (
-        <div key={index} className="movie-list-line">
-          <div className="header">
-            <img src={lineData.image} alt={lineData.name} className="header-image"/>
-            <div className="header-name">{lineData.name}</div>
-          </div>
-          <Carousel
-            showDots={false}
-            responsive={responsive}
-            itemClass="carousel-item-padding-40-px"
-          >
-            {lineData.media.map((media) => (
-              <MovieCard key={media.id} movie={media} />
-            ))}
-          </Carousel>
+      console.log(lineData),
+      <div key={index} className="movie-list-line">
+        <div className="header">
+          <img src={lineData.image} alt={lineData.name} className="header-image"/>
+          <div className="header-name">{lineData.name}</div>
         </div>
-      ) : null
+        <Carousel
+          showDots={false}
+          responsive={responsive}
+          itemClass="carousel-item-padding-40-px"
+        >
+          {Array.isArray(lineData.movies)  && lineData.movies.map((movie) => (
+            console.log(movie),
+            <MovieCard key={movie.id} movie={movie} />
+          ))}
+        </Carousel>
+      </div>
     ));
-    
   
     return (
       <div className="multi-line-movie-list">

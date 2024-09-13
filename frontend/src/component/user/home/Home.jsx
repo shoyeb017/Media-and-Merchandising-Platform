@@ -11,6 +11,7 @@ function Home() {
   const [romanceMovies, setRomanceMovies] = React.useState([]);
   const [comedyMovies, setComedyMovies] = React.useState([]);
   const [roleData, setRoleData] = React.useState([]);
+  const [empData, setEmpData] = React.useState([]);
 
   const fetchMoviesByGenre = async (genre, setMovies) => {
     try {
@@ -93,6 +94,7 @@ function Home() {
       <FeaturedContent />
       <div className="content-container">
         <MovieList movies={foryouMovies} title="Top Picks for You" />
+        <MovieList movies={empData} title="Medias from your favorite Actors" />
         <MultiLineMovieList data={roleData} />
         <MovieList movies={actionMovies} title="Action" />
         <MovieList movies={horrorMovies} title="Horror" />
