@@ -1489,6 +1489,11 @@ app.post('/addNews', async (req, res) => {
         }
     });
 
+
+
+
+
+
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR MEADIA SEARCH 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -4873,6 +4878,136 @@ app.post('/media/foryou', async (req, res) => {
         }
     }
 });
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ROUTE FOR USER /media/favRole
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.post('/media/favRole', async (req, res) => {
+    const { user_id } = req.body;
+    console.log('Received recommendation request:', { user_id });
+    let con;
+
+    try {
+        con = await pool.getConnection();
+        if (!con) {
+            return res.status(500).send("Connection Error");
+        }
+        /* top 3 fav role from actor */
+        const favrole = `
+            SELECT *
+            FROM ROLE 
+            JOIN PREFERENCEFORROLE ON ROLE.ROLE_ID = PREFERENCEFORROLE.ROLE_ID
+            WHERE PREFERENCEFORROLE.USER_ID = :user_id
+            AND ROLE.ROLE_TYPE = 'ACTOR'
+            FETCH FIRST 3 ROWS ONLY
+        `;
+        const result = await con.execute(favrole, { user_id });
+        console.log(`Query Result: `, result.rows);
+
+        if (result.rows.length === 0) {
+            return res.status(404).send("No recommendation found");
+        }
+
+        res.send(result.rows);
+    }
+    catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).send("Internal Server Error");
+    }
+    finally {
+        if (con) {
+            try {
+                await con.close();
+            } catch (err) {
+                console.error("Error closing database connection: ", err);
+            }
+        }
+    }
+});
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ROUTE FOR USER Role MEDIA
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+app.post('/media/rolemedia', async (req, res) => {
+    const { role_id } = req.body;
+    console.log('Received recommendation request:', { role_id });
+    let con;
+
+    try {
+        con = await pool.getConnection();
+        if (!con) {
+            return res.status(500).send("Connection Error");
+        }
+
+        // Fetch role details
+        const roledetail = await con.execute(
+            `SELECT * 
+            FROM ROLE
+            WHERE ROLE_ID = :role_id`,
+            { role_id }
+        );
+
+        // Fetch associated media for the role
+        const medias = await con.execute(
+            `SELECT * 
+            FROM MEDIA
+            JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
+            WHERE ROLE_ID = :role_id`,
+            { role_id }
+        );
+
+        // Transform the data into the required format
+        const transformData = (roleRow) => {
+            return {
+                image: roleRow.IMG,
+                name: roleRow.NAME,
+                movies: medias.rows.map(media => ({
+                    id: media.MEDIA_ID,
+                    title: media.TITLE,
+                    description: media.DESCRIPTION,
+                    rating: media.RATING,
+                    ratingCount: media.RATING_COUNT,
+                    type: media.TYPE,
+                    genre: media.GENRE,
+                    trailer: media.TRAILER,
+                    img: media.POSTER,
+                    duration: media.DURATION,
+                    releaseDate: media.RELEASE_DATE,
+                    episodes: media.EPISODE
+                }))
+            };
+        };
+
+        // Map through role details and transform data accordingly
+        const List = roledetail.rows.map(transformData);
+
+        console.log(`Query Result: `, List);
+
+        if (List.length === 0) {
+            return res.status(404).send("No recommendation found");
+        }
+
+        res.send(List);
+    }
+    catch (err) {
+        console.error("Error during database query: ", err);
+        res.status(500).send("Internal Server Error");
+    }
+    finally {
+        if (con) {
+            try {
+                await con.close();
+            } catch (err) {
+                console.error("Error closing database connection: ", err);
+            }
+        }
+    }
+});
+
+
 
 
 

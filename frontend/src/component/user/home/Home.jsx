@@ -1,37 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../common/Navbar";
 import FeaturedContent from "./FeaturedContent";
 import MovieList from "./MovieList";
+import MultiLineMovieList from './MultiLineMovieList';
 
 function Home() {
-  let selectedGenres=[];
-  const searchTerm=''
-  
   const [foryouMovies, setForYouMovies] = React.useState([]);
-
   const [actionMovies, setActionMovies] = React.useState([]);
   const [horrorMovies, setHorrorMovies] = React.useState([]);
   const [romanceMovies, setRomanceMovies] = React.useState([]);
   const [comedyMovies, setComedyMovies] = React.useState([]);
+  const [roleData, setRoleData] = React.useState([]);
 
-  const fetchMoviesByGenre = async ( setMovies) => {
+  const fetchMoviesByGenre = async (genre, setMovies) => {
     try {
-      
-      console.log('fetching movies by genre:', selectedGenres);
-      console.log('selectedGenres array:', selectedGenres);
-      console.log('Request payload:', JSON.stringify({ searchTerm, selectedGenres }));
-      
       const response = await fetch('http://localhost:5000/media/search/genre', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ searchTerm, selectedGenres }),
+        body: JSON.stringify({ searchTerm: '', selectedGenres: [genre] }),
       });
-      
+
       if (response.ok) {
         const data = await response.json();
-        console.log('Response data:', data);
         setMovies(Array.isArray(data) ? data : []);
       } else {
         console.error('Failed to search. Status:', response.status);
@@ -41,9 +33,8 @@ function Home() {
     }
   };
 
-  const fetchforyouMovies = async () => {
+  const fetchForYouMovies = async () => {
     try {
-      console.log('fetching movies for you');
       const response = await fetch('http://localhost:5000/media/foryou', {
         method: 'POST',
         headers: {
@@ -51,29 +42,49 @@ function Home() {
         },
         body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
       });
+
       if (!response.ok) {
         throw new Error('Failed to fetch media');
       }
+
       const media = await response.json();
       setForYouMovies(media);
     } catch (err) {
-      console.error('Failed to search:', err);
+      console.error('Failed to fetch for you movies:', err);
     }
   };
+
+  useEffect(() => {
+    const fetchFavRoleMovies = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/media/favRole', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+        });
   
+        if (!response.ok) {
+          throw new Error('Failed to fetch favorite role media');
+        }
   
+        const media = await response.json();
+        setRoleData(media);
+      } catch (err) {
+        console.error('Failed to fetch favorite role movies:', err);
+      }
+    };
+
+    fetchFavRoleMovies();
+  }, []);
 
   React.useEffect(() => {
-    fetchforyouMovies( );
-    
-    selectedGenres=['ACTION'];
-    fetchMoviesByGenre( setActionMovies);
-    selectedGenres=['HORROR'];
-    fetchMoviesByGenre( setHorrorMovies);
-    selectedGenres=['ROMANCE'];
-    fetchMoviesByGenre( setRomanceMovies);
-    selectedGenres=['COMEDY'];
-    fetchMoviesByGenre( setComedyMovies);
+    fetchForYouMovies();
+    fetchMoviesByGenre('ACTION', setActionMovies);
+    fetchMoviesByGenre('HORROR', setHorrorMovies);
+    fetchMoviesByGenre('ROMANCE', setRomanceMovies);
+    fetchMoviesByGenre('COMEDY', setComedyMovies);
   }, []);
 
   return (
@@ -82,7 +93,7 @@ function Home() {
       <FeaturedContent />
       <div className="content-container">
         <MovieList movies={foryouMovies} title="Top Picks for You" />
-        <MovieList movies={foryouMovies} title="From Your Favorite Actors" />
+        <MultiLineMovieList data={roleData} />
         <MovieList movies={actionMovies} title="Action" />
         <MovieList movies={horrorMovies} title="Horror" />
         <MovieList movies={romanceMovies} title="Romance" />
@@ -90,7 +101,6 @@ function Home() {
       </div>
     </div>
   );
-  
 }
 
 export default Home;

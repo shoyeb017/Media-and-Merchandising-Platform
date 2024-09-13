@@ -39,7 +39,7 @@ function FeaturedContent() {
       }));
 
       setFeaturedItems(transformedData);
-      console.log('^^^^^^^^^^^^Featured items:', transformedData);
+      // console.log('^^^^^^^^^^^^Featured items:', transformedData);
 
     } catch (err) {
       console.error('Failed to fetch featured content:', err);
