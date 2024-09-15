@@ -237,7 +237,7 @@ CREATE TABLE USERORDERSPRODUCT (
     ORDER_DATE DATE,
     ORDER_TIME VARCHAR2(50),
     ORDER_QUANTITY INT,
-    CONSTRAINT DELIVERY_STATUS_CHECK CHECK (DELIVERY_STATUS IN ('DELIVERED', 'TO SHIP', 'PENDING'))
+    CONSTRAINT DELIVERY_STATUS_CHECK CHECK (DELIVERY_STATUS IN ('PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'))
 );
 
 CREATE TABLE PRODUCTBASEDONMEDIA(
@@ -427,9 +427,9 @@ INSERT INTO MERCHANDISER (MER_ID,USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STRE
             VALUES (1240, 'mer1', 'SIFAT', 'We sell merch', 'chikachika@gmail.com', 'Dhaka', 'Dhanmondi', '12', '01700000000');
 
 INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
-            VALUES (1240, '1234', 'MERCHANDISER', 1239);
+            VALUES (1240, '1234', 'MERCHANDISER', 1240);
 
-
+ 
 
 
 
@@ -4364,7 +4364,18 @@ VALUES (28, 199);
 INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
 VALUES (28, 200);
 
+------------------------------------------------------------------------------------------------------------------------------
+-- PREFERENCEFORROLE
+------------------------------------------------------------------------------------------------------------------------------
 
+INSERT INTO PREFERENCEFORROLE (USER_ID, ROLE_ID)
+VALUES (1234, 4);
+
+INSERT INTO PREFERENCEFORROLE (USER_ID, ROLE_ID)
+VALUES (1234, 8);
+
+INSERT INTO PREFERENCEFORROLE (USER_ID, ROLE_ID)
+VALUES (1234, 13);
 
 
 
@@ -5016,3 +5027,38 @@ SELECT *
             FROM MEDIA
             JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
             WHERE ROLE_ID = 83;
+
+            SELECT 
+                M.MEDIA_ID, 
+                M.TITLE, 
+                M.DESCRIPTION, 
+                M.RATING, 
+                M.RATING_COUNT, 
+                M.TYPE, 
+                M.GENRE, 
+                M.TRAILER, 
+                M.POSTER, 
+                M.DURATION, 
+                M.RELEASE_DATE, 
+                M.EPISODE
+            FROM 
+                MEDIA M
+            JOIN 
+                PREFERREDGENRE P ON INSTR(P.GENRES, M.GENRE) > 0
+            WHERE 
+                P.USER_ID = 1234
+                AND NOT EXISTS (
+                    SELECT 1 
+                    FROM USERWATCHANDFAVORITE UWF 
+                    WHERE UWF.USER_ID = P.USER_ID 
+                    AND UWF.MEDIA_ID = M.MEDIA_ID
+                )
+            ORDER BY 
+                M.RATING DESC;
+
+
+                SELECT COUNT(*) , ROLE.ROLE_ID FROM MEDIA 
+                join MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
+                JOIN ROLE ON MEDIAHASROLE.ROLE_ID = ROLE.ROLE_ID
+                GROUP BY ROLE.ROLE_ID
+                ORDER BY COUNT(*) DESC;

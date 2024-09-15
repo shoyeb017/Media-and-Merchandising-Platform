@@ -30,34 +30,31 @@ const responsive = {
 
     const [roleMedia, setRoleMedia] = useState([]);
 
-  useEffect(() => {
-    const fetchRoleMedia = async () => {
-      try {
-        const allRoleMedia = [];
-        for (let i = 0; i < data.length; i++) {
+    useEffect(() => {
+      const fetchRoleMedia = async () => {
+        try {
           const response = await fetch('http://localhost:5000/media/rolemedia', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ role_id: data[i].ROLE_ID }),
+            body: JSON.stringify({ role_ids: data.map(d => d.ROLE_ID) }), // Send all ROLE_IDs at once
           });
-
+  
           if (!response.ok) {
             throw new Error('Failed to fetch media');
           }
-
-          const roleData = await response.json();
-          allRoleMedia.push(roleData);
+  
+          const allRoleMedia = await response.json();  // Array of role media objects
+          setRoleMedia(allRoleMedia);
+        } catch (error) {
+          console.error('Error fetching role media:', error);
         }
-        setRoleMedia(allRoleMedia);
-      } catch (error) {
-        console.error('Error fetching role media:', error);
-      }
-    };
-
-    fetchRoleMedia();
-  }, [data]); 
+      };
+  
+      fetchRoleMedia();
+  }, [data]);
+  
 
 
     if (!Array.isArray(roleMedia)) {
@@ -73,6 +70,7 @@ const responsive = {
         <div className="header">
           <img src={lineData.image} alt={lineData.name} className="header-image"/>
           <div className="header-name">{lineData.name}</div>
+        
         </div>
         <Carousel
           showDots={false}

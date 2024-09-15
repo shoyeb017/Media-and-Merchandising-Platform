@@ -4885,7 +4885,7 @@ app.post('/media/foryou', async (req, res) => {
 
 app.post('/media/favRole', async (req, res) => {
     const { user_id } = req.body;
-    console.log('Received recommendation request:', { user_id });
+    console.log('Received FAV ROLE request:', { user_id });
     let con;
 
     try {
@@ -4899,7 +4899,7 @@ app.post('/media/favRole', async (req, res) => {
             FROM ROLE 
             JOIN PREFERENCEFORROLE ON ROLE.ROLE_ID = PREFERENCEFORROLE.ROLE_ID
             WHERE PREFERENCEFORROLE.USER_ID = :user_id
-            AND ROLE.ROLE_TYPE = 'ACTOR'
+            
             FETCH FIRST 3 ROWS ONLY
         `;
         const result = await con.execute(favrole, { user_id });
@@ -4932,8 +4932,8 @@ app.post('/media/favRole', async (req, res) => {
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 app.post('/media/rolemedia', async (req, res) => {
-    const { role_id } = req.body;
-    console.log('Received recommendation request:', { role_id });
+    const { role_ids } = req.body;  // Expecting role_ids as an array
+    console.log('Received rOLE recommendation request:', { role_ids });
     let con;
 
     try {
@@ -4942,61 +4942,163 @@ app.post('/media/rolemedia', async (req, res) => {
             return res.status(500).send("Connection Error");
         }
 
-        // Fetch role details
-        const roledetail = await con.execute(
+        // Fetch role details for 1st role
+
+        const role1 = role_ids[0];
+        const role2 = role_ids[1];
+        const role3 = role_ids[2];
+
+        const roledetail1 = await con.execute(
             `SELECT * 
             FROM ROLE
-            WHERE ROLE_ID = :role_id`,
-            { role_id }
+            WHERE ROLE_ID = :role1`,
+            { role1: role1 }
         );
 
-        // Fetch associated media for the role
-        const medias = await con.execute(
+        const media1 = await con.execute(
             `SELECT * 
             FROM MEDIA
             JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
-            WHERE ROLE_ID = :role_id`,
-            { role_id }
+            WHERE ROLE_ID = :role1`,
+            { role1: role1 }
         );
 
-        // Transform the data into the required format
-        const transformData = (roleRow) => {
-            return {
-                image: roleRow.IMG,
-                name: roleRow.NAME,
-                movies: medias.rows.map(media => ({
-                    id: media.MEDIA_ID,
-                    title: media.TITLE,
-                    description: media.DESCRIPTION,
-                    rating: media.RATING,
-                    ratingCount: media.RATING_COUNT,
-                    type: media.TYPE,
-                    genre: media.GENRE,
-                    trailer: media.TRAILER,
-                    img: media.POSTER,
-                    duration: media.DURATION,
-                    releaseDate: media.RELEASE_DATE,
-                    episodes: media.EPISODE
-                }))
-            };
-        };
+        const roledetail2 = await con.execute(
+            `SELECT * 
+            FROM ROLE
+            WHERE ROLE_ID = :role2`,
+            { role2: role2 }
+        );
 
-        // Map through role details and transform data accordingly
-        const List = roledetail.rows.map(transformData);
+        const media2 = await con.execute(
+            `SELECT *
+            FROM MEDIA
+            JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
+            WHERE ROLE_ID = :role2`,
+            { role2: role2 }
+        );
 
-        console.log(`Query Result: `, List);
+        const roledetail3 = await con.execute(
+            `SELECT * 
+            FROM ROLE
+            WHERE ROLE_ID = :role3`,
+            { role3: role3 }
+        );
+
+        const media3 = await con.execute(
+            `SELECT *
+            FROM MEDIA
+            JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
+            WHERE ROLE_ID = :role3`,
+            { role3: role3 }
+        );
+
+        const mediaByRoleId1 = media1.rows.map((media) => ({
+            id: media.MEDIA_ID,
+            title: media.TITLE,
+            description: media.DESCRIPTION,
+            rating: media.RATING,
+            ratingCount: media.RATING_COUNT,
+            type: media.TYPE,
+            genre: media.GENRE,
+            trailer: media.TRAILER,
+            img: media.POSTER,
+            duration: media.DURATION,
+            releaseDate: media.RELEASE_DATE,
+            episodes: media.EPISODE
+        }));
+
+        const mediaByRoleId2 = media2.rows.map((media) => ({
+            id: media.MEDIA_ID,
+            title: media.TITLE,
+            description: media.DESCRIPTION,
+            rating: media.RATING,
+            ratingCount: media.RATING_COUNT,
+            type: media.TYPE,
+            genre: media.GENRE,
+            trailer: media.TRAILER,
+            img: media.POSTER,
+            duration: media.DURATION,
+            releaseDate: media.RELEASE_DATE,
+            episodes: media.EPISODE
+        }));
+
+        const mediaByRoleId3 = media3.rows.map((media) => ({
+            id: media.MEDIA_ID,
+            title: media.TITLE,
+            description: media.DESCRIPTION,
+            rating: media.RATING,
+            ratingCount: media.RATING_COUNT,
+            type: media.TYPE,
+            genre: media.GENRE,
+            trailer: media.TRAILER,
+            img: media.POSTER,
+            duration: media.DURATION,
+            releaseDate: media.RELEASE_DATE,
+            episodes: media.EPISODE
+        }));
+
+        const List = [
+            {
+                image: roledetail1.rows[0].IMG,
+                name: roledetail1.rows[0].NAME,
+                movies: mediaByRoleId1
+            },
+            {
+                image: roledetail2.rows[0].IMG,
+                name: roledetail2.rows[0].NAME,
+                movies: mediaByRoleId2
+            },
+            {
+                image: roledetail3.rows[0].IMG,
+                name: roledetail3.rows[0].NAME,
+                movies: mediaByRoleId3
+            }
+        ];
+
+
+
+
+        // Group media by ROLE_ID
+        // const mediaByRoleId = medias.rows.reduce((acc, media) => {
+        //     if (!acc[media.ROLE_ID]) {
+        //         acc[media.ROLE_ID] = [];
+        //     }
+        //     acc[media.ROLE_ID].push({
+        //         id: media.MEDIA_ID,
+        //         title: media.TITLE,
+        //         description: media.DESCRIPTION,
+        //         rating: media.RATING,
+        //         ratingCount: media.RATING_COUNT,
+        //         type: media.TYPE,
+        //         genre: media.GENRE,
+        //         trailer: media.TRAILER,
+        //         img: media.POSTER,
+        //         duration: media.DURATION,
+        //         releaseDate: media.RELEASE_DATE,
+        //         episodes: media.EPISODE
+        //     });
+        //     return acc;
+        // }, {});
+
+        
+
+
+
+        // Transform the data into the required format for each role
+
+
+        console.log(`roleMedia Result: `, List);
 
         if (List.length === 0) {
             return res.status(404).send("No recommendation found");
         }
 
         res.send(List);
-    }
-    catch (err) {
+    } catch (err) {
         console.error("Error during database query: ", err);
         res.status(500).send("Internal Server Error");
-    }
-    finally {
+    } finally {
         if (con) {
             try {
                 await con.close();

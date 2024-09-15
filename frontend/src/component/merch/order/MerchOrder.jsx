@@ -218,12 +218,29 @@ const Order = () => {
                 <div className="order-details4">
                 {order.DELIVERY_STATUS === 'PENDING' && (
                   
+                  <button className="order-details4-button" onClick={() => handleStatusUpdate(order.ORDER_DATE,order.ORDER_TIME,order.USER_ID , 'PROCESSING')}>
+                    <i className="fa fa-check"></i>
+                    <p>PROCESSING</p>
+                  </button>
+               
+              )}
+                {order.DELIVERY_STATUS === 'PROCESSING' && (
+                  
+                  <button className="order-details4-button" onClick={() => handleStatusUpdate(order.ORDER_DATE,order.ORDER_TIME,order.USER_ID , 'SHIPPED')}>
+                    <i className="fa fa-check"></i>
+                    <p>Shipped</p>
+                  </button>
+               
+              )}
+                {order.DELIVERY_STATUS === 'SHIPPED' && (
+                  
                     <button className="order-details4-button" onClick={() => handleStatusUpdate(order.ORDER_DATE,order.ORDER_TIME,order.USER_ID , 'DELIVERED')}>
                       <i className="fa fa-check"></i>
                       <p>Delivered</p>
                     </button>
                  
                 )}
+                
                 <button className="order-details4-button" onClick={() => handleCancel(order.ORDER_DATE,order.ORDER_TIME,order.USER_ID)}>
                       <i className="fa fa-times"></i>
                       <p>Cancel</p>
