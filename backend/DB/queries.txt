@@ -1,0 +1,689 @@
+// Insert user data into the database
+const userResult = await con.execute(
+    `INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE) 
+    VALUES (:user_id, :username, :name, TO_DATE(:dob, 'YYYY-MM-DD'), :email, :city, :street, :house, :phone)`,
+    { user_id, username, name, dob, email, city, street, house, phone }
+);
+console.log(`User Insert Result: ${JSON.stringify(userResult)}`);
+// Insert user login credentials into the database
+const loginResult = await con.execute(
+    `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
+    VALUES (:login_id, :password, 'USER', :user_id)`,
+    { login_id, password, user_id }
+);
+console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
+// Insert user genre preferences into the database
+const genreResult = await con.execute(
+    `INSERT INTO PREFERREDGENRE (USER_ID, GENRES) VALUES (:user_id, :genres)`,
+    { user_id, genres: genres.join(',') }
+);
+// Insert merchandiser data into the database\
+            const result = await con.execute(
+                `INSERT INTO MERCHANDISER (MER_ID, USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+                VALUES (:user_id, :username, :name, :description, :email, :city, :street, :house, :phone)`,
+                { user_id, username, name, description, email, city, street, house, phone }
+            );
+            console.log(`Merchandiser Insert Result: ${JSON.stringify(result)}`);
+
+            // Insert merchandiser login credentials into the database
+            const loginResult = await con.execute(
+                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
+                VALUES (:login_id, :password, 'MERCHANDISER', :user_id)`,
+                { login_id, password, user_id }
+            );
+            console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
+const checkUserResult = await con.execute(
+                `SELECT COUNT(*) AS count FROM USERS WHERE USER_NAME = :username`,
+                { username }
+            );
+const result = await con.execute(
+                `INSERT INTO MERCHANDISER (MER_ID, USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
+                VALUES (:user_id, :username, :name, :description, :email, :city, :street, :house, :phone)`,
+                { user_id, username, name, description, email, city, street, house, phone }
+            );
+            console.log(`Merchandiser Insert Result: ${JSON.stringify(result)}`);
+
+            // Insert merchandiser login credentials into the database
+            const loginResult = await con.execute(
+                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
+                VALUES (:login_id, :password, 'MERCHANDISER', :user_id)`,
+                { login_id, password, user_id }
+            );
+const checkUserResult = await con.execute(
+                `SELECT COUNT(*) AS count FROM USERS WHERE USER_NAME = :username`,
+                { username }
+            );
+const checkUserResult = await con.execute(
+                `SELECT COUNT(*) AS count FROM MERCHANDISER WHERE USER_NAME = :username`,
+                { username }
+            );
+const checkUserResult = await con.execute(
+                `SELECT COUNT(*) AS count FROM COMPANY WHERE USER_NAME = :username`,
+                { username }
+            );
+            // Insert company data into the database
+            const result = await con.execute(
+                `INSERT INTO COMPANY (COM_ID, USER_NAME, NAME, IMG, EMAIL, DESCRIPTION)
+                VALUES (:user_id, :username, :name, :imageUrl, :email, :description)`,
+                { user_id, username, name, imageUrl, email, description }
+            );
+            console.log(`Company Insert Result: ${JSON.stringify(result)}`);
+
+            // Insert company login credentials into the database
+            const loginResult = await con.execute(
+                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
+                VALUES (:login_id, :password, 'COMPANY', :user_id)`,
+                { login_id, password, user_id }
+            );
+const result = await con.execute(
+                `SELECT USER_NAME, PASSWORD, ADMIN_ID as "user_id" 
+                FROM LOGIN JOIN ADMIN ON LOGIN.ID = ADMIN.ADMIN_ID
+                WHERE USER_NAME = :username AND PASSWORD = :password`,
+                { username, password } // Named bind variables
+            );
+const result = await con.execute(
+                `SELECT USER_NAME, PASSWORD, USER_ID as "user_id" 
+                FROM LOGIN JOIN USERS ON LOGIN.ID = USERS.USER_ID
+                WHERE USER_NAME = :username AND PASSWORD = :password`,
+                { username, password } // Named bind variables
+            );
+ const result = await con.execute(
+                `SELECT USER_NAME, PASSWORD, MER_ID as "user_id"
+                FROM LOGIN JOIN MERCHANDISER ON LOGIN.ID = MERCHANDISER.MER_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                { username, password } // Named bind variables
+            );
+const result = await con.execute(
+                `SELECT USER_NAME, PASSWORD, COM_ID as "user_id"
+                FROM LOGIN JOIN COMPANY ON LOGIN.ID = COMPANY.COM_ID WHERE USER_NAME = :username AND PASSWORD = :password`,
+                { username, password } // Named bind variables
+            );
+        const result = await con.execute(
+            `SELECT * FROM ADMIN WHERE ADMIN_ID = :user_id`,
+            { user_id } // Named bind variables
+        );
+          const result = await con.execute(
+            `UPDATE ADMIN SET NAME = :NAME, DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE WHERE ADMIN_ID = :user_id`,
+            { NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+          );
+            const result = await con.execute(
+                `SELECT * FROM USERS WHERE USER_ID = :user_id`,
+                { user_id } // Named bind variables
+            );
+          const result = await con.execute(
+            `UPDATE USERS SET NAME = :NAME, DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE WHERE USER_ID = :user_id`,
+            { NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+          );
+            const result = await con.execute(
+                `SELECT * FROM MERCHANDISER WHERE MER_ID = :user_id`,
+                { user_id } // Named bind variables
+            );
+        const result = await con.execute(
+            `UPDATE MERCHANDISER SET NAME = :NAME, DESCRIPTION = :DESCRIPTION, EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE 
+            WHERE MER_ID = :user_id`,
+            { NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
+        );
+            const result = await con.execute(
+                `SELECT * FROM COMPANY WHERE COM_ID = :userid`,
+                { userid } // Named bind variables
+            );
+            const result = await con.execute(
+
+                `SELECT * FROM USERS`
+            );
+            const result = await con.execute(
+
+                `SELECT * FROM COMPANY`
+            );
+            const result = await con.execute(
+
+                `SELECT * FROM MERCHANDISER`
+            );
+            const result = await con.execute(
+                `SELECT * FROM ROLE`
+            );
+            // Insert media data into the database
+            const result = await con.execute(
+                `INSERT INTO MEDIA (MEDIA_ID, TITLE, DESCRIPTION, RATING, TYPE, GENRE, TRAILER, POSTER, DURATION, RELEASE_DATE, EPISODE)
+                VALUES (:media_id, :title, :description, :rating, :type, :genres, :trailer, :poster, :duration, TO_DATE(:releaseDate, 'YYYY-MM-DD'), :episode)`,
+                {
+                    media_id,
+                    title,
+                    description,
+                    rating,
+                    type,
+                    genres: selectedGenres.join(', '), // Assuming genres are stored as comma-separated values
+                    trailer,
+                    poster: imageUrl,
+                    duration,
+                    releaseDate,
+                    episode
+                }
+            );
+                    const roleResult = await con.execute(
+                        `INSERT INTO MEDIAHASROLE (ROLE_ID, MEDIA_ID)
+                        VALUES (:role_id, :media_id)`,
+                        {
+                            role_id: role.role_id,
+                            media_id
+                        }
+                    );// Insert media and company association into COMPANYHASMEDIA
+            const companyMediaResult = await con.execute(
+            `INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID)
+            VALUES (:media_id, :com_id)`,
+            {
+                media_id,
+                com_id
+            }
+        );
+            // Get all media IDs for the given company ID
+            const mediaIdsResult = await con.execute(
+                `SELECT MEDIA_ID FROM COMPANYHASMEDIA WHERE COM_ID = :com_id`,
+                { com_id }
+            );// Get all media details for the retrieved media IDs
+            const mediaQuery = `
+                SELECT MEDIA.*, COMPANY.NAME AS COMPANY_NAME 
+                FROM MEDIA
+                LEFT JOIN COMPANYHASMEDIA ON MEDIA.MEDIA_ID = COMPANYHASMEDIA.MEDIA_ID
+                LEFT JOIN COMPANY ON COMPANYHASMEDIA.COM_ID = COMPANY.COM_ID
+                WHERE MEDIA.MEDIA_ID IN (${mediaIds.join(', ')})
+            `;
+    
+            const result = await con.execute(mediaQuery);
+        // Insert news into NEWSANDUPDATES table
+        await con.execute(
+            `INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+            VALUES (:news_id, :description, :headline)`,
+            {
+                news_id,
+                description,
+                headline: topic
+            }
+        );
+
+        // Insert into COMPANYGIVENEWS table
+        await con.execute(
+            `INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+            VALUES (:news_id, :com_id, TO_DATE(:news_date, 'YYYY-MM-DD'))`,
+            {
+                news_id,
+                com_id,
+                news_date: currentDate
+            }
+        );
+
+        // Insert into NEWSTOMEDIA table
+        await con.execute(
+            `INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+            VALUES (:media_id, :news_id, TO_DATE(:news_date, 'YYYY-MM-DD'))`,
+            {
+                media_id: mediaID,
+                news_id,
+                news_date: currentDate
+            }
+        );
+            const result = await con.execute(
+                `SELECT * FROM COMPANY`
+            );
+            const result = await con.execute(
+                `SELECT * FROM COMPANY WHERE COM_ID = :companyID`,
+                { companyID }
+            );
+            
+            const news = await con.execute(
+                `SELECT MEDIA.TITLE, COMPANYGIVENEWS.NEWS_ID, NEWSANDUPDATES.DESCRIPTION, NEWSANDUPDATES.HEADLINE, NEWSTOMEDIA.NEWS_DATE
+                FROM COMPANYGIVENEWS
+                JOIN NEWSANDUPDATES ON COMPANYGIVENEWS.NEWS_ID = NEWSANDUPDATES.NEWS_ID
+                JOIN NEWSTOMEDIA ON NEWSANDUPDATES.NEWS_ID = NEWSTOMEDIA.NEWS_ID
+                JOIN MEDIA ON NEWSTOMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
+                WHERE COMPANYGIVENEWS.COM_ID = :companyID`,
+                { companyID }
+            );
+            const result = await con.execute(
+                `SELECT * FROM products`
+            );
+            const result = await con.execute(
+
+                `SELECT * FROM MEDIA
+                ORDER BY RATING DESC`
+            );
+            // Execute the query with the search term and selected media type
+            const result = await con.execute(query, { searchTerm: `%${searchTerm}%`, selectedMediaType });
+    const result = await con.execute(
+                `SELECT * FROM MEDIA WHERE LOWER(TITLE) LIKE LOWER(:searchTerm) ${genreFilter} ORDER BY RATING DESC`,
+                { searchTerm: `%${searchTerm}%` } // Named bind variables
+            );
+            const result = await con.execute(
+                `   SELECT MEDIA.*, COMPANY.NAME AS COMPANY_NAME 
+                    FROM MEDIA
+                    LEFT JOIN COMPANYHASMEDIA ON MEDIA.MEDIA_ID = COMPANYHASMEDIA.MEDIA_ID
+                    LEFT JOIN COMPANY ON COMPANYHASMEDIA.COM_ID = COMPANY.COM_ID
+                    WHERE MEDIA.MEDIA_ID = :id`,
+                { id }
+            );
+            // console.log(`Query Result: `, result.rows);
+
+            if (!result.rows.length) {
+                res.status(404).send("Media not found");
+                return;
+            }
+
+            const roleResult = await con.execute(
+                `SELECT ROLE_ID, NAME, IMG, ROLE_TYPE 
+                FROM ROLE NATURAL JOIN MEDIAHASROLE 
+                where MEDIA_ID = :id 
+                ORDER by ROLE_TYPE ASC`,
+                { id }
+            );
+            // console.log(`Role Query Result: `, roleResult.rows);
+            
+            const newsQuery = `
+            SELECT NEWSANDUPDATES.NEWS_ID, HEADLINE AS TOPIC, DESCRIPTION, COMPANYGIVENEWS.NEWS_DATE 
+            FROM NEWSANDUPDATES
+            JOIN NEWSTOMEDIA ON NEWSANDUPDATES.NEWS_ID = NEWSTOMEDIA.NEWS_ID
+            JOIN COMPANYGIVENEWS ON NEWSANDUPDATES.NEWS_ID = COMPANYGIVENEWS.NEWS_ID
+            WHERE NEWSTOMEDIA.MEDIA_ID = :id
+            ORDER BY COMPANYGIVENEWS.NEWS_DATE DESC
+             `;
+
+            const newsResult = await con.execute(newsQuery, { id });
+
+            const reviewQuery = `
+            SELECT REVIEWRATING.R_ID, REVIEWRATING.DESCRIPTION, REVIEWRATING.RATING, USERS.NAME
+            FROM REVIEWRATING
+            JOIN USERGIVEREVIEW ON REVIEWRATING.R_ID = USERGIVEREVIEW.R_ID
+            JOIN REVIEWABOUTMEDIA ON REVIEWRATING.R_ID = REVIEWABOUTMEDIA.R_ID
+            JOIN USERS ON USERGIVEREVIEW.USER_ID = USERS.USER_ID
+            WHERE REVIEWABOUTMEDIA.MEDIA_ID = :id
+            ORDER BY REVIEWRATING.REVIEW_DATE DESC
+            `;
+            const reviewResult = await con.execute(reviewQuery, { id });
+
+    
+            // Insert review into REVIEWRATING table
+            await con.execute(
+                `INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+                VALUES (:review_id, :description, :rating, 'MEDIA', TO_DATE(:review_date, 'YYYY-MM-DD'))`,
+                { review_id, description, rating, review_date: currentDate }, { autoCommit: true }
+            );
+            console.log(`Review Insert time: ${currentDate}`);
+            // Insert into USERGIVEREVIEW table
+            await con.execute(
+                `INSERT INTO USERGIVEREVIEW (R_ID, USER_ID)
+                VALUES (:review_id, :user_id)`,
+                { review_id, user_id }, { autoCommit: true }
+            );
+
+            // Insert into REVIEWABOUTMEDIA table
+            await con.execute(
+                `INSERT INTO REVIEWABOUTMEDIA (MEDIA_ID, R_ID)
+                VALUES (:media_id, :review_id)`,
+                { media_id, review_id }, { autoCommit: true }
+            );
+
+            //get previous rating_count and rating
+            const previousRating = await con.execute(
+                `SELECT RATING, RATING_COUNT FROM MEDIA WHERE MEDIA_ID = :media_id`,
+                { media_id }
+            );
+            const previousRatingCount = previousRating.rows[0].RATING_COUNT;
+            const previousRatingValue = previousRating.rows[0].RATING;
+            //calculate new rating
+            const newRating = ((previousRatingValue * previousRatingCount) + rating) / (previousRatingCount + 1);
+            //update rating and rating_count
+            await con.execute(
+                `UPDATE MEDIA SET RATING = :newRating, RATING_COUNT = RATING_COUNT + 1 WHERE MEDIA_ID = :media_id`,
+                { newRating, media_id } , { autoCommit: true }
+            );
+            
+
+            const result = await con.execute(
+                `SELECT REVIEWRATING.R_ID, REVIEWRATING.DESCRIPTION, REVIEWRATING.RATING, USERS.NAME
+                FROM REVIEWRATING
+                JOIN USERGIVEREVIEW ON REVIEWRATING.R_ID = USERGIVEREVIEW.R_ID
+                JOIN REVIEWABOUTMEDIA ON REVIEWRATING.R_ID = REVIEWABOUTMEDIA.R_ID
+                JOIN USERS ON USERGIVEREVIEW.USER_ID = USERS.USER_ID
+                WHERE REVIEWABOUTMEDIA.MEDIA_ID = :id
+                ORDER BY REVIEWRATING.REVIEW_DATE DESC`,
+                { id }, { autoCommit: true }
+            );
+
+            const result = await con.execute(
+                `SELECT REVIEWRATING.R_ID, REVIEWRATING.DESCRIPTION, REVIEWRATING.RATING, USERS.NAME
+                FROM REVIEWRATING
+                JOIN USERGIVEREVIEW ON REVIEWRATING.R_ID = USERGIVEREVIEW.R_ID
+                JOIN REVIEWABOUTPRODUCT ON REVIEWRATING.R_ID = REVIEWABOUTPRODUCT.R_ID
+                JOIN USERS ON USERGIVEREVIEW.USER_ID = USERS.USER_ID
+                WHERE REVIEWABOUTPRODUCT.PRO_ID = :id
+                ORDER BY REVIEWRATING.REVIEW_DATE DESC`,
+                { id }, { autoCommit: true }
+            );
+            // Insert review into REVIEWRATING table
+            await con.execute(
+                `INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+                VALUES (:review_id, :description, :rating, 'PRODUCT', TO_DATE(:review_date, 'YYYY-MM-DD'))`,
+                { review_id, description, rating, review_date: currentDate }, { autoCommit: true }
+            );
+            console.log(`Review Insert time: ${currentDate}`);
+            // Insert into USERGIVEREVIEW table
+            await con.execute(
+                `INSERT INTO USERGIVEREVIEW (R_ID, USER_ID)
+                VALUES (:review_id, :user_id)`,
+                { review_id, user_id }, { autoCommit: true }
+            );
+
+            // Insert into REVIEWABOUTPRODUCT table
+            await con.execute(
+                `INSERT INTO REVIEWABOUTPRODUCT (PRO_ID, R_ID)
+                VALUES (:product_id, :review_id)`,
+                { product_id, review_id }, { autoCommit: true }
+            );
+
+            //get previous rating_count and rating
+            const previousRating = await con.execute(
+                `SELECT RATING, RATING_COUNT FROM PRODUCTS WHERE PRO_ID = :product_id`,
+                { product_id }
+            );
+            const previousRatingCount = previousRating.rows[0].RATING_COUNT;
+            const previousRatingValue = previousRating.rows[0].RATING;
+            //calculate new rating
+            const newRating = ((previousRatingValue * previousRatingCount) + rating) / (previousRatingCount + 1);
+            //update rating and rating_count
+            await con.execute(
+                `UPDATE PRODUCTS SET RATING = :newRating, RATING_COUNT = RATING_COUNT + 1 WHERE PRO_ID = :product_id`,
+                { newRating, product_id } , { autoCommit: true }
+            );
+
+            const result = await con.execute(
+                `SELECT * FROM PRODUCTS WHERE PRO_ID = :id`,
+                { id }
+            );
+            const query = `
+                SELECT MEDIA_ID, TITLE, POSTER AS IMG_SRC, DESCRIPTION
+                FROM MEDIA
+                ORDER BY RATING DESC
+                FETCH FIRST 5 ROWS ONLY
+            `;
+            const result = await con.execute(query);
+    
+            const result = await con.execute(
+                `SELECT * FROM PRODUCTS
+                WHERE PRO_ID IN (
+                    SELECT PRO_ID FROM PRODUCTBASEDONMEDIA
+                    WHERE MEDIA_ID = :media_id
+                )`,
+                { media_id }
+            );
+            
+            const checkResult = await con.execute(
+                `SELECT * FROM USERWATCHANDFAVORITE 
+                WHERE USER_ID = :user_id
+                AND MEDIA_ID = :media_id`,
+                { user_id, media_id }
+            );
+            if(checkResult.rows.length === 0){
+                const result = await con.execute(
+                    `INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, STATUS)
+                    VALUES (:user_id, :media_id, :status)`,
+                    { user_id, media_id, status }, { autoCommit: true }
+                );
+                console.log(`Query Result: `, result);
+                res.send("Media added to list successfully");
+            }
+            else {
+                const result = await con.execute(
+                    `UPDATE USERWATCHANDFAVORITE 
+                    SET STATUS = :status
+                    WHERE USER_ID = :user_id
+                    AND MEDIA_ID = :media_id`,
+                    { user_id, media_id, status }, { autoCommit: true }
+                );
+            const result = await con.execute(
+                `SELECT * FROM MEDIA 
+                WHERE MEDIA_ID IN (
+                    SELECT MEDIA_ID FROM USERWATCHANDFAVORITE 
+                    WHERE USER_ID = :user_id
+                    AND STATUS = 'PLAN_TO_WATCH'
+                )`,
+                { user_id }
+            );
+
+            }
+            const result = await con.execute(
+                `SELECT * FROM MEDIA 
+                WHERE MEDIA_ID IN (
+                    SELECT MEDIA_ID FROM USERWATCHANDFAVORITE 
+                    WHERE USER_ID = :user_id
+                    AND STATUS = 'WATCHED'
+                )`,
+                { user_id }
+            );
+
+            const result = await con.execute(
+                `SELECT * FROM MEDIA
+                WHERE MEDIA_ID IN (
+                    SELECT MEDIA_ID FROM USERWATCHANDFAVORITE
+                    WHERE USER_ID = :user_id
+                    AND FAVORITE = 'Y'
+                )`,
+                { user_id }
+            );
+
+            const checkResult = await con.execute(
+                `SELECT * FROM USERWATCHANDFAVORITE 
+                WHERE USER_ID = :user_id
+                AND MEDIA_ID = :media_id`,
+                { user_id, media_id }
+            );
+            if(checkResult.rows.length === 0){
+                    
+                const result = await con.execute(
+                    `INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE)
+                    VALUES (:user_id, :media_id, :status)`,
+                    { user_id, media_id, status }, { autoCommit: true }
+                );
+                console.log(`Query Result: `, result);
+                res.send("Favorite status updated successfully");
+            }
+            else {
+                const result = await con.execute(
+                    `UPDATE USERWATCHANDFAVORITE 
+                    SET FAVORITE = :status
+                    WHERE USER_ID = :user_id
+                    AND MEDIA_ID = :media_id`,
+                    { user_id, media_id, status }, { autoCommit: true }
+                );
+
+
+            const result = await con.execute(
+                `SELECT FAVORITE FROM USERWATCHANDFAVORITE
+                WHERE USER_ID = :user_id
+                AND MEDIA_ID = :media_id`,
+                { user_id, media_id }
+            );
+
+
+            const checkResult = await con.execute(
+                `SELECT * FROM USERWATCHANDFAVORITE 
+                WHERE USER_ID = :user_id
+                AND MEDIA_ID = :media_id`,
+                { user_id, media_id }
+            );
+
+            console.log(`Query Result: `, checkResult.rows);
+
+            if(checkResult.rows.length === 0){
+                res.status(404).send("Record not found or already deleted");
+            }
+            else {
+                if(checkResult.rows[0].STATUS === 'WATCHED' || checkResult.rows[0].STATUS === 'PLAN_TO_WATCH'){
+                    const result = await con.execute(
+                        `UPDATE USERWATCHANDFAVORITE
+                        SET FAVORITE = NULL
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                } else{
+                    //delete the row
+                    const result = await con.execute(
+                        `DELETE FROM USERWATCHANDFAVORITE
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                }
+
+            const checkResult = await con.execute(
+                `SELECT * FROM USERWATCHANDFAVORITE 
+                WHERE USER_ID = :user_id
+                AND MEDIA_ID = :media_id`,
+                { user_id, media_id }
+            );
+
+                if(checkResult.rows[0].FAVORITE === 'Y'){
+                    
+                    const result = await con.execute(
+                        `UPDATE USERWATCHANDFAVORITE
+                        SET STATUS = NULL
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                } else{
+                    //delete teh row
+                    const result = await con.execute(
+                        `DELETE FROM USERWATCHANDFAVORITE
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                }
+
+            const checkResult = await con.execute(
+                `SELECT * FROM USERWATCHANDFAVORITE 
+                WHERE USER_ID = :user_id
+                AND MEDIA_ID = :media_id`,
+                { user_id, media_id }
+            );
+
+            console.log(`Query Result: `, checkResult.rows);
+
+            if(checkResult.rows.length === 0){
+                res.status(404).send("Record not found or already deleted");
+            }
+            else {
+                if(checkResult.rows[0].FAVORITE === 'Y'){
+                    
+                    const result = await con.execute(
+                        `UPDATE USERWATCHANDFAVORITE
+                        SET STATUS = NULL
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                } else{
+                    //delete the row
+                    const result = await con.execute(
+                        `DELETE FROM USERWATCHANDFAVORITE
+                        WHERE USER_ID = :user_id
+                        AND MEDIA_ID = :media_id`,
+                        { user_id, media_id }, { autoCommit: true }
+                    );
+                }
+
+                console.log(`Query Result: `, result);
+                res.send("Deleted successfully");
+                console.log("Deleted successfully");
+            }
+
+            console.log('Received roles request');
+            const result = await con.execute(
+                `SELECT ROLE.ROLE_ID, ROLE.NAME, ROLE.IMG, ROLE.ROLE_TYPE FROM 
+                ROLE JOIN PREFERENCEFORROLE
+                ON ROLE.ROLE_ID = PREFERENCEFORROLE.ROLE_ID
+                where PREFERENCEFORROLE.USER_ID = :user_id
+                ORDER BY ROLE.NAME ASC`,
+                { user_id }
+            );
+            const checkResult = await con.execute(
+                `SELECT * FROM PREFERENCEFORROLE
+                WHERE USER_ID = :user_id
+                AND ROLE_ID = :role_id`,
+                { user_id, role_id }
+            );
+
+            console.log(`Query Result: `, checkResult.rows);
+
+            if(checkResult.rows.length === 0){
+                res.status(404).send("Record not found or already deleted");
+            }
+            else {
+                const result = await con.execute(
+                    `DELETE FROM PREFERENCEFORROLE
+                    WHERE USER_ID = :user_id
+                    AND ROLE_ID = :role_id`,
+                    { user_id, role_id }, { autoCommit: true }
+                );
+                console.log(`Query Result: `, result);
+                res.send("Deleted successfully");
+                console.log("Deleted successfully");
+            }
+            if(status === 'Y'){
+                const result = await con.execute(
+                    `INSERT INTO PREFERENCEFORROLE (USER_ID, ROLE_ID)
+                    VALUES (:user_id, :role_id)`,
+                    { user_id, role_id }, { autoCommit: true }
+                );
+                console.log(`Query Result: `, result);
+                res.send("Role added to favorite successfully");
+            }
+            else {
+                const result = await con.execute(
+                    `DELETE FROM PREFERENCEFORROLE
+                    WHERE USER_ID = :user_id
+                    AND ROLE_ID = :role_id`,
+                    { user_id, role_id }, { autoCommit: true }
+                );
+                console.log(`Query Result: `, result);
+                res.send("Role removed from favorite successfully");
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

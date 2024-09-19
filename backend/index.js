@@ -81,32 +81,40 @@ oracledb.createPool({
             res.status(500).send("Connection Error");
             return;
             }
-
             // Insert user data into the database
             const userResult = await con.execute(
-                `INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE) 
-                VALUES (:user_id, :username, :name, TO_DATE(:dob, 'YYYY-MM-DD'), :email, :city, :street, :house, :phone)`,
-                { user_id, username, name, dob, email, city, street, house, phone }
+                `INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE)
+                VALUES (USERS_SEQ.NEXTVAL, :username, :name, TO_DATE(:dob, 'YYYY-MM-DD'), :email, :city, :street, :house, :phone)`,
+                { username, name, dob, email, city, street, house, phone }
             );
             console.log(`User Insert Result: ${JSON.stringify(userResult)}`);
 
-            // Insert user login credentials into the database
+            // Get the newly generated USER_ID
+            const userIdResult = await con.execute(
+                `SELECT USERS_SEQ.CURRVAL AS user_id FROM dual`
+            );
+            const user_id = userIdResult.rows[0].USER_ID;
+
+            // Insert user login credentials into the database (assuming the DB handles login_id generation)
             const loginResult = await con.execute(
                 `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
-                VALUES (:login_id, :password, 'USER', :user_id)`,
-                { login_id, password, user_id }
+                VALUES (:login_id, :password, 'USER', :user_id)`,  // Using DEFAULT for login_id generation
+                {login_id, password, user_id }
             );
             console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
 
             // Insert user genre preferences into the database
             const genreResult = await con.execute(
-                `INSERT INTO PREFERREDGENRE (USER_ID, GENRES) VALUES (:user_id, :genres)`,
+                `INSERT INTO PREFERREDGENRE (USER_ID, GENRES) 
+                VALUES (:user_id, :genres)`,
                 { user_id, genres: genres.join(',') }
             );
             console.log(`Genre Insert Result: ${JSON.stringify(genreResult)}`);
 
             // Commit the transaction
             await con.commit();
+
+
 
             res.status(201).send("User registered successfully");
             console.log("User registered successfully");
@@ -134,9 +142,7 @@ oracledb.createPool({
         const { username, password, name, description, email, city, street, house, phone } = req.body;
         console.log('Received merchandiser registration request:', { username, password, name, description, email, city, street, house, phone });
     
-        const user_id = generateUserId(username);
-        console.log('Generated User ID:', user_id);
-        const login_id = generateLoginId(username, password);
+        const login_id = generateLoginId(username, password);  // Assuming this is a function that generates a login ID
         console.log('Generated Login ID:', login_id);
     
         let con;
@@ -146,15 +152,21 @@ oracledb.createPool({
                 res.status(500).send("Connection Error");
                 return;
             }
-
-            // Insert merchandiser data into the database\
+    
+            // Insert merchandiser data into the database with MERCHANDISER_SEQ for MER_ID
             const result = await con.execute(
                 `INSERT INTO MERCHANDISER (MER_ID, USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
-                VALUES (:user_id, :username, :name, :description, :email, :city, :street, :house, :phone)`,
-                { user_id, username, name, description, email, city, street, house, phone }
+                VALUES (MERCHANDISER_SEQ.NEXTVAL, :username, :name, :description, :email, :city, :street, :house, :phone)`,
+                { username, name, description, email, city, street, house, phone }
             );
             console.log(`Merchandiser Insert Result: ${JSON.stringify(result)}`);
-
+    
+            // Get the newly generated MER_ID from the sequence
+            const userIdResult = await con.execute(
+                `SELECT MERCHANDISER_SEQ.CURRVAL AS user_id FROM dual`
+            );
+            const user_id = userIdResult.rows[0].USER_ID;
+    
             // Insert merchandiser login credentials into the database
             const loginResult = await con.execute(
                 `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
@@ -162,18 +174,18 @@ oracledb.createPool({
                 { login_id, password, user_id }
             );
             console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
-
+    
             // Commit the transaction
             await con.commit();
-
+    
             res.status(201).send("Merchandiser registered successfully");
             console.log("Merchandiser registered successfully");
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
         }
-    }
-    );
+    });
+    
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR CHECK USERNAME EXIST USER REGISTRATION
@@ -330,9 +342,7 @@ oracledb.createPool({
         const { username, password, name, email, description, imageUrl } = req.body;
         console.log('Received company registration request:', { username, password, name, email, description, imageUrl });
     
-        const user_id = generateUserId(username);
-        console.log('Generated User ID:', user_id);
-        const login_id = generateLoginId(username, password);
+        const login_id = generateLoginId(username, password);  // Assuming this is a function that generates a login ID
         console.log('Generated Login ID:', login_id);
     
         let con;
@@ -342,35 +352,40 @@ oracledb.createPool({
                 res.status(500).send("Connection Error");
                 return;
             }
-
-            // Insert company data into the database
+    
+            // Insert company data into the database using COMPANY_SEQ for COM_ID
             const result = await con.execute(
                 `INSERT INTO COMPANY (COM_ID, USER_NAME, NAME, IMG, EMAIL, DESCRIPTION)
-                VALUES (:user_id, :username, :name, :imageUrl, :email, :description)`,
-                { user_id, username, name, imageUrl, email, description }
+                VALUES (COMPANY_SEQ.NEXTVAL, :username, :name, :imageUrl, :email, :description)`,
+                { username, name, imageUrl, email, description }
             );
             console.log(`Company Insert Result: ${JSON.stringify(result)}`);
-
+    
+            // Get the newly generated COM_ID from the sequence
+            const userIdResult = await con.execute(
+                `SELECT COMPANY_SEQ.CURRVAL AS user_id FROM dual`
+            );
+            const user_id = userIdResult.rows[0].USER_ID;
+    
             // Insert company login credentials into the database
             const loginResult = await con.execute(
                 `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
                 VALUES (:login_id, :password, 'COMPANY', :user_id)`,
                 { login_id, password, user_id }
             );
-
             console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
-
+    
             // Commit the transaction
             await con.commit();
-
+    
             res.status(201).send("Company registered successfully");
             console.log("Company registered successfully");
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
         }
-
     });
+    
 
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Login route for ADMIN
@@ -1079,11 +1094,9 @@ app.post('/profile/admin', async (req, res) => {
         } = req.body;
     
         console.log('Received add media request:', { title, description, type, selectedGenres, trailer, imageUrl, duration, releaseDate, episode, roles });
-        
-        const media_id = generateMediaId(title); // Assuming you have a function to generate media IDs
+    
         const rating = 0; // Default rating
-        console.log('Generated Media ID:', media_id);
-
+    
         let con;
         try {
             con = await pool.getConnection();
@@ -1092,10 +1105,16 @@ app.post('/profile/admin', async (req, res) => {
                 return;
             }
     
+            // Fetch the next MEDIA_ID from the MEDIA_SEQ sequence
+            const mediaIdResult = await con.execute(`SELECT MEDIA_SEQ.NEXTVAL AS media_id FROM dual`);
+            const media_id = mediaIdResult.rows[0].MEDIA_ID;
+    
+            console.log('Generated Media ID:', media_id);
+    
             // Insert media data into the database
             const result = await con.execute(
-                `INSERT INTO MEDIA (MEDIA_ID, TITLE, DESCRIPTION, RATING, TYPE, GENRE, TRAILER, POSTER, DURATION, RELEASE_DATE, EPISODE)
-                VALUES (:media_id, :title, :description, :rating, :type, :genres, :trailer, :poster, :duration, TO_DATE(:releaseDate, 'YYYY-MM-DD'), :episode)`,
+                `INSERT INTO MEDIA (MEDIA_ID, TITLE, DESCRIPTION, RATING, RATING_COUNT, TYPE, GENRE, TRAILER, POSTER, DURATION, RELEASE_DATE, EPISODE)
+                VALUES (:media_id, :title, :description, :rating, 0, :type, :genres, :trailer, :poster, :duration, TO_DATE(:releaseDate, 'YYYY-MM-DD'), :episode)`,
                 {
                     media_id,
                     title,
@@ -1110,7 +1129,7 @@ app.post('/profile/admin', async (req, res) => {
                     episode
                 }
             );
-            
+    
             console.log(`Media Insert Result: ${JSON.stringify(result)}`);
     
             // Insert roles associated with the media into MEDIAHASROLE
@@ -1130,17 +1149,17 @@ app.post('/profile/admin', async (req, res) => {
                     throw roleErr;
                 }
             }
-
-             // Insert media and company association into COMPANYHASMEDIA
+    
+            // Insert media and company association into COMPANYHASMEDIA
             const companyMediaResult = await con.execute(
-            `INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID)
-            VALUES (:media_id, :com_id)`,
-            {
-                media_id,
-                com_id
-            }
-        );
-        console.log(`Company-Media Insert Result: ${JSON.stringify(companyMediaResult)}`);
+                `INSERT INTO COMPANYHASMEDIA (MEDIA_ID, COM_ID)
+                VALUES (:media_id, :com_id)`,
+                {
+                    media_id,
+                    com_id
+                }
+            );
+            console.log(`Company-Media Insert Result: ${JSON.stringify(companyMediaResult)}`);
     
             // Commit the transaction
             await con.commit();
@@ -1160,7 +1179,7 @@ app.post('/profile/admin', async (req, res) => {
             }
         }
     });
-
+    
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for COMPANY MY MEDIA
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1227,7 +1246,6 @@ app.post('/profile/admin', async (req, res) => {
 // route for COMPANY ADD MEDIA
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
-
 app.post('/addNews', async (req, res) => {
     const { mediaID, com_id, topic, description } = req.body;
     
@@ -1244,24 +1262,30 @@ app.post('/addNews', async (req, res) => {
             return;
         }
 
-        const news_id = generateUserId(topic);
         const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
 
-        // Insert news into NEWSANDUPDATES table
-        await con.execute(
+        // Insert news into NEWSANDUPDATES table, generating NEWS_ID using sequence
+        const newsResult = await con.execute(
             `INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
-            VALUES (:news_id, :description, :headline)`,
+             VALUES (NEWSANDUPDATES_SEQ.NEXTVAL, :description, :headline)`,
             {
-                news_id,
                 description,
                 headline: topic
             }
         );
+        console.log(`News Insert Result: ${JSON.stringify(newsResult)}`);
+
+        // Get the newly generated NEWS_ID
+        const newsIdResult = await con.execute(
+            `SELECT NEWSANDUPDATES_SEQ.CURRVAL AS news_id FROM dual`
+        );
+        const news_id = newsIdResult.rows[0].NEWS_ID;
+        console.log('Generated News ID:', news_id);
 
         // Insert into COMPANYGIVENEWS table
         await con.execute(
             `INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
-            VALUES (:news_id, :com_id, TO_DATE(:news_date, 'YYYY-MM-DD'))`,
+             VALUES (:news_id, :com_id, TO_DATE(:news_date, 'YYYY-MM-DD'))`,
             {
                 news_id,
                 com_id,
@@ -1272,7 +1296,7 @@ app.post('/addNews', async (req, res) => {
         // Insert into NEWSTOMEDIA table
         await con.execute(
             `INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
-            VALUES (:media_id, :news_id, TO_DATE(:news_date, 'YYYY-MM-DD'))`,
+             VALUES (:media_id, :news_id, TO_DATE(:news_date, 'YYYY-MM-DD'))`,
             {
                 media_id: mediaID,
                 news_id,
@@ -1296,6 +1320,7 @@ app.post('/addNews', async (req, res) => {
         }
     }
 });
+
     
     
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1343,7 +1368,7 @@ app.post('/addNews', async (req, res) => {
     app.post('/companies/page', async (req, res) => {
         const { companyID } = req.body;
         console.log('Received company request:', companyID);
-
+    
         let con;
         try {
             con = await pool.getConnection();
@@ -1351,32 +1376,29 @@ app.post('/addNews', async (req, res) => {
                 res.status(500).send("Connection Error");
                 return;
             }
-            const result = await con.execute(
-                `SELECT * FROM COMPANY WHERE COM_ID = :companyID`,
-                { companyID }
-            );
-            
-            const news = await con.execute(
-                `SELECT MEDIA.TITLE, COMPANYGIVENEWS.NEWS_ID, NEWSANDUPDATES.DESCRIPTION, NEWSANDUPDATES.HEADLINE, NEWSTOMEDIA.NEWS_DATE
-                FROM COMPANYGIVENEWS
-                JOIN NEWSANDUPDATES ON COMPANYGIVENEWS.NEWS_ID = NEWSANDUPDATES.NEWS_ID
-                JOIN NEWSTOMEDIA ON NEWSANDUPDATES.NEWS_ID = NEWSTOMEDIA.NEWS_ID
-                JOIN MEDIA ON NEWSTOMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
-                WHERE COMPANYGIVENEWS.COM_ID = :companyID`,
-                { companyID }
-            );
-            
-            
-            result.rows[0].news = news.rows;
-            
-            console.log(`Query Result: `, news.rows);
-
-            if (!result.rows.length) {
+    
+            // Fetch company details
+            const companyQuery = `SELECT * FROM COMPANY WHERE COM_ID = :companyID`;
+            const companyResult = await con.execute(companyQuery, { companyID });
+    
+            // Fetch company news from the COMPANY_NEWS_DETAILS view
+            const newsQuery = `
+                SELECT MEDIA_TITLE, NEWS_ID, DESCRIPTION, HEADLINE, NEWS_DATE
+                FROM COMPANY_NEWS_DETAILS
+                WHERE COM_ID = :companyID
+            `;
+            const newsResult = await con.execute(newsQuery, { companyID });
+    
+            if (!companyResult.rows.length) {
                 res.status(404).send("Company not found");
                 return;
             }
-            res.send(result.rows[0]);
-            console.log("Company Data sent");
+    
+            const companyData = companyResult.rows[0];
+            companyData.news = newsResult.rows;
+    
+            res.send(companyData);
+            console.log("Company Data sent", companyData);
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
@@ -1390,6 +1412,7 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+    
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1438,56 +1461,51 @@ app.post('/addNews', async (req, res) => {
         let con;
         try {
             con = await pool.getConnection();
-            console.log('Received media request000');
+            console.log('Received media request');
             if (!con) {
                 res.status(500).send("Connection Error");
                 return;
             }
-            console.log('Received media request');
-
-
+    
             const result = await con.execute(
-
-                `SELECT * FROM MEDIA
-                ORDER BY RATING DESC`
+                `SELECT * FROM MEDIA_VIEW`
             );
     
-            const transformData = (data) => {
-                return {
-                    id: data.MEDIA_ID,
-                    img: data.POSTER,
-                    title: data.TITLE,
-                    description: data.DESCRIPTION,
-                    rating: data.RATING , // Assuming the original rating is out of 10 and the new one is out of 5
-                    releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
-                    type: data.TYPE,
-                    episodes: data.EPISODE || 0,
-                    duration: data.DURATION,
-                    genre: data.GENRE.split(',').map(g => g.trim()),
-                    companyName: 'Example Productions',
-                    role: [],
-                    news: [],
-                    review: []
-                };
-            };
+            const transformData = (data) => ({
+                id: data.MEDIA_ID,
+                img: data.POSTER,
+                title: data.TITLE,
+                description: data.DESCRIPTION,
+                rating: data.RATING, // Assuming the rating is in the required scale
+                releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                type: data.TYPE,
+                episodes: data.EPISODE || 0,
+                duration: data.DURATION,
+                genre: data.GENRE ? data.GENRE.split(',').map(g => g.trim()) : [],
+                companyName: 'Example Productions',
+                role: [],
+                news: [],
+                review: []
+            });
     
             const transformedData = result.rows.map(transformData);
     
             res.send(transformedData);
             console.log("Media Data sent");
         } catch (err) {
-            console.error("Error during database query: ", err);
+            console.error("Error during database query:", err);
             res.status(500).send("Internal Server Error");
         } finally {
             if (con) {
                 try {
                     await con.close();
                 } catch (err) {
-                    console.error("Error closing database connection: ", err);
+                    console.error("Error closing database connection:", err);
                 }
             }
         }
     });
+    
 
 
 
@@ -1497,7 +1515,6 @@ app.post('/addNews', async (req, res) => {
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR MEADIA SEARCH 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
     app.post('/media/search', async (req, res) => {
         let con;
@@ -1518,9 +1535,9 @@ app.post('/addNews', async (req, res) => {
     
             // Combine the filters into the query
             const query = `
-                SELECT * FROM MEDIA 
-                WHERE LOWER(TITLE) LIKE LOWER(:searchTerm) 
-                ${genreFilter} 
+                SELECT * FROM MEDIA_SEARCH
+                WHERE LOWER(TITLE) LIKE LOWER(:searchTerm)
+                ${genreFilter}
                 ${mediaTypeFilter}
                 ORDER BY RATING DESC
             `;
@@ -1528,43 +1545,41 @@ app.post('/addNews', async (req, res) => {
             // Execute the query with the search term and selected media type
             const result = await con.execute(query, { searchTerm: `%${searchTerm}%`, selectedMediaType });
     
-            const transformData = (data) => {
-                return {
-                    id: data.MEDIA_ID,
-                    img: data.POSTER,
-                    title: data.TITLE,
-                    description: data.DESCRIPTION,
-                    rating: data.RATING / 2, // Assuming the original rating is out of 10 and the new one is out of 5
-                    releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
-                    type: data.TYPE.charAt(0).toUpperCase() + data.TYPE.slice(1).toLowerCase(),
-                    episodes: data.EPISODE || 0,
-                    duration: data.DURATION,
-                    genre: data.GENRE.split(',').map(g => g.trim()),
-                    companyName: 'Example Productions',
-                    role: [],
-                    news: [],
-                    review: []
-                };
-            };
+            const transformData = (data) => ({
+                id: data.MEDIA_ID,
+                img: data.POSTER,
+                title: data.TITLE,
+                description: data.DESCRIPTION,
+                rating: data.RATING / 2, // Assuming the original rating is out of 10 and the new one is out of 5
+                releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                type: data.TYPE.charAt(0).toUpperCase() + data.TYPE.slice(1).toLowerCase(),
+                episodes: data.EPISODE || 0,
+                duration: data.DURATION,
+                genre: data.GENRE.split(',').map(g => g.trim()),
+                companyName: 'Example Productions',
+                role: [],
+                news: [],
+                review: []
+            });
     
             const transformedData = result.rows.map(transformData);
     
             res.send(transformedData);
             console.log("Search Data sent:", transformedData);
         } catch (err) {
-            console.error("Error during database query: ", err);
+            console.error("Error during database query:", err);
             res.status(500).send("Internal Server Error");
         } finally {
             if (con) {
                 try {
                     await con.close();
                 } catch (err) {
-                    console.error("Error closing database connection: ", err);
+                    console.error("Error closing database connection:", err);
                 }
             }
         }
     });
-
+    
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR MEADIA SEARCH BY GENRE 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1582,7 +1597,7 @@ app.post('/addNews', async (req, res) => {
             const { searchTerm, selectedGenres } = req.body;
             const genreFilter = selectedGenres.length ? `AND (${selectedGenres.map(g => `GENRE LIKE '%${g}%'`).join(' AND ')})` : '';
             const result = await con.execute(
-                `SELECT * FROM MEDIA WHERE LOWER(TITLE) LIKE LOWER(:searchTerm) ${genreFilter} ORDER BY RATING DESC`,
+                `SELECT * FROM MEDIA WHERE UPPER(TITLE) LIKE UPPER(:searchTerm) ${genreFilter} ORDER BY RATING DESC`,
                 { searchTerm: `%${searchTerm}%` } // Named bind variables
             );
     
@@ -1639,87 +1654,67 @@ app.post('/addNews', async (req, res) => {
             }
             console.log('Received media request:', req.body);
             const { id } = req.body;
-            console.log('Received media request:', id);
-            const result = await con.execute(
-                `   SELECT MEDIA.*, COMPANY.NAME AS COMPANY_NAME 
-                    FROM MEDIA
-                    LEFT JOIN COMPANYHASMEDIA ON MEDIA.MEDIA_ID = COMPANYHASMEDIA.MEDIA_ID
-                    LEFT JOIN COMPANY ON COMPANYHASMEDIA.COM_ID = COMPANY.COM_ID
-                    WHERE MEDIA.MEDIA_ID = :id`,
+    
+            // Fetch media details using the MEDIA_COMPANY_DETAILS view
+            const mediaResult = await con.execute(
+                `SELECT * FROM MEDIA_COMPANY_DETAILS WHERE MEDIA_ID = :id`, 
                 { id }
             );
-            // console.log(`Query Result: `, result.rows);
-
-            if (!result.rows.length) {
+    
+            if (!mediaResult.rows.length) {
                 res.status(404).send("Media not found");
                 return;
             }
-
+    
+            // Fetch associated roles using the MEDIA_ROLE_DETAILS view
             const roleResult = await con.execute(
-                `SELECT ROLE_ID, NAME, IMG, ROLE_TYPE 
-                FROM ROLE NATURAL JOIN MEDIAHASROLE 
-                where MEDIA_ID = :id 
-                ORDER by ROLE_TYPE ASC`,
+                `SELECT * FROM MEDIA_ROLE_DETAILS WHERE MEDIA_ID = :id`,
                 { id }
             );
-            // console.log(`Role Query Result: `, roleResult.rows);
-            
-            const newsQuery = `
-            SELECT NEWSANDUPDATES.NEWS_ID, HEADLINE AS TOPIC, DESCRIPTION, COMPANYGIVENEWS.NEWS_DATE 
-            FROM NEWSANDUPDATES
-            JOIN NEWSTOMEDIA ON NEWSANDUPDATES.NEWS_ID = NEWSTOMEDIA.NEWS_ID
-            JOIN COMPANYGIVENEWS ON NEWSANDUPDATES.NEWS_ID = COMPANYGIVENEWS.NEWS_ID
-            WHERE NEWSTOMEDIA.MEDIA_ID = :id
-            ORDER BY COMPANYGIVENEWS.NEWS_DATE DESC
-             `;
-
-            const newsResult = await con.execute(newsQuery, { id });
-
-            const reviewQuery = `
-            SELECT REVIEWRATING.R_ID, REVIEWRATING.DESCRIPTION, REVIEWRATING.RATING, USERS.NAME
-            FROM REVIEWRATING
-            JOIN USERGIVEREVIEW ON REVIEWRATING.R_ID = USERGIVEREVIEW.R_ID
-            JOIN REVIEWABOUTMEDIA ON REVIEWRATING.R_ID = REVIEWABOUTMEDIA.R_ID
-            JOIN USERS ON USERGIVEREVIEW.USER_ID = USERS.USER_ID
-            WHERE REVIEWABOUTMEDIA.MEDIA_ID = :id
-            ORDER BY REVIEWRATING.REVIEW_DATE DESC
-            `;
-            const reviewResult = await con.execute(reviewQuery, { id });
-
-            
-            const transformData = (data) => {
-                return {
-                    id: data.MEDIA_ID,
-                    img: data.POSTER,
-                    title: data.TITLE,
-                    description: data.DESCRIPTION,
-                    rating: data.RATING, // Assuming the original rating is out of 10 and the new one is out of 5
-                    releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
-                    type: data.TYPE,
-                    episodes: data.EPISODE || 0,
-                    duration: data.DURATION,
-                    genre: data.GENRE ? data.GENRE.split(',').map(g => g.trim()) : [],
-                    trailer: data.TRAILER,
-                    companyName: data.COMPANY_NAME,
-                    role: roleResult.rows,
-                    news: newsResult.rows.map(row => ({
-                        topic: row.TOPIC,
-                        description: row.DESCRIPTION,
-                        date: row.NEWS_DATE
-                    })),
-                    review: []
-                    // reviewResult.rows.map(row => ({
-                    //     name: row.NAME,
-                    //     id: row.R_ID,
-                    //     description: row.DESCRIPTION,
-                    //     rating: row.RATING
-                    // }))
-
-                };
-            };
-            const transformedData = result.rows.map(transformData);
     
-            res.send(transformedData[0]);
+            // Fetch news related to the media using the MEDIA_NEWS_DETAILS view
+            const newsResult = await con.execute(
+                `SELECT * FROM MEDIA_NEWS_DETAILS WHERE MEDIA_ID = :id`,
+                { id }
+            );
+    
+            // Fetch reviews for the media using the MEDIA_REVIEW_DETAILS view
+            const reviewResult = await con.execute(
+                `SELECT * FROM MEDIA_REVIEW_DETAILS WHERE MEDIA_ID = :id`,
+                { id }
+            );
+    
+            // Transform the data
+            const mediaData = mediaResult.rows[0];
+            const transformedData = {
+                id: mediaData.MEDIA_ID,
+                img: mediaData.POSTER,
+                title: mediaData.TITLE,
+                description: mediaData.DESCRIPTION,
+                rating: mediaData.RATING,
+                releaseDate: new Date(mediaData.RELEASE_DATE).toISOString().split('T')[0],
+                type: mediaData.TYPE,
+                episodes: mediaData.EPISODE || 0,
+                duration: mediaData.DURATION,
+                genre: mediaData.GENRE ? mediaData.GENRE.split(',').map(g => g.trim()) : [],
+                trailer: mediaData.TRAILER,
+                companyName: mediaData.COMPANY_NAME,
+                role: roleResult.rows, // Roles from MEDIA_ROLE_DETAILS
+                news: newsResult.rows.map(row => ({
+                    topic: row.HEADLINE,
+                    description: row.DESCRIPTION,
+                    date: row.NEWS_DATE
+                })),
+                review: reviewResult.rows.map(row => ({
+                    name: row.REVIEWER_NAME,
+                    id: row.R_ID,
+                    description: row.DESCRIPTION,
+                    rating: row.RATING,
+                    date: row.REVIEW_DATE
+                }))
+            };
+    
+            res.send(transformedData);
             console.log("Media Data sent");
         } catch (err) {
             console.error("Error during database query: ", err);
@@ -1734,7 +1729,7 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
-
+    
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2065,24 +2060,22 @@ app.post('/addNews', async (req, res) => {
                 return;
             }
             console.log('Received media request');
-    
+        
             const query = `
-                SELECT MEDIA_ID, TITLE, POSTER AS IMG_SRC, DESCRIPTION
-                FROM MEDIA
-                ORDER BY RATING DESC
-                FETCH FIRST 5 ROWS ONLY
+                SELECT MEDIA_ID, TITLE, IMG_SRC, DESCRIPTION
+                FROM MEDIA_FEATURED
             `;
             const result = await con.execute(query);
-    
+        
             const transformData = (data) => ({
                 id: data.MEDIA_ID,
                 title: data.TITLE,
-                imgSrc: data.IMG_SRC, // Ensure the database field is aliased as IMG_SRC
+                imgSrc: data.IMG_SRC,
                 description: data.DESCRIPTION
             });
-    
+        
             const transformedData = result.rows.map(transformData);
-    
+        
             res.send(transformedData);
             console.log("Media Data sent");
         } catch (err) {
@@ -2098,6 +2091,7 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+    
 
 
 
@@ -2865,16 +2859,16 @@ app.post('/addNews', async (req, res) => {
                 return;
             }
             console.log('Received discussion request');
-            const result = await con.execute(
-                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
-                FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
-                    ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
-                JOIN MEDIA 
-                    ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
-                ORDER BY DISCUSSIONABOUTMEDIA.DIS_DATE DESC, DISCUSSION.REPLY_COUNT DESC`
-            );
-            // console.log(`Query Result: `,result.rows);
             
+            // Fetch discussions from the DISCUSSION_DETAILS view
+            const query = `
+                SELECT DIS_ID, TITLE, TOPIC, DESCRIPTION, REPLY_COUNT, DIS_DATE, MEDIA_ID, MEDIA_TITLE
+                FROM DISCUSSION_DETAILS
+            `;
+            
+            const result = await con.execute(query);
+            
+            // Send the result
             res.send(result.rows);
             console.log("Discussion Data sent");
         } catch (err) {
@@ -2890,6 +2884,7 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+    
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR my DISCUSSION
@@ -3435,10 +3430,7 @@ app.post('/addNews', async (req, res) => {
             imgUrl
         } = req.body;
     
-        console.log('Received add role request:', { name,roleType, img , imgUrl});
-    
-        const role_id = generateProductId(name);
-        console.log('Generated Role ID:', role_id);
+        console.log('Received add role request:', { name, roleType, img, imgUrl });
     
         let con;
         try {
@@ -3448,19 +3440,17 @@ app.post('/addNews', async (req, res) => {
                 return;
             }
     
-            
-            // Insert role data into the ROLE table
-            const productResult = await con.execute(
+            // Insert role data into the ROLE table with auto-generated ROLE_ID from ROLE_SEQ
+            const roleResult = await con.execute(
                 `INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE)
-                 VALUES (:role_id, :name, :imgUrl, :roleType)`,
+                 VALUES (ROLE_SEQ.NEXTVAL, :name, :imgUrl, :roleType)`,
                 {
-                    role_id,
                     name,
                     imgUrl,
                     roleType
                 }
             );
-            console.log(`Role Insert Result: ${JSON.stringify(productResult)}`);
+            console.log(`Role Insert Result: ${JSON.stringify(roleResult)}`);
     
             // Commit the transaction
             await con.commit();
@@ -3538,9 +3528,6 @@ app.post('/addNews', async (req, res) => {
     
         console.log('Received add product request:', { name, description, price, quantity, imageUrl, media, merchId });
     
-        const pro_id = generateProductId(name);
-        console.log('Generated Product ID:', pro_id);
-    
         let con;
         try {
             con = await pool.getConnection();
@@ -3549,7 +3536,11 @@ app.post('/addNews', async (req, res) => {
                 return;
             }
     
-            
+            // Fetch the next PRO_ID from the PRODUCTS_SEQ sequence
+            const productIdResult = await con.execute(`SELECT PRODUCTS_SEQ.NEXTVAL AS pro_id FROM dual`);
+            const pro_id = productIdResult.rows[0].PRO_ID;
+            console.log('Generated Product ID:', pro_id);
+    
             // Insert product data into the PRODUCTS table
             const productResult = await con.execute(
                 `INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY)
@@ -3565,24 +3556,23 @@ app.post('/addNews', async (req, res) => {
             );
             console.log(`Product Insert Result: ${JSON.stringify(productResult)}`);
     
-
-        // Insert product and media association into PRODUCTBASEDONMEDIA
-        for (const mediaItem of media) {
-            try {
-                const mediaResult = await con.execute(
-                    `INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID)
-                     VALUES (:pro_id, :media_id)`,
-                    {
-                        pro_id,
-                        media_id: mediaItem
-                    }
-                );
-                console.log(`Media Insert Result for Media ID ${mediaItem.media_id}: ${JSON.stringify(mediaResult)}`);
-            } catch (mediaErr) {
-                console.error(`Error inserting media ID ${mediaItem.media_id}: `, mediaErr);
-                throw mediaErr;
+            // Insert product and media association into PRODUCTBASEDONMEDIA
+            for (const mediaItem of media) {
+                try {
+                    const mediaResult = await con.execute(
+                        `INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID)
+                         VALUES (:pro_id, :media_id)`,
+                        {
+                            pro_id,
+                            media_id: mediaItem
+                        }
+                    );
+                    console.log(`Media Insert Result for Media ID ${mediaItem.media_id}: ${JSON.stringify(mediaResult)}`);
+                } catch (mediaErr) {
+                    console.error(`Error inserting media ID ${mediaItem.media_id}: `, mediaErr);
+                    throw mediaErr;
+                }
             }
-        }
     
             // Insert product and merch association into MERCHPRODUCEPROD
             const merchProductResult = await con.execute(
@@ -3614,7 +3604,6 @@ app.post('/addNews', async (req, res) => {
         }
     });
     
-
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for MERCHANDISER HOME MY PRODUCT
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -4379,23 +4368,13 @@ app.post('/addNews', async (req, res) => {
     
             const query = `
                 SELECT 
-                    TO_CHAR(ORDER_GROUP.ORDER_DATE, 'DD-MM-YYYY') AS ORDER_DATE,
-                    ORDER_GROUP.ORDER_TIME,  
-                    ORDER_GROUP.USER_ID, 
-                    ORDER_GROUP.ORDER_DETAILS, 
-                    ORDER_GROUP.DELIVERY_STATUS
-                FROM (
-                    SELECT 
-                        ORDER_DATE, 
-                        ORDER_TIME,
-                        USER_ID, 
-                        LISTAGG(PRO_ID || ' (x' || ORDER_QUANTITY || ')', ', ') WITHIN GROUP (ORDER BY PRO_ID) AS ORDER_DETAILS, 
-                        DELIVERY_STATUS
-                    FROM USERORDERSPRODUCT
-                    WHERE USER_ID = :user_id   
-                    GROUP BY ORDER_DATE, ORDER_TIME, USER_ID, DELIVERY_STATUS
-                    ORDER BY ORDER_DATE DESC, ORDER_TIME DESC
-                ) ORDER_GROUP
+                    TO_CHAR(ORDER_DATE, 'DD-MM-YYYY') AS ORDER_DATE,
+                    ORDER_TIME,  
+                    USER_ID, 
+                    ORDER_DETAILS, 
+                    DELIVERY_STATUS
+                FROM USER_ORDER_LIST
+                WHERE USER_ID = :user_id
             `;
     
             const result = await con.execute(query, { user_id });
