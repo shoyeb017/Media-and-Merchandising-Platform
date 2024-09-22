@@ -1,113 +1,132 @@
 
-.login-container0 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-attachment: scroll;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-image: linear-gradient(to left, rgba(0,0,0,0), #242428), url('https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg');
-  font-family: Arial, sans-serif;
-  margin: 0;
-
-  position: absolute;
-  bottom: 0;
-}
-
-.login-container0 {
-  font-family: Arial, sans-serif;
+.login-background {
+  position: relative;
+  width: 100vw;
   height: 100vh;
-  margin: 0;
+  overflow: hidden; /* Ensures no scrollbars appear */
+  background: linear-gradient(to bottom, black, #203843);
 }
 
+/* Floating clouds */
+.cloud {
+  position: absolute;
+  opacity: 0.8;
+  z-index: 1; /* Keep clouds behind the login form */
+}
+
+/* Left to right clouds */
+.cloud1 {
+  top: 10%;
+  left: -150px; /* Start off-screen */
+  animation: floatLeftToRight 15s linear infinite;
+
+  width: 340px; /* Adjust the size of clouds */
+}
+
+.cloud2 {
+  top: 30%;
+  left: -200px;
+  animation: floatLeftToRight 25s linear infinite;
+
+  width: 150px; /* Adjust the size of clouds */
+}
+
+/* Right to left cloud */
+.cloud3 {
+  top: 50%;
+  right: -150px; /* Start off-screen from the right */
+  animation: floatRightToLeft 20s linear infinite;
+
+  width: 220px; /* Adjust the size of clouds */
+}
+
+/* Ensure login form styling matches your theme */
 .login-container {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px 40px;
-  max-width: 350px;
+  padding: 30px;
+  color: white;
   width: 100%;
+  max-width: 400px;
+  margin-left: 900px;
+  margin-top: 120px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.login-container h2 {
   text-align: center;
-  margin-left: 850px;
-  margin-top: 10px;
-
-  color: black;
-}
-
-h2 {
   margin-bottom: 20px;
-  color: #333;
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
+.form-group-login1, .form-group-login {
+  margin-bottom: 20px;
 }
 
-.form-group-login {
-  margin-bottom: 15px;
+/* Login container should have a higher z-index */
+.login-container0 {
+  position: relative;
+  z-index: 2; /* Ensures it's above the clouds */
+}
+
+.login-title{
+  font-size: 23px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  margin-top: 35px;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: absolute;
+
   text-align: left;
+
+  font-size: 45px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+
+  margin-left: 130px;
 }
 
-.form-group-login input[type="text"] {
-  color: black;
-  margin: 0px;
-  background-color: white;
-  border: 0px;
-  width: 100%;
+/* Login container should have a higher z-index */
+.login-container0 {
+  position: relative;
+  z-index: 2; /* Ensures it's above the clouds */
 }
 
-.form-group-login input[type="password"] {
-  color: black;
-  margin: 0px;
-  background-color: white;
-  border: 0px;
-  width: 98%;
-  height: 38px;
-  border-radius: 2px;
+.login-title1{
+  font-size: 23px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  margin-top: 35px;
+  justify-content: center;
+  text-align: center;
+  color:#ff640a;
+  position: absolute;
+
+  text-align: left;
+
+  font-size: 17px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+
+  margin-left: 130px;
+  margin-top: 220px;
 }
 
-
-.form-user-type {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-  transition: border-color 0.3s;
+/* Keyframes for left-to-right animation */
+@keyframes floatLeftToRight {
+  0% {
+    transform: translateX(0); /* Start off-screen */
+  }
+  100% {
+    transform: translateX(150vw); /* End far to the right */
+  }
 }
 
-.form-user-type:focus {
-  border-color: #6e8efb;
-  outline: none;
-}
-
-.btn-login {
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-login:hover {
-  background: linear-gradient(135deg, #a777e3, #6e8efb);
-}
-
-.btn-registration {
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 10px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-registration:hover {
-  background: linear-gradient(135deg, #a777e3, #6e8efb);
+/* Keyframes for right-to-left animation */
+@keyframes floatRightToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-150vw); /* End far to the left */
+  }
 }

@@ -37,29 +37,29 @@ function Navbar() {
 
   return (
     <div className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-container">
-        <div className="logo-container">
-          {/* <p>MMP</p> */}
+      <div className="navbar-container1">
+        <div className="logo-container1">
+          <p className="logo-title">MMP</p>
         </div>
-        <div className="menu-container">
-          <ul className="menu-list">
-            <li className="menu-list-item">
-              <Link to={`/${username}/home`}>Home</Link>
+        <div className="menu-container1">
+          <ul className="menu-list1">
+            <li className="menu-list-item1">
+              <Link to={`/${username}/home`}><i class="fa fa-home"></i> Home</Link>
             </li>
-            <li className="menu-list-item">
-              <Link to={`/${username}/search`}>Search</Link>
+            <li className="menu-list-item1">
+              <Link to={`/${username}/search`}><i class="fa fa-search"></i>Search</Link>
             </li>
-            <li className="menu-list-item">
-              <Link to={`/${username}/mylist`}>My List</Link>
+            <li className="menu-list-item1">
+              <Link to={`/${username}/mylist`}><i class="fa fa-list"></i>My List</Link>
             </li>
-            <li className="menu-list-item">
-              <Link to={`/${username}/discussion`}>Discussion</Link>
+            <li className="menu-list-item1">
+              <Link to={`/${username}/discussion`}><i class="fa fa-comments"></i>Discussion</Link>
             </li>
-            <li className="menu-list-item">
-              <Link to={`/${username}/company`}>Company</Link>
+            <li className="menu-list-item1">
+              <Link to={`/${username}/company`}><i class="fa fa-building"></i>Company</Link>
             </li>
-            <li className="menu-list-item">
-              <Link to={`/${username}/merch`}>Merchandiser</Link>
+            <li className="menu-list-item1">
+              <Link to={`/${username}/merch`}><i class="fa fa-shopping-bag"></i>Merchandiser</Link>
             </li>
           </ul>
         </div>
@@ -71,8 +71,8 @@ function Navbar() {
         </button>
 
 
-        <Link to={`/${username}/profile`} className="profile-text">Profile</Link>
-        <Link to="/" className="logout-btn" onClick={handleLogout}>Logout</Link>
+        <Link to={`/${username}/profile`} className="profile-text1"><i className="fa fa-user"></i></Link>
+        <Link to="/" className="logout-btn1" onClick={handleLogout}>Logout</Link>
       </div>
     </div>
   );

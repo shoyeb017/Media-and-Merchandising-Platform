@@ -6,7 +6,7 @@ const NewsCard = ({ news }) => {
     <div className="news-card">
       {/* headline and tile will be on the same line */}
       <h4>{news.HEADLINE}</h4>
-      <p>{news.TITLE}</p>
+      <h5>{news.TITLE}</h5>
 
       <p>{news.DESCRIPTION}</p>
     </div>

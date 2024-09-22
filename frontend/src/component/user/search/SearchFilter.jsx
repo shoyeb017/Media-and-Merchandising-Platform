@@ -20,32 +20,33 @@ const SearchFilter = ({ searchTerm, setSearchTerm, selectedGenres, setSelectedGe
   };
 
   return (
-    <div className="search-filter">
-      <h3 className="search-title">Search</h3>
+    <div className="search-filter1">
+      <h3 className="search-title1">Search</h3>
       <input
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search for a media..."
+        className="search-filter1-search-bar"
       />
-      <h3 className="genre-title">Media Type</h3>
-      <div className="genres">
+      <h3 className="genre-title1">Type</h3>
+      <div className="genres1">
         {mediaTypes.map((type) => (
           <button
             key={type}
-            className={`genre-button ${selectedMediaType === type ? 'selected' : ''}`}
+            className={`genre-button1 ${selectedMediaType === type ? 'selected' : ''}`}
             onClick={() => handleMediaTypeClick(type)}
           >
             {type}
           </button>
         ))}
       </div>
-      <h3 className="genre-title">Genres</h3>
-      <div className="genres">
+      <h3 className="genre-title1">Genres</h3>
+      <div className="genres1">
         {genres.map((genre) => (
           <button
             key={genre}
-            className={`genre-button ${selectedGenres.includes(genre) ? 'selected' : ''}`}
+            className={`genre-button1 ${selectedGenres.includes(genre) ? 'selected' : ''}`}
             onClick={() => handleGenreClick(genre)}
           >
             {genre}

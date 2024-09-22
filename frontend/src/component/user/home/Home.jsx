@@ -3,6 +3,7 @@ import Navbar from "../common/Navbar";
 import FeaturedContent from "./FeaturedContent";
 import MovieList from "./MovieList";
 import MultiLineMovieList from './MultiLineMovieList';
+import HomeNews from "./HomeNews";
 
 function Home() {
   const [foryouMovies, setForYouMovies] = React.useState([]);
@@ -94,9 +95,10 @@ function Home() {
       <FeaturedContent />
       <div className="content-container">
         <MovieList movies={foryouMovies} title="Top Picks for You" />
-        <MovieList movies={empData} title="Medias from your favorite Actors" />
+        {/* <MovieList movies={empData} title="Medias from your favorite Actors" /> */}
         <MultiLineMovieList data={roleData} />
         <MovieList movies={actionMovies} title="Action" />
+        <HomeNews />
         <MovieList movies={horrorMovies} title="Horror" />
         <MovieList movies={romanceMovies} title="Romance" />
         <MovieList movies={comedyMovies} title="Comedy" />

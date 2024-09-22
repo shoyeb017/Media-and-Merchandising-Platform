@@ -1,71 +1,87 @@
 
-.search-filter {
+.search-filter1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #3a3a3e;
+    background-color: #141519;
     /* margin-top: 90px;
     margin-left: 120px;
     margin-right: 120px;
     margin-bottom: 20px; */
 
-    margin: 50px 120px 80px 120px;
-    border-radius: 20px;
+    margin: 120px 170px 20px 170px;
+    /* border-radius: 20px; */
 
     align-content: center;
+    padding: 25px 0px;
+
   }
-.search-title {
-    font-size: 22px;
+.search-title1 {
+    font-size: 20px;
     color: white;
-    margin: 50px 40px 1px 35px;
+    margin: 10px 40px 1px 35px;
   }
 
-input[type="text"] {
-
-    background-color: #3a3a3e;
+.search-filter1 [type="text"] {
+    background-color: transparent;
     color: white;
-    border: 2px solid #4d5059;
-
+    border-bottom: 2px solid #59595b;
+    border-right: 0px;
+    border-left: 0px;
+    border-top: 0px;
     padding: 10px;
-    border-radius: 5px;
-    box-sizing: border-box;
+    margin: 10px 40px 5px 40px;
+    font-size: large;
+    outline: none; /* Remove the default outline */
+}
 
-    margin: 10px 40px 20px 40px;
-  }
+/* On focus, change the bottom border color to orange */
+.search-filter1 [type="text"]:focus {
+    border-bottom: 2px solid #ff640a; /* Orange color */
+    outline: none; /* Ensures no default outline */
+}
 
-  .genre-title{
-    font-size: 22px;
+/* Selection color */
+.search-filter1 [type="text"]::selection {
+    background-color: #ff640a;
+    color: black;
+}
+
+
+.genre-title1{
+    font-size: 20px;
     color: white;
     margin: 20px 40px 1px 35px;
-  }
+}
 
-  .genres {
+.genres1 {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    margin: 10px 40px 20px 40px;
+    margin: 10px 40px 10px 40px;
   }
 
-  .genre-button {
-    padding: 8px 10px;
-    background-color: #3a3a3e;
-    color: white;
-    border: 2px solid #4d5059;
+.genre-button1 {
+    padding: 6px 8px;
+    background-color: #141519;
+    color: #a0a0a0;
+    border: 2px solid #59595b;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 1px 1px 1px 1px;
+    font-size: 13px;
   }
 
-  .genre-button:hover {
-    color: #ffdd95;
-    background-color: #3a3a3e;
+  .genre-button1:hover {
+    color: #ff640a;
+    background-color: #141519;
   }
 
-  .genre-button.selected {
-    color: #ffdd95;
-    background-color: #3a3a3e;
-    border-color: #ffdd95;
+  .genre-button1.selected {
+    color: #ff640a;
+    background-color: #141519;
+    border-color: #ff640a;
   }
 
   .filter-button {
@@ -77,7 +93,7 @@ input[type="text"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #ffdd95;
+    background-color: #ff640a;
     color: black;
     transition: background-color 0.3s;
 
@@ -86,7 +102,7 @@ input[type="text"] {
 
   .filter-button:hover {
     background-color: black;
-    color: #ffdd95;
+    color: #ff640a;
   }
 
   @media (min-width: 576px) {

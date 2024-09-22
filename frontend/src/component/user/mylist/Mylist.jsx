@@ -175,33 +175,34 @@ const Mylist = () => {
 
   return (
     <div className="my-list-container">
+      <h1 className="my-list-container-title"><i class="fa-regular fa-bookmark"></i>My Lists</h1>
       <div className="button-container">
         <button
           className={`list-button ${activeList === 'planToWatch' ? 'active' : ''}`}
           onClick={() => handleButtonClick('planToWatch')}
         >
-          Plan to Watch
+          PLAN TO WATCH
         </button>
         <button
           className={`list-button ${activeList === 'watched' ? 'active' : ''}`}
           onClick={() => handleButtonClick('watched')}
         >
-          Watched
+          WATCHED
         </button>
         <button
           className={`list-button ${activeList === 'favorite' ? 'active' : ''}`}
           onClick={() => handleButtonClick('favorite')}
         >
-          Favorite
+          FAVORITE
         </button>
         <button
           className={`list-button ${activeList === 'favoriteRoles' ? 'active' : ''}`}
           onClick={() => handleButtonClick('favoriteRoles')}
         >
-          Favorite Roles
+          FAVORITE ROLES
         </button>
       </div>
-      <div className="movie-list">
+      <div className="movie-list1">
         {activeList === 'planToWatch' &&
           planToWatchMovies.map((movie) => (
             <MovieCard2

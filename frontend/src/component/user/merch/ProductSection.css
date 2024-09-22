@@ -2,56 +2,64 @@
 .product-section {
   /* margin: 20px 20px 20px 20px;
   max-width: 1400px; */
-  margin-top: auto;
+  margin-top: 60px;
 }
 
 
 .product-section-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: row;
+  background-color: #141519;
+  align-content: center;
 
-  margin: 60px 80px 20px 40px;
+  padding-top: 28px;
+  padding-bottom: 35px;
+
+  margin-bottom: 50px;
+
+  padding-left: 180px;
+  padding-right: 180px;
 }
 
-.product-section-header input {
-  width: 1300px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.product-section-header input[type="text"]  {
+  background-color: transparent;
+  color: white;
+  border-bottom: 2px solid #4d5059;
+  border-right: 0px;
+  border-left: 0px;
+  border-top: 0px;
 
-  margin-top: 15px;
+  padding: 6px;
+
+  width: 100%;
+
+  font-size: 25px; 
+  font-weight: 200;
+  margin-right: 50px;
+  outline: none;
 }
 
-.product-section-header button {
-  background-color: #ffdd95;
-  color: black;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s, color 0.3s;
-
+.product-section-header input[type="text"]:focus {
+  border-bottom: 2px solid #ff640a;
 }
 
-.product-section-header button:hover {
-  background-color: #333;
-  color: #ffdd95;
+.product-section-header i{
+
+  font-size: 25px;
+  color: #ff640a;
+  margin-right: 5px;
 }
 
 .cart-button1 {
-  background-color: #ffdd95;
-  color: black;
+  background-color: transparent;
+  color: white;
   border: none;
   padding: 10px 10px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  border-radius: 4px;
   font-weight: 500;
 
   margin-right: 10px;
-  margin-bottom: 10px;
 
   text-decoration: none;
 
@@ -60,16 +68,19 @@
   align-items: center;
   justify-content: center;
   align-content: center;
+
+  border: 1px solid #313030;
 }
 
 .cart-button1:hover {
-  background-color: #333;
-  color: #ffdd95;
+  background-color: #313030;
 }
 
 .product-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: 20px;
+  column-gap: 20px;
   justify-content: center;
+  margin: 25px 270px 5px 270px;
 }

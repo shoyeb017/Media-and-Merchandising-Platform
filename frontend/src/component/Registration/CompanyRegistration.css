@@ -1,13 +1,17 @@
 .title {
-  font-size: 60px;
+  font-size: 25px;
   color: white;
-  border-bottom: 1px solid #ffdd95;
-  padding: 20px 0px;
+  border-bottom: 1px solid white;
+  width: 60%;
+  padding: 30px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-align: center;
+  margin-left: 300px;
 }
+
 
 .registration-container-company {
   display: flex;
@@ -15,16 +19,18 @@
   align-items: center;
   width: 100%;
   padding: 50px 0;
-  background-color: #242428;
+  background-color: transparent;
 
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .registration-form {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  background-color: #3a3a3e;
+  background: linear-gradient(to bottom, black, #203843);
+  border: 0px solid #ccc;
   width: 90%;
   max-width: 600px; /* Set a maximum width to ensure the form does not get too wide */
   box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
@@ -52,11 +58,12 @@
 .registration-form textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid  #4d5059;
-  border-radius: 5px;
+  border: 1px solid  white;
+  border-radius: 0px;
   background-color: transparent !important;
-  color: #ffdd95; /* Optional: Set text color */
+  color: white; /* Optional: Set text color */
   resize: none; /* Optional: Prevent resizing */
+  margin-left: 10px;
 }
 
 .registration-form input[type="file"] {
@@ -77,7 +84,7 @@
 .registration-form input[type="file"]::before {
   content: 'Choose File';
   display: inline-block;
-  background: #ffdd95;
+  background: #ff640a;
   color: black;
   padding: 10px 15px;
   outline: none;
@@ -90,16 +97,20 @@
 }
 
 .registration-form input[type="file"]:hover::before {
-  background: #4d5059;
-  color: #ffdd95;
+  background: black;
+  color: #ff640a;
 }
 
 
 .registration-form input[type="text"] {
   background-color: transparent;
-  border: 2px solid #4d5059;
-  color: #ffdd95;
+  border-bottom: 1px solid #ccc;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  color: white;
   margin: 0px;
+  border-radius: 0px;
 }
 
 .registration-form input[type="tel"],
@@ -108,16 +119,21 @@
 .registration-form input[type="date"],
 .registration-form input[type="number"] {
   background-color: transparent;
-  border: 2px solid #4d5059;
-  color: #ffdd95;
+  border-bottom: 1px solid #ccc;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  color: white;
+  margin: 0px;
+  border-radius: 0px;
 }
 
 .btn-register {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #ffdd95;
-  color: black;
+  background-color: #ff640a;
+  color: white;
   transition: background-color 0.3s;
   border: none;
   border-radius: 5px;
@@ -128,46 +144,6 @@
 
 .btn-register:hover {
   background-color: black;
-  color: #ffdd95;
+  color: #ff640a;
 }
 
-.genre-section {
-  margin-top: 60px;
-  margin-bottom: 40px;
-}
-
-.genre-section label {
-  display: block;
-  margin-bottom: 20px;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-}
-
-.genre-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.genre-button {
-  padding: 8px 10px;
-  background-color: #3a3a3e;
-  color: white;
-  border: 2px solid #4d5059;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin: 1px;
-}
-
-.genre-button:hover {
-  color: #ffdd95;
-  background-color: #3a3a3e;
-}
-
-.genre-button.selected {
-  color: #ffdd95;
-  background-color: #3a3a3e;
-  border-color: #ffdd95;
-}

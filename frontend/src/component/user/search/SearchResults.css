@@ -1,13 +1,14 @@
 .search-results-title {
-  font-size: 22px;
-  color: #ffdd95;
-  margin: 50px 120px 10px 120px;
+  font-size: 18px;
+  color: #ff640a;
+  margin: 50px 200px 5px 195px;
 }
 
 .search-results {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(6, 1fr);
+  row-gap: 40px;
+  column-gap: 0px;
   justify-content: center;
-  margin: 50px 120px 80px 120px;
+  margin: 25px 240px 80px 240px;
 }

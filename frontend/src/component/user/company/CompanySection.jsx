@@ -17,10 +17,15 @@ const CompanyCard = ({company}) => {
   return (
     <Link to={`/${username}/company/${company.COM_ID}`} className="link-product-card">
       <div className="company-card">
+        <div className="company-card-content-upper">
+          <h3 className="company-card-title1">{company.NAME}</h3>
+          <h3 className="company-card-email1">{company.EMAIL}</h3>
+          <p className="company-card-desc1">{company.DESCRIPTION}</p>
+        </div>
         <img className="company-card-img" src={company.IMG} alt={company.NAME} />
         <div className="company-card-content">
           <h3 className="company-card-title">{company.NAME}</h3>
-          <p className="company-card-desc">{company.DESCRIPTION}</p>
+          <h3 className="company-card-email">{company.EMAIL}</h3>
         </div>
       </div>
     </Link>
@@ -66,9 +71,9 @@ const CompanySection = () => {
           placeholder="Search for companies..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-bar"
+          className="company-section-header-search-bar"
         />
-        <button className="search-button">Search</button>
+        {/* <button className="search-button">Search</button> */}
       </div>
 
       <div className="company-list11">

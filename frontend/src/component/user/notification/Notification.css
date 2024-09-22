@@ -5,16 +5,24 @@
 }
 
 .notification-button {
-    background-color: #ffdd95;
-    color: black;
-    padding: 10px;
+    background-color: transparent;
+    color: white;
+    /* padding: 10px; */
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     display: flex;
     align-items: center;
     gap: 5px;
+
+    font-size: 20px;
+    padding: 19px 18px;
 }
+
+.notification-button:hover {
+    background-color: black;
+}
+
 
 .notification-bar {
     position: absolute;

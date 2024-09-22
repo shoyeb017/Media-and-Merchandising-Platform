@@ -1,10 +1,21 @@
 
 
 .movie-list-title {
-  margin-bottom: 20px;
-  color : #ffdd95;
+  color : white;
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 9px;
 }
+
+.movie-list-title2 {
+  color : #a0a0a0;
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
 .movie-list-container {
-  padding: 20px;
+  margin-left: 55px;
+  margin-bottom: 70px;
 }
 

@@ -122,7 +122,9 @@ const CompanyDetailsPage = () => {
           </div>
         </div>
       </div>
-      <MovieList movies={companyMovies} title="Medias" />
+      <div className="company-details-page-medias">
+        <MovieList movies={companyMovies} title="Medias" />
+      </div>
       {/* Product & news section */}
       <div className="company-details-middle">
         <div className="products-section">
@@ -134,7 +136,7 @@ const CompanyDetailsPage = () => {
           </div>
         </div>
 
-        <div className="news-section">
+        <div className="news-section1">
           <h3>News & Updates</h3>
           <div className="news-list">
             {Array.isArray(company.news) && company.news.map((newsItem, index) => (

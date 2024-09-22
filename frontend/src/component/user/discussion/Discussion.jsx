@@ -4,6 +4,8 @@ import DiscussionCard from './DiscussionCard';
 import ReplyCard from './ReplyCard';
 import './Discussion.css';
 
+import dis from './dis.jpeg';
+
 const Discussion = () => {
   const [selectedDiscussion, setSelectedDiscussion] = useState(null);
   const [view, setView] = useState('all'); // 'all' or 'my'
@@ -110,9 +112,9 @@ const Discussion = () => {
     }
   };
 
-  const handleViewChange = async (view) => {
-    setView(view);
-    if (view === 'my') {
+  const handleViewChange = async (selectedView) => {
+    setView(selectedView);
+    if (selectedView === 'my') {
       try {
         const response = await fetch('http://localhost:5000/discussions/my', {
           method: 'POST',
@@ -121,7 +123,6 @@ const Discussion = () => {
           },
           body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
         });
-        console.log(localStorage.getItem('user_id'));
         if (response.status === 200) {
           const data = await response.json();
           setDiscussions(data);
@@ -131,18 +132,33 @@ const Discussion = () => {
       } catch (error) {
         console.error('Error:', error);
       }
-
     } else {
       fetchDiscussions('http://localhost:5000/discussions');
     }
+  };
+  
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   return (
     <div className="discussion-page">
       <div className="discussion-list">
-        <div className="discussion-list-header">
-          <button onClick={() => handleViewChange('my')}>My Discussions</button>
-          <button onClick={() => handleViewChange('all')}>All Discussions</button>
+      <div className="discussion-list-header">
+      <button
+          className={`list-button ${view === 'my' ? 'active' : ''}`}
+          onClick={() =>  handleViewChange('my')}
+        >
+          MY DISCUSSION
+        </button>
+        <button
+          className={`list-button ${view === 'all' ? 'active' : ''}`}
+          onClick={() => handleViewChange('all')}
+        >
+          ALL DISCUSSION
+        </button>
         </div>
         <div className="discussion-cards">
           {discussions.map(discussion => (
@@ -152,6 +168,8 @@ const Discussion = () => {
               topic={discussion.TOPIC}
               description={discussion.DESCRIPTION}
               replyCount={discussion.REPLY_COUNT}
+              date={discussion.DIS_DATE}
+              poster={discussion.POSTER}
               onClick={() => setSelectedDiscussion(discussion)}
             />
           ))}
@@ -159,13 +177,21 @@ const Discussion = () => {
       </div>
       <div className="discussion-details">
         {selectedDiscussion ? (
-          <>
+          <div>
             <div className="discussion-details-header">
-              <p className="discussion-details-title">{selectedDiscussion.TITLE}</p>
+              <div className="discussion-details-header-inner1">
+                <img src={dis} alt="poster" className="discussion-details-header-poster1" />
+                <img src={selectedDiscussion.POSTER} alt="poster" className="discussion-details-header-poster2" />
+              </div>
+              <div className="discussion-details-header-inner2">
               <h3 className="discussion-details-topic">{selectedDiscussion.TOPIC}</h3>
-              <p className="discussion-details-desc">{selectedDiscussion.DESCRIPTION}</p>
+                <p className="discussion-details-title">{selectedDiscussion.TITLE}</p>
+                <p className="discussion-details-desc">{selectedDiscussion.DESCRIPTION}</p>
+                <p className="discussion-details-date">{formatDate(selectedDiscussion.DIS_DATE)}</p>
+              </div>
             </div>
             <p className="discussion-details-reply-count">{replies.length} replies</p>
+            <div className="discussion-details-replies-section">
             <div className="replies">
               {replies.map(reply => (
                 <ReplyCard
@@ -184,7 +210,8 @@ const Discussion = () => {
               />
               <button onClick={handleAddReply}>Reply</button>
             </div>
-          </>
+            </div>
+          </div>
         ) : (
           <p style={{ color: 'white' }}>Select a discussion to see details.</p>
         )}

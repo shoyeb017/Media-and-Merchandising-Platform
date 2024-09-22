@@ -15,14 +15,15 @@ const ProductCard = ({ product }) => {
 
     return (
     <Link to={`/${username}/product/${product.PRO_ID}`} className="link-product-card">
-    <div className="product-card">
+    <div className="product-card1">
+      <div className="product-card-inner1"> 
+        <img src={product.IMAGE} alt={product.NAME} className="product-card-inner1-img" />
+        <div className="product-card-inner1-button">Buy Now</div>
+      </div>
       <img src={product.IMAGE} alt={product.NAME} className="product-img" />
-
-        <h3 className="product-name">{product.NAME}</h3>
-        <p className="product-price">${product.PRICE}</p>
+      <h3 className="product-name">{product.NAME}</h3>
+      <p className="product-price1">${product.PRICE}</p>
     </div>
-    
-
     </Link>
   );
 };

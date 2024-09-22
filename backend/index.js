@@ -2054,6 +2054,66 @@ app.post('/addNews', async (req, res) => {
     // ROUTE FOR FEATURED MEDIA
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    app.post('/media/featured1', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+            
+            const mediaIds = req.body.mediaIds; // Assuming mediaIds is an array of IDs sent in the request body
+            
+            if (!Array.isArray(mediaIds) || mediaIds.length === 0) {
+                res.status(400).send("Invalid media IDs");
+                return;
+            }
+            
+            console.log('Received media IDs:', mediaIds);
+            
+            // Create a SQL query to fetch media details for the given IDs
+            const query = `
+                SELECT *
+                FROM MEDIA
+                WHERE MEDIA_ID IN (${mediaIds.map(id => `'${id}'`).join(',')})
+            `;
+            
+            const result = await con.execute(query);
+            
+            const transformData = (data) => ({
+                id: data.MEDIA_ID,
+                title: data.TITLE,
+                description: data.DESCRIPTION,
+                rating: data.RATING,
+                ratingCount: data.RATING_COUNT,
+                type: data.TYPE,
+                genre: data.GENRE,
+                trailer: data.TRAILER,
+                poster: data.POSTER, 
+                duration: data.DURATION,
+                releaseDate: new Date(data.RELEASE_DATE).toISOString().split('T')[0],
+                episodes: data.EPISODE || 0,
+                
+            });
+            
+            const transformedData = result.rows.map(transformData);
+            
+            res.send(transformedData);
+            console.log("Media Data sent");
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
     
 
     app.get('/media/featured', async (req, res) => {
@@ -2866,7 +2926,7 @@ app.post('/addNews', async (req, res) => {
             }
             console.log('Received discussion request');
             const result = await con.execute(
-                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT , DISCUSSIONABOUTMEDIA.DIS_DATE ,MEDIA.POSTER
                 FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
                     ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
                 JOIN MEDIA 
@@ -2906,7 +2966,7 @@ app.post('/addNews', async (req, res) => {
             }
             console.log(user_id);
             const result = await con.execute(
-                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT, DISCUSSIONABOUTMEDIA.DIS_DATE ,MEDIA.POSTER
                 FROM DISCUSSION JOIN DISCUSSIONABOUTMEDIA 
                     ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
                 JOIN MEDIA 
@@ -5005,7 +5065,7 @@ app.post('/media/rolemedia', async (req, res) => {
             img: media.POSTER,
             duration: media.DURATION,
             releaseDate: media.RELEASE_DATE,
-            episodes: media.EPISODE
+            episodes: media.EPISODE || 0
         }));
 
         const mediaByRoleId2 = media2.rows.map((media) => ({
@@ -5020,7 +5080,7 @@ app.post('/media/rolemedia', async (req, res) => {
             img: media.POSTER,
             duration: media.DURATION,
             releaseDate: media.RELEASE_DATE,
-            episodes: media.EPISODE
+            episodes: media.EPISODE || 0
         }));
 
         const mediaByRoleId3 = media3.rows.map((media) => ({
@@ -5035,7 +5095,7 @@ app.post('/media/rolemedia', async (req, res) => {
             img: media.POSTER,
             duration: media.DURATION,
             releaseDate: media.RELEASE_DATE,
-            episodes: media.EPISODE
+            episodes: media.EPISODE || 0
         }));
 
         const List = [
@@ -5108,6 +5168,57 @@ app.post('/media/rolemedia', async (req, res) => {
         }
     }
 });
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// ROUTE FOR USER HOME NEWS
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Backend route
+app.get('/home/news', async (req, res) => {
+    let con;
+    try {
+        con = await pool.getConnection();
+        if (!con) {
+            res.status(500).send("Connection Error");
+            return;
+        }
+
+        // Fetch latest news with associated media and poster
+        const newsQuery = `
+            SELECT MEDIA.MEDIA_ID,MEDIA.TITLE, MEDIA.POSTER, NEWSANDUPDATES.NEWS_ID, 
+                   NEWSANDUPDATES.DESCRIPTION, NEWSANDUPDATES.HEADLINE, 
+                   NEWSTOMEDIA.NEWS_DATE
+            FROM NEWSANDUPDATES
+            JOIN NEWSTOMEDIA ON NEWSANDUPDATES.NEWS_ID = NEWSTOMEDIA.NEWS_ID
+            JOIN MEDIA ON NEWSTOMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
+            ORDER BY NEWSTOMEDIA.NEWS_DATE DESC`;
+
+        const newsResult = await con.execute(newsQuery);
+        
+        // Assume top 2 news for left section, next 6 for right section
+        const topNews = newsResult.rows.slice(0, 2);  // Top 2 news for the left side
+        const latestNews = newsResult.rows.slice(2, 8); // Next 6 news for the right side
+
+        res.send({
+            topNews,
+            latestNews
+        });
+
+    } catch (err) {
+        console.error("Error fetching news: ", err);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        if (con) {
+            try {
+                await con.close();
+            } catch (err) {
+                console.error("Error closing connection: ", err);
+            }
+        }
+    }
+});
+
+
 
 
 

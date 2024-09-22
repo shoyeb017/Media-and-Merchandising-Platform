@@ -7,8 +7,11 @@
 .company-details-page {
     max-width: 100%;
     margin: auto;
-  }
+}
 
+.company-details-page-medias{
+  margin: 20px 160px;
+}
 
 
 .allsection {
@@ -150,11 +153,11 @@
   }
 
   .products-title{
-    color: #ffdd95;
+    color: white;
     font-size: 30px;
     padding: 10px;
     margin-bottom: 40px;
-    border-left: 5px solid white;
+    border-left: 5px solid #ff640a;;
   }
 
 
@@ -163,16 +166,16 @@
     gap: 10px;
   }
 
-  .news-section {
+  .news-section1 {
     margin-bottom: 20px;
     width: 28%;
   }
 
-  .news-section h3{
-    color: #ffdd95;
+  .news-section1 h3{
+    color: white;
     font-size: 30px;
     padding: 10px;
     margin-bottom: 40px;
-    border-left: 5px solid white;
+    border-left: 5px solid #ff640a;;
   }
 

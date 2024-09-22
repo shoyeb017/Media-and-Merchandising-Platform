@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './ProfilePage.css';
 
+import pro1 from './pro1.jpeg';
+
 const ProfilePage = () => {
   const [profile, setProfile] = useState({
     NAME: '',
@@ -79,9 +81,12 @@ const ProfilePage = () => {
   
 
   return (
-    <div className="profile-page">
-      <h2>Profile</h2>
-      <div className="profile-info">
+    <div className="profile-page1">
+      {/* <h2>Profile</h2> */}
+      <img src={pro1} className="profile-page1-Profile" />
+      <i class="fa fa-user-circle"></i>
+      <div className="profile-info-container">
+      <div className="profile-info1">
         <label>Name: </label>
         {isEditing ? (
           <input type="text" name="NAME" value={profile.NAME} onChange={handleChange} />
@@ -89,7 +94,7 @@ const ProfilePage = () => {
           <span>{profile.NAME}</span>
         )}
       </div>
-      <div className="profile-info">
+      <div className="profile-info1">
         <label>Date of Birth: </label>
         {isEditing ? (
           <input type="date" name="DOB" value={profile.DOB.split('T')[0]} onChange={handleChange} />
@@ -97,7 +102,7 @@ const ProfilePage = () => {
           <span>{profile.DOB.split('T')[0]}</span>
         )}
       </div>
-      <div className="profile-info">
+      <div className="profile-info1">
         <label>Email: </label>
         {isEditing ? (
           <input type="email" name="EMAIL" value={profile.EMAIL} onChange={handleChange} />
@@ -105,7 +110,7 @@ const ProfilePage = () => {
           <span>{profile.EMAIL}</span>
         )}
       </div>
-      <div className="profile-info">
+      <div className="profile-info1">
         <label>City: </label>
         {isEditing ? (
           <input type="text" name="CITY" value={profile.CITY} onChange={handleChange} />
@@ -113,7 +118,7 @@ const ProfilePage = () => {
           <span>{profile.CITY}</span>
         )}
       </div>
-      <div className="profile-info">
+      <div className="profile-info1">
         <label>Street: </label>
         {isEditing ? (
           <input type="text" name="STREET" value={profile.STREET} onChange={handleChange} />
@@ -121,7 +126,7 @@ const ProfilePage = () => {
           <span>{profile.STREET}</span>
         )}
       </div>
-      <div className="profile-info">
+      <div className="profile-info1">
         <label>House: </label>
         {isEditing ? (
           <input type="text" name="HOUSE" value={profile.HOUSE} onChange={handleChange} />
@@ -129,12 +134,13 @@ const ProfilePage = () => {
           <span>{profile.HOUSE}</span>
         )}
       </div>
-      <div className="profile-buttons">
+      <div className="profile-buttons1">
         {isEditing ? (
           <button onClick={handleUpdate}>Update</button>
         ) : (
           <button onClick={toggleEdit}>Edit</button>
         )}
+      </div>
       </div>
     </div>
   );

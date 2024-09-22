@@ -1,5 +1,5 @@
 .footer {
-  background: #3a3a3e;
+  background: linear-gradient(to bottom, black, #203843);
   color: white;
   padding: 40px 20px;
   margin-top: 200px;
@@ -33,7 +33,7 @@
 .newsletter-input button {
   padding: 10px 0px;
   border: none;
-  background: #ffdd95;
+  background: #ff640a;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   margin-left: 5px;
@@ -43,7 +43,7 @@
 .newsletter-input button:hover {
   padding: 10px 0px;
   border: none;
-  background: #ffdd95;
+  background: #ff640a;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   margin-left: 5px;
@@ -78,7 +78,7 @@
 
 .contact-info button {
   padding: 10px 15px;
-  border: 2px solid #ffdd95;
+  border: 2px solid #ff640a;
   background: none;
   color: white;
   cursor: pointer;
@@ -86,7 +86,7 @@
 }
 
 .contact-info button:hover {
-  background: #ffdd95;
+  background: #ff640a;
   color: #1e3d59;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .icon:hover {
-  color: #ffdd95;
+  color: #ff640a;
 }
 
 .footer-bottom p {

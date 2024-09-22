@@ -1,29 +1,61 @@
 .discussion-card {
-    border: 1px solid #505053;
-    border-radius: 15px;
-    padding: 15px 35px;
+    padding: 15px 20px;
     margin-bottom: 10px;
     cursor: pointer;
-    background-color: #505053;
+    background-color: #141519;
     transition: background-color 0.3s ease;
+    display: flex;
 
+    height: 95px;
   }
 
   .discussion-card:hover {
-    border-color: #ffdd95;
+    background-color: #222327;
   }
+
+  .discussion-card:hover .discussion-card-part1 {
+    color: white;
+  }
+
+.discussion-card-part1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #9e9ea0;
+}
+
+.discussion-card-part1 i {
+  font-size: 22px;
+  margin-right: 15px;
+}
+
+.discussion-card-part2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.discussion-card-poster {
+  height: 90px;
+  overflow: hidden;
+  margin-right: 15px;
+}
 
 .discussion-card-title {
 
+    color: #23b09a;
     max-width: 100%;
-    font-size: 18px;
-    background-color: #ffdd95;
+    font-size: 14px;
+    font-weight: 300;
     border-radius: 5px;
-    padding: 0px 5px;
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    margin-bottom: 5px;
 
 }
 
@@ -31,16 +63,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
-    padding: 10px 0px 8px 0px;
     color: white;
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .discussion-card-description {
     max-height: 36px;
     color: #9e9ea0;
-    font-size: 14px;
+    font-size: 13px;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -51,7 +81,21 @@
 
   .discussion-card-reply-count {
     padding-top: 5px;
-    font-size: 12px;
+    font-size: 10px;
+    color: white;
+    text-align: right;
+  }
+
+  .discussion-card-inner {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 15px;
+  }
+
+  .discussion-card-date {
+    padding-top: 5px;
+    font-size: 10px;
     color: white;
     text-align: right;
   }

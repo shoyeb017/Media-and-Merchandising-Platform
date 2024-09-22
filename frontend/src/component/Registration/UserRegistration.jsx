@@ -111,7 +111,7 @@ const UserRegistration = () => {
   
   return (
     <div className="full-section">
-      <h2 className="title">User Registration</h2>
+      <h2 className="title"><i className="fa fa-user"></i>User Registration</h2>
       <div className="registration-container">
         <form onSubmit={handleSubmit} className="registration-form">
           <div className="form-group">
