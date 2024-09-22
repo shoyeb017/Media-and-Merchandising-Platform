@@ -68,56 +68,55 @@ oracledb.createPool({
     app.post('/registration/user', async (req, res) => {
         const { username, password, name, dob, email, city, street, house, phone, genres } = req.body;
         console.log('Received user registration request:', { username, password, name, dob, email, city, street, house, phone, genres });
-
+    
         const user_id = generateUserId(username);
         console.log('Generated User ID:', user_id);
-        const login_id = generateLoginId(username, password, dob);
+        const login_id = generateLoginId(username, password); // Login ID is generated here in Node.js
         console.log('Generated Login ID:', login_id);
-
+    
         let con;
         try {
             con = await pool.getConnection();
             if (!con) {
-            res.status(500).send("Connection Error");
-            return;
+                res.status(500).send("Connection Error");
+                return;
             }
-            // Insert user data into the database
-            const userResult = await con.execute(
-                `INSERT INTO USERS (USER_ID, USER_NAME, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE)
-                VALUES (USERS_SEQ.NEXTVAL, :username, :name, TO_DATE(:dob, 'YYYY-MM-DD'), :email, :city, :street, :house, :phone)`,
-                { username, name, dob, email, city, street, house, phone }
+    
+            // Define bind parameters for calling the stored procedure
+            const bindParams = {
+                p_username: username,
+                p_password: password,
+                p_name: name,
+                p_dob: dob,
+                p_email: email,
+                p_city: city,
+                p_street: street,
+                p_house: house,
+                p_phone: phone,
+                p_genres: genres.join(','),
+                p_login_id: login_id,  // Pass the generated login_id as an input parameter
+                p_user_id: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
+            };
+    
+            // Call the stored procedure using a cursor
+            const result = await con.execute(
+                `BEGIN 
+                   RegisterUser(
+                     :p_username, :p_password, :p_name, TO_DATE(:p_dob, 'YYYY-MM-DD'), :p_email, :p_city, :p_street, :p_house, :p_phone, 
+                     :p_genres, :p_login_id, :p_user_id
+                   );
+                 END;`,
+                bindParams
             );
-            console.log(`User Insert Result: ${JSON.stringify(userResult)}`);
-
-            // Get the newly generated USER_ID
-            const userIdResult = await con.execute(
-                `SELECT USERS_SEQ.CURRVAL AS user_id FROM dual`
-            );
-            const user_id = userIdResult.rows[0].USER_ID;
-
-            // Insert user login credentials into the database (assuming the DB handles login_id generation)
-            const loginResult = await con.execute(
-                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
-                VALUES (:login_id, :password, 'USER', :user_id)`,  // Using DEFAULT for login_id generation
-                {login_id, password, user_id }
-            );
-            console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
-
-            // Insert user genre preferences into the database
-            const genreResult = await con.execute(
-                `INSERT INTO PREFERREDGENRE (USER_ID, GENRES) 
-                VALUES (:user_id, :genres)`,
-                { user_id, genres: genres.join(',') }
-            );
-            console.log(`Genre Insert Result: ${JSON.stringify(genreResult)}`);
-
+    
+            const userId = result.outBinds.p_user_id;
+            console.log(`User registered with User ID: ${userId} and Login ID: ${login_id}`);
+    
+            // Respond with success
+            res.status(201).send("User registered successfully");
+    
             // Commit the transaction
             await con.commit();
-
-
-
-            res.status(201).send("User registered successfully");
-            console.log("User registered successfully");
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
@@ -131,6 +130,7 @@ oracledb.createPool({
             }
         }
     });
+    
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR MERCHANIDISER REGISTRATION
@@ -142,7 +142,7 @@ oracledb.createPool({
         const { username, password, name, description, email, city, street, house, phone } = req.body;
         console.log('Received merchandiser registration request:', { username, password, name, description, email, city, street, house, phone });
     
-        const login_id = generateLoginId(username, password);  // Assuming this is a function that generates a login ID
+        const login_id = generateLoginId(username, password);  // Generate login_id in Node.js
         console.log('Generated Login ID:', login_id);
     
         let con;
@@ -153,38 +153,53 @@ oracledb.createPool({
                 return;
             }
     
-            // Insert merchandiser data into the database with MERCHANDISER_SEQ for MER_ID
+            // Bind parameters for the stored procedure call
+            const bindParams = {
+                p_username: username,
+                p_password: password,
+                p_name: name,
+                p_description: description,
+                p_email: email,
+                p_city: city,
+                p_street: street,
+                p_house: house,
+                p_phone: phone,
+                p_login_id: login_id, // Send login_id as input parameter
+                p_merch_id: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT } // Output parameter for MERCH_ID
+            };
+    
+            // Execute the stored procedure
             const result = await con.execute(
-                `INSERT INTO MERCHANDISER (MER_ID, USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
-                VALUES (MERCHANDISER_SEQ.NEXTVAL, :username, :name, :description, :email, :city, :street, :house, :phone)`,
-                { username, name, description, email, city, street, house, phone }
+                `BEGIN 
+                    RegisterMerchandiser(
+                      :p_username, :p_password, :p_name, :p_description, :p_email, :p_city, :p_street, :p_house, :p_phone, :p_login_id, :p_merch_id
+                    ); 
+                 END;`,
+                bindParams
             );
-            console.log(`Merchandiser Insert Result: ${JSON.stringify(result)}`);
     
-            // Get the newly generated MER_ID from the sequence
-            const userIdResult = await con.execute(
-                `SELECT MERCHANDISER_SEQ.CURRVAL AS user_id FROM dual`
-            );
-            const user_id = userIdResult.rows[0].USER_ID;
+            const merchId = result.outBinds.p_merch_id;  // Retrieve the MERCH_ID from the output bind
+            console.log(`Merchandiser registered with Merch ID: ${merchId} and Login ID: ${login_id}`);
     
-            // Insert merchandiser login credentials into the database
-            const loginResult = await con.execute(
-                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
-                VALUES (:login_id, :password, 'MERCHANDISER', :user_id)`,
-                { login_id, password, user_id }
-            );
-            console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
+            // Send success response
+            res.status(201).send("Merchandiser registered successfully");
     
             // Commit the transaction
             await con.commit();
-    
-            res.status(201).send("Merchandiser registered successfully");
-            console.log("Merchandiser registered successfully");
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
         }
     });
+    
     
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -342,7 +357,7 @@ oracledb.createPool({
         const { username, password, name, email, description, imageUrl } = req.body;
         console.log('Received company registration request:', { username, password, name, email, description, imageUrl });
     
-        const login_id = generateLoginId(username, password);  // Assuming this is a function that generates a login ID
+        const login_id = generateLoginId(username, password);  // Generate login_id in Node.js
         console.log('Generated Login ID:', login_id);
     
         let con;
@@ -353,38 +368,50 @@ oracledb.createPool({
                 return;
             }
     
-            // Insert company data into the database using COMPANY_SEQ for COM_ID
+            // Bind parameters for the stored procedure call
+            const bindParams = {
+                p_username: username,
+                p_password: password,
+                p_name: name,
+                p_img: imageUrl,
+                p_email: email,
+                p_description: description,
+                p_login_id: login_id, // Send the login_id as input
+                p_com_id: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT } // Output parameter for COM_ID
+            };
+    
+            // Execute the stored procedure
             const result = await con.execute(
-                `INSERT INTO COMPANY (COM_ID, USER_NAME, NAME, IMG, EMAIL, DESCRIPTION)
-                VALUES (COMPANY_SEQ.NEXTVAL, :username, :name, :imageUrl, :email, :description)`,
-                { username, name, imageUrl, email, description }
+                `BEGIN 
+                    RegisterCompany(
+                      :p_username, :p_password, :p_name, :p_img, :p_email, :p_description, :p_login_id, :p_com_id
+                    ); 
+                 END;`,
+                bindParams
             );
-            console.log(`Company Insert Result: ${JSON.stringify(result)}`);
     
-            // Get the newly generated COM_ID from the sequence
-            const userIdResult = await con.execute(
-                `SELECT COMPANY_SEQ.CURRVAL AS user_id FROM dual`
-            );
-            const user_id = userIdResult.rows[0].USER_ID;
+            const comId = result.outBinds.p_com_id;  // Retrieve the COM_ID from the output bind
+            console.log(`Company registered with Company ID: ${comId} and Login ID: ${login_id}`);
     
-            // Insert company login credentials into the database
-            const loginResult = await con.execute(
-                `INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID) 
-                VALUES (:login_id, :password, 'COMPANY', :user_id)`,
-                { login_id, password, user_id }
-            );
-            console.log(`Login Insert Result: ${JSON.stringify(loginResult)}`);
+            // Send success response
+            res.status(201).send("Company registered successfully");
     
             // Commit the transaction
             await con.commit();
-    
-            res.status(201).send("Company registered successfully");
-            console.log("Company registered successfully");
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
         }
     });
+    
     
 
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1420,7 +1447,10 @@ app.post('/addNews', async (req, res) => {
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    app.get('/products', async (req, res) => {
+    app.post('/user/order', async (req, res) => {
+        const { user_id, items, order_date, order_time } = req.body;
+        console.log('Received order request:', { user_id, items, order_date, order_time });
+    
         let con;
         try {
             con = await pool.getConnection();
@@ -1428,29 +1458,31 @@ app.post('/addNews', async (req, res) => {
                 res.status(500).send("Connection Error");
                 return;
             }
-            console.log('Received company request');
-            const result = await con.execute(
-                `SELECT * FROM products`
-            );
-            console.log(`Query Result: `,result.rows);
-
-            
-
-            res.send(result.rows);
-            console.log("Company Data sent");
+    
+            for (const item of items) {
+                const result = await con.execute(
+                    `INSERT INTO USERORDERSPRODUCT (USER_ID, PRO_ID, DELIVERY_STATUS, ORDER_DATE, ORDER_TIME, ORDER_QUANTITY)
+                     VALUES (:user_id, :pro_id, 'PENDING', TO_DATE(:order_date, 'DD-MM-YYYY'), :order_time, :quantity)`,
+                    { user_id, pro_id: item.PRO_ID, order_date, order_time, quantity: item.quantity }
+                );
+                console.log(`Order Insert Result for Product ${item.PRO_ID}: ${JSON.stringify(result)}`);
+            }
+    
+            // Commit the transaction
+            await con.commit();
+    
+            res.status(201).send("Order placed successfully");
+            console.log("Order placed successfully");
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
         } finally {
             if (con) {
-                try {
-                    await con.close();
-                } catch (err) {
-                    console.error("Error closing database connection: ", err);
-                }
+                con.close();
             }
         }
     });
+    
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for ALL MEDIA
@@ -1938,12 +1970,12 @@ app.post('/addNews', async (req, res) => {
     app.post('/products/review/add', async (req, res) => {
         const { user_id, product_id, rating, description } = req.body;
         console.log('Received add review request:', { user_id, product_id, description, rating });
-
+    
         if (!product_id || !user_id || !rating || !description) {
             res.status(400).send("Missing required fields");
             return;
         }
-
+    
         let con;
         try {
             con = await pool.getConnection();
@@ -1951,46 +1983,31 @@ app.post('/addNews', async (req, res) => {
                 res.status(500).send("Connection Error");
                 return;
             }
-
+    
             const review_id = generateReviewId(description);
             const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
-
+    
             // Insert review into REVIEWRATING table
             await con.execute(
                 `INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
                 VALUES (:review_id, :description, :rating, 'PRODUCT', TO_DATE(:review_date, 'YYYY-MM-DD'))`,
-                { review_id, description, rating, review_date: currentDate }, { autoCommit: true }
+                { review_id, description, rating, review_date: currentDate }
             );
-            console.log(`Review Insert time: ${currentDate}`);
+    
             // Insert into USERGIVEREVIEW table
             await con.execute(
                 `INSERT INTO USERGIVEREVIEW (R_ID, USER_ID)
                 VALUES (:review_id, :user_id)`,
-                { review_id, user_id }, { autoCommit: true }
+                { review_id, user_id }
             );
-
+    
             // Insert into REVIEWABOUTPRODUCT table
             await con.execute(
                 `INSERT INTO REVIEWABOUTPRODUCT (PRO_ID, R_ID)
                 VALUES (:product_id, :review_id)`,
-                { product_id, review_id }, { autoCommit: true }
+                { product_id, review_id }
             );
-
-            //get previous rating_count and rating
-            const previousRating = await con.execute(
-                `SELECT RATING, RATING_COUNT FROM PRODUCTS WHERE PRO_ID = :product_id`,
-                { product_id }
-            );
-            const previousRatingCount = previousRating.rows[0].RATING_COUNT;
-            const previousRatingValue = previousRating.rows[0].RATING;
-            //calculate new rating
-            const newRating = ((previousRatingValue * previousRatingCount) + rating) / (previousRatingCount + 1);
-            //update rating and rating_count
-            await con.execute(
-                `UPDATE PRODUCTS SET RATING = :newRating, RATING_COUNT = RATING_COUNT + 1 WHERE PRO_ID = :product_id`,
-                { newRating, product_id } , { autoCommit: true }
-            );
-
+    
             // Commit the transaction
             await con.commit();
             res.status(201).send("Review added successfully");
@@ -2008,6 +2025,57 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE for all products
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    app.get('/products', async (req, res) => {
+        let con;
+        try {
+            con = await pool.getConnection();
+            console.log('Received product request');
+            if (!con) {
+                res.status(500).send("Connection Error");
+                return;
+            }
+
+            const result = await con.execute(
+                `SELECT * FROM PRODUCTS
+                ORDER BY RATING DESC`
+            );
+
+            // const transformData = (data) => ({
+            //     id: data.PRO_ID,
+            //     img: data.IMG_SRC,
+            //     title: data.TITLE,
+            //     description: data.DESCRIPTION,
+            //     rating: data.RATING,
+            //     price: data.PRICE,
+            //     stock: data.STOCK,
+            //     category: data.CATEGORY,
+            //     review: []
+            // });
+
+            // const transformedData = result.rows.map(transformData);
+
+            // res.send(transformedData);
+            res.send(result.rows);
+            console.log("Product Data sent");
+        } catch (err) {
+            console.error("Error during database query:", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection:", err);
+                }
+            }
+        }
+    });
+    
     
 
 
@@ -4313,7 +4381,7 @@ app.post('/addNews', async (req, res) => {
     // ROUTE FOR USER CONFIRMATION ORDER
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
       
-    app.post('/user/order', async (req, res) => {
+    app.post('/user/order/confirm', async (req, res) => {
         const { user_id, items, order_date, order_time } = req.body; // 'order_date' and 'order_time' are sent separately
         console.log('Received order request:', { user_id, items, order_date, order_time });
     
@@ -4658,10 +4726,6 @@ app.post('/addNews', async (req, res) => {
             return res.status(400).send("Order date, order time, user ID, and status are required");
         }
         
-        const validStatuses = ['PENDING', 'TO SHIP', 'DELIVERED', 'CANCELLED'];
-        if (!validStatuses.includes(status)) {
-            return res.status(400).send("Invalid status");
-        }
         
         let con;
         try {
@@ -4709,9 +4773,9 @@ app.post('/addNews', async (req, res) => {
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     app.post('/order/delete', async (req, res) => {
-        const { order_date,order_time , user_id } = req.body;
+        const { order_date, order_time, user_id } = req.body;
     
-        console.log('Received order cancel request:', { order_date,order_time, user_id });
+        console.log('Received order cancel request:', { order_date, order_time, user_id });
     
         let con;
         try {
@@ -4726,8 +4790,8 @@ app.post('/addNews', async (req, res) => {
                 `SELECT COUNT(*) AS COUNT 
                 FROM USERORDERSPRODUCT 
                 WHERE USER_ID = :user_id
-                 AND ORDER_DATE = TO_DATE(:order_date, 'DD-MM-YYYY')
-                 AND ORDER_TIME = :order_time`,
+                AND ORDER_DATE = TO_DATE(:order_date, 'DD-MM-YYYY')
+                AND ORDER_TIME = :order_time`,
                 { user_id, order_date, order_time }
             );
     
@@ -4742,7 +4806,7 @@ app.post('/addNews', async (req, res) => {
                     WHERE USER_ID = :user_id
                     AND ORDER_DATE = TO_DATE(:order_date, 'DD-MM-YYYY')
                     AND ORDER_TIME = :order_time`,
-                    {user_id, order_date, order_time }
+                    { user_id, order_date, order_time }
                 );
                 console.log(`Deleted existing entries with USER_ID ${user_id} and ORDER_DATE ${order_date}`);
             }
@@ -4750,8 +4814,8 @@ app.post('/addNews', async (req, res) => {
             // Commit the transaction
             await con.commit();
     
-            res.status(201).send("Order Canceled successfully");
-            console.log("Order Canceled successfully");
+            res.status(201).send("Order canceled successfully");
+            console.log("Order canceled successfully");
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
@@ -4765,6 +4829,7 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+    
     
     
 
@@ -4878,8 +4943,6 @@ app.post('/media/favRole', async (req, res) => {
             FROM ROLE 
             JOIN PREFERENCEFORROLE ON ROLE.ROLE_ID = PREFERENCEFORROLE.ROLE_ID
             WHERE PREFERENCEFORROLE.USER_ID = :user_id
-            
-            FETCH FIRST 3 ROWS ONLY
         `;
         const result = await con.execute(favrole, { user_id });
         console.log(`Query Result: `, result.rows);
@@ -4912,7 +4975,7 @@ app.post('/media/favRole', async (req, res) => {
 
 app.post('/media/rolemedia', async (req, res) => {
     const { role_ids } = req.body;  // Expecting role_ids as an array
-    console.log('Received rOLE recommendation request:', { role_ids });
+    console.log('Received ROLE recommendation request:', { role_ids });
     let con;
 
     try {
@@ -4921,152 +4984,53 @@ app.post('/media/rolemedia', async (req, res) => {
             return res.status(500).send("Connection Error");
         }
 
-        // Fetch role details for 1st role
+        let List = [];
 
-        const role1 = role_ids[0];
-        const role2 = role_ids[1];
-        const role3 = role_ids[2];
+        // Loop through each role_id to fetch its details and media
+        for (const role_id of role_ids) {
+            // Fetch role details for current role_id
+            const roleDetailQuery = await con.execute(
+                `SELECT * 
+                FROM ROLE
+                WHERE ROLE_ID = :role_id`,
+                { role_id: role_id }
+            );
 
-        const roledetail1 = await con.execute(
-            `SELECT * 
-            FROM ROLE
-            WHERE ROLE_ID = :role1`,
-            { role1: role1 }
-        );
+            // Fetch media details associated with the current role_id
+            const mediaQuery = await con.execute(
+                `SELECT * 
+                FROM MEDIA
+                JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
+                WHERE ROLE_ID = :role_id`,
+                { role_id: role_id }
+            );
 
-        const media1 = await con.execute(
-            `SELECT * 
-            FROM MEDIA
-            JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
-            WHERE ROLE_ID = :role1`,
-            { role1: role1 }
-        );
+            const roleDetail = roleDetailQuery.rows[0];
 
-        const roledetail2 = await con.execute(
-            `SELECT * 
-            FROM ROLE
-            WHERE ROLE_ID = :role2`,
-            { role2: role2 }
-        );
+            const mediaByRoleId = mediaQuery.rows.map((media) => ({
+                id: media.MEDIA_ID,
+                title: media.TITLE,
+                description: media.DESCRIPTION,
+                rating: media.RATING,
+                ratingCount: media.RATING_COUNT,
+                type: media.TYPE,
+                genre: media.GENRE,
+                trailer: media.TRAILER,
+                img: media.POSTER,
+                duration: media.DURATION,
+                releaseDate: media.RELEASE_DATE,
+                episodes: media.EPISODE
+            }));
 
-        const media2 = await con.execute(
-            `SELECT *
-            FROM MEDIA
-            JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
-            WHERE ROLE_ID = :role2`,
-            { role2: role2 }
-        );
+            // Push the role and its media to the final list
+            List.push({
+                image: roleDetail.IMG,
+                name: roleDetail.NAME,
+                movies: mediaByRoleId
+            });
+        }
 
-        const roledetail3 = await con.execute(
-            `SELECT * 
-            FROM ROLE
-            WHERE ROLE_ID = :role3`,
-            { role3: role3 }
-        );
-
-        const media3 = await con.execute(
-            `SELECT *
-            FROM MEDIA
-            JOIN MEDIAHASROLE ON MEDIA.MEDIA_ID = MEDIAHASROLE.MEDIA_ID
-            WHERE ROLE_ID = :role3`,
-            { role3: role3 }
-        );
-
-        const mediaByRoleId1 = media1.rows.map((media) => ({
-            id: media.MEDIA_ID,
-            title: media.TITLE,
-            description: media.DESCRIPTION,
-            rating: media.RATING,
-            ratingCount: media.RATING_COUNT,
-            type: media.TYPE,
-            genre: media.GENRE,
-            trailer: media.TRAILER,
-            img: media.POSTER,
-            duration: media.DURATION,
-            releaseDate: media.RELEASE_DATE,
-            episodes: media.EPISODE
-        }));
-
-        const mediaByRoleId2 = media2.rows.map((media) => ({
-            id: media.MEDIA_ID,
-            title: media.TITLE,
-            description: media.DESCRIPTION,
-            rating: media.RATING,
-            ratingCount: media.RATING_COUNT,
-            type: media.TYPE,
-            genre: media.GENRE,
-            trailer: media.TRAILER,
-            img: media.POSTER,
-            duration: media.DURATION,
-            releaseDate: media.RELEASE_DATE,
-            episodes: media.EPISODE
-        }));
-
-        const mediaByRoleId3 = media3.rows.map((media) => ({
-            id: media.MEDIA_ID,
-            title: media.TITLE,
-            description: media.DESCRIPTION,
-            rating: media.RATING,
-            ratingCount: media.RATING_COUNT,
-            type: media.TYPE,
-            genre: media.GENRE,
-            trailer: media.TRAILER,
-            img: media.POSTER,
-            duration: media.DURATION,
-            releaseDate: media.RELEASE_DATE,
-            episodes: media.EPISODE
-        }));
-
-        const List = [
-            {
-                image: roledetail1.rows[0].IMG,
-                name: roledetail1.rows[0].NAME,
-                movies: mediaByRoleId1
-            },
-            {
-                image: roledetail2.rows[0].IMG,
-                name: roledetail2.rows[0].NAME,
-                movies: mediaByRoleId2
-            },
-            {
-                image: roledetail3.rows[0].IMG,
-                name: roledetail3.rows[0].NAME,
-                movies: mediaByRoleId3
-            }
-        ];
-
-
-
-
-        // Group media by ROLE_ID
-        // const mediaByRoleId = medias.rows.reduce((acc, media) => {
-        //     if (!acc[media.ROLE_ID]) {
-        //         acc[media.ROLE_ID] = [];
-        //     }
-        //     acc[media.ROLE_ID].push({
-        //         id: media.MEDIA_ID,
-        //         title: media.TITLE,
-        //         description: media.DESCRIPTION,
-        //         rating: media.RATING,
-        //         ratingCount: media.RATING_COUNT,
-        //         type: media.TYPE,
-        //         genre: media.GENRE,
-        //         trailer: media.TRAILER,
-        //         img: media.POSTER,
-        //         duration: media.DURATION,
-        //         releaseDate: media.RELEASE_DATE,
-        //         episodes: media.EPISODE
-        //     });
-        //     return acc;
-        // }, {});
-
-        
-
-
-
-        // Transform the data into the required format for each role
-
-
+        // Log the final result
         console.log(`roleMedia Result: `, List);
 
         if (List.length === 0) {
@@ -5087,6 +5051,7 @@ app.post('/media/rolemedia', async (req, res) => {
         }
     }
 });
+
 
 
 

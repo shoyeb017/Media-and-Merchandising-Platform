@@ -59,7 +59,7 @@ const Cart = () => {
         };
   
       // Send the order data to the backend
-      const response = await fetch('http://localhost:5000/user/order', {
+      const response = await fetch('http://localhost:5000/user/order/confirm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
