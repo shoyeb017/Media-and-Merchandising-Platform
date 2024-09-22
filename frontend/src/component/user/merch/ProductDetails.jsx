@@ -71,9 +71,7 @@ const ProductDetails = () => {
     fetchReviews();
   }, [productId]);
 
-
   const [reviews, setReviews] = useState(product ? product.reviews : []);
-
 
   const onAddToCart = (product, quantity) => {
     if (quantity <= 0) {
@@ -88,11 +86,26 @@ const ProductDetails = () => {
     alert(`${quantity} ${product.NAME}(s) has been added to your cart.`);
   };
 
-  const handleQuantityChange = (amount) => {
-    setQuantity((prevQuantity) => Math.max(prevQuantity + amount, 0));
-  };
+  const minQuantity = 1;
+  const maxQuantity = product ? product.QUANTITY : 0;
 
-  if (!product) return <div style={{color: 'white'}}>Product not found</div>;
+const handleQuantityChange = (change) => {
+  setQuantity((prevQuantity) => {
+    const newQuantity = prevQuantity + change;
+    if (newQuantity < minQuantity) {
+      return minQuantity;
+    } else if (newQuantity > maxQuantity) {
+      return maxQuantity;
+    } else {
+      return newQuantity;
+    }
+  });
+};
+
+  if (!product) return <div style={{ color: 'white' }}>Product not found</div>;
+
+
+  
 
   return (
     <div className="product-details">
@@ -103,13 +116,18 @@ const ProductDetails = () => {
         <p className="product-details-price">${product.PRICE}</p>
         <p className="product-details-description">{product.DESCRIPTION}</p>
 
-        <div className="quantity-selector">
-          <button onClick={() => handleQuantityChange(-1)}>-</button>
-          <span>{quantity}</span>
-          <button onClick={() => handleQuantityChange(1)}>+</button>
-        </div>
-
-        <button onClick={() => onAddToCart(product, quantity)}>Add to Cart</button>
+        {product.QUANTITY > 0 ? (
+          <div className="quantity-add-to-cart">
+            <div className="quantity-selector">
+              <button onClick={() => handleQuantityChange(-1)}>-</button>
+              <span>{quantity}</span>
+              <button onClick={() => handleQuantityChange(1)}>+</button>
+            </div>
+            <button onClick={() => onAddToCart(product, quantity)}>Add to Cart</button>
+          </div>
+        ) : (
+          <p className="out-of-stock">Out of Stock</p>
+        )}
       </div>
 
       <div className="reviews-section">
@@ -118,8 +136,6 @@ const ProductDetails = () => {
         {reviews.map((review, index) => (
           <ReviewCard key={index} review={review} />
         ))}
-
-        
       </div>
     </div>
   );

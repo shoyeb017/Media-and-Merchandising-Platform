@@ -174,3 +174,8 @@
     white-space: warp;
   } */
 
+.out-of-stock{
+  color: red;
+  font-size: 20px;
+  margin-top: 20px;
+}

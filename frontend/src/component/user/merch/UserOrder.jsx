@@ -185,8 +185,10 @@ const Order = () => {
                   <div className="order-details1-upper">
                   {order.DELIVERY_STATUS === 'PENDING' ? (
                     <div className="order-details1-status"><i className="fa fa-clock"></i><strong>PENDING</strong></div>
-                  ) : order.DELIVERY_STATUS === 'TO SHIP' ? (
-                    <div className="order-details1-status"><i className="fa fa-truck"></i><strong>TO SHIP</strong></div>
+                  ) : order.DELIVERY_STATUS === 'PROCESSING' ? (
+                    <div className="order-details1-status"><i className="fa fa-truck"></i><strong>PROCESSING</strong></div>
+                  ) : order.DELIVERY_STATUS === 'SHIPPED' ? (
+                    <div className="order-details1-status"><i className="fa fa-truck"></i><strong>SHIPPED</strong></div>
                   ) : (
                     <div className="order-details1-status"><i className="fa fa-check"></i><strong>DELIVERED</strong></div>
                   )}
