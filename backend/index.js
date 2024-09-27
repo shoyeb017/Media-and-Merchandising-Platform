@@ -69,67 +69,94 @@ oracledb.createPool({
         const { username, password, name, dob, email, city, street, house, phone, genres } = req.body;
         console.log('Received user registration request:', { username, password, name, dob, email, city, street, house, phone, genres });
     
+        // Generate IDs
         const user_id = generateUserId(username);
         console.log('Generated User ID:', user_id);
-        const login_id = generateLoginId(username, password); // Login ID is generated here in Node.js
+        const login_id = generateLoginId(username, password); // Generate Login ID in Node.js
         console.log('Generated Login ID:', login_id);
     
         let con;
         try {
             con = await pool.getConnection();
             if (!con) {
-                res.status(500).send("Connection Error");
-                return;
+                return res.status(500).send("Connection Error");
             }
+    
+            // Ensure DOB is in the correct format (YYYY-MM-DD)
+            const formattedDob = new Date(dob).toISOString().split('T')[0]; // Example conversion
     
             // Define bind parameters for calling the stored procedure
             const bindParams = {
                 p_username: username,
                 p_password: password,
                 p_name: name,
-                p_dob: dob,
+                p_dob: formattedDob, // Use the formatted DOB here
                 p_email: email,
                 p_city: city,
                 p_street: street,
                 p_house: house,
                 p_phone: phone,
-                p_genres: genres.join(','),
+                p_genres: genres.join(','),  // Assuming genres is an array, join it into a string
                 p_login_id: login_id,  // Pass the generated login_id as an input parameter
-                p_user_id: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }
+                p_user_id: { type: oracledb.NUMBER, dir: oracledb.BIND_OUT }  // Output parameter for user ID
             };
     
-            // Call the stored procedure using a cursor
+            // Execute the stored procedure
             const result = await con.execute(
                 `BEGIN 
-                   RegisterUser(
-                     :p_username, :p_password, :p_name, TO_DATE(:p_dob, 'YYYY-MM-DD'), :p_email, :p_city, :p_street, :p_house, :p_phone, 
-                     :p_genres, :p_login_id, :p_user_id
-                   );
-                 END;`,
+                    RegisterUser(
+                        :p_username, :p_password, :p_name, TO_DATE(:p_dob, 'YYYY-MM-DD'), :p_email, :p_city, :p_street, :p_house, :p_phone, 
+                        :p_genres, :p_login_id, :p_user_id
+                    );
+                END;`,
                 bindParams
             );
     
             const userId = result.outBinds.p_user_id;
             console.log(`User registered with User ID: ${userId} and Login ID: ${login_id}`);
     
-            // Respond with success
-            res.status(201).send("User registered successfully");
-    
             // Commit the transaction
             await con.commit();
+            console.log("Transaction committed successfully.");
+    
+            // Respond with success
+            res.status(201).json({
+                message: `User registered successfully.`,
+                userId: userId,
+                loginId: login_id
+            });
+    
         } catch (err) {
-            console.error("Error during database query: ", err);
-            res.status(500).send("Internal Server Error");
+            // Handle errors during the query execution
+            console.error("Error during database operation: ", err);
+    
+            // Attempt to roll back the transaction if there is a failure
+            if (con) {
+                try {
+                    await con.rollback();
+                    console.log("Transaction rolled back due to error.");
+                } catch (rollbackErr) {
+                    console.error("Error during transaction rollback: ", rollbackErr);
+                }
+            }
+    
+            // Send the error response with more details
+            res.status(500).json({ message: "Internal Server Error. Unable to register user.", error: err.message });
+    
         } finally {
+            // Ensure the connection is closed
             if (con) {
                 try {
                     await con.close();
-                } catch (err) {
-                    console.error("Error closing database connection: ", err);
+                    console.log("Database connection closed.");
+                } catch (closeErr) {
+                    console.error("Error closing the database connection: ", closeErr);
                 }
             }
         }
     });
+    
+    
     
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -221,21 +248,50 @@ oracledb.createPool({
     
             console.log('Checking username availability:', username);
     
-            const checkUserResult = await con.execute(
-                `SELECT COUNT(*) AS count FROM USERS WHERE USER_NAME = :username`,
-                { username }
-            );
-            console.log('Query Result: ${JSON.stringify(checkUserResult.rows)}');
+            // Define the PL/SQL block with a cursor for checking the username
+            const plsql = `
+            DECLARE
+                CURSOR username_cursor IS
+                    SELECT COUNT(*) AS count FROM USERS WHERE USER_NAME = :username;
+                username_count NUMBER;
+            BEGIN
+                OPEN username_cursor;
+                FETCH username_cursor INTO username_count;
+
+                IF username_count > 0 THEN
+                    :result := 'exists';
+                ELSE
+                    :result := 'available';
+                END IF;
+
+                CLOSE username_cursor;
+
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                    :result := 'available';  -- Handle the case where no data is found
+                WHEN OTHERS THEN
+                    :result := 'error';  -- Generic error handling
+                    RAISE_APPLICATION_ERROR(-20003, 'An unexpected error occurred while checking the username.');
+            END;
+            `;
     
-            const userCount = checkUserResult.rows[0].COUNT;
+            // Execute the PL/SQL block with bind variables
+            const bindVars = {
+                username,
+                result: { dir: oracledb.BIND_OUT, type: oracledb.STRING }
+            };
+            console.log('cursor working');
     
-            console.log('User Count:', userCount);
+            const result = await con.execute(plsql, bindVars);
     
-            if (userCount > 0) {
+            console.log('Cursor result:', result.outBinds.result);
+    
+            if (result.outBinds.result === 'exists') {
                 res.status(409).send("Username already exists");
             } else {
                 res.status(200).send("Username available");
             }
+    
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
@@ -249,6 +305,7 @@ oracledb.createPool({
             }
         }
     });
+    
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -270,21 +327,50 @@ oracledb.createPool({
     
             console.log('Checking username availability:', username);
     
-            const checkUserResult = await con.execute(
-                `SELECT COUNT(*) AS count FROM MERCHANDISER WHERE USER_NAME = :username`,
-                { username }
-            );
-            console.log('Query Result: ${JSON.stringify(checkUserResult.rows)}');
+            // Define the PL/SQL block with a cursor for checking the username
+            const plsql = `
+            DECLARE
+                CURSOR merch_cursor IS
+                    SELECT COUNT(*) AS count FROM MERCHANDISER WHERE USER_NAME = :username;
+                merch_count NUMBER;
+            BEGIN
+                OPEN merch_cursor;
+                FETCH merch_cursor INTO merch_count;
+
+                IF merch_count > 0 THEN
+                    :result := 'exists';
+                ELSE
+                    :result := 'available';
+                END IF;
+
+                CLOSE merch_cursor;
+
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                    :result := 'available';  -- If no data is found, we assume the username is available (shouldn't happen with COUNT)
+                WHEN OTHERS THEN
+                    :result := 'error';  -- For any other exceptions, set result to 'error'
+                    RAISE_APPLICATION_ERROR(-20002, 'An unexpected error occurred while checking merchandiser username.');
+            END;
+            `;
     
-            const userCount = checkUserResult.rows[0].COUNT;
+            // Execute the PL/SQL block with bind variables
+            const bindVars = {
+                username,  // Input bind for username
+                result: { dir: oracledb.BIND_OUT, type: oracledb.STRING }  // Output bind for result
+            };
     
-            console.log('User Count: ${userCount}');
+            const result = await con.execute(plsql, bindVars);
     
-            if (userCount > 0) {
+            console.log('Cursor result:', result.outBinds.result);
+    
+            // Return the appropriate response based on the cursor result
+            if (result.outBinds.result === 'exists') {
                 res.status(409).send("Username already exists");
             } else {
                 res.status(200).send("Username available");
             }
+    
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
@@ -298,6 +384,7 @@ oracledb.createPool({
             }
         }
     });
+    
 
 
 
@@ -320,21 +407,50 @@ oracledb.createPool({
     
             console.log('Checking username availability:', username);
     
-            const checkUserResult = await con.execute(
-                `SELECT COUNT(*) AS count FROM COMPANY WHERE USER_NAME = :username`,
-                { username }
-            );
-            console.log('Query Result: ${JSON.stringify(checkUserResult.rows)}');
+            // Define the PL/SQL block with a cursor for checking the company username
+            const plsql = `
+            DECLARE
+                CURSOR company_cursor IS
+                    SELECT COUNT(*) AS count FROM COMPANY WHERE USER_NAME = :username;
+                company_count NUMBER;
+            BEGIN
+                OPEN company_cursor;  -- Open the cursor
+                FETCH company_cursor INTO company_count;  -- Fetch the count into company_count
+
+                IF company_count > 0 THEN
+                    :result := 'exists';  -- Set output result if username exists
+                ELSE
+                    :result := 'available';  -- Set output result if username is available
+                END IF;
+
+                CLOSE company_cursor;  -- Close the cursor
+
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                    :result := 'available';  -- Handle case where no data is found (shouldn't occur with COUNT)
+                WHEN OTHERS THEN
+                    :result := 'error';  -- Handle any other exceptions
+                    RAISE_APPLICATION_ERROR(-20001, 'An unexpected error occurred while checking username.');
+            END;
+            `;
     
-            const userCount = checkUserResult.rows[0].COUNT;
+            // Execute the PL/SQL block with bind variables
+            const bindVars = {
+                username,  // Input bind for username
+                result: { dir: oracledb.BIND_OUT, type: oracledb.STRING }  // Output bind for result
+            };
     
-            console.log('User Count: ${userCount}');
+            const result = await con.execute(plsql, bindVars);
     
-            if (userCount > 0) {
+            console.log('Cursor result:', result.outBinds.result);
+    
+            // Return the appropriate response based on the cursor result
+            if (result.outBinds.result === 'exists') {
                 res.status(409).send("Username already exists");
             } else {
                 res.status(200).send("Username available");
             }
+    
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
@@ -348,6 +464,7 @@ oracledb.createPool({
             }
         }
     });
+    
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE FOR COMPANY REGISTRATION
@@ -414,7 +531,7 @@ oracledb.createPool({
     
     
 
-        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // Login route for ADMIN
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -681,42 +798,57 @@ app.post('/profile/admin', async (req, res) => {
 // route for USER PROFILE
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    app.post('/profile/user', async (req, res) => {
-        const { user_id } = req.body;
-        console.log('Received user profile request:', { user_id });
-        let con;
-        try {
-            con = await pool.getConnection();
-            if (!con) {
-                res.status(500).send("Connection Error");
-                return;
-            }
+app.post('/profile/user', async (req, res) => {
+    const { user_id } = req.body;
+    console.log('Received user profile request:', { user_id });
 
-            const result = await con.execute(
-                `SELECT * FROM USERS WHERE USER_ID = :user_id`,
-                { user_id } // Named bind variables
-            );
-            console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+    let con;
+    try {
+        // Get connection from the pool
+        con = await pool.getConnection();
+        if (!con) {
+            return res.status(500).send("Connection Error");
+        }
 
-            if (result.rows.length) {
-                res.send(result.rows[0]);
-                console.log("User Data sent");
-            } else {
-                res.status(404).send("User not found");
-            }
-        } catch (err) {
-            console.error("Error during database query: ", err);
-            res.status(500).send("Internal Server Error");
-        } finally {
-            if (con) {
-                try {
-                    await con.close();
-                } catch (err) {
-                    console.error("Error closing database connection: ", err);
-                }
+        // Execute the query to get user details
+        const result = await con.execute(
+            `SELECT USER_NAME, 
+                    NAME, 
+                    DOB, 
+                    EMAIL, 
+                    PHONE, 
+                    TREAT(ADDRESS AS address_type).city AS CITY,
+                    TREAT(ADDRESS AS address_type).street AS STREET,
+                    TREAT(ADDRESS AS address_type).house AS HOUSE
+             FROM USERS WHERE USER_ID = :user_id`,
+            { user_id } // Named bind variables
+        );
+
+        console.log(`Query Result: ${JSON.stringify(result.rows)}`);
+
+        if (result.rows.length) {
+            // Send back the user data
+            res.json(result.rows[0]);
+            console.log("User Data sent");
+        } else {
+            // If no user was found, return 404
+            res.status(404).send("User not found");
+        }
+    } catch (err) {
+        console.error("Error during database query:", err);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        // Close the connection after the request is handled
+        if (con) {
+            try {
+                await con.close();
+            } catch (err) {
+                console.error("Error closing database connection:", err);
             }
         }
-    });
+    }
+});
+
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // route for USER PROFILE UPDATE
