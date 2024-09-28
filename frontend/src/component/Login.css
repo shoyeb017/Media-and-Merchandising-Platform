@@ -17,7 +17,7 @@
 /* Left to right clouds */
 .cloud1 {
   top: 10%;
-  left: -150px; /* Start off-screen *
+  left: -150px; /* Start off-screen */
   animation: floatLeftToRight 15s linear infinite;
 
   width: 340px; /* Adjust the size of clouds */

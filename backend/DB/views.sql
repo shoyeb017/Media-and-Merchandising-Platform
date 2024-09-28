@@ -96,7 +96,9 @@ FROM
 ORDER BY 
     RATING DESC;
 
-    CREATE OR REPLACE VIEW USER_ORDER_LIST AS
+
+
+CREATE OR REPLACE VIEW USER_ORDER_LIST AS
 SELECT 
     ORDER_DATE, 
     ORDER_TIME, 
@@ -151,5 +153,3 @@ JOIN
 JOIN 
     MEDIA M ON NTM.MEDIA_ID = M.MEDIA_ID;
 
-
-select 'drop table '||table_name||' cascade constraints;' from user_tables;
