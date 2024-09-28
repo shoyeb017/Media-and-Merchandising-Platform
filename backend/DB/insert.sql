@@ -2685,10 +2685,10 @@ AND
 -------------------------------------------------------------------------------------------------------------------------------, 0, 0-
 
 INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
-VALUES (100, 6);
+VALUES (100, 3);
 
 INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
-VALUES (101, 6);
+VALUES (101, 4);
 
 INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
 VALUES (102, 7);

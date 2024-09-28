@@ -1,0 +1,150 @@
+.rolelist-section {
+    margin-top: 60px;
+}
+
+.rolelist-section-header {
+    display: flex;
+    flex-direction: column;
+    background-color: #141519;
+    align-content: center;
+
+    padding-top: 28px;
+    padding-bottom: 35px;
+
+    margin-bottom: 50px;
+}
+
+.rolelist-section-header-search-bar {
+
+    background-color: transparent;
+    color: white;
+    border-bottom: 2px solid #4d5059;
+    border-right: 0px;
+    border-left: 0px;
+    border-top: 0px;
+
+    padding: 6px;
+
+    font-size: 25px;
+    font-weight: 200;
+    margin: 0px 350px;
+    outline: none;
+}
+
+.rolelist-section-header-search-bar:focus {
+    border-bottom: 2px solid #ff640a;
+}
+
+
+.role-type22-title {
+    margin-top: 20px;
+    text-align: top;
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0px 350px;
+    margin-top: 20px;
+}
+
+.role-type22-buttons {
+    display: flex;
+    margin: 0px 350px;
+    margin-top: 10px;
+}
+
+.role-type22-btn {
+    padding: 6px 8px;
+    background-color: #141519;
+    color: #a0a0a0;
+    border: 2px solid #59595b;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 15px;
+    font-size: 13px;
+}
+
+.role-type22-btn:hover {
+    color: #ff640a;
+    border-color: #ff640a;
+}
+
+.role-type22-btn.selected {
+    color: #ff640a;
+    border-color: #ff640a;
+}
+
+.view-role-add-role-button {
+    background-color: transparent;
+    color: #ff640a;
+    border: 1px solid #ff640a;
+    width: fit-content;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 120px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.rolelist-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 cards per row */
+    gap: 20px;
+    /* Space between the cards */
+    justify-items: center;
+    /* Center the cards horizontally */
+    align-items: start;
+    /* Align cards to the top */
+    padding: 0 150px;
+    /* Optional: Add padding for responsiveness */
+}
+
+.admin-role-card {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 10px;
+    color: white;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    /* Set a max-width for the cards */
+    height: auto;
+    background-color: #1d1f24;
+    /* Optional: Add background color to cards */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* Optional: Add box-shadow for depth */
+    transition: transform 0.3s ease-in-out;
+    /* Optional: Smooth hover effect */
+}
+
+.admin-role-card:hover {
+    transform: translateY(-5px);
+    /* Hover effect: Lift card */
+}
+
+.admin-role-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-right: 20px;
+}
+
+.admin-role-info h4 {
+    margin: 0 0 5px;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.admin-role-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #797e8f;
+    white-space: nowrap;
+    overflow: hidden;
+}

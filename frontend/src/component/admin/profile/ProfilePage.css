@@ -1,52 +1,91 @@
-.profile-page {
-    width: 50%;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color:#505053 ;
-    color: white;
-  }
+.profile-page2 {
+  width: 30%;
+  background-color: #141519;
+  color: white;
 
-  .profile-page h2 {
-    margin-bottom: 20px;
-    color: white;
-  }
+  margin-top: 170px;
+  margin-left: 35%;
+}
 
-  .profile-info {
-    margin-bottom: 15px;
-  }
+.profile-page2-Profile {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+}
 
-  .profile-info label {
-    font-weight: bold;
-  }
+.profile-page2 i {
+  font-size: 100px;
+  margin-top: -60px;
+  margin-left: 160px;
+  color: white;
+}
 
-  .profile-info span {
-    margin-left: 10px;
-  }
+.profile-info2-container {
+  padding: 20px;
 
-  .profile-info input {
-    margin-left: 10px;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-  }
+}
 
-  .profile-buttons {
-    text-align: right;
-  }
+.profile-info2 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
 
-  .profile-buttons button {
-    padding: 8px 12px;
-    background-color: #ffdd95;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+.profile-info2 label {
+  font-weight: 400;
+  color: #8d979a;
+  font-size: 12px;
+}
 
-  .profile-buttons button:hover {
-    background-color: #505053;
-    color: #ffdd95;
-  }
+.profile-info2 span {
+  margin-left: 10px;
+}
+
+.profile-info2 input {
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid #ddd;
+
+  background-color: transparent;
+  color: white;
+  border-bottom: 2px solid #8d979a;
+  border-right: 0px;
+  border-left: 0px;
+  border-top: 0px;
+  outline: none;
+
+  -webkit-appearance: none;
+  /* Remove default styling in WebKit browsers */
+  -moz-appearance: none;
+  /* Remove default styling in Firefox */
+  appearance: none;
+  /* Remove default styling in other browsers */
+}
+
+.profile-info2 input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  /* Make the calendar icon white */
+}
+
+.profile-info2 input:focus {
+  border-bottom: 2px solid #ff640a;
+}
+
+.profile-buttons2 {
+  text-align: right;
+}
+
+.profile-buttons2 button {
+  padding: 8px 12px;
+  background-color: #ff640a;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-buttons2 button:hover {
+  background-color: transparent;
+  color: #ff640a;
+  border: 2px solid #ff640a;
+}

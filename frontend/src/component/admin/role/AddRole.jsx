@@ -1,37 +1,38 @@
-import React, { useState } from 'react';
-import { ref, uploadBytes, getDownloadURL, storage } from '../../../firebase';
+// AddRole.js
+import React, { useState } from "react";
+import { ref, uploadBytes, getDownloadURL, storage } from "../../../firebase";
 import { v4 } from "uuid";
-import './AddRole.css';
+import "./AddRole.css";
 
-const AddRole = () => {
+const AddRole = ({ onClose }) => {
   const [roleData, setRoleData] = useState({
-    name: '',
-    roleType: '',
+    name: "",
+    roleType: "",
     img: null,
-    imgUrl: ''
+    imgUrl: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setRoleData(prevData => ({
+    setRoleData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
       const image = e.target.files[0];
-      setRoleData(prevData => ({
+      setRoleData((prevData) => ({
         ...prevData,
-        img: image
+        img: image,
       }));
 
       const reader = new FileReader();
       reader.onload = () => {
-        setRoleData(prevData => ({
+        setRoleData((prevData) => ({
           ...prevData,
-          imgUrl: reader.result
+          imgUrl: reader.result,
         }));
       };
       reader.readAsDataURL(image);
@@ -41,7 +42,7 @@ const AddRole = () => {
   const validateForm = () => {
     const { name, roleType, img } = roleData;
     if (!name || !roleType || !img) {
-      alert('Please fill out all fields.');
+      alert("Please fill out all fields.");
       return false;
     }
     return true;
@@ -49,74 +50,64 @@ const AddRole = () => {
 
   const handleUpload = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    if (!roleData.img) {
-      alert('Please upload an image.');
-      return;
-    }
+    if (!validateForm()) return;
 
     try {
-      // Upload the image and get the URL
       const imageRef = ref(storage, `roles/${roleData.img.name + v4()}`);
       await uploadBytes(imageRef, roleData.img);
       const url = await getDownloadURL(imageRef);
-      console.log("Image URL:", url);
 
-      // Construct the data to be sent to the server
       const updatedFormData = {
         name: roleData.name,
         roleType: roleData.roleType,
-        imgUrl: url, // Include the uploaded image URL
+        imgUrl: url,
       };
 
-      console.log('Form data:', updatedFormData);
-
-      // Send the form data to the backend
-      const response = await fetch('http://localhost:5000/admin/addrole', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/admin/addrole", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedFormData),
       });
 
       if (response.status === 201) {
-        setRoleData({
-          name: '',
-          roleType: '',
-          img: null,
-          imgUrl: ''
-        });
-        alert('Role added successfully!');
-        // window.location.reload();
+        setRoleData({ name: "", roleType: "", img: null, imgUrl: "" });
+        alert("Role added successfully!");
+        onClose(); // Close the modal after successful submission
       } else {
-        const errorData = await response.json();
-        console.error('Error during adding:', errorData);
-        alert('An error occurred during adding. Please try again.');
+        alert("An error occurred. Please try again.");
       }
     } catch (error) {
-      console.error('Error during adding:', error);
-      alert('An error occurred during adding. Please try again.');
+      console.error("Error:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
   return (
-    <div>
-      <h3 className="title-addrole">Add Role</h3>
-      <div className="role-form">
-        <form>
-          <div className="form-group">
-            <label>Name:</label>
-            <input type="text" name="name" value={roleData.name} onChange={handleChange} />
+    <div className="addrole-modal">
+      <div className="addrole-modal-content">
+        <button className="addrole-close-btn" onClick={onClose}>
+        <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h3 className="title-addrole">Add Role</h3>
+        <form onSubmit={handleUpload}>
+          <div className="form-group22">
+            <p className="form-group22-label">Name</p>
+            <input
+              type="text"
+              name="name"
+              value={roleData.name}
+              onChange={handleChange}
+            />
           </div>
-
-          <div className="form-group">
-            <label>Role Type:</label>
-            <select name="roleType" value={roleData.roleType} onChange={handleChange}>
+          <div className="form-group22">
+            <p className="form-group22-label">Role Type</p>
+            <select
+              name="roleType"
+              value={roleData.roleType}
+              onChange={handleChange}
+            >
               <option value="">Select Role Type</option>
               <option value="DIRECTOR">Director</option>
               <option value="PRODUCER">Producer</option>
@@ -125,14 +116,20 @@ const AddRole = () => {
               <option value="ACTRESS">Actress</option>
             </select>
           </div>
-
-          <label className="upload-image-label">Upload Image:</label>
-          <div className="image-upload">
+          <p className="form-group22-label">Upload Image</p>
+          <div className="image-upload2">
             <input type="file" accept="image/*" onChange={handleImageChange} />
-            {roleData.imgUrl && <img src={roleData.imgUrl} alt="Preview" className="image-preview" />}
+            {roleData.imgUrl && (
+              <img
+                src={roleData.imgUrl}
+                alt="Preview"
+                className="image-preview2"
+              />
+            )}
           </div>
-
-          <button className="submit-button" type="button" onClick={handleUpload}>Submit</button>
+          <button type="submit" className="submit-button22">
+            Submit
+          </button>
         </form>
       </div>
     </div>

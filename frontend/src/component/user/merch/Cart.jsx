@@ -93,7 +93,7 @@ const Cart = () => {
   return (
     <div className="cart">
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p style={{ fontSize: "30px", color: "white",textAlign: "center" }}>Your cart is empty.</p>
       ) : (
         <div className="cart-all-section">
           <div className="cart-section-left">

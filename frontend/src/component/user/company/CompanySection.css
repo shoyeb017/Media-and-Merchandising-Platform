@@ -1,95 +1,95 @@
 .company-section {
-    margin-top: 60px;
-  }
+  margin-top: 60px;
+}
 
-  .company-section-header {
-    display: flex;
-    flex-direction: column;
-    background-color: #141519;
-    align-content: center;
+.company-section-header {
+  display: flex;
+  flex-direction: column;
+  background-color: #141519;
+  align-content: center;
 
-    padding-top: 28px;
-    padding-bottom: 35px;
+  padding-top: 28px;
+  padding-bottom: 35px;
 
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 
-  }
+}
 
-  .company-section-header input[type="text"] {
+.company-section-header input[type="text"] {
 
-    background-color: transparent;
-    color: white;
-    border-bottom: 2px solid #4d5059;
-    border-right: 0px;
-    border-left: 0px;
-    border-top: 0px;
+  background-color: transparent;
+  color: white;
+  border-bottom: 2px solid #4d5059;
+  border-right: 0px;
+  border-left: 0px;
+  border-top: 0px;
 
-    padding: 6px;
+  padding: 6px;
 
-    font-size: 25px;
-    font-weight: 200;
-    margin: 0px 350px;
-    outline: none;
-  }
+  font-size: 25px;
+  font-weight: 200;
+  margin: 0px 350px;
+  outline: none;
+}
 
-  .company-section-header input[type="text"]:focus {
-    border-bottom: 2px solid #ff640a;
-  }
+.company-section-header input[type="text"]:focus {
+  border-bottom: 2px solid #ff640a;
+}
 
-  .search-button {
-    font-size: 18px;
-    font-weight: bold;
+.search-button {
+  font-size: 18px;
+  font-weight: bold;
 
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #ffdd95;
-    color: black;
-    transition: background-color 0.3s;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ffdd95;
+  color: black;
+  transition: background-color 0.3s;
 
-    margin: 20px 1090px 20px 40px;
-  }
+  margin: 20px 1090px 20px 40px;
+}
 
-  .search-button:hover {
-    background-color: black;
-    color: #ffdd95;
-  }
+.search-button:hover {
+  background-color: black;
+  color: #ffdd95;
+}
 
-  .company-list11 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: 20px;
-    column-gap: 0px;
-    justify-content: center;
-    margin: 25px 240px 80px 270px;
-  }
+.company-list11 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 20px;
+  column-gap: 0px;
+  justify-content: center;
+  margin: 25px 240px 80px 270px;
+}
 
 
 
-  .company-card {
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
-    width: 295px;
-    height: 250px;
-    text-align: center;
-    font-family: arial;
+.company-card {
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  width: 295px;
+  height: 250px;
+  text-align: center;
+  font-family: arial;
 
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
 
-  .company-card-content-upper {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
+.company-card-content-upper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
 
-    background-color: #141519;
-    height: 85%;
+  background-color: #141519;
+  height: 85%;
 
-    padding: 15px 15px;
-    opacity: 0;
-  }
+  padding: 15px 15px;
+  opacity: 0;
+}
 
 
 .company-card-title1 {
@@ -130,54 +130,52 @@
 }
 
 
-  .company-card:hover .company-card-content-upper {
-   opacity: 1;
-  }
+.company-card:hover .company-card-content-upper {
+  opacity: 1;
+}
 
-  .company-card:hover .company-card-desc {
-    
-  }
+.company-card:hover .company-card-desc {}
 
-  .company-card-img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+.company-card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 
-    transition: 1s all ease-in-out;
-  }
+  transition: 1s all ease-in-out;
+}
 
-  .company-card-title {
-    max-width: 100%;
-    font-size: 14px;
-    font-weight: 200;
-    text-align: left;
-    color: white;
-    margin-top: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: 1s all ease-in-out;
-  }
+.company-card-title {
+  max-width: 100%;
+  font-size: 14px;
+  font-weight: 200;
+  text-align: left;
+  color: white;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 1s all ease-in-out;
+}
 
-  .company-card-email {
-    max-width: 100%;
-    font-size: 12px;
-    font-weight: 200;
-    text-align: left;
-    color: #a0a1a1;
-    margin-top: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: 1s all ease-in-out;
-  }
+.company-card-email {
+  max-width: 100%;
+  font-size: 12px;
+  font-weight: 200;
+  text-align: left;
+  color: #a0a1a1;
+  margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 1s all ease-in-out;
+}
 
-  .company-card-desc {
-    max-height: 180px;
-    overflow: hidden;
-    border-radius: 5px;
-    color: white;
-    font-size: 14px;
+.company-card-desc {
+  max-height: 180px;
+  overflow: hidden;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
 
-    text-align: left;
-  }
+  text-align: left;
+}

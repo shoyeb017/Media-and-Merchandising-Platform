@@ -38,7 +38,7 @@ function Navbar() {
     <div className={`navbar ${isScrolled ? "scrolled" : ""}`}>
       <div className="navbar-container1">
         <div className="logo-container1">
-          <p className="logo-title">MMP</p>
+          <p className="logo-title1">MMP</p>
         </div>
         <div className="menu-container1">
           <ul className="menu-list1">
@@ -77,7 +77,7 @@ function Navbar() {
         <Notification />
         <button className="orders-btn">
           <Link to={`/${username}/merch/order`} className="order-button">
-          <i class="fa-solid fa-truck-fast"></i>{" "}
+            <i class="fa-solid fa-truck-fast"></i>{" "}
             {/* Replace with the desired FontAwesome icon */}
           </Link>
         </button>

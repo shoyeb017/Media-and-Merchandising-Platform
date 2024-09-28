@@ -1,46 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import './UserList.css';
+import React, { useState, useEffect } from "react";
+import "./UserList.css";
 
-
-
-const UserListCard = ({data}) => {
+const UserListCard = ({ data }) => {
   return (
-      <div className="userlist-card">
-          <h3 className="userlist-card-username">{data.USER_NAME}</h3>
-          <h3 className="userlist-card-name">{data.NAME}</h3>
-          <p className="userlist-card-email">{data.EMAIL}</p>
-      </div>
+    <div className="userlist-card">
+      <h3 className="userlist-card-username">{data.USER_NAME}</h3>
+      <h3 className="userlist-card-name">{data.NAME}</h3>
+      <p className="userlist-card-email">{data.EMAIL}</p>
+    </div>
   );
 };
 
-
 function UserList() {
   const [users, setUsers] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const fetchUserlist= async () => {
+    const fetchUserlist = async () => {
       try {
-        const response = await fetch('http://localhost:5000/userlist',
-          { 
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' } 
-          }
-        );
+        const response = await fetch("http://localhost:5000/userlist", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
         if (response.ok) {
           const data = await response.json();
           setUsers(data);
         } else {
-          alert('Failed to fetch userlist');
+          alert("Failed to fetch userlist");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
     fetchUserlist();
   }, []);
-  const filteredusers = users.filter(data =>
+  const filteredusers = users.filter((data) =>
     data.USER_NAME.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -58,12 +53,12 @@ function UserList() {
       </div>
 
       <div className="userlist-list">
-        {filteredusers.map(data => (
+        {filteredusers.map((data) => (
           <UserListCard key={data.USER_ID} data={data} />
         ))}
       </div>
     </div>
   );
-  };
+}
 
-  export default UserList;  
+export default UserList;

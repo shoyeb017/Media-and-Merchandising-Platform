@@ -1,112 +1,118 @@
-
 .companylist-card {
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
-    width:auto;
-    height: 70px;
-    background-color: #3a3a3e;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  width: auto;
+  height: 70px;
+  background-color: #141519;
 
-    margin: 2px 120px;
-    border-radius: 5px;
+  margin: 2px 120px;
 
-    display: flex;
-    flex-direction:row;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 
-  }
+}
 
-  .companylist-card-username {
+.companylist-card-username {
 
-    width: 100px;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: left;
-    color: #ffdd95;
-    border-right: 2px solid #ffdd95;
+  width: 100px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  color: #ff640a;
+  border-right: 2px solid #ff640a;
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    margin-left: 15px;
-    padding-right: 15px;
-  }
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-left: 15px;
+  padding-right: 15px;
+}
 
-  .companylist-card-img {
-    width: 75px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
+.companylist-card-img {
+  width: 75px;
+  height: 60px;
+  object-fit: cover;
 
-    margin-left: 10px;
-    margin-top: 5px;
-  }
+  margin-left: 10px;
+  margin-top: 5px;
+}
 
 
-  .companylist-card-name {
+.companylist-card-name {
 
-    width: 150px;
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
+  width: 150px;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
 
-    white-space: wrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-    display: flex;
-    justify-content: left;
-    text-align: left;
-    align-items: center;
-    margin-left: 15px;
-  }
+  display: flex;
+  justify-content: left;
+  text-align: left;
+  align-items: center;
+  margin-left: 15px;
+}
 
-  .companylist-card-email {
-  
-    max-width: 100%;
-    font-size: 15px;
-    font-weight: bold;
-    color: white;
+.companylist-card-email {
 
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  max-width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
 
-    display: flex;
-    justify-content: left;
-    text-align: left;
-    align-items: center;
-    margin-left: 15px;
-  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-  .companylist-section {
-    margin-top: auto;
-  }
+  display: flex;
+  justify-content: left;
+  text-align: left;
+  align-items: center;
+  margin-left: 15px;
+}
 
-  .companylist-section-header {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #3a3a3e;
+.companylist-section {
+  margin-top: 60px;
+}
 
-    margin: 50px 120px 80px 120px;
-    border-radius: 20px;
-    padding-top: 10px;
-    align-content: center;
-  }
+.companylist-section-header {
+  display: flex;
+  flex-direction: column;
+  background-color: #141519;
+  align-content: center;
 
-  .companylist-section-header-search-bar {
-    
-    background-color: #3a3a3e;
-    color: white;
-    border: 2px solid #4d5059;
+  padding-top: 28px;
+  padding-bottom: 35px;
 
-    padding: 10px;
-    border-radius: 5px;
-    box-sizing: border-box;
+  margin-bottom: 50px;
+}
 
-    margin: 10px 40px 20px 40px;
-  }
+.companylist-section-header-search-bar {
+
+  background-color: transparent;
+  color: white;
+  border-bottom: 2px solid #4d5059;
+  border-right: 0px;
+  border-left: 0px;
+  border-top: 0px;
+
+  padding: 6px;
+
+  font-size: 25px;
+  font-weight: 200;
+  margin: 0px 350px;
+  outline: none;
+}
+
+
+.companylist-section-header-search-bar:focus {
+  border-bottom: 2px solid #ff640a;
+}
