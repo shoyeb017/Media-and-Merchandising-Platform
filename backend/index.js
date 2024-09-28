@@ -858,51 +858,71 @@ app.post('/profile/user', async (req, res) => {
     app.post('/profile/user/update', async (req, res) => {
         const { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE } = req.body;
         console.log('Received user profile update request:', { user_id, NAME, DOB, EMAIL, CITY, STREET, HOUSE, PHONE });
-      
+    
+        // Validate that all fields are provided
         if (!user_id || !NAME || !DOB || !EMAIL || !CITY || !STREET || !HOUSE || !PHONE) {
-          return res.status(400).json({ message: "All fields are required" });
+            return res.status(400).json({ message: "All fields are required" });
         }
-      
+    
         // Log the DOB value to verify its format
         console.log('DOB before formatting:', DOB);
-      
+    
         // Ensure DOB is in YYYY-MM-DD format
         const formattedDOB = new Date(DOB).toISOString().split('T')[0];
         console.log('Formatted DOB:', formattedDOB);
-      
+    
         let con;
         try {
-          con = await pool.getConnection();
-          if (!con) {
-            res.status(500).json({ message: "Connection Error" });
-            return;
-          }
-      
-          const result = await con.execute(
-            `UPDATE USERS SET NAME = :NAME, DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), EMAIL = :EMAIL, CITY = :CITY, STREET = :STREET, HOUSE = :HOUSE, PHONE = :PHONE WHERE USER_ID = :user_id`,
-            { NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE, user_id }
-          );
-          console.log(`Query Result: ${JSON.stringify(result)}`);
-      
-          await con.commit();
-      
-          const updatedProfile = { user_id, NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE };
-          res.status(200).json(updatedProfile);
-          console.log("Profile updated successfully");
-      
-        } catch (err) {
-          console.error("Error during database query: ", err);
-          res.status(500).json({ message: "Internal Server Error" });
-        } finally {
-          if (con) {
-            try {
-              await con.close();
-            } catch (err) {
-              console.error("Error closing database connection: ", err);
+            con = await pool.getConnection();
+            if (!con) {
+                res.status(500).json({ message: "Connection Error" });
+                return;
             }
-          }
+    
+            // Update the USERS table and set the ADDRESS column using the address_type object constructor
+            const query = `
+                UPDATE USERS 
+                SET NAME = :NAME, 
+                    DOB = TO_DATE(:DOB, 'YYYY-MM-DD'), 
+                    EMAIL = :EMAIL, 
+                    PHONE = :PHONE, 
+                    ADDRESS = address_type(:CITY, :STREET, :HOUSE)  -- Update the address object
+                WHERE USER_ID = :user_id
+            `;
+    
+            const result = await con.execute(query, {
+                NAME, 
+                DOB: formattedDOB, 
+                EMAIL, 
+                PHONE, 
+                CITY, 
+                STREET, 
+                HOUSE, 
+                user_id
+            });
+            console.log(`Query Result: ${JSON.stringify(result)}`);
+    
+            await con.commit();
+    
+            // Return the updated profile
+            const updatedProfile = { user_id, NAME, DOB: formattedDOB, EMAIL, CITY, STREET, HOUSE, PHONE };
+            res.status(200).json(updatedProfile);
+            console.log("Profile updated successfully");
+    
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).json({ message: "Internal Server Error" });
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
         }
     });
+    
 
 
         
@@ -2140,10 +2160,37 @@ app.post('/addNews', async (req, res) => {
                 { product_id, review_id }
             );
     
+            // Step 1: Retrieve current rating and rating count from PRODUCTS table
+            const productResult = await con.execute(
+                `SELECT RATING, RATING_COUNT FROM PRODUCTS WHERE PRO_ID = :product_id`,
+                { product_id }
+            );
+    
+            if (productResult.rows.length === 0) {
+                throw new Error("Product not found");
+            }
+    
+            // Access the first row from the result (as an array)
+            const currentRating = productResult.rows[0][0]; // RATING
+            const ratingCount = productResult.rows[0][1];   // RATING_COUNT
+    
+            // Step 2: Calculate the new average rating
+            const newRatingCount = (ratingCount || 0) + 1;  // Increment rating count
+            const newRating = ((currentRating || 0) * (ratingCount || 0) + rating) / newRatingCount;
+    
+            // Step 3: Update the PRODUCTS table with the new rating and rating count
+            await con.execute(
+                `UPDATE PRODUCTS 
+                 SET RATING = :newRating, 
+                     RATING_COUNT = :newRatingCount 
+                 WHERE PRO_ID = :product_id`,
+                { newRating, newRatingCount, product_id }
+            );
+    
             // Commit the transaction
             await con.commit();
-            res.status(201).send("Review added successfully");
-            console.log("Review added successfully");
+            res.status(201).send("Review added successfully and product rating updated");
+            console.log("Review added and product rating updated successfully");
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");
@@ -2157,6 +2204,8 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+    
+    
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ROUTE for all products
@@ -4723,38 +4772,51 @@ app.post('/addNews', async (req, res) => {
         console.log('Received user_id details request:', { user_id });
         let con;
         try {
-          con = await pool.getConnection();
-          if (!con) {
-            return res.status(500).send("Connection Error");
-          }
-
-          const query = 
-          `  SELECT NAME, EMAIL, PHONE, CITY, STREET, HOUSE 
-             FROM USERS 
-             WHERE USER_ID = :user_id `;
-      
-          const result = await con.execute(query, { user_id });
-      
-          console.log(`Query Result: `, result.rows[0]);
-      
-          if (result.rows[0].length === 0) {
-            return res.status(404).send("No user found");
-          }
-      
-          res.send(result.rows[0]);
-        } catch (err) {
-          console.error("Error during database query: ", err);
-          res.status(500).send("Internal Server Error");
-        } finally {
-          if (con) {
-            try {
-              await con.close();
-            } catch (err) {
-              console.error("Error closing database connection: ", err);
+            // Get connection from pool
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
             }
-          }
+    
+            // SQL query to fetch user details
+            const query = `
+                SELECT NAME, EMAIL, PHONE, 
+                    TREAT(ADDRESS AS address_type).city AS CITY, 
+                    TREAT(ADDRESS AS address_type).street AS STREET, 
+                    TREAT(ADDRESS AS address_type).house AS HOUSE
+                FROM USERS 
+                WHERE USER_ID = :user_id
+            `;
+
+            
+            // Execute the query
+            const result = await con.execute(query, { user_id });
+    
+            console.log(`Query Result: `, result.rows);
+    
+            // Check if no user data was found
+            if (result.rows.length === 0) {
+                return res.status(404).send("No user found");
+            }
+    
+            // Send user details
+            res.send(result.rows[0]);
+            
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            // Ensure the connection is closed
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
         }
-      });
+    });
+    
       
     
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

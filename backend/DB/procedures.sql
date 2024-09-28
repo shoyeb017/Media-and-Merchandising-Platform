@@ -87,12 +87,10 @@ CREATE OR REPLACE PROCEDURE RegisterMerchandiser(
     p_merch_id   OUT NUMBER     
 ) AS
 BEGIN
-    -- Insert into MERCHANDISER table
     INSERT INTO MERCHANDISER (MER_ID, USER_NAME, NAME, DESCRIPTION, EMAIL, CITY, STREET, HOUSE, PHONE)
     VALUES (MERCHANDISER_SEQ.NEXTVAL, p_username, p_name, p_description, p_email, p_city, p_street, p_house, p_phone)
     RETURNING MER_ID INTO p_merch_id;
-
-    -- Insert into LOGIN table
+    
     INSERT INTO LOGIN (LOGIN_ID, PASSWORD, ROLE, ID)
     VALUES (p_login_id, p_password, 'MERCHANDISER', p_merch_id);
 

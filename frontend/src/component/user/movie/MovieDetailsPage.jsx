@@ -488,19 +488,20 @@ const MovieDetailsPage = () => {
           </div>
 
           <div className="allsection1-section1-watchlist-buttons">
-            <button
+          <button
               className="allsection1-section1-watchlist-button1"
+              onClick={handlePlanToWatch}
+            >
+              <i class="fa-solid fa-plus"></i> ADD TO PLAN TO WATCH
+            </button>
+            <button
+              className="allsection1-section1-watchlist-button"
               onClick={handleWatched}
             >
               {" "}
               <i class="fa-regular fa-bookmark"></i> ADD TO WATCHLIST
             </button>
-            <button
-              className="allsection1-section1-watchlist-button2"
-              onClick={handlePlanToWatch}
-            >
-              <i class="fa-solid fa-plus"></i> ADD TO PLAN TO WATCH
-            </button>
+            
           </div>
 
           <p className="allsection1-section1-desc">
@@ -515,7 +516,8 @@ const MovieDetailsPage = () => {
             ))}
           </p>
           <p className="allsection1-section1-epi">
-            <div>Episodes</div> <div>{movieDetails.episodes}</div>
+            <div>Episodes</div> 
+            <div>{movieDetails.episodes === 0 ? 'Movie' : movieDetails.episodes}</div>
           </p>
           <p className="allsection1-section1-epi">
             <div>Duration</div> {movieDetails.duration}
@@ -526,6 +528,7 @@ const MovieDetailsPage = () => {
           <p className="allsection1-section1-epi">
             <div>Company</div> {movieDetails.companyName}
           </p>
+
         </div>
 
         <div className="allsection1-section2">
@@ -534,9 +537,14 @@ const MovieDetailsPage = () => {
               url={movieDetails.trailer}
               className="trailer-player1"
             />
-            <div className="allsection1-section2-button">
-              <i class="fa-brands fa-google-play"></i>WATCH TRAILER
+            <div 
+              className="allsection1-section2-button" 
+              onClick={() => window.open(movieDetails.trailer, '_blank')}
+              style={{ cursor: 'pointer' }}
+            >
+              <i className="fa-brands fa-google-play"></i> WATCH TRAILER
             </div>
+
           </div>
         </div>
       </div>
