@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Navbar from "../common/Navbar";
 import FeaturedContent from "./FeaturedContent";
 import MovieList from "./MovieList";
-import MultiLineMovieList from './MultiLineMovieList';
+import MultiLineMovieList from "./MultiLineMovieList";
 import HomeNews from "./HomeNews";
 
 function Home() {
@@ -16,65 +16,65 @@ function Home() {
 
   const fetchMoviesByGenre = async (genre, setMovies) => {
     try {
-      const response = await fetch('http://localhost:5000/media/search/genre', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/media/search/genre", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ searchTerm: '', selectedGenres: [genre] }),
+        body: JSON.stringify({ searchTerm: "", selectedGenres: [genre] }),
       });
 
       if (response.ok) {
         const data = await response.json();
         setMovies(Array.isArray(data) ? data : []);
       } else {
-        console.error('Failed to search. Status:', response.status);
+        console.error("Failed to search. Status:", response.status);
       }
     } catch (err) {
-      console.error('Failed to search:', err);
+      console.error("Failed to search:", err);
     }
   };
 
   const fetchForYouMovies = async () => {
     try {
-      const response = await fetch('http://localhost:5000/media/foryou', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/media/foryou", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+        body: JSON.stringify({ user_id: localStorage.getItem("user_id") }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch media');
+        throw new Error("Failed to fetch media");
       }
 
       const media = await response.json();
       setForYouMovies(media);
     } catch (err) {
-      console.error('Failed to fetch for you movies:', err);
+      console.error("Failed to fetch for you movies:", err);
     }
   };
 
   useEffect(() => {
     const fetchFavRoleMovies = async () => {
       try {
-        const response = await fetch('http://localhost:5000/media/favRole', {
-          method: 'POST',
+        const response = await fetch("http://localhost:5000/media/favRole", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ user_id: localStorage.getItem('user_id') }),
+          body: JSON.stringify({ user_id: localStorage.getItem("user_id") }),
         });
-  
+
         if (!response.ok) {
-          throw new Error('Failed to fetch favorite role media');
+          throw new Error("Failed to fetch favorite role media");
         }
-  
+
         const media = await response.json();
         setRoleData(media);
       } catch (err) {
-        console.error('Failed to fetch favorite role movies:', err);
+        console.error("Failed to fetch favorite role movies:", err);
       }
     };
 
@@ -83,10 +83,10 @@ function Home() {
 
   React.useEffect(() => {
     fetchForYouMovies();
-    fetchMoviesByGenre('ACTION', setActionMovies);
-    fetchMoviesByGenre('HORROR', setHorrorMovies);
-    fetchMoviesByGenre('ROMANCE', setRomanceMovies);
-    fetchMoviesByGenre('COMEDY', setComedyMovies);
+    fetchMoviesByGenre("ACTION", setActionMovies);
+    fetchMoviesByGenre("HORROR", setHorrorMovies);
+    fetchMoviesByGenre("ROMANCE", setRomanceMovies);
+    fetchMoviesByGenre("COMEDY", setComedyMovies);
   }, []);
 
   return (
@@ -97,7 +97,7 @@ function Home() {
         <MovieList movies={foryouMovies} title="Top Picks for You" />
         {roleData.length > 0 && (
           <>
-            <MovieList movies={empData} title="Medias from your favorite Actors" />
+            {/* <MovieList movies={empData} title="Medias from your favorite Actors" /> */}
             <MultiLineMovieList data={roleData} />
           </>
         )}

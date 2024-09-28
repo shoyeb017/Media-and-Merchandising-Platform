@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import './FeaturedContent.css';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./FeaturedContent.css";
+import { Link } from "react-router-dom";
 
 function FeaturedContent() {
   const [featuredItems, setFeaturedItems] = useState([]);
@@ -11,34 +11,33 @@ function FeaturedContent() {
   // Helper function to truncate text
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
-      return text.slice(0, maxLength) + '...';
+      return text.slice(0, maxLength) + "...";
     }
     return text;
   };
 
-  const mediaIds = ['57', '88', '13', '76', '16'];
+  const mediaIds = ["57", "88", "13", "76", "16"];
 
   // Fetch featured items from the backend
   const fetchFeaturedItems = async () => {
     try {
-      const response = await fetch('http://localhost:5000/media/featured1', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/media/featured1", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ mediaIds }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch featured content');
+        throw new Error("Failed to fetch featured content");
       }
 
       const data = await response.json();
       setFeaturedItems(data);
-      console.log('Featured items:', data);
-
+      console.log("Featured items:", data);
     } catch (err) {
-      console.error('Failed to fetch featured content:', err);
+      console.error("Failed to fetch featured content:", err);
       setFeaturedItems([]); // Handle the error by setting to an empty array
     }
   };
@@ -94,7 +93,7 @@ function FeaturedContent() {
     setCurrentIndex(index);
   };
 
-  const username = localStorage.getItem('username') || '';
+  const username = localStorage.getItem("username") || "";
 
   return (
     <div
@@ -102,7 +101,7 @@ function FeaturedContent() {
       // style={{
       //   backgroundImage:
       //     featuredItems.length
-      //       ? `linear-gradient(to left, rgba(0,0,0,0), #000000), 
+      //       ? `linear-gradient(to left, rgba(0,0,0,0), #000000),
       //          linear-gradient(to bottom, rgba(0,0,0,0), #000000),
       //          url(${featuredItems[currentIndex].poster})`
       //       : 'none',
@@ -113,37 +112,51 @@ function FeaturedContent() {
         <>
           <div className="allsection2">
             <div className="section12">
-
-              <img src={featuredItems[currentIndex].poster} alt={featuredItems[currentIndex].title} className="movie-img" />
+              <img
+                src={featuredItems[currentIndex].poster}
+                alt={featuredItems[currentIndex].title}
+                className="movie-img"
+              />
             </div>
             <div className="section22">
-              <h1 className="featured-title">{featuredItems[currentIndex].title}</h1>
+              <h1 className="featured-title">
+                {featuredItems[currentIndex].title}
+              </h1>
               <p className="featured-details">
-               {featuredItems[currentIndex].type} &#9670; {featuredItems[currentIndex].genre}
+                {featuredItems[currentIndex].type} &#9670;{" "}
+                {featuredItems[currentIndex].genre}
               </p>
               <p className="featured-desc">
                 {truncateText(featuredItems[currentIndex].description, 250)}
               </p>
-              <div 
+              <div
                 className="tooltip-container"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                <Link to={`/${username}/media/${featuredItems[currentIndex].id}`} className="featured-link">
-                <button className="featured-button1">
-                  <i className="fa fa-bars"></i>   VIEW DETAILS</button>
+                <Link
+                  to={`/${username}/media/${featuredItems[currentIndex].id}`}
+                  className="featured-link"
+                >
+                  <button className="featured-button1">
+                    <i className="fa fa-bars"></i> VIEW DETAILS
+                  </button>
                 </Link>
                 {isHovered && <div className="tooltip">View Details</div>}
               </div>
 
-              <div 
+              <div
                 className="tooltip-container"
                 onMouseEnter={() => setIsHovered1(true)}
                 onMouseLeave={() => setIsHovered1(false)}
               >
-                <Link to={`/${username}/media/${featuredItems[currentIndex].id}`} className="featured-link">
-                <button className="featured-button2">
-                  <i className="fa fa-bookmark"></i></button>
+                <Link
+                  to={`/${username}/media/${featuredItems[currentIndex].id}`}
+                  className="featured-link"
+                >
+                  <button className="featured-button2">
+                    <i className="fa fa-bookmark"></i>
+                  </button>
                 </Link>
                 {isHovered1 && <div className="tooltip">Add to WatchList</div>}
               </div>
@@ -153,7 +166,7 @@ function FeaturedContent() {
             {featuredItems.map((_, index) => (
               <span
                 key={index}
-                className={`dot ${index === currentIndex ? 'active' : ''}`}
+                className={`dot ${index === currentIndex ? "active" : ""}`}
                 onClick={() => handleDotClick(index)}
               ></span>
             ))}

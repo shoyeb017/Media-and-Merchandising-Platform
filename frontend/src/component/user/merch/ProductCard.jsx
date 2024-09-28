@@ -13,6 +13,7 @@ const ProductCard = ({ product }) => {
   }, []);
   //const username = localStorage.getItem('username');
 
+  
     return (
     <Link to={`/${username}/product/${product.PRO_ID}`} className="link-product-card">
     <div className="product-card1">
@@ -21,7 +22,7 @@ const ProductCard = ({ product }) => {
         <div className="product-card-inner1-button">Buy Now</div>
       </div>
       <img src={product.IMAGE} alt={product.NAME} className="product-img" />
-      <h3 className="product-name">{product.NAME}</h3>
+      <p className="product-name">{product.NAME}</p>
       <p className="product-price1">${product.PRICE}</p>
     </div>
     </Link>

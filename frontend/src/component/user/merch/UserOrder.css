@@ -1,10 +1,14 @@
+.user-order-top-header{
+    margin-top: 70px;
+}
+
 .order-container {
     width: 100%;
     height: 500px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0), #242428), url('https://www.theladders.com/wp-content/uploads/handshake_190617.jpg');
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #242428), url('https://www.theladders.com/wp-content/uploads/handshake_190617.jpg');
     filter: blur(1px);
     position: absolute;
 }
@@ -15,14 +19,15 @@
     color: #ffdd95;
     filter: drop-shadow(2px 2px 2px black);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  
+
     text-align: center;
-  
+
     border-bottom: 1px solid #ffdd95;
     padding-bottom: 30px;
-  
+
     position: relative;
-    z-index: 1; /* Ensure this is above the background container */
+    z-index: 1;
+    /* Ensure this is above the background container */
 }
 
 .order-requests {
@@ -33,7 +38,8 @@
     background-color: rgba(58, 58, 62, 0.7);
     border-radius: 8px;
     position: relative;
-    z-index: 1; /* Ensure this is above the background container */
+    z-index: 1;
+    /* Ensure this is above the background container */
 }
 
 .order-requests h3 {
@@ -120,7 +126,7 @@
 
 }
 
-.order-details2-upper p{
+.order-details2-upper p {
     margin: 0;
     color: white;
     font-size: 15px;
@@ -130,7 +136,7 @@
 
 .order-details2-lower {
     width: 50%;
-    border-left: 2px solid #4d5059 ;
+    border-left: 2px solid #4d5059;
     padding-left: 20px;
 }
 
@@ -242,42 +248,55 @@
 }
 
 .product-detail-item {
-  position: relative; /* Allows the floating section to be positioned relative to this element */
+    position: relative;
+    /* Allows the floating section to be positioned relative to this element */
 }
 
 /* Hidden by default, and will fade in */
 .add-review-floating {
-  position: absolute; /* Makes the review section float */
-  top: 50%; /* Adjust as needed */
-  left: 50%; /* Adjust as needed */
-  transform: translate(-50%, -50%); /* Centers the floating box */
-  background-color: #333; /* Background color */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000; /* Ensure it's above other elements */
-  opacity: 0; /* Starts hidden */
-  visibility: hidden; /* Ensures it's not visible when hidden */
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+    position: absolute;
+    /* Makes the review section float */
+    top: 50%;
+    /* Adjust as needed */
+    left: 50%;
+    /* Adjust as needed */
+    transform: translate(-50%, -50%);
+    /* Centers the floating box */
+    background-color: #333;
+    /* Background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    /* Ensure it's above other elements */
+    opacity: 0;
+    /* Starts hidden */
+    visibility: hidden;
+    /* Ensures it's not visible when hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    /* Smooth transition */
 }
 
 /* When the review is visible, make it opaque */
 .add-review-floating.show {
-  opacity: 1; /* Fully visible */
-  visibility: visible; /* Visible */
+    opacity: 1;
+    /* Fully visible */
+    visibility: visible;
+    /* Visible */
 }
 
 .review-button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  background-color: #ffdd95;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #ffdd95;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
 }
 
 .review-button:hover {
-  background-color: #ffdd95;
+    background-color: #ffdd95;
 }

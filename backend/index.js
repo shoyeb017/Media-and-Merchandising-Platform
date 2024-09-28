@@ -3122,7 +3122,7 @@ app.post('/addNews', async (req, res) => {
                 return;
             }
             const result = await con.execute(
-                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT
+                `SELECT DISCUSSION.DIS_ID, TITLE, TOPIC, DISCUSSION.DESCRIPTION, REPLY_COUNT , DISCUSSIONABOUTMEDIA.DIS_DATE
                 FROM DISCUSSION
                 JOIN DISCUSSIONABOUTMEDIA ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID
                 JOIN MEDIA ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
@@ -3285,7 +3285,9 @@ app.post('/addNews', async (req, res) => {
                     NEWSANDUPDATES.HEADLINE,
                     NEWSANDUPDATES.DESCRIPTION,
                     NEWSTOMEDIA.NEWS_DATE,
-                    MEDIA.TITLE AS MEDIA_TITLE
+                    MEDIA.TITLE AS MEDIA_TITLE,
+                    MEDIA.MEDIA_ID AS MEDIA_ID,
+                    MEDIA.POSTER AS MEDIA_POSTER
                 FROM
                     NEWSANDUPDATES
                 JOIN
@@ -3314,7 +3316,9 @@ app.post('/addNews', async (req, res) => {
                 headline: row.HEADLINE,
                 description: row.DESCRIPTION,
                 news_date: row.NEWS_DATE,
-                media_title: row.MEDIA_TITLE
+                media_title: row.MEDIA_TITLE,
+                media_id: row.MEDIA_ID,
+                media_poster: row.MEDIA_POSTER
             }));
     
             res.status(200).json(notifications);
@@ -5079,7 +5083,7 @@ app.post('/media/rolemedia', async (req, res) => {
                 img: media.POSTER,
                 duration: media.DURATION,
                 releaseDate: media.RELEASE_DATE,
-                episodes: media.EPISODE
+                episodes: media.EPISODE  || 0
             }));
 
             // Push the role and its media to the final list

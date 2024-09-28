@@ -1,4 +1,4 @@
-.role-card {
+.role-card111 {
     display: flex;
     align-items: center;
     background-color: transparent;
@@ -11,30 +11,33 @@
     height: auto;
   }
 
-  .role-img {
-    width: 100px;
-    height: 100px;
+  .role-img111 {
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     border-radius: 100%;
     margin-right: 10px;
   }
 
-  .role-info h4 {
+  .role-info111 h4 {
     margin: 0 0 5px;
-
+    font-size: 15px;
+    font-weight: 400;
+    color: white;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .role-info p {
+  .role-info111 p {
     margin: 0;
-
+    color: white;
+    font-size: 13px;
     color: #797e8f  ;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .role-action{
+  .role-action111{
     margin-left: auto;
     margin-right: 35px;
     background-color: transparent;
@@ -49,14 +52,14 @@
 
 .heart-icon:hover {
     /* color: #ffdd95; */
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .heart-icon.favorite {
-  color:  #ffdd95;
+  color:  #ff460a;
 }
 
 .heart-icon.favorite:hover{
   /* color:  #797e8f; */
-  transform: scale(1.2);
+  transform: scale(1.1);
 }

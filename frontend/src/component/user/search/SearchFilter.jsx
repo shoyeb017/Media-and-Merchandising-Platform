@@ -1,22 +1,45 @@
-import React from 'react';
-import './SearchFilter.css';
+import React from "react";
+import "./SearchFilter.css";
 
-const genres = ['ACTION', 'ADVENTURE', 'COMEDY', 'DRAMA', 'FANTASY', 'HISTORICAL', 'HORROR', 'MAGIC',
-  'MYSTERY', 'PSYCHOLOGICAL', 'ROMANCE', 'SCI-FI', 'SUPERNATURAL', 'SPORTS', 'THRILLER', 'TRAGEDY'];
+const genres = [
+  "ACTION",
+  "ADVENTURE",
+  "COMEDY",
+  "DRAMA",
+  "FANTASY",
+  "HISTORICAL",
+  "HORROR",
+  "MAGIC",
+  "MYSTERY",
+  "PSYCHOLOGICAL",
+  "ROMANCE",
+  "SCI-FI",
+  "SUPERNATURAL",
+  "SPORTS",
+  "THRILLER",
+  "TRAGEDY",
+];
 
-const mediaTypes = ['MOVIE', 'TV_SHOW', 'ANIME', 'DOCUMENTARY'];
+const mediaTypes = ["MOVIE", "TV_SHOW", "ANIME", "DOCUMENTARY"];
 
-const SearchFilter = ({ searchTerm, setSearchTerm, selectedGenres, setSelectedGenres, selectedMediaType, setSelectedMediaType }) => {
+const SearchFilter = ({
+  searchTerm,
+  setSearchTerm,
+  selectedGenres,
+  setSelectedGenres,
+  selectedMediaType,
+  setSelectedMediaType,
+}) => {
   const handleGenreClick = (genre) => {
     if (selectedGenres.includes(genre)) {
-      setSelectedGenres(selectedGenres.filter(g => g !== genre));
+      setSelectedGenres(selectedGenres.filter((g) => g !== genre));
     } else {
       setSelectedGenres([...selectedGenres, genre]);
     }
   };
 
   const handleMediaTypeClick = (type) => {
-    setSelectedMediaType(type === selectedMediaType ? '' : type);
+    setSelectedMediaType(type === selectedMediaType ? "" : type);
   };
 
   return (
@@ -34,7 +57,9 @@ const SearchFilter = ({ searchTerm, setSearchTerm, selectedGenres, setSelectedGe
         {mediaTypes.map((type) => (
           <button
             key={type}
-            className={`genre-button1 ${selectedMediaType === type ? 'selected' : ''}`}
+            className={`genre-button1 ${
+              selectedMediaType === type ? "selected" : ""
+            }`}
             onClick={() => handleMediaTypeClick(type)}
           >
             {type}
@@ -46,7 +71,9 @@ const SearchFilter = ({ searchTerm, setSearchTerm, selectedGenres, setSelectedGe
         {genres.map((genre) => (
           <button
             key={genre}
-            className={`genre-button1 ${selectedGenres.includes(genre) ? 'selected' : ''}`}
+            className={`genre-button1 ${
+              selectedGenres.includes(genre) ? "selected" : ""
+            }`}
             onClick={() => handleGenreClick(genre)}
           >
             {genre}

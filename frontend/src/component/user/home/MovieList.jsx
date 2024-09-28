@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import MovieCard from './MovieCard';
-import MovieCardcopy from './MovieCardcopy';
-import './MovieList.css';
+import MovieCard from "./MovieCard";
+import MovieCardcopy from "./MovieCardcopy";
+import "./MovieList.css";
 
 const responsive = {
   superLargeDesktop: {
@@ -27,29 +27,32 @@ const responsive = {
 
 const MovieList = ({ movies, title }) => {
   if (!Array.isArray(movies)) {
-    console.error('Expected an array of movies:', movies);
+    console.error("Expected an array of movies:", movies);
     return null;
   }
 
-  const movielist = movies.map((movie) => (
-    title === "Medias" 
-      ? <MovieCardcopy key={movie.id} movie={movie} /> 
-      : <MovieCard key={movie.id} movie={movie} />
-  ));
+  const movielist = movies.map((movie) =>
+    title === "Medias" ? (
+      <MovieCardcopy key={movie.id} movie={movie} />
+    ) : (
+      <MovieCard key={movie.id} movie={movie} />
+    )
+  );
 
-  const displayText = title === "Top Picks for You"
-  ? "Recommended for you from your favorites"
-  : title === "Medias from your favorite Actors"
-  ? "Recommended for you from your favorites roles"
-  : title === "Romance"
-  ? "Wants some love in life? Then check out these Romantic movies!"
-  : title === "Action"
-  ? "Craving some adrenaline? Dive into these thrilling Action-packed movies!"
-  : title === "Horror"
-  ? "Ready for some spine-chilling scares? Watch these bone-chilling Horror movies!"
-  : title === "Comedy"
-  ? "Need a good laugh? Check out these hilarious Comedy movies!"
-  : "Check out these movies!";
+  const displayText =
+    title === "Top Picks for You"
+      ? "Recommended for you from your favorites"
+      : title === "Medias from your favorite Actors"
+      ? "Recommended for you from your favorites roles"
+      : title === "Romance"
+      ? "Wants some love in life? Then check out these Romantic movies!"
+      : title === "Action"
+      ? "Craving some adrenaline? Dive into these thrilling Action-packed movies!"
+      : title === "Horror"
+      ? "Ready for some spine-chilling scares? Watch these bone-chilling Horror movies!"
+      : title === "Comedy"
+      ? "Need a good laugh? Check out these hilarious Comedy movies!"
+      : "Check out these movies!";
 
   return (
     <div className="movie-list-container">
