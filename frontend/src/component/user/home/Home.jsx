@@ -97,7 +97,7 @@ function Home() {
         <MovieList movies={foryouMovies} title="Top Picks for You" />
         {roleData.length > 0 && (
           <>
-            {/* <MovieList movies={empData} title="Medias from your favorite Actors" /> */}
+            
             <MultiLineMovieList data={roleData} />
           </>
         )}

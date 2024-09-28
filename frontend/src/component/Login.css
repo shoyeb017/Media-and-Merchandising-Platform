@@ -17,7 +17,7 @@
 /* Left to right clouds */
 .cloud1 {
   top: 10%;
-  left: -150px; /* Start off-screen */
+  left: -150px; /* Start off-screen *
   animation: floatLeftToRight 15s linear infinite;
 
   width: 340px; /* Adjust the size of clouds */
@@ -28,6 +28,7 @@
   left: -200px;
   animation: floatLeftToRight 25s linear infinite;
 
+  filter: blur(5px);
   width: 150px; /* Adjust the size of clouds */
 }
 
@@ -38,6 +39,9 @@
   animation: floatRightToLeft 20s linear infinite;
 
   width: 220px; /* Adjust the size of clouds */
+  /*blur*/
+  filter: blur(2px);
+
 }
 
 /* Ensure login form styling matches your theme */

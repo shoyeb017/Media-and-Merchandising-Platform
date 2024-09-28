@@ -15,6 +15,10 @@ const MovieCard = ({ movie }) => {
     }
   }, []);
 
+  function handleAddToWatchList() {
+    console.log("Added to WatchList");
+  }
+
   return (
     <Link to={`/${username}/media/${movie.id}`} className="link-product-card">
 
@@ -44,10 +48,10 @@ const MovieCard = ({ movie }) => {
                 onMouseEnter={() => setIsHovered1(true)}
                 onMouseLeave={() => setIsHovered1(false)}
               >
-                <Link to={`/${username}/media/${movie.id}`} className="featured-link">
-                <button className="movie-card-content-button1">
+                {/* <Link to={`/${username}/media/${movie.id}`} className="featured-link"> */}
+                <button className="movie-card-content-button1" onClick={handleAddToWatchList()}>
                   <i className="fa fa-bookmark"></i></button>
-                </Link>
+                
                 {isHovered1 && <div className="tooltip">Add to WatchList</div>}
               </div>
               </div>
