@@ -3174,6 +3174,7 @@ app.post('/addNews', async (req, res) => {
                     ON DISCUSSION.DIS_ID = DISCUSSIONABOUTMEDIA.DIS_ID 
                 JOIN MEDIA 
                     ON DISCUSSIONABOUTMEDIA.MEDIA_ID = MEDIA.MEDIA_ID
+                WHERE PARENT_TOPIC IS NULL
                 ORDER BY DISCUSSIONABOUTMEDIA.DIS_DATE DESC, DISCUSSION.REPLY_COUNT DESC`
             );
             // console.log(`Query Result: `,result.rows);
@@ -5180,7 +5181,7 @@ app.post('/media/foryou', async (req, res) => {
             FROM 
                 MEDIA M
             JOIN 
-                PREFERREDGENRE P ON INSTR(P.GENRES, M.GENRE) > 0
+                PREFERREDGENRE P ON REGEXP_LIKE(M.GENRE, REPLACE(P.GENRES, ',', '|'))
             WHERE 
                 P.USER_ID = :USER_ID
                 AND NOT EXISTS (
@@ -5191,6 +5192,7 @@ app.post('/media/foryou', async (req, res) => {
                 )
             ORDER BY 
                 M.RATING DESC
+
 
         `;
 
