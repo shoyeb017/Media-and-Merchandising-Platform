@@ -15,7 +15,11 @@ const CartCard = ({ item, onCancel }) => {
         <p className="cart-card-total-total">
           ${(item.PRICE * item.quantity).toFixed(2)}
         </p>
-        <i class="fa-solid fa-trash" onClick={() => onCancel(item.PRO_ID)}></i>
+        {/* Delete specific item */}
+        <i
+          className="fa-solid fa-trash"
+          onClick={() => onCancel(item.PRO_ID)}
+        ></i>
       </div>
     </div>
   );
@@ -32,13 +36,71 @@ const Cart = () => {
 
   // Function to handle canceling an item
   const handleCancelItem = (id) => {
+    // Filter out only the item with the matching PRO_ID
+    console.log("Canceling item with PRO_ID:", id);
     const updatedCartItems = cartItems.filter((item) => item.PRO_ID !== id);
+    
+    // Update the state and local storage
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
+  
 
   const handleConfirmOrder = async () => {
     try {
+
+      // Create a map to store the quantity of each product
+      const qtyMap = new Map();
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const proId = cartItems[i].PRO_ID;
+
+        // Initialize the quantity in the map to 0 if it's not already set
+        if (!qtyMap.has(proId)) {
+          qtyMap.set(proId, 0);
+        }
+
+        // Get the current quantity from the map and add the quantity from cartItems
+        const currentQty = qtyMap.get(proId);
+        const cartItemQty = cartItems[i].quantity; // Get the cart quantity
+
+        const newQty = currentQty + cartItemQty; // Add cart quantity to the current quantity
+
+        // Update the map with the new total quantity
+        qtyMap.set(proId, newQty);
+
+        console.log(`Updated quantity for product ${proId}:`, qtyMap.get(proId));
+      }
+
+      console.log('Final qtyMap:', qtyMap);
+
+
+      for (let [proId, qty] of qtyMap) {
+        const availableqty = await fetch(`http://localhost:5000/user/product/checkqty`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ PRO_ID : proId }),
+        });
+
+        if (!availableqty.ok) {
+          throw new Error("Failed to check product quantity");
+        }
+
+        const data = await availableqty.json();
+        console.log('Available quantity:', data);
+
+        const proname = cartItems.find(item => item.PRO_ID === proId).NAME;
+        console.log('Product name:', proname);
+
+        if (qty > data[0].QUANTITY) {
+          alert(`Not enough quantity available for product ${proname}`);
+          return;
+        }
+      }
+
+
       // Get current date and time
       const now = new Date();
 
@@ -101,13 +163,14 @@ const Cart = () => {
               MY CART ( {cartItems.length} )
             </h2>
             <div className="cart-items">
-              {cartItems.map((item) => (
-                <CartCard
-                  key={item.PRO_ID}
-                  item={item}
-                  onCancel={handleCancelItem}
-                />
-              ))}
+            {cartItems.map((item) => (
+              <CartCard
+                key={item.PRO_ID} // Ensure the key is the unique product ID
+                item={item}
+                onCancel={handleCancelItem}
+              />
+            ))}
+
             </div>
           </div>
           <div className="cart-section-right">

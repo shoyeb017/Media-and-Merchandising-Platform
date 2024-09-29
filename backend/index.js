@@ -4618,8 +4618,65 @@ app.post('/addNews', async (req, res) => {
             }
         }
     });
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ROUTE for quantity check
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    // for(let i=0; i<cartItems.length; i++){
+    //     const checkqty = await fetch(`http://localhost:5000/user/product/checkqty`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({PRO_ID: cartItems[i].PRO_ID}),
+    //     });
+    //     if (!checkqty.ok) {
+    //       throw new Error("Failed to check quantity");
+    //     }
+    //     const data = await checkqty.json();
+    //     if(data[0].QUANTITY < cartItems[i].quantity){
+    //       alert("Failed to confirm the order. Please try again.");
+    //       return;
+    //     }
+    //   }
 
+    app.post('/user/product/checkqty', async (req, res) => {
+        const { PRO_ID } = req.body;
+        console.log('Received check quantity request:', { PRO_ID });
+        let con;
+        try {
+            con = await pool.getConnection();
+            if (!con) {
+                return res.status(500).send("Connection Error");
+            }
+
+            const result = await con.execute(
+                `SELECT QUANTITY
+                FROM PRODUCTS
+                WHERE PRO_ID = :PRO_ID`,
+                { PRO_ID }
+            );
+
+            console.log(`Query Result: `, result.rows);
+
+            if (result.rows.length === 0) {
+                return res.status(404).send("No product found for the specified product ID");
+            }
+            // just send the quantity value
+            res.send(result.rows);
+        } catch (err) {
+            console.error("Error during database query: ", err);
+            res.status(500).send("Internal Server Error");
+        } finally {
+            if (con) {
+                try {
+                    await con.close();
+                } catch (err) {
+                    console.error("Error closing database connection: ", err);
+                }
+            }
+        } 
+    });
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
