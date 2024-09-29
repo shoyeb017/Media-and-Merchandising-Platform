@@ -262,17 +262,6 @@ const Mylist = () => {
                 />
               ))}
 
-            <h2>Producers</h2>
-            {favoriteRoles
-              .filter((role) => role.ROLE_TYPE === 'PRODUCER')
-              .map((role) => (
-                <RoleCard2
-                  key={role.NAME}
-                  role={role}
-                  handleDeleteRole={() => handleDeleteRole(role.ROLE_ID)}
-                />
-              ))}
-
             <h2>Writers</h2>
             {favoriteRoles
               .filter((role) => role.ROLE_TYPE === 'WRITER')

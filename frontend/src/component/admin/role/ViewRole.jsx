@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ViewRole.css";
 import AddRole from "./AddRole.jsx";
 
-const roleTypes = ["DIRECTOR", "PRODUCER", "WRITER", "ACTOR", "ACTRESS"];
+const roleTypes = ["DIRECTOR", "WRITER", "ACTOR", "ACTRESS"];
 
 const AdminRoleCard = ({ role }) => {
   return (
