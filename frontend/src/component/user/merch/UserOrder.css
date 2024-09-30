@@ -1,8 +1,8 @@
-.user-order-top-header{
+.user-order-top-header11 {
     margin-top: 70px;
 }
 
-.order-container {
+/* .order-container {
     width: 100%;
     height: 500px;
     background-repeat: no-repeat;
@@ -11,102 +11,119 @@
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #242428), url('https://www.theladders.com/wp-content/uploads/handshake_190617.jpg');
     filter: blur(1px);
     position: absolute;
-}
+} */
 
-.title-order {
-    font-size: 45px;
+.title-order11 {
+    font-size: 25px;
+    font-weight: 500;
     margin-bottom: 20px;
-    color: #ffdd95;
+    color: white;
     filter: drop-shadow(2px 2px 2px black);
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
 
-    text-align: center;
-
-    border-bottom: 1px solid #ffdd95;
-    padding-bottom: 30px;
+    border-bottom: 1px solid white;
+    padding-bottom: 20px;
 
     position: relative;
     z-index: 1;
     /* Ensure this is above the background container */
 }
 
-.order-requests {
+.order-requests11 {
     max-width: 1000px;
     width: 100%;
     margin: 20px auto;
     padding: 20px;
-    background-color: rgba(58, 58, 62, 0.7);
-    border-radius: 8px;
+    background-color: #141519;
     position: relative;
     z-index: 1;
     /* Ensure this is above the background container */
 }
 
-.order-requests h3 {
+/* .order-requests h3 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 1.5rem;
     color: #ffdd95;
-}
+} */
 
-.order-list {
+.order-list11 {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    margin-right: 25px;
+    
 }
 
-.order-item {
+.order-item11 {
     padding: 15px;
     margin-bottom: 20px;
-    background-color: #3a3a3e;
+    background-color: #1d1f25;
     color: white;
-    border: 2px solid #4d5059;
-    border-radius: 5px;
+    border: 1px solid #4d5059;
     display: flex;
     flex-direction: column;
 }
 
-.order-item:hover {
-    border: 1px solid #ffdd95;
+.order-item11:hover {
+    border: 1px solid #ff640a;
 }
 
-.order-details1 {
+.order-item11-details {
     margin-bottom: 10px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 2px solid #4d5059;
+    border-bottom: 1px solid #4d5059;
     padding-bottom: 10px;
 }
 
-.order-details1-lower {
-    position: absolute;
-    right: 35px;
-    color: tomato;
-    text-align: right;
-}
+/* .order-item11-details-upper-left {
 
-.order-details1-lower-price {
-    font-size: 25px;
-    color: #ffdd95;
-    font-weight: 500;
-}
+} */
 
-
-.order-details1-status {
+.order-item11-details-upper-left-status {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-.order-details1-status i {
-    font-size: 50px;
-    color: #ffdd95;
+.order-item11-details-upper-left-status i {
+    font-size: 45px;
+    color: #ff640a;
 }
 
-.order-details2 {
+.order-item11-details-upper-left-status strong {
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    margin-top: 5px;
+}
+
+.order-item11-details-upper-right{
+    position: absolute;
+    right: 35px;
+    color: tomato;
+    text-align: right;
+    
+    right:55px;
+}
+
+.order-item11-details-upper-right-date{
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.order-item11-details-upper-right-lower-price {
+    font-size: 24px;
+    color: white;
+    font-weight: 400;
+}
+
+.order-item11-details-lower {
     margin-bottom: 10px;
     width: 100%;
     display: flex;
@@ -114,189 +131,221 @@
     gap: 10px;
 }
 
-.order-details2-upper {
+.order-item11-details-lower-left {
     width: 50%;
+    padding-right: 20px;
+
 }
 
-.order-details2-upper-title {
+.order-item11-details-lower-left-title {
     font-size: 18px;
-    color: #ffdd95;
+    color: #ff640a;
     margin-bottom: 10px;
-    font-weight: 500;
+    font-weight: 400;
+
+    border-bottom: 1px solid white;
+    padding-bottom: 15px;
 
 }
 
-.order-details2-upper p {
+.order-item11-details-lower-left p {
     margin: 0;
     color: white;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 400;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.order-details2-lower {
+.order-item11-details-lower-left-label {
+    color: rgba(255, 255, 255, 0.564);
+}
+
+.order-item11-details-lower-right {
     width: 50%;
-    border-left: 2px solid #4d5059;
+    /* border-left: 2px solid #4d5059; */
     padding-left: 20px;
 }
 
-.order-details2-label {
-    color: rgb(109, 109, 109);
+.order-item11-details-lower-right-title {
+    font-size: 18px;
+    color: #ff640a;
+    margin-bottom: 10px;
+    font-weight: 400;
+    border-bottom: 1px solid white;
+    padding-bottom: 15px;
 }
 
-.product-details-list {
+.order-item11-details-lower-right-product-details-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.product-detail-item {
+.order-item11-details-lower-right-product-details-item {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #4d5059;
-    border-radius: 5px;
+    background-color: transparent;
+    border-bottom: 1px solid #4d5059;
     color: white;
 }
 
-.product-detail-image {
-    width: 60px;
-    height: 60px;
+.order-item11-details-lower-right-product-details-item-image{
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     margin-right: 10px;
-    border-radius: 5px;
 }
 
-.product-detail-info {
+.order-item11-details-lower-right-product-details-item-info {
     flex: 1;
 }
 
-.product-detail-info p {
+.order-item11-details-lower-right-product-details-item-info-name {
     margin: 0;
+    font-size: 12px;
+    font-weight: 400;
 }
 
-.order-details3 {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
+.order-item11-details-lower-right-product-details-item-info-qunatity{
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 5px;
+    border: 1px solid #ff640a;
+    padding: 2px 8px;
+    border-radius: 9px;
+    width: fit-content;
 }
 
-.order-details3-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 5px;
-    background-color: #3a3a3e;
-    border: 1px solid #4d5059;
-    border-radius: 5px;
-    padding: 10px;
+.order-item11-details-lower-right-product-details-item-info-2nd {
+    font-size: 14px;
+    font-weight: 400;
+
+}
+
+.order-item11-details-lower-right-product-details-item-info-2nd p {
+    margin: 0;
     font-size: 15px;
-}
-
-.order-details3-button p {
-    color: white;
-}
-
-.order-details3-button i {
-    font-size: 20px;
-    color: #ffdd95;
-}
-
-.order-details3-button:hover {
-    background-color: #4d5059;
-}
-
-.order-details4 {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.order-details4-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 5px;
-    width: 120px;
-    background-color: #3a3a3e;
-    border: 1px solid #4d5059;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 15px;
-}
-
-.order-details4-button p {
-    color: white;
-}
-
-.order-details4-button i {
-    font-size: 20px;
-    color: #ffdd95;
-}
-
-.order-details4-button:hover {
-    background-color: #4d5059;
-}
-
-.product-detail-item {
-    position: relative;
-    /* Allows the floating section to be positioned relative to this element */
-}
-
-/* Hidden by default, and will fade in */
-.add-review-floating {
-    position: absolute;
-    /* Makes the review section float */
-    top: 50%;
-    /* Adjust as needed */
-    left: 50%;
-    /* Adjust as needed */
-    transform: translate(-50%, -50%);
-    /* Centers the floating box */
-    background-color: #333;
-    /* Background color */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    /* Ensure it's above other elements */
-    opacity: 0;
-    /* Starts hidden */
-    visibility: hidden;
-    /* Ensures it's not visible when hidden */
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    /* Smooth transition */
-}
-
-/* When the review is visible, make it opaque */
-.add-review-floating.show {
-    opacity: 1;
-    /* Fully visible */
-    visibility: visible;
-    /* Visible */
+    font-weight: 400;
+    color: #2abdbb;
 }
 
 .review-button {
     margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #ffdd95;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
+    font-size: 10px;
+    padding: 3px 6px;
+    background-color: transparent;
+    border: 1px solid #ff640a;
+    color: #ff640a;
     cursor: pointer;
     transition: background-color 0.3s ease;
     /* Smooth transition for hover effect */
 }
 
 .review-button:hover {
-    background-color: #ffdd95;
+    color: white;
+}
+
+
+/* Hidden by default, and will fade in */
+.add-review-floating {
+    position: fixed; /* Change to fixed for positioning relative to the viewport */
+    top: 50%; /* Adjust as needed */
+    left: 50%; /* Adjust as needed */
+    transform: translate(-50%, -50%); /* Centers the floating box */
+    background-color: #141519; /* Background color */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it's above other elements */
+    opacity: 0; /* Starts hidden */
+    visibility: hidden; /* Ensures it's not visible when hidden */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+}
+
+/* When the review is visible, make it opaque */
+.add-review-floating.show {
+    opacity: 1; /* Fully visible */
+    visibility: visible; /* Visible */
+}
+
+.rating-review-box11 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.rating-review-box11 p {
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.rating-review-box11 select {
+    padding: 5px;
+    background-color: #1d1f25;
+    color: white;
+    border: 1px solid #4d5059;
+}
+
+.rating-review-box11 textarea {
+    padding: 5px;
+    background-color: #1d1f25;
+    color: white;
+    border: 1px solid #4d5059;
+}
+
+.rating-review-box11-button {
+    padding: 5px 10px;
+    background-color: #ff640a;
+    color: black;
+    border: 1px solid #ff640a;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    margin-top: 10px;
+}
+
+.rating-review-box11-button:hover {
+    background-color: #ff640ab8;
+}
+
+
+
+.order-item11-details-lower-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.order-item11-details-lower-bottom-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+    background-color: transparent;
+    border: 1px solid #ff640a;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    color: #ff640a;
+}
+
+.order-item11-details-lower-bottom-button p {
+    font-size: 15px;
+}
+
+.order-item11-details-lower-bottom-button i {
+    font-size: 20px;
+}
+
+.order-item11-details-lower-bottom-button:hover {
+    color: white;
 }

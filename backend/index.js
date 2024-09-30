@@ -1398,15 +1398,15 @@ app.post('/profile/user', async (req, res) => {
     
             const result = await con.execute(mediaQuery);
     
-            const mediaList = result.rows.map(data => ({
-                id: data.MEDIA_ID,
-                img: data.POSTER,
-                title: data.TITLE,
-                description: data.DESCRIPTION,
-                companyName: data.COMPANY_NAME
-            }));
+            // const mediaList = result.rows.map(data => ({
+            //     id: data.MEDIA_ID,
+            //     img: data.POSTER,
+            //     title: data.TITLE,
+            //     description: data.DESCRIPTION,
+            //     companyName: data.COMPANY_NAME
+            // }));
     
-            res.send(mediaList);
+            res.send(result.rows);
         } catch (err) {
             console.error("Error during database query: ", err);
             res.status(500).send("Internal Server Error");

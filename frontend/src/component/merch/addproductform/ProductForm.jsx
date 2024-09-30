@@ -173,7 +173,6 @@ const ProductForm = () => {
 
   return (
     <div>
-      <div className="addproduct-container"></div>
       <h3 className="title-addproduct">Add Product</h3>
       <div className="product-form">
         <form>

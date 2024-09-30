@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,40 +15,50 @@ function Navbar() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
+    const storedUsername = localStorage.getItem("username");
     if (storedUsername) {
       setUsername(storedUsername);
     }
   }, []);
 
   return (
-    <div className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-container">
-        <div className="logo-container">
-          <h1 className="logo">MMP</h1>
+    <div className={`navbar ${isScrolled ? "scrolled" : ""}`}>
+      <div className="navbar-container3">
+        <div className="logo-container3">
+          <p className="logo-title3">MMP</p>
         </div>
-        <div className="menu-container">
-          <ul className="menu-list">
-            <li className="menu-list-item">
-              <Link to={`/${username}/home`}>Home</Link>
-            </li>
-            <li className="menu-list-item">
-              <Link to={`/${username}/mediaform`}>Add Media</Link>
-            </li>
-            <li className="menu-list-item">
-              <Link to={`/${username}/company/collaborate`}>Collaborate</Link>
-            </li>
+        <div className="menu-container3">
+          <ul className="menu-list3">
+            <Link to={`/${username}/home`}>
+              <li className="menu-list-item3">
+                <i class="fa fa-home"></i> Home
+              </li>
+            </Link>
+            <Link to={`/${username}/mediaform`}>
+              <li className="menu-list-item3">
+              <i class="fa-solid fa-folder-plus"></i>Add Media
+              </li>
+            </Link>
+            <Link to={`/${username}/company/collaborate`}>
+              <li className="menu-list-item3">
+              <i class="fa-solid fa-handshake"></i>Collaborate
+              </li>
+            </Link>
           </ul>
         </div>
-        <Link to={`/${username}/profile`} className="profile-text">Profile</Link>
-        <Link to="/" className="logout-btn">Logout</Link>
+        <Link to={`/${username}/profile`} className="profile-text3">
+          <i className="fa fa-user"></i>
+        </Link>
+        <Link to="/" className="logout-btn3">
+          Logout
+        </Link>
       </div>
     </div>
   );

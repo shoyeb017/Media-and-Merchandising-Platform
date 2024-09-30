@@ -11,19 +11,21 @@ const ProductCard = ({ product }) => {
       setUsername(storedUsername);
     }
   }, []);
-  const username1 = localStorage.getItem('user_id');
+  //const username = localStorage.getItem('username');
+
   
-
     return (
-    <Link to={`/merchandiser/${username1}/product/${product.PRO_ID}`} className="link-product-card">
-    <div className="product-card">
+    <Link to={`/merchandiser/${username}/product/${product.PRO_ID}`} className="link-product-card">
+    <div className="product-card1">
+      <div className="product-card-inner1"> 
+        <img src={product.IMAGE} alt={product.NAME} className="product-card-inner1-img" />
+        <div className="product-card-inner1-button">View Details</div>
+      </div>
       <img src={product.IMAGE} alt={product.NAME} className="product-img" />
-
-        <h3 className="product-name">{product.NAME}</h3>
-        <p className="product-price">${product.PRICE}</p>
+      <p className="product-name">{product.NAME}</p>
+      <p className="product-price1">${product.PRICE}</p>
     </div>
-
-    </Link>
+  </Link>
   );
 };
 

@@ -185,117 +185,133 @@ const Order = () => {
   const [isReviewVisible, setIsReviewVisible] = useState(null);
 
   return (
-    <div className="user-order-top-header">
+    <div className="user-order-top-header11">
       {/* <div className="order-container"></div> */}
-      <h3 className="title-order">My Orders</h3>
-      <div className="order-requests">
+      
+      <div className="order-requests11">
+      <h3 className="title-order11">My Orders</h3>
         {orders.length > 0 ? (
-          <ul className="order-list">
+          <ul className="order-list11">
             {orders.map((order) => (
               <li
                 key={order.ORDER_ID}
-                className={`order-item ${order.DELIVERY_STATUS.toLowerCase()}`}
+                className={`order-item11 ${order.DELIVERY_STATUS.toLowerCase()}`}
               >
-                <div className="order-details1">
-                  <div className="order-details1-upper">
+                <div className="order-item11-details">
+                  <div className="order-item11-details-upper-left">
                     {order.DELIVERY_STATUS === "PENDING" ? (
-                      <div className="order-details1-status">
+                      <div className="order-item11-details-upper-left-status">
                         <i className="fa fa-clock"></i>
-                        <strong>PENDING</strong>
+                        <strong>Pending</strong>
                       </div>
                     ) : order.DELIVERY_STATUS === "PROCESSING" ? (
-                      <div className="order-details1-status">
+                      <div className="order-item11-details-upper-left-status">
                         <i className="fa fa-truck"></i>
-                        <strong>PROCESSING</strong>
+                        <strong>PRrocessing</strong>
                       </div>
                     ) : order.DELIVERY_STATUS === "SHIPPED" ? (
-                      <div className="order-details1-status">
+                      <div className="order-item11-details-upper-left-status">
                         <i className="fa fa-truck"></i>
-                        <strong>SHIPPED</strong>
+                        <strong>Shipped</strong>
                       </div>
                     ) : (
-                      <div className="order-details1-status">
+                      <div className="order-item11-details-upper-left-status">
                         <i className="fa fa-check"></i>
-                        <strong>DELIVERED</strong>
+                        <strong>Delivered</strong>
                       </div>
                     )}
                   </div>
-                  <div className="order-details1-lower">
-                    <p className="order-details1-lower-date">
+                  <div className="order-item11-details-upper-right">
+                    <p className="order-item11-details-upper-right-date">
                       {order.ORDER_DATE} {order.ORDER_TIME}
                     </p>
-                    <p className="order-details1-lower-price">
+                    <p className="order-item11-details-upper-right-lower-price">
                       Total: $
                       {calculateTotalPrice(order.ORDER_DETAILS).toFixed(2)}{" "}
                     </p>
                   </div>
                 </div>
 
-                <div className="order-details2">
-                  <div className="order-details2-upper">
-                    <h2 className="order-details2-upper-title">
+                <div className="order-item11-details-lower">
+                  <div className="order-item11-details-lower-left">
+                    <h2 className="order-item11-details-lower-left-title">
                       Customer Details{" "}
                     </h2>
                     <p>
-                      <strong>Order Date:</strong>{" "}
-                      <span className="order-details2-label">
+                      Order Date:{" "}
+                      <span className="order-item11-details-lower-left-label">
                         {order.ORDER_DATE} {order.ORDER_TIME}
                       </span>
                     </p>
                     <p>
-                      <strong>User Name:</strong> {userDetails.NAME}
+                      User Name{" "}
+                      <span className="order-item11-details-lower-left-label">
+                        {userDetails.NAME}
+                      </span>
                     </p>
                     <p>
-                      <strong>Phone:</strong> {userDetails.PHONE}
+                      Phone{" "}
+                      <span className="order-item11-details-lower-left-label">
+                        {" "}
+                        {userDetails.PHONE}{" "}
+                      </span>
                     </p>
                     <p>
-                      <strong>Email:</strong> {userDetails.EMAIL}
+                      Email
+                      <span className="order-item11-details-lower-left-label">
+                        {userDetails.EMAIL}
+                      </span>
                     </p>
                     <p>
-                      <strong>Address:</strong>{" "}
-                      {`${userDetails.HOUSE}, ${userDetails.STREET}, ${userDetails.CITY}`}
+                      Address{" "}
+                      <span className="order-item11-details-lower-left-label">{`${userDetails.HOUSE}, ${userDetails.STREET}, ${userDetails.CITY}`}</span>
                     </p>
                   </div>
-                  <div className="order-details2-lower">
-                    <h2 className="order-details2-upper-title">Products</h2>
-                    <ul className="product-details-list">
+                  <div className="order-item11-details-lower-right">
+                    <h2 className="order-item11-details-lower-right-title">
+                      Products
+                    </h2>
+                    <ul className="order-item11-details-lower-right-product-details-list">
                       {order.ORDER_DETAILS.split(", ").map((detail) => {
                         const [productId, quantity] = detail.split(" (x");
                         const cleanQuantity = quantity.replace(")", "");
                         const product = productDetails[productId];
 
                         return (
-                          <li key={productId} className="product-detail-item">
+                          <li
+                            key={productId}
+                            className="order-item11-details-lower-right-product-details-item"
+                          >
                             <img
                               src={product?.IMAGE}
                               alt={product?.NAME}
-                              className="product-detail-image"
+                              className="order-item11-details-lower-right-product-details-item-image"
                             />
-                            <div className="product-detail-info">
-                              <p>
-                                <strong>Product Name:</strong> {product?.NAME}
+                            <div className="order-item11-details-lower-right-product-details-item-info">
+                              <p className="order-item11-details-lower-right-product-details-item-info-name">
+                                {product?.NAME}
                               </p>
-                              <p>
-                                <strong>Quantity:</strong> {cleanQuantity}
-                              </p>
-                              <p>
-                                <strong>Price:</strong> ${product?.PRICE}
+                              <p className="order-item11-details-lower-right-product-details-item-info-qunatity">
+                                x{cleanQuantity}
                               </p>
                             </div>
+                            <div className="order-item11-details-lower-right-product-details-item-info-2nd">
+                              <p>${product?.PRICE}</p>
 
-                            {/* Review Button */}
-                            <button
-                              onClick={() =>
-                                setIsReviewVisible(
-                                  isReviewVisible === productId
-                                    ? null
-                                    : productId
-                                )
-                              }
-                              className="review-button"
-                            >
-                              Review
-                            </button>
+                              {/* Review Button */}
+                              <button
+                                onClick={() =>
+                                  setIsReviewVisible(
+                                    isReviewVisible === productId
+                                      ? null
+                                      : productId
+                                  )
+                                }
+                                className="review-button"
+                              >
+                                Review
+                              </button>
+                            </div>
 
                             {/* Add Review Section */}
                             <div
@@ -303,8 +319,30 @@ const Order = () => {
                                 isReviewVisible === productId ? "show" : ""
                               }`}
                             >
-                              <h4 style={{ color: "white" }}>Add a Review</h4>
-                              <div className="rating-review-box">
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <h4
+                                  style={{
+                                    color: "white",
+                                    fontSize: "15px",
+                                    fontWeight: "400",
+                                  }}
+                                >
+                                  Add a Review
+                                </h4>
+
+                                <i
+                                  class="fa-solid fa-xmark"
+                                  style={{ color: "white", fontSize: "20px" }}
+                                  onClick={() => setIsReviewVisible(null)}
+                                ></i>
+                              </div>
+                              <div className="rating-review-box11">
                                 <textarea
                                   placeholder="Your Review"
                                   value={newReview.description}
@@ -331,8 +369,8 @@ const Order = () => {
                                   ))}
                                 </select>
                               </div>
-                              <button onClick={handleAddReview}>
-                                Submit Review
+                              <button className="rating-review-box11-button" onClick={handleAddReview}>
+                                Submit
                               </button>
                             </div>
                           </li>
@@ -341,9 +379,9 @@ const Order = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="order-details4">
+                <div className="order-item11-details-lower-bottom">
                   <button
-                    className="order-details4-button"
+                    className="order-item11-details-lower-bottom-button"
                     onClick={() =>
                       handleCancel(
                         order.ORDER_DATE,
@@ -360,7 +398,7 @@ const Order = () => {
             ))}
           </ul>
         ) : (
-          <p>No orders.</p>
+          <p style={{color:"white"}}>No orders.</p>
         )}
       </div>
     </div>

@@ -1,13 +1,3 @@
-.addproduct-container {
-  width: 100%;
-  height: 500px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0), #242428), url('https://static.vecteezy.com/system/resources/previews/031/319/909/large_2x/row-of-fashionable-polo-t-shirts-for-man-on-wooden-hanger-or-rack-in-a-clothing-boutique-retail-shop-concept-by-ai-generated-free-photo.jpg');
-  filter: blur(1px);
-  position: absolute;
-}
 
 .product-form {
   max-width: 600px;
@@ -34,6 +24,8 @@
 
   position: relative;
   z-index: 1; /* Ensure this is above the background container */
+
+  margin-top: 80px;
 
 }
 
