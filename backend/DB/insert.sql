@@ -4126,6 +4126,149 @@ VALUES (1234, 13);
 -- DISCUSSION
 ------------------------------------------------------------------------------------------------------------------------------
 
+-- Parent discussion started by user 1237
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    240,
+    'Discussion on the epic conclusion of the Avengers saga in Endgame.',
+    'Avengers: Endgame Discussion',
+    7,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    241,
+    'The character arcs in this movie are phenomenal!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    242,
+    'I can’t believe how emotional the final battle was!',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    243,
+    'The time travel aspect was really well done!',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    244,
+    'What did you think of Iron Man’s final sacrifice?',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    245,
+    'The return of all the heroes was such a thrilling moment!',
+    NULL,
+    5,  -- Increasing reply count for fifth reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    246,
+    'I loved how they wrapped up all the storylines!',
+    NULL,
+    6,  -- Increasing reply count for sixth reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    247,
+    'The visuals were stunning in this movie!',
+    NULL,
+    7,  -- Increasing reply count for seventh reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    248,
+    'What was your favorite scene from the movie?',
+    NULL,
+    8,  -- Increasing reply count for eighth reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    249,
+    'How did you feel about Captain America wielding Mjolnir?',
+    NULL,
+    9,  -- Increasing reply count for ninth reply
+    240
+);
+
+
 
 -- Starting discussion by user 1234
 INSERT INTO DISCUSSION (
@@ -4381,6 +4524,1145 @@ INSERT INTO USERSTARTDISCUSSION (
 );
 
 
+
+
+-- Parent discussion started by user 1235
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    210,
+    'Discussion on the epic journey in The Lord of the Rings: The Fellowship of the Ring.',
+    'The Lord of the Rings Discussion',
+    9,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    211,
+    'I love the character development, especially Frodo!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    212,
+    'The scenery is breathtaking, Middle-earth is beautifully depicted.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    213,
+    'I always felt the dynamic between Aragorn and Legolas was underappreciated.',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    214,
+    'The journey feels so personal and epic at the same time.',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    215,
+    'Its amazing how the movie connects with Tolkiens lore.',
+    NULL,
+    5,
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    216,
+    'I cant get enough of the battle sequences.',
+    NULL,
+    6,
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    217,
+    'The friendship between Sam and Frodo is just perfect.',
+    NULL,
+    7,
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    218,
+    'What do you think about the Rings corrupting power on Boromir?',
+    NULL,
+    8,
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    219,
+    'I think Gollum character arc is one of the best in the trilogy.',
+    NULL,
+    9,
+    210
+);
+
+
+-- Parent discussion started by user 1236
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    220,
+    'Discussion on the intense action and visuals in Mad Max: Fury Road.',
+    'Mad Max: Fury Road Discussion',
+    8,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    221,
+    'The stunts and practical effects are amazing!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    222,
+    'I love how they built the world of post-apocalyptic wastelands.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    223,
+    'Furiosa is one of the best characters in action movies!',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    224,
+    'The chase scenes are legendary and so well done.',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    225,
+    'I was blown away by the minimal use of CGI.',
+    NULL,
+    5,
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    226,
+    'The soundtrack by Junkie XL adds so much to the movie.',
+    NULL,
+    6,
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    227,
+    'The cinematography is breathtaking.',
+    NULL,
+    7,
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    228,
+    'I think Immortan Joe is one of the most terrifying villains.',
+    NULL,
+    8,
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    229,
+    'What are your thoughts on the feminist themes in the movie?',
+    NULL,
+    9,
+    220
+);
+
+
+-- Parent discussion started by user 1237
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    230,
+    'Discussion on the mind-bending plot and themes of Inception.',
+    'Inception Movie Discussion',
+    7,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    231,
+    'The concept of dreams within dreams is so fascinating!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    232,
+    'I love how the movie leaves you questioning what is real.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    233,
+    'The visuals and effects are mind-blowing!',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    234,
+    'The score by Hans Zimmer is iconic.',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    235,
+    'What do you think about the ending? Was Cobb still dreaming?',
+    NULL,
+    5,
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    236,
+    'The idea of shared dreaming is such a unique concept.',
+    NULL,
+    6,
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    237,
+    'I appreciate how Christopher Nolan doesn’t spoon-feed the plot.',
+    NULL,
+    7,
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    238,
+    'I think this is one of Leonardo DiCaprio’s best performances.',
+    NULL,
+    8,
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    239,
+    'The dream sequences are so cleverly constructed.',
+    NULL,
+    9,
+    230
+);
+
+
+
+
+-- Parent discussion and replies linked to "Inception" (MEDIA_ID = 7)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    230,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    231,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    232,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    233,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    234,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    235,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    236,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    237,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    238,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    239,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+
+-- Parent discussion and replies linked to "Avengers: Endgame" (MEDIA_ID = 3)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    240,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    241,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    242,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    243,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    244,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    245,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    246,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    247,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    248,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    249,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+
+-- Parent discussion and replies linked to "The Lord of the Rings: The Fellowship of the Ring" (MEDIA_ID = 19)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    210,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    211,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    212,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    213,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    214,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    215,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    216,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    217,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    218,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    219,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+
+-- Parent discussion and replies linked to "Mad Max: Fury Road" (MEDIA_ID = 9)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    220,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    221,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    222,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    223,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    224,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    225,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    226,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    227,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    228,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    229,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+
+
+-- Parent discussion started by user 1237
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    230,
+    1237
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    231,
+    1238
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    232,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    233,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    234,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    235,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    236,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    237,
+    1244
+);
+
+
+
+-- Parent discussion started by user 1235
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    210,
+    1235
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    211,
+    1236
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    212,
+    1237
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    213,
+    1238
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    214,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    215,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    216,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    217,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    218,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    219,
+    1244
+);
+
+
+-- Parent discussion started by user 1236
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    220,
+    1236
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    221,
+    1237
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    222,
+    1238
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    223,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    224,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    225,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    226,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    227,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    228,
+    1244
+);
+
+
+-- Parent discussion started by user 1237
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    240,
+    1237
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    241,
+    1238
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    242,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    243,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    244,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    245,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    246,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    247,
+    1244
+);
+
+
 ------------------------------------------------------------------------------------------------------------------------------
 -- DISCUSSIONABOUTMEDIA
 ------------------------------------------------------------------------------------------------------------------------------
@@ -4501,6 +5783,916 @@ INSERT INTO DISCUSSIONABOUTMEDIA (
 
 
 
+
+-- Parent discussion started by user 1238
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    250,
+    'Let’s discuss the epic visuals and storyline of Thor: Ragnarok!',
+    'Thor: Ragnarok Discussion',
+    6,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    251,
+    'The humor in this film is top-notch!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    252,
+    'I loved the character development of Thor and Loki.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    253,
+    'What did you think of the fight scenes?',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    254,
+    'Hela was an amazing villain!',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    255,
+    'The visuals and colors were stunning!',
+    NULL,
+    5,  -- Increasing reply count for fifth reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    256,
+    'I loved Korg! He was hilarious!',
+    NULL,
+    6,  -- Increasing reply count for sixth reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    257,
+    'What were your thoughts on the ending?',
+    NULL,
+    7,  -- Increasing reply count for seventh reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    258,
+    'The music choices were perfect!',
+    NULL,
+    8,  -- Increasing reply count for eighth reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    259,
+    'How does this compare to other Thor movies?',
+    NULL,
+    9,  -- Increasing reply count for ninth reply
+    250
+);
+
+
+
+-- Parent discussion and replies linked to "Thor: Ragnarok" (MEDIA_ID = 4)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    250,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    251,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    252,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    253,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    254,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    255,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    256,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    257,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    258,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    259,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+
+
+-- Parent discussion started by user 1238
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    250,
+    1238
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    251,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    252,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    253,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    254,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    255,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    256,
+    1244
+);
+
+
+
+
+
+
+
+-- Parent discussion started by user 1239
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    260,
+    'What are your thoughts on Doctor Strange’s powers and the multiverse concept?',
+    'Doctor Strange Discussion',
+    5,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    261,
+    'The special effects in this movie were amazing!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    262,
+    'I loved how they introduced the concept of the multiverse.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    263,
+    'Doctor Strange’s character development was spot on.',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    264,
+    'What did you think of the ending?',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    265,
+    'The way they portrayed magic was fascinating!',
+    NULL,
+    5,  -- Increasing reply count for fifth reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    266,
+    'The relationship between Doctor Strange and Wong was great.',
+    NULL,
+    6,  -- Increasing reply count for sixth reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    267,
+    'I would love to see more of the multiverse in future films.',
+    NULL,
+    7,  -- Increasing reply count for seventh reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    268,
+    'Which other characters would you like to see join him?',
+    NULL,
+    8,  -- Increasing reply count for eighth reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    269,
+    'The music score added so much to the film’s atmosphere!',
+    NULL,
+    9,  -- Increasing reply count for ninth reply
+    260
+);
+
+
+
+
+-- Parent discussion and replies linked to "Doctor Strange" (MEDIA_ID = 5)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    260,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    261,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    262,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    263,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    264,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    265,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    266,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    267,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    268,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    269,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+
+
+
+
+-- Parent discussion started by user 1239
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    260,
+    1239
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    261,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    262,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    263,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    264,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    265,
+    1244
+);
+
+
+
+
+-- Parent discussion started by user 1240
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    270,
+    'What are your thoughts on the concept of time in Interstellar?',
+    'Interstellar Discussion',
+    4,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    271,
+    'The way they portrayed black holes was mind-blowing!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    272,
+    'I loved the emotional depth of Cooper’s journey.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    273,
+    'The ending was both beautiful and heartbreaking.',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    274,
+    'The soundtrack by Hans Zimmer was fantastic!',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    275,
+    'The science behind the wormholes was fascinating.',
+    NULL,
+    5,  -- Increasing reply count for fifth reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    276,
+    'How do you feel about the portrayal of love in the movie?',
+    NULL,
+    6,  -- Increasing reply count for sixth reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    277,
+    'What do you think of the ending and its implications?',
+    NULL,
+    7,  -- Increasing reply count for seventh reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    278,
+    'I found the visual effects to be stunning!',
+    NULL,
+    8,  -- Increasing reply count for eighth reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    279,
+    'Did you notice the time dilation effects?',
+    NULL,
+    9,  -- Increasing reply count for ninth reply
+    270
+);
+
+
+
+
+
+-- Parent discussion and replies linked to "Interstellar" (MEDIA_ID = 6)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    270,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    271,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    272,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    273,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    274,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    275,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    276,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    277,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    278,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    279,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+
+
+
+
+-- Parent discussion started by user 1240
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    270,
+    1240
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    271,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    272,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    273,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    274,
+    1244
+);
 
 
 
