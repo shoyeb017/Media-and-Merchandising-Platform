@@ -495,7 +495,7 @@ const MovieDetailsPage = () => {
               <i class="fa-solid fa-plus"></i> ADD TO PLAN TO WATCH
             </button>
             <button
-              className="allsection1-section1-watchlist-button"
+              className="allsection1-section1-watchlist-button2"
               onClick={handleWatched}
             >
               {" "}

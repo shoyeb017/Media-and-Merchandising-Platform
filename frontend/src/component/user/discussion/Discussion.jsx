@@ -198,6 +198,7 @@ const Discussion = () => {
                   key={reply.DIS_ID}
                   name={reply.NAME}
                   text={reply.DESCRIPTION}
+                  reply={reply.REPLY_COUNT}
                 />
               ))}
             </div>

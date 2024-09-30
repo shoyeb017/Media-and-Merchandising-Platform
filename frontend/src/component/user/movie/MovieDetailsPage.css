@@ -161,8 +161,11 @@
 }
 
 .allsection1-section1-watchlist-button1:hover {
-  color: #f8782f;
-  border-color: #f8782f;
+  /* color: #f8782f;
+  border-color: #f8782f; */
+  background-color: #ff640a;
+  color: white;
+  
 }
 
 .allsection1-section1-watchlist-button2 {

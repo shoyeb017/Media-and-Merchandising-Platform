@@ -38,7 +38,7 @@ VALUES (
     3,
     'Avengers: Endgame',
     'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos'' actions and restore balance to the universe.',
-    8,
+    9.5,
     10,
     'MOVIE',
     'ACTION, ADVENTURE, DRAMA',
@@ -54,7 +54,7 @@ VALUES (
     4,
     'Thor: Ragnarok',
     'Imprisoned on the planet Sakaar, Thor must race against time to return to Asgard and stop Ragnarök, the destruction of his world, at the hands of the powerful and ruthless villain Hela.',
-    8,
+    9.5,
     10,
     'MOVIE',
     'ACTION, ADVENTURE, DRAMA',
@@ -70,7 +70,7 @@ VALUES (
     5,
     'Doctor Strange',
     'While on a journey of physical and spiritual healing, a brilliant neurosurgeon is drawn into the world of the mystic arts.',
-    7,
+    9.5,
     10,
     'MOVIE',
     'ACTION, ADVENTURE, FANTASY',
@@ -102,7 +102,7 @@ VALUES (
     7,
     'Inception',
     'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.',
-    9,
+    9.5,
     10,
     'MOVIE',
     'ACTION, ADVENTURE, SCI-FI',
@@ -134,7 +134,7 @@ VALUES (
     9,
     'Mad Max: Fury Road',
     'In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshipper and a drifter named Max.',
-    8,
+    9.5,
     10,
     'MOVIE',
     'ACTION, ADVENTURE, SCI-FI',
@@ -712,7 +712,7 @@ VALUES (
     13,
     'Bad Boys: Ride or Die',
     'This Summer, the world''s favorite Bad Boys are back with their iconic mix of edge-of-your seat action and outrageous comedy but this time with a twist: Miami''s finest are now on the run.',
-    7,
+    9.5,
     10,
     'MOVIE',
     'ACTION, ADVENTURE, COMEDY',
@@ -808,7 +808,7 @@ VALUES (
     19,
     'The Lord of the Rings: The Fellowship of the Ring',
     'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.',
-    9,
+    9.5,
     10,
     'MOVIE',
     'ACTION, ADVENTURE, DRAMA',
@@ -840,7 +840,7 @@ VALUES (
     21,
     'Damsel',
     'A dutiful damsel agrees to marry a handsome prince, only to find the royal family has recruited her as a sacrifice to repay an ancient debt.',
-    6,
+    9.4,
     10,
     'MOVIE',
     'ACTION, ADVENTURE, FANTASY',
@@ -1777,37 +1777,37 @@ VALUES (
 
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS) 
-    VALUES ('1234', 1, 'Y', 'PLAN_TO_WATCH');
+    VALUES ('1234', 35, 'Y', 'PLAN_TO_WATCH');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS)
-    VALUES ('1234', 2, 'Y', 'PLAN_TO_WATCH');
+    VALUES ('1234', 39, 'Y', 'PLAN_TO_WATCH');
     
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS) 
-    VALUES ('1234', 3, 'Y', 'PLAN_TO_WATCH');
+    VALUES ('1234', 40, 'Y', 'PLAN_TO_WATCH');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS)
-    VALUES ('1234', 4, 'Y', 'PLAN_TO_WATCH');
+    VALUES ('1234', 201, 'Y', 'PLAN_TO_WATCH');
     
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS) 
-    VALUES ('1234', 5, 'Y', 'PLAN_TO_WATCH');
+    VALUES ('1234',29, 'Y', 'PLAN_TO_WATCH');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS)
-    VALUES ('1234', 6, 'Y', 'PLAN_TO_WATCH');
+    VALUES ('1234', 28, 'Y', 'PLAN_TO_WATCH');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS) 
-    VALUES ('1234', 7, 'Y', 'WATCHED');
+    VALUES ('1234', 33, 'Y', 'WATCHED');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS)
-    VALUES ('1234', 8, 'Y', 'WATCHED');
+    VALUES ('1234', 88, 'Y', 'WATCHED');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS)
-    VALUES ('1234', 9, 'Y', 'WATCHED');
+    VALUES ('1234', 78, 'Y', 'WATCHED');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS)
-    VALUES ('1234', 10, 'Y', 'WATCHED');
+    VALUES ('1234', 83, 'Y', 'WATCHED');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS)
-    VALUES ('1234', 11, 'Y', 'WATCHED');
+    VALUES ('1234', 82, 'Y', 'WATCHED');
 
 INSERT INTO USERWATCHANDFAVORITE (USER_ID, MEDIA_ID, FAVORITE, STATUS)
     VALUES ('1234', 12, 'Y', 'WATCHED');
@@ -2684,6 +2684,25 @@ AND
 --PRODUCTBASEDONMEDIA
 -------------------------------------------------------------------------------------------------------------------------------, 0, 0-
 
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (103, 13);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (110, 13);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (116, 13);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (127, 9);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (101, 9);
+
+INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
+VALUES (123, 9);
+
 INSERT INTO PRODUCTBASEDONMEDIA (PRO_ID, MEDIA_ID) 
 VALUES (100, 3);
 
@@ -3375,7 +3394,14 @@ INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE)
 VALUES (200, 'Chie Nakamura', 'https://image.tmdb.org/t/p/w500/evB6vKUbm0CKgBcgikPeFXdwd29.jpg', 'ACTRESS');
 
 
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE)
+VALUES (201, 'Nathan Fielder', 'https://m.media-amazon.com/images/M/MV5BNzIyNjQzMTIxN15BMl5BanBnXkFtZTgwMzUxMTIwNzE@._V1_FMjpg_UX1500_.jpg', 'DIRECTOR');
 
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE)
+VALUES (202,'Brian S. Wolfe', 'https://m.media-amazon.com/images/M/MV5BMTQxODYyMTI2OF5BMl5BanBnXkFtZTgwMzQ4MDg5MjE@._V1_QL75_UX436.5_.jpg', 'ACTOR');
+
+INSERT INTO ROLE (ROLE_ID, NAME, IMG, ROLE_TYPE)
+VALUES (203, 'John Wilson', 'https://ntvb.tmsimg.com/assets/assets/1328303_v9_aa.jpg', 'ACTOR');
 
 
 
@@ -3401,6 +3427,19 @@ VALUES (200, 'Chie Nakamura', 'https://image.tmdb.org/t/p/w500/evB6vKUbm0CKgBcgi
 ------------------------------------------------------------------------------------------------------------------------------
 -- MEDIAHASROLE
 ------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
+VALUES (214, 201);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID)  
+VALUES (214, 202);
+
+INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID)
+VALUES (214, 203);
+
 
 
 INSERT INTO MEDIAHASROLE (MEDIA_ID, ROLE_ID) 
@@ -4087,533 +4126,1541 @@ VALUES (1234, 13);
 -- DISCUSSION
 ------------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-INSERT INTO DISCUSSION(
+-- Parent discussion started by user 1237
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
-    1,
-    'This is a discussion about the best way to learn SQL.',
-    'SQL',
-    4,
+) VALUES (
+    240,
+    'Discussion on the epic conclusion of the Avengers saga in Endgame.',
+    'Avengers: Endgame Discussion',
+    7,  -- Initial reply count for parent discussion
     NULL
-  );
+);
 
-INSERT INTO DISCUSSION(
+-- Replies by other users
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
+) VALUES (
+    241,
+    'The character arcs in this movie are phenomenal!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    242,
+    'I can’t believe how emotional the final battle was!',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    243,
+    'The time travel aspect was really well done!',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    244,
+    'What did you think of Iron Man’s final sacrifice?',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    245,
+    'The return of all the heroes was such a thrilling moment!',
+    NULL,
+    5,  -- Increasing reply count for fifth reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    246,
+    'I loved how they wrapped up all the storylines!',
+    NULL,
+    6,  -- Increasing reply count for sixth reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    247,
+    'The visuals were stunning in this movie!',
+    NULL,
+    7,  -- Increasing reply count for seventh reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    248,
+    'What was your favorite scene from the movie?',
+    NULL,
+    8,  -- Increasing reply count for eighth reply
+    240
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    249,
+    'How did you feel about Captain America wielding Mjolnir?',
+    NULL,
+    9,  -- Increasing reply count for ninth reply
+    240
+);
+
+
+
+-- Starting discussion by user 1234
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    200,
+    'Lets discuss the stunts and action scenes in Bad Boys: Ride or Die!',
+    'Bad Boys: Ride or Die - Action Scenes',
+    9,
+    NULL
+);
+
+-- User 1234 starts the discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1234,
+    200
+);
+
+-- Linking the discussion to the media (Bad Boys: Ride or Die)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    200,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Replies from users 1235 to 1243, with increasing reply counts
+
+-- Reply from user 1235
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    201,
+    'The car chase scene was epic! What do you think?',
+    NULL,
     2,
-    'This is a discussion about the best way to learn Python.',
-    'Python',
-    4,
-    NULL
-  );
+    200
+);
 
-INSERT INTO DISCUSSION(
+-- User 1235 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1235,
+    201
+);
+
+-- Reply from user 1236
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
+) VALUES (
+    202,
+    'I loved the part where the helicopter explodes! So thrilling.',
+    NULL,
     3,
-    'This is a discussion about the best way to learn Java.',
-    'Java',
-    4,
-    NULL
-  );
+    200
+);
 
-INSERT INTO DISCUSSION(
+-- User 1236 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1236,
+    202
+);
+
+-- Reply from user 1237
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
+) VALUES (
+    203,
+    'The hand-to-hand combat scenes were top-notch!',
+    NULL,
     4,
-    'This is a discussion about the best way to learn JavaScript.',
-    'JavaScript',
-    4,
-    NULL
-  );
+    200
+);
 
-  -- child topics
-----------------------------------------------------------------------------------
-INSERT INTO DISCUSSION(
+-- User 1237 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1237,
+    203
+);
+
+-- Reply from user 1238
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
+) VALUES (
+    204,
+    'Agreed! It felt like a real action-packed movie.',
+    NULL,
     5,
-    'This is a discussion about the best way to learn SQL.',
-    NULL,
-    1,
-    1
-  );
-  INSERT INTO DISCUSSION(
+    200
+);
+
+-- User 1238 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1238,
+    204
+);
+
+-- Reply from user 1239
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
-    8,
-    'This is a discussion about the best way to learn SQL.',
+) VALUES (
+    205,
+    'The plot was intense, and the action complemented it well!',
     NULL,
-    2,
-    1
-  );
-  INSERT INTO DISCUSSION(
-    DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
     6,
-    'This is a discussion about the best way to learn SQL.',
-    NULL,
-    3,
-    1
-  );
-  INSERT INTO DISCUSSION(
+    200
+);
+
+-- User 1239 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1239,
+    205
+);
+
+-- Reply from user 1240
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
+) VALUES (
+    206,
+    'I agree! The pacing of the action scenes was perfect.',
+    NULL,
     7,
-    'This is a discussion about the best way to learn SQL.',
+    200
+);
+
+-- User 1240 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1240,
+    206
+);
+
+-- Reply from user 1241
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    207,
+    'What did you think of the final showdown?',
     NULL,
-    4,
-    1
-  );
+    8,
+    200
+);
+
+-- User 1241 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1241,
+    207
+);
+
+-- Reply from user 1242
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    208,
+    'The final scene was so intense! Great end to the movie.',
+    NULL,
+    9,
+    200
+);
+
+-- User 1242 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1242,
+    208
+);
+
+-- Reply from user 1243
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    209,
+    'Definitely! It had me on the edge of my seat.',
+    NULL,
+    10,
+    200
+);
+
+-- User 1243 replies to discussion
+INSERT INTO USERSTARTDISCUSSION (
+    USER_ID,
+    DIS_ID
+) VALUES (
+    1243,
+    209
+);
 
 
--------------------------------------------------------------------------------
-    INSERT INTO DISCUSSION(
+
+
+-- Parent discussion started by user 1235
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
-    21,
-    'This is a discussion about the best way to learn Python.',
-    'Python',
-    1,
-    2
-  );
-  INSERT INTO DISCUSSION(
+) VALUES (
+    210,
+    'Discussion on the epic journey in The Lord of the Rings: The Fellowship of the Ring.',
+    'The Lord of the Rings Discussion',
+    9,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
-    22,
-    'This is a discussion about the best way to learn Python.',
-    'Python',
-    2,
-    2
-  );
-  INSERT INTO DISCUSSION(
+) VALUES (
+    211,
+    'I love the character development, especially Frodo!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    210
+);
+
+INSERT INTO DISCUSSION (
     DIS_ID,
     DESCRIPTION,
     TOPIC,
     REPLY_COUNT,
     PARENT_TOPIC
-  )
-VALUES
-  (
-    23,
-    'This is a discussion about the best way to learn Python.',
-    'Python',
+) VALUES (
+    212,
+    'The scenery is breathtaking, Middle-earth is beautifully depicted.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    213,
+    'I always felt the dynamic between Aragorn and Legolas was underappreciated.',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    214,
+    'The journey feels so personal and epic at the same time.',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    215,
+    'Its amazing how the movie connects with Tolkiens lore.',
+    NULL,
+    5,
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    216,
+    'I cant get enough of the battle sequences.',
+    NULL,
+    6,
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    217,
+    'The friendship between Sam and Frodo is just perfect.',
+    NULL,
+    7,
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    218,
+    'What do you think about the Rings corrupting power on Boromir?',
+    NULL,
+    8,
+    210
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    219,
+    'I think Gollum character arc is one of the best in the trilogy.',
+    NULL,
+    9,
+    210
+);
+
+
+-- Parent discussion started by user 1236
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    220,
+    'Discussion on the intense action and visuals in Mad Max: Fury Road.',
+    'Mad Max: Fury Road Discussion',
+    8,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    221,
+    'The stunts and practical effects are amazing!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    222,
+    'I love how they built the world of post-apocalyptic wastelands.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    223,
+    'Furiosa is one of the best characters in action movies!',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    224,
+    'The chase scenes are legendary and so well done.',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    225,
+    'I was blown away by the minimal use of CGI.',
+    NULL,
+    5,
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    226,
+    'The soundtrack by Junkie XL adds so much to the movie.',
+    NULL,
+    6,
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    227,
+    'The cinematography is breathtaking.',
+    NULL,
+    7,
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    228,
+    'I think Immortan Joe is one of the most terrifying villains.',
+    NULL,
+    8,
+    220
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    229,
+    'What are your thoughts on the feminist themes in the movie?',
+    NULL,
+    9,
+    220
+);
+
+
+-- Parent discussion started by user 1237
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    230,
+    'Discussion on the mind-bending plot and themes of Inception.',
+    'Inception Movie Discussion',
+    7,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    231,
+    'The concept of dreams within dreams is so fascinating!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    232,
+    'I love how the movie leaves you questioning what is real.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    233,
+    'The visuals and effects are mind-blowing!',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    234,
+    'The score by Hans Zimmer is iconic.',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    235,
+    'What do you think about the ending? Was Cobb still dreaming?',
+    NULL,
+    5,
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    236,
+    'The idea of shared dreaming is such a unique concept.',
+    NULL,
+    6,
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    237,
+    'I appreciate how Christopher Nolan doesn’t spoon-feed the plot.',
+    NULL,
+    7,
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    238,
+    'I think this is one of Leonardo DiCaprio’s best performances.',
+    NULL,
+    8,
+    230
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    239,
+    'The dream sequences are so cleverly constructed.',
+    NULL,
+    9,
+    230
+);
+
+
+
+
+-- Parent discussion and replies linked to "Inception" (MEDIA_ID = 7)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    230,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    231,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    232,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    233,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    234,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    235,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    236,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    237,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    238,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    239,
+    7,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+
+-- Parent discussion and replies linked to "Avengers: Endgame" (MEDIA_ID = 3)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    240,
     3,
-    2
-  );
-  INSERT INTO DISCUSSION(
-    DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    24,
-    'This is a discussion about the best way to learn Python.',
-    'Python',
-    4,
-    2
-  );
--------------------------------------------------------------------------------------
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
 
-INSERT INTO DISCUSSION(
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
     DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    31,
-    'This is a discussion about the best way to learn Java.',
-    'Java',
-    1,
-   3
-  );
-  INSERT INTO DISCUSSION(
-    DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    32,
-    'This is a discussion about the best way to learn Java.',
-    'Java',
-    2,
-    3
-  );
-  INSERT INTO DISCUSSION(
-    DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    33,
-    'This is a discussion about the best way to learn Java.',
-    'Java',
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    241,
     3,
-    3
-  );
-  INSERT INTO DISCUSSION(
-    DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    34,
-    'This is a discussion about the best way to learn Java.',
-    'Java',
-    4,
-    3
-  );
-  -----------------------------------------------------------------------------------------
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
 
-  INSERT INTO DISCUSSION(
+INSERT INTO DISCUSSIONABOUTMEDIA (
     DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    41,
-    'This is a discussion about the best way to learn JavaScript.',
-    'JavaScript',
-    1,
-    4
-  );
-  INSERT INTO DISCUSSION(
-    DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    42,
-    'This is a discussion about the best way to learn JavaScript.',
-    'JavaScript',
-    2,
-    4
-  );
-  INSERT INTO DISCUSSION(
-    DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    43,
-    'This is a discussion about the best way to learn JavaScript.',
-    'JavaScript',
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    242,
     3,
-    4
-  );
-  INSERT INTO DISCUSSION(
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
     DIS_ID,
-    DESCRIPTION,
-    TOPIC,
-    REPLY_COUNT,
-    PARENT_TOPIC
-  )
-VALUES
-  (
-    44,
-    'This is a discussion about the best way to learn JavaScript.',
-    'JavaScript',
-    4,
-    4
-  );
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    243,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    244,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    245,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    246,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    247,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    248,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    249,
+    3,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
 
 
-------------------------------------------------------------------------------------------------------------------------------
--- USERSTARTDISCUSSION
-------------------------------------------------------------------------------------------------------------------------------
+-- Parent discussion and replies linked to "The Lord of the Rings: The Fellowship of the Ring" (MEDIA_ID = 19)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    210,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    211,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    212,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    213,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    214,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    215,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    216,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    217,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    218,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    219,
+    19,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+
+-- Parent discussion and replies linked to "Mad Max: Fury Road" (MEDIA_ID = 9)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    220,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    221,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    222,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    223,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    224,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    225,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    226,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    227,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    228,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    229,
+    9,
+    TO_DATE('2023-09-26', 'YYYY-MM-DD')
+);
 
 
 
+-- Parent discussion started by user 1237
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    230,
+    1237
+);
 
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    1
-  );
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    231,
+    1238
+);
 
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    2
-  );
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    232,
+    1239
+);
 
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    3
-  );
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    233,
+    1240
+);
 
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    4
-  );
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    234,
+    1241
+);
 
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    5
-  );
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    235,
+    1242
+);
 
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    6
-  );
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    236,
+    1243
+);
 
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    7
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    8
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    21
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    22
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    23
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    24
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    31
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    32
-  );  
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    33
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    34
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    41
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    42
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    43
-  );
-
-INSERT INTO USERSTARTDISCUSSION(
-    USER_ID,
-    DIS_ID
-  )
-VALUES
-  (
-    1234,
-    44
-  );
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    237,
+    1244
+);
 
 
 
+-- Parent discussion started by user 1235
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    210,
+    1235
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    211,
+    1236
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    212,
+    1237
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    213,
+    1238
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    214,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    215,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    216,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    217,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    218,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    219,
+    1244
+);
+
+
+-- Parent discussion started by user 1236
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    220,
+    1236
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    221,
+    1237
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    222,
+    1238
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    223,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    224,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    225,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    226,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    227,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    228,
+    1244
+);
+
+
+-- Parent discussion started by user 1237
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    240,
+    1237
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    241,
+    1238
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    242,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    243,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    244,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    245,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    246,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    247,
+    1244
+);
 
 
 ------------------------------------------------------------------------------------------------------------------------------
@@ -4621,64 +5668,1031 @@ VALUES
 ------------------------------------------------------------------------------------------------------------------------------
 
 
+-- Linking discussion and replies to the media "Bad Boys: Ride or Die" (MEDIA_ID = 13)
 
-
-
-INSERT INTO DISCUSSIONABOUTMEDIA(
+-- Discussion started by user 1234
+INSERT INTO DISCUSSIONABOUTMEDIA (
     DIS_ID,
     MEDIA_ID,
     DIS_DATE
-  )
-VALUES
-  (
-    1,
-    3,
-    TO_DATE('2022-03-01', 'YYYY-MM-DD')
-  );
+) VALUES (
+    200,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
 
-INSERT INTO DISCUSSIONABOUTMEDIA(
+-- Reply from user 1235
+INSERT INTO DISCUSSIONABOUTMEDIA (
     DIS_ID,
     MEDIA_ID,
     DIS_DATE
-  )
-VALUES
-  (
-    2,
+) VALUES (
+    201,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Reply from user 1236
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    202,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Reply from user 1237
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    203,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Reply from user 1238
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    204,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Reply from user 1239
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    205,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Reply from user 1240
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    206,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Reply from user 1241
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    207,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Reply from user 1242
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    208,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+-- Reply from user 1243
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    209,
+    13,
+    TO_DATE('2023-09-25', 'YYYY-MM-DD')
+);
+
+
+
+
+
+-- Parent discussion started by user 1238
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    250,
+    'Let’s discuss the epic visuals and storyline of Thor: Ragnarok!',
+    'Thor: Ragnarok Discussion',
+    6,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    251,
+    'The humor in this film is top-notch!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    252,
+    'I loved the character development of Thor and Loki.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    253,
+    'What did you think of the fight scenes?',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    254,
+    'Hela was an amazing villain!',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    255,
+    'The visuals and colors were stunning!',
+    NULL,
+    5,  -- Increasing reply count for fifth reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    256,
+    'I loved Korg! He was hilarious!',
+    NULL,
+    6,  -- Increasing reply count for sixth reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    257,
+    'What were your thoughts on the ending?',
+    NULL,
+    7,  -- Increasing reply count for seventh reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    258,
+    'The music choices were perfect!',
+    NULL,
+    8,  -- Increasing reply count for eighth reply
+    250
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    259,
+    'How does this compare to other Thor movies?',
+    NULL,
+    9,  -- Increasing reply count for ninth reply
+    250
+);
+
+
+
+-- Parent discussion and replies linked to "Thor: Ragnarok" (MEDIA_ID = 4)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    250,
     4,
-    TO_DATE('2022-03-02', 'YYYY-MM-DD')
-  );
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
 
-INSERT INTO DISCUSSIONABOUTMEDIA(
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
     DIS_ID,
     MEDIA_ID,
     DIS_DATE
-  )
-VALUES
-  (
-    3,
+) VALUES (
+    251,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    252,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    253,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    254,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    255,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    256,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    257,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    258,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    259,
+    4,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+
+
+-- Parent discussion started by user 1238
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    250,
+    1238
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    251,
+    1239
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    252,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    253,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    254,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    255,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    256,
+    1244
+);
+
+
+
+
+
+
+
+-- Parent discussion started by user 1239
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    260,
+    'What are your thoughts on Doctor Strange’s powers and the multiverse concept?',
+    'Doctor Strange Discussion',
+    5,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    261,
+    'The special effects in this movie were amazing!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    262,
+    'I loved how they introduced the concept of the multiverse.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    263,
+    'Doctor Strange’s character development was spot on.',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    264,
+    'What did you think of the ending?',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    265,
+    'The way they portrayed magic was fascinating!',
+    NULL,
+    5,  -- Increasing reply count for fifth reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    266,
+    'The relationship between Doctor Strange and Wong was great.',
+    NULL,
+    6,  -- Increasing reply count for sixth reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    267,
+    'I would love to see more of the multiverse in future films.',
+    NULL,
+    7,  -- Increasing reply count for seventh reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    268,
+    'Which other characters would you like to see join him?',
+    NULL,
+    8,  -- Increasing reply count for eighth reply
+    260
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    269,
+    'The music score added so much to the film’s atmosphere!',
+    NULL,
+    9,  -- Increasing reply count for ninth reply
+    260
+);
+
+
+
+
+-- Parent discussion and replies linked to "Doctor Strange" (MEDIA_ID = 5)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    260,
     5,
-    TO_DATE('2022-03-03', 'YYYY-MM-DD')
-  );
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
 
-INSERT INTO DISCUSSIONABOUTMEDIA(
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
     DIS_ID,
     MEDIA_ID,
     DIS_DATE
-  )
-VALUES
-  (
-    4,
+) VALUES (
+    261,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    262,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    263,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    264,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    265,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    266,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    267,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    268,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    269,
+    5,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+
+
+
+
+-- Parent discussion started by user 1239
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    260,
+    1239
+);
+
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    261,
+    1240
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    262,
+    1241
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    263,
+    1242
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    264,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    265,
+    1244
+);
+
+
+
+
+-- Parent discussion started by user 1240
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    270,
+    'What are your thoughts on the concept of time in Interstellar?',
+    'Interstellar Discussion',
+    4,  -- Initial reply count for parent discussion
+    NULL
+);
+
+-- Replies by other users
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    271,
+    'The way they portrayed black holes was mind-blowing!',
+    NULL,
+    1,  -- Increasing reply count for first reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    272,
+    'I loved the emotional depth of Cooper’s journey.',
+    NULL,
+    2,  -- Increasing reply count for second reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    273,
+    'The ending was both beautiful and heartbreaking.',
+    NULL,
+    3,  -- Increasing reply count for third reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    274,
+    'The soundtrack by Hans Zimmer was fantastic!',
+    NULL,
+    4,  -- Increasing reply count for fourth reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    275,
+    'The science behind the wormholes was fascinating.',
+    NULL,
+    5,  -- Increasing reply count for fifth reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    276,
+    'How do you feel about the portrayal of love in the movie?',
+    NULL,
+    6,  -- Increasing reply count for sixth reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    277,
+    'What do you think of the ending and its implications?',
+    NULL,
+    7,  -- Increasing reply count for seventh reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    278,
+    'I found the visual effects to be stunning!',
+    NULL,
+    8,  -- Increasing reply count for eighth reply
+    270
+);
+
+INSERT INTO DISCUSSION (
+    DIS_ID,
+    DESCRIPTION,
+    TOPIC,
+    REPLY_COUNT,
+    PARENT_TOPIC
+) VALUES (
+    279,
+    'Did you notice the time dilation effects?',
+    NULL,
+    9,  -- Increasing reply count for ninth reply
+    270
+);
+
+
+
+
+
+-- Parent discussion and replies linked to "Interstellar" (MEDIA_ID = 6)
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    270,
     6,
-    TO_DATE('2022-03-04', 'YYYY-MM-DD')
-  );
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+-- Replies for the discussion
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    271,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    272,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    273,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    274,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    275,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    276,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    277,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    278,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
+
+INSERT INTO DISCUSSIONABOUTMEDIA (
+    DIS_ID,
+    MEDIA_ID,
+    DIS_DATE
+) VALUES (
+    279,
+    6,
+    TO_DATE('2023-09-27', 'YYYY-MM-DD')
+);
 
 
 
 
 
+-- Parent discussion started by user 1240
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    270,
+    1240
+);
 
+-- Replies by other users
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    271,
+    1241
+);
 
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    272,
+    1242
+);
 
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    273,
+    1243
+);
+
+INSERT INTO USERSTARTDISCUSSION (
+    DIS_ID,
+    USER_ID
+) VALUES (
+    274,
+    1244
+);
 
 
 
@@ -4829,3 +6843,631 @@ INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE) VALUES
 (15, 30, TO_DATE('2023-11-19', 'YYYY-MM-DD'));
 
 
+
+-- Inserting into NEWSANDUPDATES table
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (100, 'A thrilling chase through the streets of LA. Bad Boys are back with more action!', 'Bad Boys Return');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (101, 'New stunts and explosions in the latest sequel of Bad Boys.', 'Bad Boys: Ride or Die Trailer Released');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (102, 'Epic fantasy continues as The Fellowship embarks on a journey.', 'The Journey Begins in LOTR');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (103, 'Anniversary special edition of LOTR released.', 'LOTR Anniversary Special Edition');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (104, 'Explosive action on the road to survival.', 'Mad Max: Fury Road Behind the Scenes');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (105, 'Exclusive: New Mad Max sequel in production.', 'Mad Max: Sequel Confirmed');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (106, 'Mind-bending thriller where dreams are the battlefield.', 'Inception: Dream Heist Details');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (107, 'Cast reunion: Inception stars share their memories.', 'Inception Cast Reunion');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (108, 'The Avengers face their greatest challenge yet.', 'Avengers Endgame: Final Battle Breakdown');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (109, 'Deleted scenes from Endgame reveal alternate ending.', 'Avengers: Endgame Deleted Scenes');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (110, 'Thor returns with cosmic-level action and humor.', 'Thor: Ragnarok Review');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (111, 'Taika Waititi talks about directing Thor: Ragnarok.', 'Director Taika Waititi’s Vision for Thor');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (112, 'Doctor Strange explores the multiverse in the latest MCU adventure.', 'Doctor Strange Multiverse Madness');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (113, 'New theory on Doctor Strange’s role in future MCU movies.', 'Doctor Strange: What’s Next?');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (114, 'A journey through space and time as Cooper seeks a new home for humanity.', 'Interstellar: Humanity’s Hope in the Stars');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (115, 'New scientific discoveries inspired by Interstellar.', 'The Science Behind Interstellar');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (116, 'A brave princess embarks on a dangerous quest.', 'Damsel: A Journey of Courage and Love');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (117, 'First look at Damsel’s stunning visual effects.', 'Damsel: Behind the Scenes');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (118, 'Saitama’s epic battles continue in Season 3 of One Punch Man.', 'One Punch Man Season 3 Teaser');
+
+INSERT INTO NEWSANDUPDATES (NEWS_ID, DESCRIPTION, HEADLINE)
+    VALUES (119, 'New characters revealed in One Punch Man: Season 3.', 'One Punch Man: Meet the New Heroes');
+
+-- Inserting into NEWSTOMEDIA table
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (13, 100, TO_DATE('09/01/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (13, 101, TO_DATE('09/10/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (19, 102, TO_DATE('08/15/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (19, 103, TO_DATE('08/22/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (9, 104, TO_DATE('07/12/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (9, 105, TO_DATE('07/25/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (7, 106, TO_DATE('06/18/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (7, 107, TO_DATE('06/30/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (3, 108, TO_DATE('05/05/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (3, 109, TO_DATE('05/15/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (4, 110, TO_DATE('04/07/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (4, 111, TO_DATE('04/14/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (5, 112, TO_DATE('03/20/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (5, 113, TO_DATE('03/30/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (6, 114, TO_DATE('02/10/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (6, 115, TO_DATE('02/17/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (21, 116, TO_DATE('01/08/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (21, 117, TO_DATE('01/20/2023', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (200, 118, TO_DATE('12/12/2022', 'MM/DD/YYYY'));
+
+INSERT INTO NEWSTOMEDIA (MEDIA_ID, NEWS_ID, NEWS_DATE)
+    VALUES (200, 119, TO_DATE('12/25/2022', 'MM/DD/YYYY'));
+
+
+-- Inserting data into COMPANYGIVENEWS table
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (104, 3, TO_DATE('07/12/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (100, 27, TO_DATE('09/01/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (106, 4, TO_DATE('06/18/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (110, 1, TO_DATE('04/07/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (105, 4, TO_DATE('07/25/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (108, 1, TO_DATE('05/05/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (112, 1, TO_DATE('03/20/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (105, 5, TO_DATE('07/25/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (102, 30, TO_DATE('08/15/2023', 'MM/DD/YYYY'));
+
+INSERT INTO COMPANYGIVENEWS (NEWS_ID, COM_ID, NEWS_DATE)
+    VALUES (118, 61, TO_DATE('12/12/2022', 'MM/DD/YYYY'));
+
+
+
+
+
+
+-- Inserting review ratings for all users for each media
+
+-- User 1234's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1001, 'Amazing action scenes and great performances.', 9, 'MEDIA', TO_DATE('09/05/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1002, 'A solid movie, worth watching.', 8, 'MEDIA', TO_DATE('09/06/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1003, 'Great visuals but a weak plot.', 7, 'MEDIA', TO_DATE('09/07/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1004, 'Exceptional character development.', 9, 'MEDIA', TO_DATE('09/08/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1005, 'Interesting but slow pacing.', 6, 'MEDIA', TO_DATE('09/09/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1006, 'Thrilling and entertaining!', 10, 'MEDIA', TO_DATE('09/10/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1007, 'A visually stunning masterpiece.', 9, 'MEDIA', TO_DATE('09/11/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1008, 'Not my cup of tea, but well-made.', 5, 'MEDIA', TO_DATE('09/12/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1009, 'A classic that lives up to the hype.', 8, 'MEDIA', TO_DATE('09/13/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1010, 'Unique and refreshing experience.', 9, 'MEDIA', TO_DATE('09/14/2023', 'MM/DD/YYYY'));
+
+-- User 1235's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1011, 'Great character arcs and plot twists.', 9, 'MEDIA', TO_DATE('09/15/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1012, 'Incredible acting, a must-watch!', 10, 'MEDIA', TO_DATE('09/16/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1013, 'Well directed but not engaging.', 6, 'MEDIA', TO_DATE('09/17/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1014, 'Breathtaking visuals!', 9, 'MEDIA', TO_DATE('09/18/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1015, 'Not worth the hype.', 4, 'MEDIA', TO_DATE('09/19/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1016, 'A thrilling ride from start to finish!', 10, 'MEDIA', TO_DATE('09/20/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1017, 'Good, but not exceptional.', 7, 'MEDIA', TO_DATE('09/21/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1018, 'Captivating story and superb acting.', 8, 'MEDIA', TO_DATE('09/22/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1019, 'A masterclass in filmmaking.', 10, 'MEDIA', TO_DATE('09/23/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1020, 'Fresh and innovative.', 9, 'MEDIA', TO_DATE('09/24/2023', 'MM/DD/YYYY'));
+
+-- User 1236's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1021, 'Great action scenes and great performances.', 9, 'MEDIA', TO_DATE('09/25/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1022, 'An emotional rollercoaster.', 10, 'MEDIA', TO_DATE('09/26/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1023, 'A visual feast.', 8, 'MEDIA', TO_DATE('09/27/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1024, 'Some great moments, but uneven pacing.', 6, 'MEDIA', TO_DATE('09/28/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1025, 'Loved the humor and action!', 9, 'MEDIA', TO_DATE('09/29/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1026, 'A captivating story.', 9, 'MEDIA', TO_DATE('09/30/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1027, 'Incredible world-building.', 10, 'MEDIA', TO_DATE('10/01/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1028, 'Not for everyone, but worth a watch.', 7, 'MEDIA', TO_DATE('10/02/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1029, 'An unforgettable experience.', 9, 'MEDIA', TO_DATE('10/03/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1030, 'Unique and well-crafted.', 8, 'MEDIA', TO_DATE('10/04/2023', 'MM/DD/YYYY'));
+
+-- User 1237's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1031, 'A masterpiece of cinema.', 10, 'MEDIA', TO_DATE('10/05/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1032, 'Great film, but not my favorite.', 7, 'MEDIA', TO_DATE('10/06/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1033, 'An amazing story with depth.', 9, 'MEDIA', TO_DATE('10/07/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1034, 'Well acted and directed.', 8, 'MEDIA', TO_DATE('10/08/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1035, 'Engaging from start to finish!', 9, 'MEDIA', TO_DATE('10/09/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1036, 'Too long and drawn out.', 5, 'MEDIA', TO_DATE('10/10/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1037, 'Fantastic and thrilling!', 10, 'MEDIA', TO_DATE('10/11/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1038, 'A must-see film for everyone.', 10, 'MEDIA', TO_DATE('10/12/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1039, 'Good, but could be better.', 6, 'MEDIA', TO_DATE('10/13/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1040, 'One of the best of the year!', 10, 'MEDIA', TO_DATE('10/14/2023', 'MM/DD/YYYY'));
+
+-- User 1238's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1041, 'Incredible storytelling!', 10, 'MEDIA', TO_DATE('10/15/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1042, 'Too predictable.', 5, 'MEDIA', TO_DATE('10/16/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1043, 'Absolutely fantastic!', 10, 'MEDIA', TO_DATE('10/17/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1044, 'Not my favorite genre.', 4, 'MEDIA', TO_DATE('10/18/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1045, 'A very enjoyable watch.', 8, 'MEDIA', TO_DATE('10/19/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1046, 'A classic, loved every minute.', 9, 'MEDIA', TO_DATE('10/20/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1047, 'Great cinematography!', 9, 'MEDIA', TO_DATE('10/21/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1048, 'Average at best.', 5, 'MEDIA', TO_DATE('10/22/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1049, 'Very emotional and powerful.', 9, 'MEDIA', TO_DATE('10/23/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1050, 'Would recommend!', 8, 'MEDIA', TO_DATE('10/24/2023', 'MM/DD/YYYY'));
+
+-- User 1239's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1051, 'Epic and thrilling!', 10, 'MEDIA', TO_DATE('10/25/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1052, 'A masterpiece!', 10, 'MEDIA', TO_DATE('10/26/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1053, 'Very well done.', 9, 'MEDIA', TO_DATE('10/27/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1054, 'Decent watch.', 6, 'MEDIA', TO_DATE('10/28/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1055, 'Exceptional film!', 10, 'MEDIA', TO_DATE('10/29/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1056, 'Really enjoyed this one.', 9, 'MEDIA', TO_DATE('10/30/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1057, 'Good, but not great.', 7, 'MEDIA', TO_DATE('10/31/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1058, 'Fabulous production quality!', 10, 'MEDIA', TO_DATE('11/01/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1059, 'A very touching story.', 8, 'MEDIA', TO_DATE('11/02/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1060, 'Not what I expected.', 5, 'MEDIA', TO_DATE('11/03/2023', 'MM/DD/YYYY'));
+
+-- User 1240's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1061, 'Outstanding performances.', 10, 'MEDIA', TO_DATE('11/04/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1062, 'A bit long, but worth it.', 8, 'MEDIA', TO_DATE('11/05/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1063, 'Could have been better.', 6, 'MEDIA', TO_DATE('11/06/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1064, 'Fantastic visuals!', 9, 'MEDIA', TO_DATE('11/07/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1065, 'A classic, I loved it.', 9, 'MEDIA', TO_DATE('11/08/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1066, 'Really engaging!', 9, 'MEDIA', TO_DATE('11/09/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1067, 'I didnt enjoy this one.', 4, 'MEDIA', TO_DATE('11/10/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1068, 'Very compelling.', 9, 'MEDIA', TO_DATE('11/11/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1069, 'Highly recommended!', 10, 'MEDIA', TO_DATE('11/12/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1070, 'Very enjoyable!', 9, 'MEDIA', TO_DATE('11/13/2023', 'MM/DD/YYYY'));
+
+-- User 1241's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1071, 'A stunning visual experience.', 10, 'MEDIA', TO_DATE('11/14/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1072, 'I loved the ending.', 9, 'MEDIA', TO_DATE('11/15/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1073, 'Could be better, but entertaining.', 6, 'MEDIA', TO_DATE('11/16/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1074, 'An unforgettable experience.', 10, 'MEDIA', TO_DATE('11/17/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1075, 'Engaging plot and characters.', 9, 'MEDIA', TO_DATE('11/18/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1076, 'Very touching story.', 9, 'MEDIA', TO_DATE('11/19/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1077, 'Good movie, but a bit predictable.', 7, 'MEDIA', TO_DATE('11/20/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1078, 'A true work of art.', 10, 'MEDIA', TO_DATE('11/21/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1079, 'I would watch it again.', 9, 'MEDIA', TO_DATE('11/22/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1080, 'Not my style, but well made.', 5, 'MEDIA', TO_DATE('11/23/2023', 'MM/DD/YYYY'));
+
+-- User 1242's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1081, 'Fantastic and emotional.', 10, 'MEDIA', TO_DATE('11/24/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1082, 'Loved the characters.', 9, 'MEDIA', TO_DATE('11/25/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1083, 'Very inspiring.', 8, 'MEDIA', TO_DATE('11/26/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1084, 'Great film, would recommend!', 9, 'MEDIA', TO_DATE('11/27/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1085, 'A unique perspective.', 8, 'MEDIA', TO_DATE('11/28/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1086, 'An average film.', 6, 'MEDIA', TO_DATE('11/29/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1087, 'Well worth watching.', 9, 'MEDIA', TO_DATE('11/30/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1088, 'A very solid entry.', 8, 'MEDIA', TO_DATE('12/01/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1089, 'Left me wanting more.', 7, 'MEDIA', TO_DATE('12/02/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1090, 'Incredible soundtrack!', 10, 'MEDIA', TO_DATE('12/03/2023', 'MM/DD/YYYY'));
+
+-- User 1243's reviews
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1091, 'A beautiful story.', 10, 'MEDIA', TO_DATE('12/04/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1092, 'A moving and touching film.', 10, 'MEDIA', TO_DATE('12/05/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1093, 'A fantastic film experience.', 9, 'MEDIA', TO_DATE('12/06/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1094, 'I didnt enjoy this one at all.', 3, 'MEDIA', TO_DATE('12/07/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1095, 'A mesmerizing film.', 10, 'MEDIA', TO_DATE('12/08/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1096, 'Would watch again!', 9, 'MEDIA', TO_DATE('12/09/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1097, 'Good storyline but poor execution.', 5, 'MEDIA', TO_DATE('12/10/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1098, 'Exceptional cinematography!', 10, 'MEDIA', TO_DATE('12/11/2023', 'MM/DD/YYYY'));
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+    VALUES (1099, 'A truly unique experience.', 9, 'MEDIA', TO_DATE('12/12/2023', 'MM/DD/YYYY'));
+
+
+
+
+-- Linking user IDs to their respective reviews in the USERGIVEREVIEW table
+
+-- User 1234's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1001);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1002);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1003);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1004);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1005);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1006);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1007);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1008);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1009);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 1010);
+
+-- User 1235's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1011);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1012);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1013);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1014);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1015);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1016);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1017);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1018);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1019);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 1020);
+
+-- User 1236's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1021);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1022);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1023);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1024);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1025);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1026);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1027);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1028);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1029);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 1030);
+
+-- User 1237's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1031);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1032);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1033);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1034);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1035);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1036);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1037);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1038);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1039);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 1040);
+
+-- User 1238's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1041);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1042);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1043);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1044);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1045);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1046);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1047);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1048);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1049);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 1050);
+
+-- User 1239's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1051);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1052);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1053);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1054);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1055);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1056);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1057);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1058);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1059);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 1060);
+
+-- User 1240's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1061);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1062);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1063);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1064);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1065);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1066);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1067);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1068);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1069);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 1070);
+
+-- User 1241's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1071);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1072);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1073);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1074);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1075);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1076);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1077);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1078);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1079);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 1080);
+
+-- User 1242's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1081);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1082);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1083);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1084);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1085);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1086);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1087);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1088);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1089);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 1090);
+
+-- User 1243's reviews
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1091);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1092);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1093);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1094);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1095);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1096);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1097);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1098);
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 1099);
+
+
+
+
+-- User 1234's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1001, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1002, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1003, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1004, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1005, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1006, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1007, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1008, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1009, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1010, 200);
+
+-- User 1235's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1011, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1012, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1013, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1014, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1015, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1016, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1017, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1018, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1019, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1020, 200);
+
+-- User 1236's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1021, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1022, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1023, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1024, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1025, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1026, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1027, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1028, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1029, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1030, 200);
+
+-- User 1237's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1031, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1032, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1033, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1034, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1035, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1036, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1037, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1038, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1039, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1040, 200);
+
+-- User 1238's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1041, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1042, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1043, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1044, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1045, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1046, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1047, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1048, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1049, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1050, 200);
+
+-- User 1239's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1051, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1052, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1053, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1054, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1055, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1056, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1057, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1058, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1059, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1060, 200);
+
+-- User 1240's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1061, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1062, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1063, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1064, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1065, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1066, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1067, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1068, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1069, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1070, 200);
+
+-- User 1241's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1071, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1072, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1073, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1074, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1075, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1076, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1077, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1078, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1079, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1080, 200);
+
+-- User 1242's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1081, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1082, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1083, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1084, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1085, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1086, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1087, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1088, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1089, 19);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1090, 200);
+
+-- User 1243's reviews for each media
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1091, 21);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1092, 13);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1093, 7);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1094, 4);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1095, 9);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1096, 3);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1097, 5);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1098, 6);
+INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1099, 19);
