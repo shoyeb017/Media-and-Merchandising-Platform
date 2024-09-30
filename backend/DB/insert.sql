@@ -1827,7 +1827,7 @@ INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL)
 VALUES (2, 'Paramount Pictures', 'company2', 'https://static1.srcdn.com/wordpress/wp-content/uploads/2018/02/Paramount-Logo-in-Yelllow.jpg', 'Paramount Pictures Corporation, doing business as Paramount Pictures is an American film and television production and distribution company and the namesake subsidiary of Paramount Global.', 'para@gmail.com');
 
 INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
-VALUES (3, 'Warner Bros. Pictures', 'company3', 'https://wbd.com/wp-content/uploads/2024/01/wb-motion-pictures-group-16x9-1.png', 'Warner Bros. Pictures is an American film production and distribution company of the Warner Bros. Motion Picture Group division of Warner Bros. Entertainment. The studio is the flagship producer of live-action feature films within the Warner Bros', 'sample@gmail.com');
+VALUES (3, 'Warner Bros. Pictures', 'company3', 'https://entertainment.time.com/wp-content/uploads/sites/3/2012/09/warner_bros-_pictures_intro.jpg', 'Warner Bros. Pictures is an American film production and distribution company of the Warner Bros. Motion Picture Group division of Warner Bros. Entertainment. The studio is the flagship producer of live-action feature films within the Warner Bros', 'sample@gmail.com');
 
 INSERT INTO COMPANY (COM_ID, NAME, USER_NAME, IMG, DESCRIPTION, EMAIL) 
 VALUES (4, 'Warner Bros.', 'company4', 'https://logomak.com/blog/wp-content/uploads/2023/09/The-Evolution-and-Design-of-the-Warner-Brothers-Logo-min.png', 'Warner Bros. Entertainment Inc. is an American film and entertainment studio headquartered at the Warner Bros. Studios complex in Burbank, California, and a subsidiary of Warner Bros. Discovery.', 'sample@gmail.com');
@@ -2430,109 +2430,109 @@ VALUES (215, 7);
 
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (100, 'Interstellar Essential T-Shirt', 'Everyday tee, crew neck, slim fit', 'https://ih1.redbubble.net/image.5087401540.6885/ssrco,slim_fit_t_shirt,mens,101010:01c5ca27c6,front,square_product,600x600.u5.jpg', 21.73, 5, 0, 0);
+VALUES (100, 'Interstellar Essential T-Shirt', 'Everyday tee, crew neck, slim fit', 'https://ih1.redbubble.net/image.5087401540.6885/ssrco,slim_fit_t_shirt,mens,101010:01c5ca27c6,front,square_product,600x600.u5.jpg', 21.73, 50, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (101, 'hamilton interstellar watch', 'Hamilton Khaki Navy Automatic Green Dial Sprite Bezel Men''s Watch H82375161', 'https://www.watchvault.com.au/cdn/shop/files/HamiltonKhakiAviationPilotDayDateAuto_Interstellar_H64615135-2020WatchVault03_2048x.jpg', 631.4, 2, 0, 0);
+VALUES (101, 'hamilton interstellar watch', 'Hamilton Khaki Navy Automatic Green Dial Sprite Bezel Men''s Watch H82375161', 'https://www.watchvault.com.au/cdn/shop/files/HamiltonKhakiAviationPilotDayDateAuto_Interstellar_H64615135-2020WatchVault03_2048x.jpg', 631.4, 20, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (102, 'Inception Top Totem Spinning Metal', 'Made from high grade Zinc Alloy and each top should spin for at least 3 minutes', 'https://m.media-amazon.com/images/I/51eLkYY0r6L._AC_SL1292_.jpg', 20.0, 2, 0, 0);
+VALUES (102, 'Inception Top Totem Spinning Metal', 'Made from high grade Zinc Alloy and each top should spin for at least 3 minutes', 'https://m.media-amazon.com/images/I/51eLkYY0r6L._AC_SL1292_.jpg', 20.0, 20, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (103, '"Inception" inspired poster', 'INCEPTION film poster, minimalist art print, mid-century modern, beige, grey, Swiss, Helvetica, Christopher Nolan, Leonardo DiCaprio', 'https://i.etsystatic.com/42043278/r/il/d5b8d6/6247326852/il_1588xN.6247326852_ov48.jpg', 11.56, 4, 0, 0);
+VALUES (103, '"Inception" inspired poster', 'INCEPTION film poster, minimalist art print, mid-century modern, beige, grey, Swiss, Helvetica, Christopher Nolan, Leonardo DiCaprio', 'https://i.etsystatic.com/42043278/r/il/d5b8d6/6247326852/il_1588xN.6247326852_ov48.jpg', 11.56, 40, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (104, 'The Silence of the Lambs movie Canvas ', 'The Silence of the Lambs FILMS movie Canvas Art Poster unframe multiple choice-12x18''''24x36''', 'https://i.etsystatic.com/26687163/r/il/c55157/6078033999/il_1588xN.6078033999_b210.jpg', 12.75, 5, 0, 0);
+VALUES (104, 'The Silence of the Lambs movie Canvas ', 'The Silence of the Lambs FILMS movie Canvas Art Poster unframe multiple choice-12x18''''24x36''', 'https://i.etsystatic.com/26687163/r/il/c55157/6078033999/il_1588xN.6078033999_b210.jpg', 12.75, 50, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (105, 'The Silence Of The Lambs Movie Barcode', 'Celebrate your favourite movies with our unique movie barcode prints. I use video imaging software to watch the The Silence Of The Lambs movie and extrapolate the average color of each scene in the movie. This print then features these colors displayed as a barcode. The perfect gift for any movie fan that loves a unique data representation', 'https://i.etsystatic.com/31803080/r/il/953835/5423830786/il_1588xN.5423830786_se8e.jpg', 14.4, 3, 0, 0);
+VALUES (105, 'The Silence Of The Lambs Movie Barcode', 'Celebrate your favourite movies with our unique movie barcode prints. I use video imaging software to watch the The Silence Of The Lambs movie and extrapolate the average color of each scene in the movie. This print then features these colors displayed as a barcode. The perfect gift for any movie fan that loves a unique data representation', 'https://i.etsystatic.com/31803080/r/il/953835/5423830786/il_1588xN.5423830786_se8e.jpg', 14.4, 30, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (106, 'Chandu Champion design T-Shirt', 'Here is my design of Kartik aryan from chandu champion.. Hope you like it Pickup your favourite one merchandise.', 'https://ih1.redbubble.net/image.5568573715.8823/ssrco,slim_fit_t_shirt,flatlay,4f4942:33c5b16199,front,wide_portrait,750x1000-bg,f8f8f8.jpg', 23.0, 5, 0, 0);
+VALUES (106, 'Chandu Champion design T-Shirt', 'Here is my design of Kartik aryan from chandu champion.. Hope you like it Pickup your favourite one merchandise.', 'https://ih1.redbubble.net/image.5568573715.8823/ssrco,slim_fit_t_shirt,flatlay,4f4942:33c5b16199,front,wide_portrait,750x1000-bg,f8f8f8.jpg', 23.0, 50, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (107, 'Psycho Scream Print-Classic Horror Movie Poster', 'Museum-quality print made on thick and long-lasting matte (uncoated) paper with high quality inks producing striking images for wall decor, gifts, projects, collections, and more!', 'https://i.etsystatic.com/37337950/r/il/f02c64/5099389131/il_1588xN.5099389131_kmj5.jpg', 16.2, 6, 0, 0);
+VALUES (107, 'Psycho Scream Print-Classic Horror Movie Poster', 'Museum-quality print made on thick and long-lasting matte (uncoated) paper with high quality inks producing striking images for wall decor, gifts, projects, collections, and more!', 'https://i.etsystatic.com/37337950/r/il/f02c64/5099389131/il_1588xN.5099389131_kmj5.jpg', 16.2, 60, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (108, 'Retro Psycho 1960 Shirt -Alfred Hitchcock Shirt', 'Our products are unisex and true to size. If you prefer an oversized fit, we recommend ordering 1 or 2 sizes larger than your usual size.', 'https://i.etsystatic.com/53028486/r/il/ddacce/6277595761/il_1588xN.6277595761_ptre.jpg', 20.0, 10, 0, 0);
+VALUES (108, 'Retro Psycho 1960 Shirt -Alfred Hitchcock Shirt', 'Our products are unisex and true to size. If you prefer an oversized fit, we recommend ordering 1 or 2 sizes larger than your usual size.', 'https://i.etsystatic.com/53028486/r/il/ddacce/6277595761/il_1588xN.6277595761_ptre.jpg', 20.0, 100, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (109, 'Forrest Gump (1994) Movie Poster Print', 'Canvas Fabric, smooth, not easily deformed, particularly the printing is more realistic, waterproof, durable and Long Lasting. It is ideal for gifts and personal collections.', 'https://i.etsystatic.com/45320799/r/il/7d8db7/5354241887/il_1588xN.5354241887_oj1r.jpg', 8.57, 4, 0, 0);
+VALUES (109, 'Forrest Gump (1994) Movie Poster Print', 'Canvas Fabric, smooth, not easily deformed, particularly the printing is more realistic, waterproof, durable and Long Lasting. It is ideal for gifts and personal collections.', 'https://i.etsystatic.com/45320799/r/il/7d8db7/5354241887/il_1588xN.5354241887_oj1r.jpg', 8.57, 40, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (110, 'Forrest Gump Point', 'Forrest Gump Point'', this image has been on my bucket list for decades, and I finally got it a couple weeks ago. To get great shots like this one, you simply must be there, at the right time, in the right light, with the right preparation. It is my extreme pleasure to bring you one of my most cherished shots from anywhere. I am making it available in various materials, sizes and price points, so that anyone on any budget who appreciates the moment captured in this image can take it home.', 'https://i.etsystatic.com/36721239/r/il/630bff/5925739127/il_1588xN.5925739127_skif.jpg', 49.0, 5, 0, 0);
+VALUES (110, 'Forrest Gump Point', 'Forrest Gump Point'', this image has been on my bucket list for decades, and I finally got it a couple weeks ago. To get great shots like this one, you simply must be there, at the right time, in the right light, with the right preparation. It is my extreme pleasure to bring you one of my most cherished shots from anywhere. I am making it available in various materials, sizes and price points, so that anyone on any budget who appreciates the moment captured in this image can take it home.', 'https://i.etsystatic.com/36721239/r/il/630bff/5925739127/il_1588xN.5925739127_skif.jpg', 49.0, 50, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (111, 'Shawshank Redemption Unisex Sweatshirt', 'A sturdy and warm sweatshirt bound to keep you warm in the colder months. A pre-shrunk, classic fit sweater that''s made with air-jet spun yarn for a soft feel and reduced pilling', 'https://i.etsystatic.com/16104183/r/il/02cd11/2344895056/il_1588xN.2344895056_cyky.jpg', 35.0, 10, 0, 0);
+VALUES (111, 'Shawshank Redemption Unisex Sweatshirt', 'A sturdy and warm sweatshirt bound to keep you warm in the colder months. A pre-shrunk, classic fit sweater that''s made with air-jet spun yarn for a soft feel and reduced pilling', 'https://i.etsystatic.com/16104183/r/il/02cd11/2344895056/il_1588xN.2344895056_cyky.jpg', 35.0, 100, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (112, 'SHAWSHANK REDEMPTION Vintage Tshirt', '100% cotton (fiber content may vary for different colors)
+VALUES (112, 'SHAWSHANK REDEMPTION Vintage Tshirt', '100% cotton (fiber content may vary for different0 colors)
 Medium fabric (5.3 oz/yd² (180 g/m²))
 Classic fit
 Tear-away label
 Runs true to size', 'https://i.etsystatic.com/43160006/r/il/43d969/5677612058/il_1588xN.5677612058_bpkk.jpg', 30.95, 5, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (113, 'Metal Pulp Fiction Wall Art', 'Metal Pulp Fiction Wall Art is an inspirational wall art for living room, bedroom, dining room, kitchen and for your entire home. Metal Pulp Fiction Wall Art will make you wanna dance all night just like Mia Wallace and Vincent Vega. Your guests will most likely adore this unique piece of art.
+VALUES (113, 'Metal Pulp Fiction Wall Art', 'Metal Pulp Fiction Wall Art is an inspirational wall art for living room, bedroom, dining room, kitchen and for your entire home. Metal Pulp Fiction Wall Art will make you wanna dance all night just like Mia Wallace and Vincent Vega. Your guests will most likely adore this unique piece0 of art.
 ', 'https://i.etsystatic.com/33176996/r/il/f7a2cf/3983083566/il_1588xN.3983083566_cfmu.jpg', 120.0, 2, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (114, 'Pulp Fiction (1993) Screenplay', 'This is a full screenplay / movie script in English that comes with preprinted autographs from the cast! If you have been searching for the perfect gift for a movie fan, this is it! This full movie script / screenplay with preprinted autographs is sure to please. It makes for a great gift because it’s unique, authentic, and rare.', 'https://i.etsystatic.com/44907333/r/il/e2aedf/5084300572/il_1588xN.5084300572_j148.jpg', 33.48, 1, 0, 0);
+VALUES (114, 'Pulp Fiction (1993) Screenplay', 'This is a full screenplay / movie script in English that comes with preprinted autographs from the cast! If you have been searching for the perfect gift for a movie fan, this is it! This full movie script / screenplay with preprinted autographs is sure to please. It makes for a great gift because it’s unique, authentic, and rare.', 'https://i.etsystatic.com/44907333/r/il/e2aedf/5084300572/il_1588xN.5084300572_j148.jpg', 33.48, 10, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (115, 'Elves Elf Boat Castle The Lord Of The Rings light box', 'Are you a believer in the mystical world of ""Lord of the Rings""? Let Elves help you turn your living space into a magical world with unique box lights inspired by this classic!', 'https://i.etsystatic.com/31580870/r/il/ed1512/6297848841/il_1588xN.6297848841_at00.jpg', 185.0, 8, 0, 0);
+VALUES (115, 'Elves Elf Boat Castle The Lord Of The Rings light box', 'Are you a believer in the mystical world of ""Lord of the Rings""? Let Elves help you turn your living space into a magical world with unique box lights inspired by this classic!', 'https://i.etsystatic.com/31580870/r/il/ed1512/6297848841/il_1588xN.6297848841_at00.jpg', 185.0, 80, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (116, '6 in 1 bundle The Fellowship of the Ring Crochet Pattern', 'The Fellowship of the Ring Crochet Pattern, English pattern quick and easy pattern', 'https://i.etsystatic.com/53018604/r/il/b5c853/6119293698/il_1588xN.6119293698_lmdh.jpg', 19.23, 10, 0, 0);
+VALUES (116, '6 in 1 bundle The Fellowship of the Ring Crochet Pattern', 'The Fellowship of the Ring Crochet Pattern, English pattern quick and easy pattern', 'https://i.etsystatic.com/53018604/r/il/b5c853/6119293698/il_1588xN.6119293698_lmdh.jpg', 19.23, 100, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (117, 'The Boys Movie Poster ', 'Poster is printed on Waterproof canvas, it is thick, strong, waterproof, it has the vivid color and will not fade, not easy to be damaged and shows vibrant graphics on it. It becomes more and more popular with the cool crowd.
+VALUES (117, 'The Boys Movie Poster ', 'Poster is printed on Waterproof canvas, it is thick, strong, waterproof, it has the vivid color and will not fade, not easy to be damaged and shows vibrant graphics on it. It becomes more and more popular with the coo0l crowd.
 ', 'https://i.etsystatic.com/51464994/r/il/a3f5eb/6179145815/il_1588xN.6179145815_ru1i.jpg', 15.45, 3, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (118, 'Fire Dragon and Ice Dragon Resin Lamp', 'This resin night light features a magical sight with three little dragons flying across the sky. Its beauty lies not only in the exquisite details but also in the dreamy ambiance it creates. The dragons, crafted from epoxy resin, delicately reflect light, producing a shimmering effect akin to bright stars in the night sky. This light is not just a decorative piece but also an artwork, bringing warmth and style to your living space.
+VALUES (118, 'Fire Dragon and Ice Dragon Resin Lamp', 'This resin night light features a magical sight with three little dragons flying across the sky. Its beauty lies not only in the exquisite details but also in the dreamy ambiance it creates. The dragons, crafted from epoxy resin, delicately reflect light, producing a shimmering effect akin to bright stars in the night sky. This light is not just a decorative piece but also an artwork, bringing warmth and style to your livin0g space.
 ', 'https://i.etsystatic.com/42604617/r/il/a8da1d/5853600023/il_1588xN.5853600023_70pq.jpg', 114.0, 3, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (119, 'Game of Thrones Coaster Set', 'Depicting the sigils of all four Great Houses of Westeros, these coasters are a unique way to celebrate your love of A Song of Ice and Fire. Made from hand selected cherry boards, each piece is one of a kind. Individually milled, engraved, and hand finished, they work perfectly for hot and cold drinks all year round. Included with these unique coasters is a hand built display box which will keep all four like a perfect wooden throne.
+VALUES (119, 'Game of Thrones Coaster Set', 'Depicting the sigils of all four Great Houses of Westeros, these coasters are a unique way to celebrate your love of A Song of Ice and Fire. Made from hand selected cherry boards, each piece is one of a kind. Individually milled, engraved, and hand finished, they work perfectly for hot and cold drinks all year round. Included with these unique coasters is a hand built display box which will keep all four like a perfect wooden0 throne.
 ', 'https://i.etsystatic.com/20160004/r/il/365476/1870250368/il_1588xN.1870250368_nd2b.jpg', 45.0, 4, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (120, 'The Last of Us Ellie''s Journal Cosplay Props Replica', 'The journal is A5 size, which is 5.8 inches x 8 inches, contains content from The Last of Us Part II', 'https://i.etsystatic.com/19424222/r/il/1eea81/5123734983/il_1588xN.5123734983_gb0q.jpg', 68.5, 25, 0, 0);
+VALUES (120, 'The Last of Us Ellie''s Journal Cosplay Props Replica', 'The journal is A5 size, which is 5.8 inches x 8 inches, contains content from The Last of Us Part II', 'https://i.etsystatic.com/19424222/r/il/1eea81/5123734983/il_1588xN.5123734983_gb0q.jpg', 68.5, 250, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (121, 'JOEL MUG (THE LAST OF US II) FANMADE', 'THE MUG IS PROFESSIONALLY MADE, INSPIRED BY THE ORIGINAL LOOK OF JOEL''S MUG IN THE LAST OF US PART II. INCLUDES A BOX TO DISPLAY IT WITH YOUR TLOU COLLECTION.', 'https://i.etsystatic.com/24433473/r/il/ba026f/3584208411/il_1588xN.3584208411_jt9l.jpg', 57.8, 5, 0, 0);
+VALUES (121, 'JOEL MUG (THE LAST OF US II) FANMADE', 'THE MUG IS PROFESSIONALLY MADE, INSPIRED BY THE ORIGINAL LOOK OF JOEL''S MUG IN THE LAST OF US PART II. INCLUDES A BOX TO DISPLAY IT WITH YOUR TLOU COLLECTION.', 'https://i.etsystatic.com/24433473/r/il/ba026f/3584208411/il_1588xN.3584208411_jt9l.jpg', 57.8, 50, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (122, ' House of Dragon Adjustable Ring', '14k Matt gold plating, oxidized silver, black oxidized silver, white silver, ring 14 mm height', 'https://i.etsystatic.com/10988505/r/il/c05308/4345385551/il_1588xN.4345385551_8e60.jpg', 69.0, 4, 0, 0);
+VALUES (122, ' House of Dragon Adjustable Ring', '14k Matt gold plating, oxidized silver, black oxidized silver, white silver, ring 14 mm height', 'https://i.etsystatic.com/10988505/r/il/c05308/4345385551/il_1588xN.4345385551_8e60.jpg', 69.0, 40, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (123, 'Rhaenyra and Aegon Crowns, House of the Dragon', 'This is a replica of Crown of Jaehaerys I based on series and is not an official item. King of The Seven Kingdoms Crown', 'https://i.etsystatic.com/39161474/r/il/c61d9e/6032700511/il_1588xN.6032700511_614c.jpg', 84.56, 2, 0, 0);
+VALUES (123, 'Rhaenyra and Aegon Crowns, House of the Dragon', 'This is a replica of Crown of Jaehaerys I based on series and is not an official item. King of The Seven Kingdoms Crown', 'https://i.etsystatic.com/39161474/r/il/c61d9e/6032700511/il_1588xN.6032700511_614c.jpg', 84.56, 20, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (124, 'Japanese Anime Music Box', 'Unleash the epic world of Attack on Titan with our thrilling music box. For fans of action and adventure, this handcrafted masterpiece is an absolute must-have. It pays homage to the relentless battle against the Titans, showcasing the courage and determination that define the series. Gift it to fellow fans or proudly display it as a symbol of your dedication to the Scout Regiment. 
+VALUES (124, 'Japanese Anime Music Box', 'Unleash the epic world of Attack on Titan with our thrilling music box. For fans of action and adventure, this handcrafted masterpiece is an absolute must-have. It pays homage to the relentless battle against the Titans, showcasing the courage and determination that define the series. Gift it to fellow fans or proudly display it as a symbol of your dedication to the Scout Re0giment. 
 ', 'https://i.etsystatic.com/41975262/r/il/75ddcb/4799778382/il_1588xN.4799778382_orl5.jpg', 21.83, 5, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (125, 'Erwin Smith Speech Hoodie', 'Erwin Smith Speech Hoodie: A Tribute to Attack on Titan. Immerse yourself in the valor and determination of the Scouts Regiment with our Erwin Smith Speech Hoodie. Inspired by the iconic and motivational speeches of Commander Erwin Smith from "Attack on Titan" (Shingeki no Kyojin), this hoodie is a must-have for fans who admire his leadership and the thrilling saga of humanity''s fight for survival. Designed for both warmth and style, this hoodie is your shield against the cold and a banner of your fandom.', 'https://i.etsystatic.com/52597500/r/il/230191/6216527248/il_1588xN.6216527248_e2lm.jpg', 55.22, 7, 0, 0);
+VALUES (125, 'Erwin Smith Speech Hoodie', 'Erwin Smith Speech Hoodie: A Tribute to Attack on Titan. Immerse yourself in the valor and determination of the Scouts Regiment with our Erwin Smith Speech Hoodie. Inspired by the iconic and motivational speeches of Commander Erwin Smith from "Attack on Titan" (Shingeki no Kyojin), this hoodie is a must-have for fans who admire his leadership and the thrilling saga of humanity''s fight for survival. Designed for both warmth and style, this hoodie is your shield against the cold and a banner of your fandom.', 'https://i.etsystatic.com/52597500/r/il/230191/6216527248/il_1588xN.6216527248_e2lm.jpg', 55.22, 70, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (126, 'Fallout T-shirt', 'This T-shirt is inspired by the classic post-apocalyptic RPG series Fallout. Screen-printed on Earth Positive 100% combed organic cotton T-shirts.
+VALUES (126, 'Fallout T-shirt', 'This T-shirt is inspired by the classic post-apocalyptic RPG series Fallout. Screen-printed on Earth Positive 100% combed organic cotton T0-shirts.
 ', 'https://i.etsystatic.com/17927977/r/il/debbb5/5857675522/il_1588xN.5857675522_fp0a.jpg', 34.75, 7, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (127, 'Explosion Resin diorama', 'This resin lamp conveys the message that we should cherish our lives because we don''t know what will happen. The light is powered by 5VDC via the USB type C charging port. A USB Type C charging cable is included.
-', 'https://i.etsystatic.com/40890130/r/il/b5131b/6112626262/il_1588xN.6112626262_flnz.jpg', 108.0, 3, 0, 0);
+VALUES (127, 'Explosion Resin diorama', 'This resin lamp conveys the message that we should cherish our lives because we don''t know what will happen. The light is powered by 5VDC via the USB type C charging port. A USB Type C charging cable is i0ncluded.
+', 'https://i.etsystatic.com/40890130/r/il/b5131b/6112626262/il_1588xN.6112626262_flnz.jpg', 108.0, 30, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (128, 'Outlander 10th Anniversary 2014-2024 Signatures Shirt', 'If you love youthful personality style, you will definitely be conquered by these hoodies/sweatshirts/t-shirts. Simple and uncompromising when combined with any item. It makes a thoughtful Birthday gift, Christmas gift, Mother''s Day gift, Holiday gift, etc.', 'https://i.etsystatic.com/39484573/r/il/9590f2/5763359631/il_1588xN.5763359631_azsa.jpg', 30.06, 6, 0, 0);
+VALUES (128, 'Outlander 10th Anniversary 2014-2024 Signatures Shirt', 'If you love youthful personality style, you will definitely be conquered by these hoodies/sweatshirts/t-shirts. Simple and uncompromising when combined with any item. It makes a thoughtful Birthday gift, Christmas gift, Mother''s Day gift, Holiday gift, etc.', 'https://i.etsystatic.com/39484573/r/il/9590f2/5763359631/il_1588xN.5763359631_azsa.jpg', 30.06, 60, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (129, 'Outlander ring sterling silver', 'Silver outlander ring 925 sterling silver ring for celtic wedding, Scottish wedding ring in brutalist style.Rustic wedding band for her or him.', 'https://i.etsystatic.com/35531844/r/il/ee6920/5234248329/il_1588xN.5234248329_jnm3.jpg', 45.18, 7, 0, 0);
+VALUES (129, 'Outlander ring sterling silver', 'Silver outlander ring 925 sterling silver ring for celtic wedding, Scottish wedding ring in brutalist style.Rustic wedding band for her or him.', 'https://i.etsystatic.com/35531844/r/il/ee6920/5234248329/il_1588xN.5234248329_jnm3.jpg', 45.18, 70, 0, 0);
 
 INSERT INTO PRODUCTS (PRO_ID, NAME, DESCRIPTION, IMAGE, PRICE, QUANTITY, RATING_COUNT, RATING) 
-VALUES (130, 'The Bear TV Show Shirt', 'Graphic t-shirt of The Beef logo signage outside of the restaurant in Chicago.
-', 'https://i.etsystatic.com/45843620/r/il/788fa9/5585868454/il_1588xN.5585868454_6q5i.jpg', 24.0, 10, 0, 0);
+VALUES (130, 'The Bear TV Show Shirt', 'Graphic t-shirt of The Beef logo signage outside of the restaurant in 0Chicago.
+', 'https://i.etsystatic.com/45843620/r/il/788fa9/5585868454/il_1588xN.5585868454_6q5i.jpg', 24.0, 100, 0, 0);
 
 
 
@@ -7471,3 +7471,234 @@ INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1096, 3);
 INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1097, 5);
 INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1098, 6);
 INSERT INTO REVIEWABOUTMEDIA (R_ID, MEDIA_ID) VALUES (1099, 19);
+
+
+
+-- Reviews for product 130
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (308, 'Love the design and fit.', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 308);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (308, 130);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (309, 'Comfortable and stylish.', 4, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1243, 309);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (309, 130);
+
+
+-- Reviews for product 111
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (306, 'Super comfortable and looks great.', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 306);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (306, 111);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (307, 'Perfect for any Shawshank fan.', 4, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 307);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (307, 111);
+
+
+-- Reviews for product 108
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (304, 'A must-have for Hitchcock fans!', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 304);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (304, 108);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (305, 'Good quality, nice print.', 4, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 305);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (305, 108);
+
+
+-- Reviews for product 116
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (302, 'Fun and creative, perfect for LOTR fans!', 5, 'PRODUCT', TO_DATE('2024-09-29', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 302);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (302, 116);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (303, 'A bit challenging but worth it.', 4, 'PRODUCT', TO_DATE('2024-09-29', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 303);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (303, 116);
+
+
+-- Reviews for product 120
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (300, 'Amazing replica, exactly like in the game!', 5, 'PRODUCT', TO_DATE('2024-09-28', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 300);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (300, 120);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (301, 'Great detail, but a little pricey.', 4, 'PRODUCT', TO_DATE('2024-09-28', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 301);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (301, 120);
+
+
+-- Reviews for product 115
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (310, 'The details are fantastic. Great for LOTR fans.', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1244, 310);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (310, 115);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (311, 'Absolutely beautiful when lit up.', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1234, 311);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (311, 115);
+
+-- Reviews for product 125
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (312, 'Amazing hoodie with an epic quote!', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1235, 312);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (312, 125);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (313, 'Super soft and comfortable.', 4, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1236, 313);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (313, 125);
+
+-- Reviews for product 126
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (314, 'Perfect for Fallout fans. Great quality.', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1237, 314);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (314, 126);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (315, 'Cool design, but could be softer.', 4, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1238, 315);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (315, 126);
+
+-- Reviews for product 129
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (316, 'Beautifully crafted, looks stunning.', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1239, 316);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (316, 129);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (317, 'Nice quality, but a bit expensive.', 4, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1240, 317);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (317, 129);
+
+-- Reviews for product 128
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (318, 'Great shirt for any Outlander fan!', 5, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1241, 318);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (318, 128);
+
+INSERT INTO REVIEWRATING (R_ID, DESCRIPTION, RATING, REVIEW_FOR, REVIEW_DATE)
+VALUES (319, 'The print is high quality and vibrant.', 4, 'PRODUCT', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO USERGIVEREVIEW (USER_ID, R_ID) VALUES (1242, 319);
+INSERT INTO REVIEWABOUTPRODUCT (R_ID, PRO_ID) VALUES (319, 128);
+
+
+
+-- Insert for COLLABORATE table
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (100, 7, 1235, 'Collaboration accepted for product 100.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (101, 4, 1235, 'Collaboration accepted for product 101.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (102, 3, 1235, 'Collaboration accepted for product 102.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (103, 1, 1235, 'Collaboration accepted for product 103.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (104, 2, 1235, 'Collaboration accepted for product 104.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (105, 11, 1235, 'Collaboration accepted for product 105.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (106, 17, 1235, 'Collaboration accepted for product 106.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (107, 20, 1235, 'Collaboration accepted for product 107.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (108, 18, 1235, 'Collaboration accepted for product 108.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (109, 7, 1235, 'Collaboration accepted for product 109.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (110, 4, 1236, 'Collaboration accepted for product 110.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (111, 3, 1236, 'Collaboration accepted for product 111.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (112, 1, 1236, 'Collaboration accepted for product 112.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (113, 2, 1236, 'Collaboration accepted for product 113.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (114, 11, 1236, 'Collaboration accepted for product 114.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (115, 17, 1236, 'Collaboration accepted for product 115.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (116, 20, 1236, 'Collaboration accepted for product 116.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (117, 18, 1236, 'Collaboration accepted for product 117.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (118, 7, 1236, 'Collaboration accepted for product 118.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (119, 4, 1236, 'Collaboration accepted for product 119.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (120, 3, 1237, 'Collaboration accepted for product 120.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (121, 1, 1237, 'Collaboration accepted for product 121.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (122, 2, 1237, 'Collaboration accepted for product 122.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (123, 11, 1237, 'Collaboration accepted for product 123.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (124, 17, 1237, 'Collaboration accepted for product 124.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (125, 20, 1237, 'Collaboration accepted for product 125.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (126, 18, 1237, 'Collaboration accepted for product 126.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (127, 7, 1237, 'Collaboration accepted for product 127.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (128, 4, 1237, 'Collaboration accepted for product 128.', 'ACCEPTED');
+
+INSERT INTO COLLABORATE (PRO_ID, COM_ID, MER_ID, DESCRIPTION, C_STATUS)
+VALUES (129, 3, 1237, 'Collaboration accepted for product 129.', 'ACCEPTED');
