@@ -282,9 +282,57 @@
   border-left: 5px solid #ff640a;
 }
 
+.add-news {
+  margin-top: 20px;
+  background-color: #141519;
+  padding: 15px;
+}
 
+.add-news input[type="text"] {
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  border-bottom: 2px solid #505053;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  background-color: transparent;
+  color: white;
+}
 
+.add-news textarea {
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0;
+  border-bottom: 2px solid #505053;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+  background-color: transparent;
+  color: white;
+}
 
+.add-news input[type="text"]:focus,
+.add-news textarea:focus{
+  border-color:#ff640a;
+}
+
+.add-news button {
+  padding: 8px 14px;
+  border: 2px solid #ff640a;
+  background-color: transparent;
+  color: #ff640a;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.add-news button:hover {
+  color: white;
+}
 
 .reviews-section111 {
   margin-top: 50px
@@ -303,94 +351,10 @@
   padding: 15px 0px;
 }
 
-.add-review111 {
-  background-color: #141519;
-  padding-left: 25px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
 .rating-review-box111 {
   display: flex;
   gap: 10px;
 }
-
-.rating-review-box111 textarea {
-  width: 70%;
-  padding: 10px;
-  margin: 10px 0;
-  border-bottom: 2px solid #505053;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  background-color: transparent;
-  color: white;
-}
-
-.rating-review-box111 select {
-  font-size: 16px;
-  font-weight: bold;
-  width: 20%;
-  padding: 10px;
-  /* Increase padding for better spacing */
-  margin: 10px 0;
-  background-color: transparent;
-  color: white;
-  border: 2px solid #505053;
-  border-radius: 3px;
-  appearance: none;
-  /* Remove default dropdown arrow */
-  -webkit-appearance: none;
-  /* Remove default dropdown arrow for Safari */
-  -moz-appearance: none;
-  /* Remove default dropdown arrow for Firefox */
-
-  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ff640a" d="M2 0L0 2h4z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 10px;
-  outline: none;
-}
-
-.rating-review-box111 select:focus,
-.rating-review-box111 textarea:focus{
-  border-color:#ff640a;
-}
-
-.rating-review-box111 select option {
-  font-size: 12px;
-  color: white;
-  background-color: #333;
-  padding: 7px;
-  border: none;
-}
-
-
-.rating-review-box111 select option:checked {
-  background-color: #ff640a;
-  color: white;
-}
-
-
-.add-review111 button {
-
-  margin-top: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 8px 10px;
-  background-color: transparent;
-  color: #ff640a;
-  border-color: #ff640a;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.add-review111 button:hover {
-  background-color: rgba(113, 113, 113, 0.434);
-}
-
-
 
 
 .review-card111 {
@@ -407,6 +371,7 @@
   border-bottom: 1px solid #61616d;
 
 }
+
 
 .review-card111 i {
   font-size: 25px;
@@ -442,144 +407,6 @@
 }
 
 
-
-.discussions-section {
-  margin-top: 100px;
-  width: 100%;
-}
-
-.discussions-section-inner {
-  width: 100%;
-}
-
-.discussion-title {
-  color: white;
-  font-size: 23px;
-  padding: 10px;
-  margin-bottom: 40px;
-  border-left: 5px solid #ff640a;
-  text-align: left;
-}
-
-.discussion-card111 {
-  padding: 15px;
-  background-color: #141519;
-}
-
-.discussion-card111:hover {
-  background-color: #1e2026;
-}
-
-.discussion-card111 i{
-  font-size: 20px;
-  color: #9e9ea0;
-  margin: auto 0;
-  text-align: center;
-}
-
-.discussion-img111 {
-  width: 100%;
-  height: 30px;
-  object-fit: cover;
-  object-position: bottom;
-}
-
-.discussion-card111 h4 {
-  color: #2abdbb;
-  font-size: 15px;
-  font-weight: 500;
-  margin: 0 0 5px;
-
-  border-left: 1px solid white;
-  padding-left: 10px;
-}
-
-.discussion-card111 p {
-  color: white;
-  font-size: 13px;
-  line-height: 1.4;
-  margin: 5px 0;
-  padding-left: 10px;
-}
-
-.add-discussion {
-
-  background-color: #141519;
-  padding: 15px;
-}
-
-.add-discussion input[type="text"] {
-  width: 97%;
-  padding: 5px 10px;
-  margin: 10px 0px;
-  border-bottom: 1px solid #505053;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  background-color: transparent;
-  color: white;
-}
-
-.add-discussion input[type="text"]:focus {
-  border-bottom: 1px solid #ff640a;
-}
-
-.discussion-des {
-  width: 97%;
-  padding: 10px 10px;
-  min-height: 80px;
-  margin: 10px 0;
-  border: 1px solid #505053;
-  outline: none;
-  background-color: transparent;
-  color: white;
-}
-
-.discussion-des:focus {
-  border: 1px solid #ff640a;
-}
-
-
-
-.add-discussion button {
-  margin-top: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 8px 10px;
-  background-color: transparent;
-  color: #ff640a;
-  border-color: #ff640a;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.add-discussion button:hover {
-  background-color: #5050531f;
-}
-
-
-.fav-icon {
-  font-size: 25px;
-  color: #ffffff;
-  transition: color 0.3s ease, transform 0.3s ease;
-  margin-left: 15px;
-  margin-bottom: 0px;
-  cursor: pointer;
-  vertical-align: middle;
-}
-
-.fav-icon:hover {
-  transform: scale(1.1);
-}
-
-.fav-icon.favorite {
-  color: #ff640a;
-}
-
-.fav-icon.favorite:hover {
-  transform: scale(1.1);
-}
 
 .company-details-middle111 {
   margin-top: 100px;

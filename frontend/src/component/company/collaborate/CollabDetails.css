@@ -1,126 +1,125 @@
 /* CollabDetails.css */
 
 .collab-details-page {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+
+  margin-top: 80px;
 }
 
-.collab-details-merchandiser{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
+.collab-details-merchandiser1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 
-    background-color: #3a3a3e;
-    border-radius: 5px;
+  background-color: #141519;
 
-    margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 30px 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 30px 10px;
 
-    width: 700px
+  width: 700px
 }
 
-.collab-details-merchandiser h2{
-    color: white;
-    font-size: 30px;
+.collab-details-merchandiser1 h2 {
+  color: white;
+  font-size: 30px;
 
-    padding: 0px 10px;
-    border-left: 3px solid #ffdd95;
-    border-right: 3px solid #ffdd95;
+  padding: 0px 10px;
+  border-left: 3px solid #ff640a;
+  border-right: 3px solid #ff640a;
 }
 
-.collab-details-merchandiser-name{
-    color: #ffdd95;
-    font-size: 25px;
+.collab-details-merchandiser-name1 {
+  color: #ff640a;
+  font-size: 25px;
 }
 
-.collab-details-merchandiser-desc{
-    color: white;
-    font-size: 15px;
-}
-  
-
-.collab-details-products{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-
-    background-color: #3a3a3e;
-    border-radius: 5px;
-    padding: 30px 10px;
-
-    width: 700px;
+.collab-details-merchandiser-desc1 {
+  color: white;
+  font-size: 15px;
 }
 
-.collab-details-products h2{
-    color: white;
-    font-size: 30px;
 
-    padding: 0px 10px;
-    border-left: 3px solid #ffdd95;
-    border-right: 3px solid #ffdd95;
+.collab-details-products1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #141519;
+  padding: 30px 10px;
+
+  width: 700px;
+}
+
+.collab-details-products1 h2 {
+  color: white;
+  font-size: 30px;
+
+  padding: 0px 10px;
+  border-left: 3px solid #ff640a;
+  border-right: 3px solid #ff640a;
 }
 
 .collab-details-products-item {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 
-    width: 100%;
-  }
+  width: 100%;
+}
 
-.product-card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    cursor: pointer;
-    transition: box-shadow 0.3s;
+.product-card123 {
+  border: 1px solid #ddd;
+  padding: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
 
-    height: 200px;
-    width: 150px;
-  }
+  height: 200px;
+  width: 150px;
+}
 
 .link-product-card {
-    text-decoration: none;
-  }
+  text-decoration: none;
+}
 
 
-.product-card:hover {
-    border-color: #ffdd95;
-  }
+.product-card123:hover {
+  border-color: #ff640a;
+}
 
-.product-img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
+.product-img123 {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
 
 .product-info {
-    text-align: center;
-    padding: 10px 0;
-  }
+  text-align: center;
+  padding: 10px 0;
+}
 
-.product-name {
-    font-size: 12px;
-    margin: 2px 0;
-    color: white;
+.product-name123 {
+  font-size: 12px;
+  margin: 2px 0;
+  color: white;
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    
-  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
-.product-price {
-    font-size: 14px;
-    color: #ffdd95;
-    font-weight: bold;
-    margin-top: 12px;
-  }
+}
+
+.product-price123 {
+  font-size: 14px;
+  color: #ff640a;
+  font-weight: bold;
+  margin-top: 12px;
+}

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { v4 } from 'uuid';
-import { storage } from '../../../firebase'; // Make sure to configure and export your Firebase storage instance
-import './ProfilePage.css';
+import React, { useState, useEffect } from "react";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import { storage } from "../../../firebase"; // Make sure to configure and export your Firebase storage instance
+import "./ProfilePage.css";
 
 const ProfilePage = () => {
   const initialProfile = {
-    IMG: '', // Placeholder image URL
-    NAME: '',
-    EMAIL: '',
-    DESCRIPTION: '',
+    IMG: "", // Placeholder image URL
+    NAME: "",
+    EMAIL: "",
+    DESCRIPTION: "",
   };
 
   const [profile, setProfile] = useState(initialProfile);
@@ -19,28 +19,28 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      console.log('Fetching profile data...');
-      console.log("USER ID________________________"+localStorage.getItem('user_id'));
+      console.log("Fetching profile data...");
+      console.log(
+        "USER ID________________________" + localStorage.getItem("user_id")
+      );
       try {
-        const response = await fetch('http://localhost:5000/profile/company', {
-          method: 'POST',
+        const response = await fetch("http://localhost:5000/profile/company", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userid: localStorage.getItem('user_id') }),
+          body: JSON.stringify({ userid: localStorage.getItem("user_id") }),
         });
         if (response.status === 200) {
           const data = await response.json();
           setProfile(data);
         }
       } catch (error) {
-        console.error('Error fetching profile data:', error);
+        console.error("Error fetching profile data:", error);
       }
     };
     fetchProfileData();
   }, []);
-
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,7 +68,10 @@ const ProfilePage = () => {
 
     // Only upload the image if a new file has been selected
     if (imageUpload) {
-      const imageRef = ref(storage, `company/profile/${imageUpload.name + v4()}`);
+      const imageRef = ref(
+        storage,
+        `company/profile/${imageUpload.name + v4()}`
+      );
       await uploadBytes(imageRef, imageUpload);
       const url = await getDownloadURL(imageRef);
       updatedProfile.IMG = url;
@@ -83,48 +86,76 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="company-profile-page">
-      <h2>Company Profile</h2>
+    <div className="profile-page3">
+      {/* <h2>Company Profile</h2> */}
       <div className="profile-info-image">
         {isEditing ? (
           <>
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="profile-img-preview"
+              />
+            )}
             <input type="file" name="img" onChange={handleImageChange} />
-            {imagePreview && <img src={imagePreview} alt="Preview" className="profile-img-preview" />}
           </>
         ) : (
-          <img src={profile.IMG} alt={profile.NAME} className="profile-img" />
+          <img
+            src={profile.IMG}
+            alt={profile.NAME}
+            className="profile-page3-Profile"
+          />
         )}
       </div>
-      <div className="profile-info">
-        <label>Name: </label>
-        {isEditing ? (
-          <input type="text" name="name" value={profile.NAME} onChange={handleChange} />
-        ) : (
-          <span>{profile.NAME}</span>
-        )}
-      </div>
-      <div className="profile-info">
-        <label>Email: </label>
-        {isEditing ? (
-          <input type="email" name="email" value={profile.EMAIL} onChange={handleChange} />
-        ) : (
-          <span>{profile.EMAIL}</span>
-        )}
-      </div>
-      <div className="profile-info">
-        <label>Description: </label>
-        {isEditing ? (
-          <textarea name="description" value={profile.DESCRIPTION} onChange={handleChange} />
-        ) : (
-          <span>{profile.DESCRIPTION}</span>
-        )}
-      </div>
-      <div className="profile-buttons">
-        {isEditing ? (
-          <button onClick={handleUpdate}>Update</button>
-        ) : (
-          <button onClick={toggleEdit}>Edit</button>
-        )}
+      {isEditing ? null : <i class="fa fa-user-circle"></i>}
+
+      <div className="profile-info3-container">
+        <div className="profile-info3">
+          <label>Name: </label>
+          {isEditing ? (
+            <input
+              type="text"
+              name="name"
+              value={profile.NAME}
+              onChange={handleChange}
+            />
+          ) : (
+            <span>{profile.NAME}</span>
+          )}
+        </div>
+        <div className="profile-info3">
+          <label>Email: </label>
+          {isEditing ? (
+            <input
+              type="email"
+              name="email"
+              value={profile.EMAIL}
+              onChange={handleChange}
+            />
+          ) : (
+            <span>{profile.EMAIL}</span>
+          )}
+        </div>
+        <div className="profile-info3">
+          <label>Description: </label>
+          {isEditing ? (
+            <textarea
+              name="description"
+              value={profile.DESCRIPTION}
+              onChange={handleChange}
+            />
+          ) : (
+            <span>{profile.DESCRIPTION}</span>
+          )}
+        </div>
+        <div className="profile-buttons3">
+          {isEditing ? (
+            <button onClick={handleUpdate}>Update</button>
+          ) : (
+            <button onClick={toggleEdit}>Edit</button>
+          )}
+        </div>
       </div>
     </div>
   );
