@@ -70,8 +70,7 @@ oracledb.createPool({
         console.log('Received user registration request:', { username, password, name, dob, email, city, street, house, phone, genres });
     
         // Generate IDs
-        const user_id = generateUserId(username);
-        console.log('Generated User ID:', user_id);
+        
         const login_id = generateLoginId(username, password); // Generate Login ID in Node.js
         console.log('Generated Login ID:', login_id);
     
@@ -81,7 +80,9 @@ oracledb.createPool({
             if (!con) {
                 return res.status(500).send("Connection Error");
             }
-    
+
+            const resultt = await con.execute(`SELECT USERS_SEQ.NEXTVAL as user_id FROM dual`);
+            const user_id = resultt.rows[0].USER_ID;
             // Ensure DOB is in the correct format (YYYY-MM-DD)
             const formattedDob = new Date(dob).toISOString().split('T')[0]; // Example conversion
     
