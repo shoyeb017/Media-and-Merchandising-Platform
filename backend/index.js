@@ -1517,7 +1517,17 @@ app.post('/addNews', async (req, res) => {
             }
             console.log('Received company request');
             const result = await con.execute(
-                `SELECT * FROM COMPANY`
+                `SELECT 
+                    C.COM_ID, C.USER_NAME, C."NAME", C.IMG, C.DESCRIPTION, C.EMAIL, 
+                    COUNT(CHM.MEDIA_ID) AS MEDIA_COUNT
+                FROM 
+                    COMPANY C
+                JOIN 
+                    COMPANYHASMEDIA CHM ON C.COM_ID = CHM.COM_ID
+                GROUP BY 
+                    C.COM_ID, C.USER_NAME, C."NAME", C.IMG, C.DESCRIPTION, C.EMAIL
+                ORDER BY 
+                    MEDIA_COUNT DESC`
             );
             console.log(`Query Result: `,result.rows);
 
@@ -2223,7 +2233,7 @@ app.post('/addNews', async (req, res) => {
 
             const result = await con.execute(
                 `SELECT * FROM PRODUCTS
-                ORDER BY RATING DESC`
+                ORDER BY RATING DESC, QUANTITY DESC`
             );
 
             // const transformData = (data) => ({
@@ -4528,14 +4538,23 @@ app.post('/addNews', async (req, res) => {
     
 
             const result = await con.execute(
+                // `
+                // SELECT P.PRO_ID, P.NAME, P.DESCRIPTION, P.IMAGE, P.PRICE, P.QUANTITY
+                // FROM PRODUCTS P
+                // JOIN PRODUCTBASEDONMEDIA PB ON P.PRO_ID = PB.PRO_ID
+                // JOIN COMPANYHASMEDIA CHM ON PB.MEDIA_ID = CHM.MEDIA_ID
+                // JOIN COLLABORATE COL ON P.PRO_ID = COL.PRO_ID AND CHM.COM_ID = COL.COM_ID
+                // WHERE COL.COM_ID = :com_id
+                // AND COL.C_STATUS = 'ACCEPTED'`,
                 `
-                SELECT P.PRO_ID, P.NAME, P.DESCRIPTION, P.IMAGE, P.PRICE, P.QUANTITY
+                SELECT distinct P.PRO_ID, P.NAME, P.DESCRIPTION, P.IMAGE, P.PRICE, P.QUANTITY
                 FROM PRODUCTS P
                 JOIN PRODUCTBASEDONMEDIA PB ON P.PRO_ID = PB.PRO_ID
-                JOIN COMPANYHASMEDIA CHM ON PB.MEDIA_ID = CHM.MEDIA_ID
-                JOIN COLLABORATE COL ON P.PRO_ID = COL.PRO_ID AND CHM.COM_ID = COL.COM_ID
+                JOIN COLLABORATE COL ON P.PRO_ID = COL.PRO_ID
                 WHERE COL.COM_ID = :com_id
-                AND COL.C_STATUS = 'ACCEPTED'`,
+                AND COL.C_STATUS = 'ACCEPTED'
+                AND P.QUANTITY > 0
+                `,
                 { com_id }
             );
     
