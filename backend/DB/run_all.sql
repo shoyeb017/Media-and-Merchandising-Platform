@@ -59,32 +59,3 @@ SELECT P.PRO_ID, P.NAME, P.DESCRIPTION, P.IMAGE, P.PRICE, P.QUANTITY
                 WHERE COL.COM_ID = 7
                 AND COL.C_STATUS = 'ACCEPTED'
                 AND P.QUANTITY > 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-SELECT 
-
-                
